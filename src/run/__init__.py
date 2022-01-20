@@ -5,8 +5,8 @@
 # 
 # SPDX-License-Identifier: BSD-3-Clause
 
-import runcore
-import rundef
+from . import runcore
+from . import rundef
 
 __all__ = ["runcore", "rundef"]
 

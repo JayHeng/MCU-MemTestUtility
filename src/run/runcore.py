@@ -8,7 +8,7 @@
 
 import sys
 import os
-import rundef
+from . import rundef
 sys.path.append(os.path.abspath(".."))
 from ui import uicore
 from ui import uidef

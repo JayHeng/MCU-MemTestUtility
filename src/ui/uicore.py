@@ -9,8 +9,8 @@
 import sys
 import os
 from PyQt5.Qt import *
-import uidef
-import uilang
+from . import uidef
+from . import uilang
 sys.path.append(os.path.abspath(".."))
 from win import memTesterWin
 
