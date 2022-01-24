@@ -20,5 +20,12 @@ class memTesterUi(QMainWindow, memTesterWin.Ui_memTesterWin):
         super(memTesterUi, self).__init__(parent)
         self.setupUi(self)
 
+        self.exeBinRoot = os.getcwd()
+        self.exeTopRoot = os.path.dirname(self.exeBinRoot)
+        exeMainFile = os.path.join(self.exeTopRoot, 'src', 'main.py')
+        if not os.path.isfile(exeMainFile):
+            self.exeTopRoot = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
 
-
+        self.mcuDevice = 'i.MXRT117x'
+        self.uartComPort = None
+        self.uartBaudrate = None

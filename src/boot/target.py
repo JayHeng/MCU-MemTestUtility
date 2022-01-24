@@ -29,7 +29,7 @@
 # SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 import sys, os
-import commands, memoryrange, peripherals
+from . import commands, memoryrange, peripherals
 sys.path.append(os.path.abspath(".."))
 from utils import misc
 
@@ -49,47 +49,14 @@ class Target(object):
         self.reservedRegionDict = misc.get_dict_default(kwargs, 'reservedRegionDict', {})
         self.availableCommands = misc.get_dict_default(kwargs, 'availableCommands', 0)
         self.availablePeripherals = misc.get_dict_default(kwargs, 'availablePeripherals', 0)
-        self.romUsbVid = misc.get_dict_default(kwargs, 'romUsbVid', None)
-        self.romUsbPid = misc.get_dict_default(kwargs, 'romUsbPid', None)
-        self.hasSdpReadRegisterCmd = misc.get_dict_default(kwargs, 'hasSdpReadRegisterCmd', None)
-        self.flashloaderUsbVid = misc.get_dict_default(kwargs, 'flashloaderUsbVid', None)
-        self.flashloaderUsbPid = misc.get_dict_default(kwargs, 'flashloaderUsbPid', None)
         self.flashloaderLoadAddr = misc.get_dict_default(kwargs, 'flashloaderLoadAddr', None)
         self.flashloaderJumpAddr = misc.get_dict_default(kwargs, 'flashloaderJumpAddr', None)
         self.supportedPeripheralSpeed_uart = misc.get_dict_default(kwargs, 'supportedPeripheralSpeed_uart', None)
-        self.availableSecureBootTypes = misc.get_dict_default(kwargs, 'availableSecureBootTypes', None)
-        self.hasRemappedFuse = misc.get_dict_default(kwargs, 'hasRemappedFuse', None)
-        self.availableBootDevices = misc.get_dict_default(kwargs, 'availableBootDevices', None)
         self.flexspiNorDevice = misc.get_dict_default(kwargs, 'flexspiNorDevice', None)
         self.flexspiNorMemBase = misc.get_dict_default(kwargs, 'flexspiNorMemBase0', None)
         self.flexspiNorMemBase0 = misc.get_dict_default(kwargs, 'flexspiNorMemBase0', None)
         self.flexspiNorMemBase1 = misc.get_dict_default(kwargs, 'flexspiNorMemBase1', None)
-        self.flexspiFreqs = misc.get_dict_default(kwargs, 'flexspiFreqs', None)
-        self.xspiNorCfgInfoOffset = misc.get_dict_default(kwargs, 'xspiNorCfgInfoOffset', None)
-        self.flexspiNorEfuseBootCfg0Bits = misc.get_dict_default(kwargs, 'flexspiNorEfuseBootCfg0Bits', None)
-        self.isNonXipImageAppliableForXipableDeviceUnderClosedHab = misc.get_dict_default(kwargs, 'isNonXipImageAppliableForXipableDeviceUnderClosedHab', None)
         self.isSipFlexspiNorDevice = misc.get_dict_default(kwargs, 'isSipFlexspiNorDevice', None)
-        self.isEccTypeSetInFuseMiscConf = misc.get_dict_default(kwargs, 'isEccTypeSetInFuseMiscConf', None)
-        self.isSwEccSetAsDefaultInNandOpt = misc.get_dict_default(kwargs, 'isSwEccSetAsDefaultInNandOpt', None)
-        self.hasMultiUsdhcBootInstance = misc.get_dict_default(kwargs, 'hasMultiUsdhcBootInstance', None)
-        self.hwAuthHashEngine = misc.get_dict_default(kwargs, 'hwAuthHashEngine', None)
-
-        self.quadspiNorDevice = misc.get_dict_default(kwargs, 'quadspiNorDevice', None)
-        self.quadspiNorMemBase = misc.get_dict_default(kwargs, 'quadspiNorMemBase', None)
-
-        self.registerAddrDict = misc.get_dict_default(kwargs, 'registerAddrDict', None)
-        self.registerDefnDict = misc.get_dict_default(kwargs, 'registerDefnDict', None)
-        self.efusemapIndexDict = misc.get_dict_default(kwargs, 'efusemapIndexDict', None)
-        self.efusemapDefnDict = misc.get_dict_default(kwargs, 'efusemapDefnDict', None)
-        self.efuseDescDiffDict = misc.get_dict_default(kwargs, 'efuseDescDiffDict', None)
-        self.otpmapIndexDict = misc.get_dict_default(kwargs, 'otpmapIndexDict', None)
-        self.otpmapDefnDict = misc.get_dict_default(kwargs, 'otpmapDefnDict', None)
-        self.otpDescDiffDict = misc.get_dict_default(kwargs, 'otpDescDiffDict', None)
-
-        self.ftfxNorMemBase = misc.get_dict_default(kwargs, 'ftfxNorMemBase', None)
-        self.c040hdNorMemBase = misc.get_dict_default(kwargs, 'c040hdNorMemBase', None)
-
-        self.sbLoaderVersion = misc.get_dict_default(kwargs, 'sbLoaderVersion', None)
 
     ##
     # @brief Check if a command is supported by the target.

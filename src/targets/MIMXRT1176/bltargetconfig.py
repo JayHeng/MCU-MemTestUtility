@@ -31,74 +31,24 @@
 import sys, os
 sys.path.append(os.path.abspath(".."))
 from boot.memoryrange import MemoryRange
-from ui import RTyyyy_uidef
-from ui import RTyyyy_uidef_efuse
 from ui import uidef
-from run import RTyyyy_rundef
-from gen import gendef
 
 cpu = 'MIMXRT1176'
 board = 'EVK'
 compiler = 'iar'
 build = 'Release'
+mcuSeries = uidef.kMcuSeries_iMXRT11yy
 
 availablePeripherals = 0x11
-romUsbVid = '0x1FC9'
-romUsbPid = '0x013D'
-hasSdpReadRegisterCmd = None
-flashloaderUsbVid = '0x15A2'
-flashloaderUsbPid = '0x0073'
 flashloaderLoadAddr = None
 flashloaderJumpAddr = None
 availableCommands = 0x5EFDF
 supportedPeripheralSpeed_uart = [4800, 9600, 19200, 57600, 115200] # @todo Verify
-availableSecureBootTypes = [RTyyyy_uidef.kSecureBootType_Development,
-                            RTyyyy_uidef.kSecureBootType_HabAuth,
-                            #RTyyyy_uidef.kSecureBootType_HabCrypto,
-                            RTyyyy_uidef.kSecureBootType_OtfadCrypto,
-                            #RTyyyy_uidef.kSecureBootType_IeeCrypto
-                            ]
-hasRemappedFuse = False
-availableBootDevices = [RTyyyy_uidef.kBootDevice_FlexspiNor,
-                        RTyyyy_uidef.kBootDevice_FlexspiNand,
-                        RTyyyy_uidef.kBootDevice_SemcNand,
-                        RTyyyy_uidef.kBootDevice_UsdhcSd,
-                        RTyyyy_uidef.kBootDevice_UsdhcMmc,
-                        RTyyyy_uidef.kBootDevice_LpspiNor]
+
 flexspiNorDevice = uidef.kFlexspiNorDevice_ISSI_IS25LP064A
 flexspiNorMemBase0 = 0x30000000
 flexspiNorMemBase1 = 0x60000000
-flexspiFreqs = ['30MHz', '50MHz', '60MHz', '80MHz', '100MHz', '120MHz', '133MHz', '166MHz', '200MHz']
-xspiNorCfgInfoOffset = 0x400
-flexspiNorEfuseBootCfg0Bits = 12
-isNonXipImageAppliableForXipableDeviceUnderClosedHab = True
 isSipFlexspiNorDevice = False
-isEccTypeSetInFuseMiscConf = True
-isSwEccSetAsDefaultInNandOpt = False
-hasMultiUsdhcBootInstance = True
-hwAuthHashEngine = "CAAM"
-
-quadspiNorDevice = None
-quadspiNorMemBase = None
-
-registerAddrDict = RTyyyy_rundef.registerAddrDict_RT11yy
-registerDefnDict  = RTyyyy_rundef.registerDefnDict_RT11yy
-
-efusemapIndexDict = RTyyyy_uidef_efuse.efusemapIndexDict_RT11yy
-efusemapDefnDict  = RTyyyy_uidef_efuse.efusemapDefnDict_RT11yy
-
-efuseDescDiffDict = {
-                     '0xc70_flexramcfg_bit21_16':RTyyyy_uidef_efuse.efuse_0xc70_flexramPartion512KB,
-                    }
-
-otpmapIndexDict = None
-otpmapDefnDict  = None
-otpDescDiffDict = None
-
-ftfxNorMemBase = None
-c040hdNorMemBase = None
-
-sbLoaderVersion = gendef.kSbLoaderVersion_v1_0
 
 # memory map
 memoryRange = {
