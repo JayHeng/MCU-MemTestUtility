@@ -45,6 +45,7 @@ class Target(object):
         self.build = build
 
         self.baseDir = misc.get_dict_default(kwargs, 'baseDir', '.')
+        self.mcuSeries = misc.get_dict_default(kwargs, 'mcuSeries', '.')
         self.memoryRange = misc.get_dict_default(kwargs, 'memoryRange', {})
         self.reservedRegionDict = misc.get_dict_default(kwargs, 'reservedRegionDict', {})
         self.availableCommands = misc.get_dict_default(kwargs, 'availableCommands', 0)

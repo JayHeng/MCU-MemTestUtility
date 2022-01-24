@@ -17,6 +17,16 @@ from ui import uilang
 from boot import bltest
 from boot import target
 
+def execfile(filepath, globals=None, locals=None):
+    if globals is None:
+        globals = {}
+    globals.update({
+        "__file__": filepath,
+        "__name__": "__main__",
+    })
+    with open(filepath, 'rb') as file:
+        exec(compile(file.read(), filepath, 'exec'), globals, locals)
+
 def createTarget(device, exeBinRoot):
     cpu = "MIMXRT1052"
     if device == uidef.kMcuDevice_iMXRT500:

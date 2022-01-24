@@ -31,7 +31,10 @@
 import os
 import sys
 import stat
-import exceptions
+try:
+    import exceptions
+except ImportError:
+    import builtins as exceptions
 import unittest
 from os.path import abspath
 
@@ -71,7 +74,7 @@ def _samefile(src, dst):
 def copyfile(src, dst):
 	"""Copy data from src to dst"""
 	if _samefile(src, dst):
-		raise Error, "`%s` and `%s` are the same file" % (src, dst)
+		raise Exception("`%s` and `%s` are the same file" % (src, dst))
 
 	fsrc = None
 	fdst = None
@@ -146,9 +149,9 @@ def copytree(src, dst, symlinks=False, mode=None):
 	"""
 	names = os.listdir(src)
 	if os.path.exists(dst) and not os.path.isdir(dst):
-		raise Exception, "destination directory is a file"
+		raise Exception("destination directory is a file")
 	
-	dstMode = 0777
+	dstMode = 777
 	if hasattr(os, "chmod"):
 		if mode == None:
 			st = os.stat(src)
@@ -174,10 +177,10 @@ def copytree(src, dst, symlinks=False, mode=None):
 					os.chmod(dstname, mode)
 					
 			# XXX What about devices, sockets etc.?
-		except (IOError, os.error), why:
+		except ((IOError, os.error), why):
 			errors.append((srcname, dstname, why))
 	if errors:
-		raise Error, errors
+		raise Exception(errors)
 
 def rmtree(path, ignore_errors=False, onerror=None, force=False):
 	"""Recursively delete a directory tree.
@@ -199,7 +202,7 @@ def rmtree(path, ignore_errors=False, onerror=None, force=False):
 	names = []
 	try:
 		names = os.listdir(path)
-	except os.error, err:
+	except (os.error, err):
 		onerror(os.listdir, path, sys.exc_info())
 	for name in names:
 		fullname = os.path.join(path, name)
@@ -212,7 +215,7 @@ def rmtree(path, ignore_errors=False, onerror=None, force=False):
 		else:
 			try:
 				os.remove(fullname)
-			except os.error, err:
+			except (os.error, err):
 				onerror(os.remove, fullname, sys.exc_info())
 	try:
 		os.rmdir(path)
@@ -234,7 +237,7 @@ def move(src, dst):
 	except OSError:
 		if os.path.isdir(src):
 			if destinsrc(src, dst):
-				raise Error, "Cannot move a directory '%s' into itself '%s'." % (src, dst)
+				raise Exception("Cannot move a directory '%s' into itself '%s'." % (src, dst))
 			copytree(src, dst, symlinks=True)
 			rmtree(src)
 		else:

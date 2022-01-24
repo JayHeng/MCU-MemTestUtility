@@ -1,10 +1,9 @@
 #!/usr/bin/env python
 
-import elf
-import filetools
-import misc
-import sound
+from . import elf
+from . import filetools
+from . import misc
 
-__all__ = ["elf", "filetools", "misc", "sound"]
+__all__ = ["elf", "filetools", "misc"]
 
 

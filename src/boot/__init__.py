@@ -28,12 +28,12 @@
 # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 # SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import bltest
-import commands
-import memoryrange
-import peripherals
-import properties
-import status
+from . import bltest
+from . import commands
+from . import memoryrange
+from . import peripherals
+from . import properties
+from . import status
 
 __all__ = ["bltest", "commands", "memoryrange", "peripherals", "properties", "status"]
 
