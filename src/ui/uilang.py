@@ -31,4 +31,7 @@ kMsgLanguageContentDict = {
         'aboutAuthor_blog':                   [u"Blog: 痞子衡嵌入式 https://www.cnblogs.com/henjay724/ \n"],
         'revisionHistory_title':              ['Revision History'],
         'revisionHistory_v1_0_0':             [kRevision_1_0_0_en],
+
+        'connectError_doubleCheckBmod':       ['Make sure that you have put MCU in UART SDP mode (BMOD[1:0] pins = 2\'b01)!'],
+        'connectError_doubleCheckIsp':        ['Make sure that you have put MCU in UART ISP mode (ISP[2:0] pins = 3\'b110)!'],
 }

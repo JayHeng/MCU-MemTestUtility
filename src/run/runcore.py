@@ -11,6 +11,7 @@ import os
 import array
 from . import rundef
 sys.path.append(os.path.abspath(".."))
+import boot
 from ui import uicore
 from ui import uidef
 from ui import uilang
