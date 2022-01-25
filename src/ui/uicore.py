@@ -8,9 +8,11 @@
 
 import sys
 import os
-import threading
 import serial.tools.list_ports
 from PyQt5.Qt import *
+from PyQt5.QtWidgets import *
+from PyQt5.QtCore import *
+from PyQt5.QtGui import *
 from . import uidef
 from . import uilang
 sys.path.append(os.path.abspath(".."))
@@ -19,11 +21,28 @@ from win import memTesterWin
 s_serialPort = serial.Serial()
 s_recvInterval = 1
 
+class uartRecvWorker(QThread):
+    sinOut = pyqtSignal()
+
+    def __init__(self, parent=None):
+        super(uartRecvWorker, self).__init__(parent)
+        self.working = True
+
+    def __del__(self):
+        self.working = False
+
+    def run(self):
+        while self.working == True:
+            self.sinOut.emit()
+            self.sleep(s_recvInterval)
+
 class memTesterUi(QMainWindow, memTesterWin.Ui_memTesterWin):
 
     def __init__(self, parent=None):
         super(memTesterUi, self).__init__(parent)
         self.setupUi(self)
+        self.uartRecvThread = uartRecvWorker()
+        self.uartRecvThread.sinOut.connect(self.receiveUartData)
 
         self.exeBinRoot = os.getcwd()
         self.exeTopRoot = os.path.dirname(self.exeBinRoot)
@@ -86,7 +105,7 @@ class memTesterUi(QMainWindow, memTesterWin.Ui_memTesterWin):
             return
         s_serialPort.reset_input_buffer()
         s_serialPort.reset_output_buffer()
-        threading.Timer(s_recvInterval, self.receiveUartData).start()
+        self.uartRecvThread.start()
 
     def receiveUartData( self ):
         if s_serialPort.isOpen():
@@ -94,4 +113,3 @@ class memTesterUi(QMainWindow, memTesterWin.Ui_memTesterWin):
             if num != 0:
                 data = s_serialPort.read(num)
                 self.textEdit_displayWin.append(data.decode())
-            threading.Timer(s_recvInterval, self.receiveUartData).start()
