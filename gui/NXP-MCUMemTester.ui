@@ -773,6 +773,9 @@
     <property name="title">
      <string>Help</string>
     </property>
+    <addaction name="menuHelpAction_homePage"/>
+    <addaction name="menuHelpAction_aboutAuthor"/>
+    <addaction name="menuHelpAction_revisionHistory"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuEdit"/>
@@ -782,6 +785,21 @@
    <addaction name="menuHelp"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
+  <action name="menuHelpAction_homePage">
+   <property name="text">
+    <string>Home Page</string>
+   </property>
+  </action>
+  <action name="menuHelpAction_aboutAuthor">
+   <property name="text">
+    <string>About Author</string>
+   </property>
+  </action>
+  <action name="menuHelpAction_revisionHistory">
+   <property name="text">
+    <string>Revision History</string>
+   </property>
+  </action>
  </widget>
  <resources/>
  <connections/>
