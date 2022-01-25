@@ -37,29 +37,29 @@ class memTesterMain(runcore.memTesterRun):
         self.updatePortSetupValue()
         self.connectToDevice()
         if self._retryToPingBootloader():
-            #self.jumpToFirmware()
-            pass
+            self.jumpToFirmware()
+            self.openUartPort()
         else:
             if (self.tgt.mcuSeries == uidef.kMcuSeries_iMXRT10yy) or \
                (self.tgt.mcuSeries == uidef.kMcuSeries_iMXRT11yy):
-                QMessageBox.information(self, 'Connection Error', uilang.kMsgLanguageContentDict['connectError_doubleCheckBmod'][0])
+                self.showInfoMessage('Connection Error', uilang.kMsgLanguageContentDict['connectError_doubleCheckBmod'][0])
             elif (self.tgt.mcuSeries == uidef.kMcuSeries_iMXRTxxx):
-                QMessageBox.information(self, 'Connection Error', uilang.kMsgLanguageContentDict['connectError_doubleCheckIsp'][0])
+                self.showInfoMessage('Connection Error', uilang.kMsgLanguageContentDict['connectError_doubleCheckIsp'][0])
             else:
                 pass
 
     def callbackShowHomePage(self):
-        QMessageBox.about(self, uilang.kMsgLanguageContentDict['homePage_title'][0], uilang.kMsgLanguageContentDict['homePage_info'][0] )
+        self.showAboutMessage(uilang.kMsgLanguageContentDict['homePage_title'][0], uilang.kMsgLanguageContentDict['homePage_info'][0] )
 
     def callbackShowAboutAuthor(self):
         msgText = ((uilang.kMsgLanguageContentDict['aboutAuthor_author'][0]) +
                    (uilang.kMsgLanguageContentDict['aboutAuthor_email1'][0]) +
                    (uilang.kMsgLanguageContentDict['aboutAuthor_email2'][0]) +
                    (uilang.kMsgLanguageContentDict['aboutAuthor_blog'][0]))
-        QMessageBox.about(self, uilang.kMsgLanguageContentDict['aboutAuthor_title'][0], msgText )
+        self.showAboutMessage(uilang.kMsgLanguageContentDict['aboutAuthor_title'][0], msgText )
 
     def callbackShowRevisionHistory(self):
-        QMessageBox.about(self, uilang.kMsgLanguageContentDict['revisionHistory_title'][0], uilang.kMsgLanguageContentDict['revisionHistory_v1_0_0'][0] )
+        self.showAboutMessage(uilang.kMsgLanguageContentDict['revisionHistory_title'][0], uilang.kMsgLanguageContentDict['revisionHistory_v1_0_0'][0] )
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)

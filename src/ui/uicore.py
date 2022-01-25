@@ -8,12 +8,16 @@
 
 import sys
 import os
+import threading
 import serial.tools.list_ports
 from PyQt5.Qt import *
 from . import uidef
 from . import uilang
 sys.path.append(os.path.abspath(".."))
 from win import memTesterWin
+
+s_serialPort = serial.Serial()
+s_recvInterval = 1
 
 class memTesterUi(QMainWindow, memTesterWin.Ui_memTesterWin):
 
@@ -31,6 +35,12 @@ class memTesterUi(QMainWindow, memTesterWin.Ui_memTesterWin):
         self.uartComPort = None
         self.uartBaudrate = None
         self.setPortSetupValue()
+
+    def showAboutMessage( self, myTitle, myContent):
+        QMessageBox.about(self, myTitle, myContent )
+
+    def showInfoMessage( self, myTitle, myContent):
+        QMessageBox.information(self, myTitle, myContent )
 
     def adjustPortSetupValue( self ):
         # Auto detect available ports
@@ -63,3 +73,25 @@ class memTesterUi(QMainWindow, memTesterWin.Ui_memTesterWin):
         self.adjustPortSetupValue()
         self.updatePortSetupValue()
 
+    def openUartPort ( self ):
+        s_serialPort.port = self.uartComPort
+        s_serialPort.baudrate = int(self.uartBaudrate)
+        s_serialPort.bytesizes = serial.EIGHTBITS
+        s_serialPort.stopbits = serial.STOPBITS_ONE
+        s_serialPort.parity = serial.PARITY_NONE
+        try:
+            s_serialPort.open()
+        except:
+            QMessageBox.information(self, 'Port Error', 'Com Port cannot opened!')
+            return
+        s_serialPort.reset_input_buffer()
+        s_serialPort.reset_output_buffer()
+        threading.Timer(s_recvInterval, self.receiveUartData).start()
+
+    def receiveUartData( self ):
+        if s_serialPort.isOpen():
+            num = s_serialPort.inWaiting()
+            if num != 0:
+                data = s_serialPort.read(num)
+                self.textEdit_displayWin.append(data.decode())
+            threading.Timer(s_recvInterval, self.receiveUartData).start()
