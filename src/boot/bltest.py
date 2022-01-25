@@ -202,7 +202,7 @@ class Bootloader(object):
             peripheralArgIndex = self._commandArgs.index('-p') + 1
             peripheralArgs = self._commandArgs[peripheralArgIndex].split(',')
             if len(peripheralArgs) > 1:
-                    peripheralSpeed = long(peripheralArgs[1])
+                    peripheralSpeed = int(peripheralArgs[1])
             else:
                     peripheralSpeed = peripheralspeed.kUartDefaultSpeed
         else:
@@ -229,7 +229,7 @@ class Bootloader(object):
         if 'receive-sb-file' in args:
             timeout = 100 # don't know what is in SB file, so give it a long time
         elif fileLength > 0:
-            actualLength  = long(fileLength) * 1.25 #actual length includes file length and other overhead such as framing header
+            actualLength  = int(fileLength) * 1.25 #actual length includes file length and other overhead such as framing header
             baseFileLength = 40960
             multiplicationFactors = actualLength / baseFileLength
             if peripheral == peripherals.kPeripheral_UART:
@@ -251,7 +251,7 @@ class Bootloader(object):
         self.fileLength = 0
         self.eraseLength = 0
 
-        self.timeout = long(timeout)
+        self.timeout = int(timeout)
 
     ##
     # @brief set max timeout for waiting results from blhost
@@ -272,7 +272,7 @@ class Bootloader(object):
         self.fileLength = 0
         self.eraseLength = 0
 
-        self.timeout = long(timeout)
+        self.timeout = int(timeout)
 
     ##
     # @brief Generate computed timeout arguments for the host tool.
@@ -304,7 +304,7 @@ class Bootloader(object):
 
         # Execute the command.
         process = subprocess.Popen(theArgs, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
-        self.commandOutput = process.communicate()[0]
+        self.commandOutput = process.communicate()[0].decode()
         self.toolStatus = process.returncode
 
         print ('toolStatus:', self.toolStatus)
