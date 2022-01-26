@@ -38,8 +38,10 @@ board = 'EVK'
 compiler = 'iar'
 build = 'Release'
 mcuSeries = uidef.kMcuSeries_iMXRTxxx
+maxCpuFreqInMHz = 200
 
 availablePeripherals = 0x11
+uartPeripheralPinStr = 'Flexcomm0 UART - PIO0[2:1]'
 firmwareLoadAddr = 0x00080000
 firmwareJumpAddr = 0x00083175
 firmwareInitialSp = 0x20300000

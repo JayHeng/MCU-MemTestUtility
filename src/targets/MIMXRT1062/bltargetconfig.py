@@ -38,8 +38,10 @@ board = 'EVK'
 compiler = 'iar'
 build = 'Release'
 mcuSeries = uidef.kMcuSeries_iMXRT10yy
+maxCpuFreqInMHz = 600
 
 availablePeripherals = 0x11
+uartPeripheralPinStr = 'LPUART1 - GPIO_AD_B0[13:12]'
 firmwareLoadAddr = 0x00001e00
 firmwareJumpAddr = 0x00001e00
 firmwareInitialSp = None

@@ -46,10 +46,12 @@ class Target(object):
 
         self.baseDir = misc.get_dict_default(kwargs, 'baseDir', '.')
         self.mcuSeries = misc.get_dict_default(kwargs, 'mcuSeries', '.')
+        self.maxCpuFreqInMHz = misc.get_dict_default(kwargs, 'maxCpuFreqInMHz', 0)
         self.memoryRange = misc.get_dict_default(kwargs, 'memoryRange', {})
         self.reservedRegionDict = misc.get_dict_default(kwargs, 'reservedRegionDict', {})
         self.availableCommands = misc.get_dict_default(kwargs, 'availableCommands', 0)
         self.availablePeripherals = misc.get_dict_default(kwargs, 'availablePeripherals', 0)
+        self.uartPeripheralPinStr = misc.get_dict_default(kwargs, 'uartPeripheralPinStr', '.')
         self.firmwareLoadAddr = misc.get_dict_default(kwargs, 'firmwareLoadAddr', None)
         self.firmwareJumpAddr = misc.get_dict_default(kwargs, 'firmwareJumpAddr', None)
         self.firmwareInitialSp = misc.get_dict_default(kwargs, 'firmwareInitialSp', None)

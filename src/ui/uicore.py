@@ -66,6 +66,9 @@ class memTesterUi(QMainWindow, memTesterWin.Ui_memTesterWin):
     def showInfoMessage( self, myTitle, myContent):
         QMessageBox.information(self, myTitle, myContent )
 
+    def updateCpuSpeedInfo( self ):
+        self.lineEdit_cpuSpeed.setText(str(self.tgt.maxCpuFreqInMHz))
+
     def adjustPortSetupValue( self ):
         # Auto detect available ports
         comports = list(serial.tools.list_ports.comports())
@@ -96,6 +99,9 @@ class memTesterUi(QMainWindow, memTesterWin.Ui_memTesterWin):
 
     def setTargetSetupValue( self ):
         self.mcuDevice = self.comboBox_mcuDevice.currentText()
+
+    def updateUartPadInfo( self ):
+        self.lineEdit_uartPad.setText(self.tgt.uartPeripheralPinStr)
 
     def updatePortSetupValue( self ):
         self.uartComPort = self.comboBox_comPort.currentText()

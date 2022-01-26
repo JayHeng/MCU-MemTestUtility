@@ -16,6 +16,7 @@ class memTesterMain(runcore.memTesterRun):
         super(memTesterMain, self).__init__(parent)
         self._register_callbacks()
         self.isDeviceConnected = False
+        self._setupMcuTargets()
 
     def _register_callbacks(self):
         self.menuHelpAction_homePage.triggered.connect(self.callbackShowHomePage)
@@ -28,6 +29,8 @@ class memTesterMain(runcore.memTesterRun):
         self.setTargetSetupValue()
         self.initUi()
         self.initRun()
+        self.updateCpuSpeedInfo()
+        self.updateUartPadInfo()
 
     def callbackSetMcuDevice( self ):
         self._setupMcuTargets()
