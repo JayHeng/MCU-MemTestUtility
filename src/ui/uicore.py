@@ -119,6 +119,15 @@ class memTesterUi(QMainWindow, memTesterWin.Ui_memTesterWin):
         s_serialPort.reset_input_buffer()
         s_serialPort.reset_output_buffer()
         self.uartRecvThread.start()
+        self.pushButton_connect.setText('Reset')
+        self.pushButton_connect.setStyleSheet("background-color: green")
+
+    def closeUartPort ( self ):
+        if s_serialPort.isOpen():
+            s_serialPort.close()
+            self.uartRecvThread.quit()
+            self.pushButton_connect.setText('Connect')
+            self.pushButton_connect.setStyleSheet("background-color: grey")
 
     def receiveUartData( self ):
         if s_serialPort.isOpen():

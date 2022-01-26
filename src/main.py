@@ -15,6 +15,7 @@ class memTesterMain(runcore.memTesterRun):
     def __init__(self, parent=None):
         super(memTesterMain, self).__init__(parent)
         self._register_callbacks()
+        self.isDeviceConnected = False
 
     def _register_callbacks(self):
         self.menuHelpAction_homePage.triggered.connect(self.callbackShowHomePage)
@@ -42,20 +43,25 @@ class memTesterMain(runcore.memTesterRun):
             time.sleep(2)
         return pingStatus
 
-    def callbackConnectToDevice( self, event ):
-        self.updatePortSetupValue()
-        self.connectToDevice()
-        if self._retryToPingBootloader():
-            self.jumpToFirmware()
-            self.openUartPort()
-        else:
-            if (self.tgt.mcuSeries == uidef.kMcuSeries_iMXRT10yy) or \
-               (self.tgt.mcuSeries == uidef.kMcuSeries_iMXRT11yy):
-                self.showInfoMessage('Connection Error', uilang.kMsgLanguageContentDict['connectError_doubleCheckBmod'][0])
-            elif (self.tgt.mcuSeries == uidef.kMcuSeries_iMXRTxxx):
-                self.showInfoMessage('Connection Error', uilang.kMsgLanguageContentDict['connectError_doubleCheckSerialMasterBoot'][0])
+    def callbackConnectToDevice( self ):
+        if not self.isDeviceConnected:
+            self.updatePortSetupValue()
+            self.connectToDevice()
+            if self._retryToPingBootloader():
+                self.jumpToFirmware()
+                self.openUartPort()
+                self.isDeviceConnected = True
             else:
-                pass
+                if (self.tgt.mcuSeries == uidef.kMcuSeries_iMXRT10yy) or \
+                   (self.tgt.mcuSeries == uidef.kMcuSeries_iMXRT11yy):
+                    self.showInfoMessage('Connection Error', uilang.kMsgLanguageContentDict['connectError_doubleCheckBmod'][0])
+                elif (self.tgt.mcuSeries == uidef.kMcuSeries_iMXRTxxx):
+                    self.showInfoMessage('Connection Error', uilang.kMsgLanguageContentDict['connectError_doubleCheckSerialMasterBoot'][0])
+                else:
+                    pass
+        else:
+            self.isDeviceConnected = False
+            self.closeUartPort()
 
     def callbackShowHomePage(self):
         self.showAboutMessage(uilang.kMsgLanguageContentDict['homePage_title'][0], uilang.kMsgLanguageContentDict['homePage_info'][0] )
