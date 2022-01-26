@@ -165,9 +165,9 @@ class memTesterRun(uicore.memTesterUi):
             status, results, cmdStr = self.blhost.writeMemory(firmwareLoadAddr, firmwareBinFile)
             if status != boot.status.kStatus_Success:
                 return False
-            status, results, cmdStr = self.blhost.execute(firmwareJumpAddr, 0, firmwareInitialSp)
-            if status != boot.status.kStatus_Success:
-                return False
+            #status, results, cmdStr = self.blhost.execute(firmwareJumpAddr, 0, firmwareInitialSp)
+            #if status != boot.status.kStatus_Success:
+            #    return False
         else:
             pass
         self.textEdit_displayWin.setPlainText(u"boot firmware is loaded")

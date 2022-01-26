@@ -32,6 +32,6 @@ kMsgLanguageContentDict = {
         'revisionHistory_title':              ['Revision History'],
         'revisionHistory_v1_0_0':             [kRevision_1_0_0_en],
 
-        'connectError_doubleCheckBmod':       ['Make sure that you have put MCU in UART SDP mode (BMOD[1:0] pins = 2\'b01)!'],
-        'connectError_doubleCheckIsp':        ['Make sure that you have put MCU in UART ISP mode (ISP[2:0] pins = 3\'b110)!'],
+        'connectError_doubleCheckBmod':             ['Make sure that you have put MCU in UART SDP mode (BMOD[1:0] pins = 2\'b01)!'],
+        'connectError_doubleCheckSerialMasterBoot': ['Make sure that you have put MCU in UART Master boot mode (ISP[2:0] pins = 3\'b111)!'],
 }

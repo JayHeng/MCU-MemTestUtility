@@ -53,7 +53,7 @@ class memTesterMain(runcore.memTesterRun):
                (self.tgt.mcuSeries == uidef.kMcuSeries_iMXRT11yy):
                 self.showInfoMessage('Connection Error', uilang.kMsgLanguageContentDict['connectError_doubleCheckBmod'][0])
             elif (self.tgt.mcuSeries == uidef.kMcuSeries_iMXRTxxx):
-                self.showInfoMessage('Connection Error', uilang.kMsgLanguageContentDict['connectError_doubleCheckIsp'][0])
+                self.showInfoMessage('Connection Error', uilang.kMsgLanguageContentDict['connectError_doubleCheckSerialMasterBoot'][0])
             else:
                 pass
 
