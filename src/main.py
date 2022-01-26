@@ -20,7 +20,16 @@ class memTesterMain(runcore.memTesterRun):
         self.menuHelpAction_homePage.triggered.connect(self.callbackShowHomePage)
         self.menuHelpAction_aboutAuthor.triggered.connect(self.callbackShowAboutAuthor)
         self.menuHelpAction_revisionHistory.triggered.connect(self.callbackShowRevisionHistory)
+        self.comboBox_mcuDevice.currentIndexChanged.connect(self.callbackSetMcuDevice)
         self.pushButton_connect.clicked.connect(self.callbackConnectToDevice)
+
+    def _setupMcuTargets( self ):
+        self.setTargetSetupValue()
+        self.initUi()
+        self.initRun()
+
+    def callbackSetMcuDevice( self ):
+        self._setupMcuTargets()
 
     def _retryToPingBootloader( self ):
         pingStatus = False

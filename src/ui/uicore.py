@@ -50,7 +50,12 @@ class memTesterUi(QMainWindow, memTesterWin.Ui_memTesterWin):
         if not os.path.isfile(exeMainFile):
             self.exeTopRoot = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
 
-        self.mcuDevice = 'i.MXRT117x'
+        self.mcuDevice = None
+        self._initTargetSetupValue()
+        self.setTargetSetupValue()
+        self.initUi()
+
+    def initUi( self ):
         self.uartComPort = None
         self.uartBaudrate = None
         self.setPortSetupValue()
@@ -83,6 +88,14 @@ class memTesterUi(QMainWindow, memTesterWin.Ui_memTesterWin):
             self.comboBox_baudrate.setCurrentIndex(self.comboBox_baudrate.findText(lastBaud))
         else:
             self.comboBox_baudrate.setCurrentIndex(0)
+
+    def _initTargetSetupValue( self ):
+        self.comboBox_mcuDevice.clear()
+        self.comboBox_mcuDevice.addItems(uidef.kMcuDevice_v1_0)
+        self.comboBox_mcuDevice.setCurrentIndex(0)
+
+    def setTargetSetupValue( self ):
+        self.mcuDevice = self.comboBox_mcuDevice.currentText()
 
     def updatePortSetupValue( self ):
         self.uartComPort = self.comboBox_comPort.currentText()

@@ -85,6 +85,9 @@ class memTesterRun(uicore.memTesterUi):
 
     def __init__(self, parent=None):
         super(memTesterRun, self).__init__(parent)
+        self.initRun()
+
+    def initRun( self ):
         self.blhost = None
         self.sdphost = None
         self.tgt = None
