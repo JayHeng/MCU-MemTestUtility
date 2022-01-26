@@ -149,6 +149,7 @@ class memTesterRun(uicore.memTesterUi):
         firmwareBinFile = os.path.join(self.cpuDir, 'boot_firmware.bin')
         firmwareLoadAddr = self.tgt.firmwareLoadAddr
         firmwareJumpAddr = self.tgt.firmwareJumpAddr
+        firmwareInitialSp = self.tgt.firmwareInitialSp
         if self.tgt.mcuSeries == uidef.kMcuSeries_iMXRT10yy:
             status, results, cmdStr = self.sdphost.writeFile(firmwareLoadAddr, firmwareBinFile)
             if status != boot.status.kSDP_Status_HabEnabled and status != boot.status.kSDP_Status_HabDisabled:
@@ -161,7 +162,12 @@ class memTesterRun(uicore.memTesterUi):
             if status != boot.status.kStatus_Success:
                 return False
         elif self.tgt.mcuSeries == uidef.kMcuSeries_iMXRTxxx:
-            pass
+            status, results, cmdStr = self.blhost.writeMemory(firmwareLoadAddr, firmwareBinFile)
+            if status != boot.status.kStatus_Success:
+                return False
+            status, results, cmdStr = self.blhost.execute(firmwareJumpAddr, 0, firmwareInitialSp)
+            if status != boot.status.kStatus_Success:
+                return False
         else:
             pass
         self.textEdit_displayWin.setPlainText(u"boot firmware is loaded")

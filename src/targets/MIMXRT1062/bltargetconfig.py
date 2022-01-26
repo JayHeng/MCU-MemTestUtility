@@ -42,6 +42,7 @@ mcuSeries = uidef.kMcuSeries_iMXRT10yy
 availablePeripherals = 0x11
 firmwareLoadAddr = 0x00001e00
 firmwareJumpAddr = 0x00001e00
+firmwareInitialSp = None
 availableCommands = 0x5EFDF
 supportedPeripheralSpeed_uart = [4800, 9600, 19200, 57600, 115200] # @todo Verify
 

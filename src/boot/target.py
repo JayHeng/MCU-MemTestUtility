@@ -52,6 +52,7 @@ class Target(object):
         self.availablePeripherals = misc.get_dict_default(kwargs, 'availablePeripherals', 0)
         self.firmwareLoadAddr = misc.get_dict_default(kwargs, 'firmwareLoadAddr', None)
         self.firmwareJumpAddr = misc.get_dict_default(kwargs, 'firmwareJumpAddr', None)
+        self.firmwareInitialSp = misc.get_dict_default(kwargs, 'firmwareInitialSp', None)
         self.supportedPeripheralSpeed_uart = misc.get_dict_default(kwargs, 'supportedPeripheralSpeed_uart', None)
         self.flexspiNorDevice = misc.get_dict_default(kwargs, 'flexspiNorDevice', None)
         self.flexspiNorMemBase = misc.get_dict_default(kwargs, 'flexspiNorMemBase0', None)

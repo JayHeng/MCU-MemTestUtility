@@ -33,41 +33,35 @@ sys.path.append(os.path.abspath(".."))
 from boot.memoryrange import MemoryRange
 from ui import uidef
 
-cpu = 'MIMXRT1176'
+cpu = 'MIMXRT595'
 board = 'EVK'
 compiler = 'iar'
 build = 'Release'
-mcuSeries = uidef.kMcuSeries_iMXRT11yy
+mcuSeries = uidef.kMcuSeries_iMXRTxxx
 
 availablePeripherals = 0x11
-firmwareLoadAddr = None
-firmwareJumpAddr = None
-firmwareInitialSp = None
+firmwareLoadAddr = 0x00080000
+firmwareJumpAddr = 0x00083175
+firmwareInitialSp = 0x20300000
 availableCommands = 0x5EFDF
 supportedPeripheralSpeed_uart = [4800, 9600, 19200, 57600, 115200] # @todo Verify
 
-flexspiNorDevice = uidef.kFlexspiNorDevice_ISSI_IS25LP064A
-flexspiNorMemBase0 = 0x30000000
-flexspiNorMemBase1 = 0x60000000
+flexspiNorDevice = uidef.kFlexspiNorDevice_MXIC_MX25UM51345G
+flexspiNorMemBase0 = 0x08000000
+flexspiNorMemBase1 = None
 isSipFlexspiNorDevice = False
+
 
 # memory map
 memoryRange = {
-    # ITCM_CM7, 512KByte
-    'itcm' : MemoryRange(0x00000000, 0x80000, 'state_mem0.dat'),
-    # ITCM_CM4, 128KByte
-    'itcm_cm4' : MemoryRange(0x1FFE0000, 0x20000, 'state_mem0.dat'),
-    # DTCM, 512KByte
-    'dtcm' : MemoryRange(0x20000000, 0x80000, 'state_mem1.dat'),
-    # OCRAM, 2MByte
-    'ocram' : MemoryRange(0x20200000, 0x200000, 'state_mem2.dat'),
+    # SRAM, 3MByte
+    'sram' : MemoryRange(0x00000000, 0x480000, 'state_mem0.dat'),
 
     # FLASH, 64KByte / 512MByte
     'flash': MemoryRange(0x00000000, 0x20000000, 'state_flash_mem.dat', True, 0x10000)
 }
 
-reservedRegionDict = {   # new
-    # OCRAM, 2MB
-    'ram' : [0x20203800, 0x20207F58]
+reservedRegionDict = {
+    # SRAM, 512KB
+    'sram' : [0x20203800, 0x20207EF8]
 }
-
