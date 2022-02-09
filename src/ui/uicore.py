@@ -140,4 +140,14 @@ class memTesterUi(QMainWindow, memTesterWin.Ui_memTesterWin):
             num = s_serialPort.inWaiting()
             if num != 0:
                 data = s_serialPort.read(num)
-                self.textEdit_displayWin.append(data.decode())
+                self.showContentOnMainDisplayWin(data.decode())
+
+    def showContentOnMainDisplayWin( self, contentStr ):
+        self.textEdit_displayWin.append(contentStr)
+
+    def showContentOnSecPacketWin( self, contentStr ):
+        self.textEdit_packetWin.append(contentStr)
+
+    def clearContentOfScreens( self ):
+        self.textEdit_displayWin.clear()
+        self.textEdit_packetWin.clear()

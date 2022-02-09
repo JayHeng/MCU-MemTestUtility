@@ -24,6 +24,7 @@ class memTesterMain(runcore.memTesterRun):
         self.menuHelpAction_revisionHistory.triggered.connect(self.callbackShowRevisionHistory)
         self.comboBox_mcuDevice.currentIndexChanged.connect(self.callbackSetMcuDevice)
         self.pushButton_connect.clicked.connect(self.callbackConnectToDevice)
+        self.pushButton_clearScreen.clicked.connect(self.clearContentOfScreens)
 
     def _setupMcuTargets( self ):
         self.setTargetSetupValue()
@@ -48,12 +49,16 @@ class memTesterMain(runcore.memTesterRun):
 
     def callbackConnectToDevice( self ):
         if not self.isDeviceConnected:
+            self.showContentOnSecPacketWin(u"【Action】: Click connect button to load boot firmware.")
             self.updatePortSetupValue()
             self.connectToDevice()
             if self._retryToPingBootloader():
-                self.jumpToFirmware()
-                self.openUartPort()
-                self.isDeviceConnected = True
+                if self.jumpToFirmware():
+                    self.showContentOnSecPacketWin(u"【  Info 】: boot firmware is loaded.")
+                    self.openUartPort()
+                    self.isDeviceConnected = True
+                else:
+                    pass
             else:
                 if (self.tgt.mcuSeries == uidef.kMcuSeries_iMXRT10yy) or \
                    (self.tgt.mcuSeries == uidef.kMcuSeries_iMXRT11yy):
@@ -63,6 +68,7 @@ class memTesterMain(runcore.memTesterRun):
                 else:
                     pass
         else:
+            self.showContentOnSecPacketWin(u"【Action】: Click reset button to reboot system.")
             self.isDeviceConnected = False
             self.closeUartPort()
 

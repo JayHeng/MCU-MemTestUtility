@@ -170,5 +170,4 @@ class memTesterRun(uicore.memTesterUi):
             #    return False
         else:
             pass
-        self.textEdit_displayWin.setPlainText(u"boot firmware is loaded")
         return True
