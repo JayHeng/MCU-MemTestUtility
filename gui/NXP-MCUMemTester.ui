@@ -643,8 +643,14 @@
        <x>10</x>
        <y>50</y>
        <width>701</width>
-       <height>261</height>
+       <height>171</height>
       </rect>
+     </property>
+     <property name="font">
+      <font>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
      </property>
      <property name="frameShadow">
       <enum>QFrame::Plain</enum>
@@ -731,6 +737,54 @@
      </property>
      <property name="text">
       <string>Clear Screen</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_stressTest">
+     <property name="geometry">
+      <rect>
+       <x>300</x>
+       <y>10</y>
+       <width>81</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>Stress Test</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_pinUnittest">
+     <property name="geometry">
+      <rect>
+       <x>540</x>
+       <y>10</y>
+       <width>75</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>Pin Unittest</string>
+     </property>
+    </widget>
+    <widget class="QGraphicsView" name="graphicsView">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>230</y>
+       <width>701</width>
+       <height>81</height>
+      </rect>
      </property>
     </widget>
    </widget>
