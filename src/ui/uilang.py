@@ -23,7 +23,7 @@ kRevision_1_0_0_en =  "【v1.0.0】 \n" + \
 
 kMsgLanguageContentDict = {
         'homePage_title':                     ['Home Page'],
-        'homePage_info':                      ['https://github.com/JayHeng/NXP-MCUBootTester.git \n'],
+        'homePage_info':                      ['https://github.com/JayHeng/MCU-MemTestUtility.git \n'],
         'aboutAuthor_title':                  ['About Author'],
         'aboutAuthor_author':                 [u"Author: 痞子衡 \n"],
         'aboutAuthor_email1':                 ['Email: jie.heng@nxp.com \n'],

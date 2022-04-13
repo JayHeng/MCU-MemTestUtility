@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>NXP MCU Mem Tester</string>
+   <string>MCU Mem Test Utility</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QFrame" name="mcuFrame">

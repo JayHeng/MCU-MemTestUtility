@@ -88,7 +88,7 @@ class memTesterMain(runcore.memTesterRun):
 if __name__ == '__main__':
     app = QApplication(sys.argv)
     mainWin = memTesterMain(None)
-    mainWin.setWindowTitle(u"NXP MCU Mem Tester v1.0")
+    mainWin.setWindowTitle(u"MCU Mem Test Utility v1.0")
     mainWin.show()
 
     sys.exit(app.exec_())

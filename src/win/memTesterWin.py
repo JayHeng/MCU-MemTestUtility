@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file '.\NXP-MCUMemTester.ui'
+# Form implementation generated from reading ui file '.\MCU-MemTestUtility.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.1
 #
@@ -316,7 +316,7 @@ class Ui_memTesterWin(object):
 
     def retranslateUi(self, memTesterWin):
         _translate = QtCore.QCoreApplication.translate
-        memTesterWin.setWindowTitle(_translate("memTesterWin", "NXP MCU Mem Tester"))
+        memTesterWin.setWindowTitle(_translate("memTesterWin", "MCU Mem Test Utility"))
         self.label_mcuDevice.setText(_translate("memTesterWin", "MCU Device:"))
         self.comboBox_mcuDevice.setItemText(0, _translate("memTesterWin", "i.MXRT117x"))
         self.label_flexspiConnection.setText(_translate("memTesterWin", "FlexSPI Connection:"))
