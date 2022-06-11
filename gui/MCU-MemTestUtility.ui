@@ -69,40 +69,6 @@
       </property>
      </item>
     </widget>
-    <widget class="QLabel" name="label_flexspiConnection">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>40</y>
-       <width>111</width>
-       <height>16</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <weight>75</weight>
-       <bold>true</bold>
-      </font>
-     </property>
-     <property name="text">
-      <string>FlexSPI Connection:</string>
-     </property>
-    </widget>
-    <widget class="QComboBox" name="comboBox_flexspiConnection">
-     <property name="geometry">
-      <rect>
-       <x>130</x>
-       <y>40</y>
-       <width>101</width>
-       <height>22</height>
-      </rect>
-     </property>
-     <item>
-      <property name="text">
-       <string>Idx 1st, Opt 1st</string>
-      </property>
-     </item>
-    </widget>
     <widget class="QTextEdit" name="textEdit_flexspiConnection">
      <property name="enabled">
       <bool>true</bool>
@@ -110,9 +76,9 @@
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>70</y>
+       <y>80</y>
        <width>221</width>
-       <height>191</height>
+       <height>181</height>
       </rect>
      </property>
      <property name="readOnly">
@@ -225,6 +191,25 @@
        <string>64bit</string>
       </property>
      </item>
+    </widget>
+    <widget class="QPushButton" name="pushButton_flexspiConnectionConfiguration">
+     <property name="geometry">
+      <rect>
+       <x>14</x>
+       <y>40</y>
+       <width>211</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>FlexSPI Connection Configuration</string>
+     </property>
     </widget>
    </widget>
    <widget class="QFrame" name="uartFrame">

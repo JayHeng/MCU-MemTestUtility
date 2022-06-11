@@ -1,0 +1,417 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>flexspiConnCfgDialog</class>
+ <widget class="QDialog" name="flexspiConnCfgDialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>419</width>
+    <height>321</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <widget class="QLabel" name="label_instance">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>20</y>
+     <width>81</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="text">
+    <string>Instance:</string>
+   </property>
+  </widget>
+  <widget class="QComboBox" name="comboBox_instance">
+   <property name="geometry">
+    <rect>
+     <x>110</x>
+     <y>20</y>
+     <width>291</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <item>
+    <property name="text">
+     <string>1</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>2</string>
+    </property>
+   </item>
+  </widget>
+  <widget class="QLabel" name="label_dataL4b">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>50</y>
+     <width>81</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="text">
+    <string>DATA_L4B:</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_dataH4b">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>80</y>
+     <width>81</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="text">
+    <string>DATA_H4B:</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_ssb">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>110</y>
+     <width>81</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="text">
+    <string>SS_B:</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_sclk">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>140</y>
+     <width>81</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="text">
+    <string>SCLK:</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_dqs">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>170</y>
+     <width>100</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="text">
+    <string>DQS:</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_sclkn">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>200</y>
+     <width>100</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="text">
+    <string>SCLK_N:</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_rstb">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>230</y>
+     <width>100</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="text">
+    <string>RST_B:</string>
+   </property>
+  </widget>
+  <widget class="QComboBox" name="comboBox_dataL4b">
+   <property name="geometry">
+    <rect>
+     <x>110</x>
+     <y>50</y>
+     <width>291</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <item>
+    <property name="text">
+     <string>PortA_DATA[3:0] - GPIO_SD_B2[11:8]</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>PortA_DATA[3:0] - GPIO_AD[23:20]</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>PortB_DATA[3:0] - GPIO_SD_B2[3:0]</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>PortB_DATA[3:0] - GPIO_AD[15:12]</string>
+    </property>
+   </item>
+  </widget>
+  <widget class="QComboBox" name="comboBox_dataH4b">
+   <property name="geometry">
+    <rect>
+     <x>110</x>
+     <y>80</y>
+     <width>291</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <item>
+    <property name="text">
+     <string>None</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>PortB_DATA[3:0] - GPIO_SD_B2[3:0]</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>PortB_DATA[3:0] - GPIO_AD[15:12]</string>
+    </property>
+   </item>
+  </widget>
+  <widget class="QComboBox" name="comboBox_ssb">
+   <property name="geometry">
+    <rect>
+     <x>110</x>
+     <y>110</y>
+     <width>291</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <item>
+    <property name="text">
+     <string>PortA_SS0 - GPIO_SD_B2[6]</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>PortA_SS0 - GPIO_AD[18]</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>PortA_SS1 - GPIO_SD_B1[2]</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>PortB_SS0 - GPIO_SD_B1[4]</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>PortB_SS1 - GPIO_AD[35]</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>PortB_SS1 - GPIO_SD_B1[3]</string>
+    </property>
+   </item>
+  </widget>
+  <widget class="QComboBox" name="comboBox_sclk">
+   <property name="geometry">
+    <rect>
+     <x>110</x>
+     <y>140</y>
+     <width>291</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <item>
+    <property name="text">
+     <string>PortA_SCLK - GPIO_SD_B2[7]</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>PortA_SCLK - GPIO_AD[19]</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>PortB_SCLK - GPIO_SD_B2[4]</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>PortB_SCLK - GPIO_AD[16]</string>
+    </property>
+   </item>
+  </widget>
+  <widget class="QComboBox" name="comboBox_dqs">
+   <property name="geometry">
+    <rect>
+     <x>110</x>
+     <y>170</y>
+     <width>291</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <item>
+    <property name="text">
+     <string>PortA_DQS - GPIO_SD_B2[5]</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>PortA_DQS - GPIO_AD[17]</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>PortA_DQS - GPIO_EMC_B2[18]</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>PortB_DQS - GPIO_SD_B1[5]</string>
+    </property>
+   </item>
+  </widget>
+  <widget class="QComboBox" name="comboBox_sclkn">
+   <property name="geometry">
+    <rect>
+     <x>110</x>
+     <y>200</y>
+     <width>291</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <item>
+    <property name="text">
+     <string>None</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>PortB_SCLK - GPIO_SD_B2[4]</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>PortB_SCLK - GPIO_AD[16]</string>
+    </property>
+   </item>
+  </widget>
+  <widget class="QComboBox" name="comboBox_rstb">
+   <property name="geometry">
+    <rect>
+     <x>110</x>
+     <y>230</y>
+     <width>291</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <item>
+    <property name="text">
+     <string>None</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>GPIO_SD_B1[0]</string>
+    </property>
+   </item>
+  </widget>
+  <widget class="QPushButton" name="pushButton_ok">
+   <property name="geometry">
+    <rect>
+     <x>90</x>
+     <y>270</y>
+     <width>75</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Ok</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton_cancel">
+   <property name="geometry">
+    <rect>
+     <x>250</x>
+     <y>270</y>
+     <width>75</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Cancel</string>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

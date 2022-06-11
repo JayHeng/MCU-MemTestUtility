@@ -6,6 +6,7 @@ import time
 from PyQt5.Qt import *
 from ui import uidef
 from ui import uilang
+from ui import ui_cfg_flexspi_conn
 from run import runcore
 
 kRetryPingTimes = 5
@@ -23,6 +24,7 @@ class memTesterMain(runcore.memTesterRun):
         self.menuHelpAction_aboutAuthor.triggered.connect(self.callbackShowAboutAuthor)
         self.menuHelpAction_revisionHistory.triggered.connect(self.callbackShowRevisionHistory)
         self.comboBox_mcuDevice.currentIndexChanged.connect(self.callbackSetMcuDevice)
+        self.pushButton_flexspiConnectionConfiguration.clicked.connect(self.callbackFlexspiConnectionConfiguration)
         self.pushButton_connect.clicked.connect(self.callbackConnectToDevice)
         self.pushButton_clearScreen.clicked.connect(self.clearContentOfScreens)
 
@@ -35,6 +37,10 @@ class memTesterMain(runcore.memTesterRun):
 
     def callbackSetMcuDevice( self ):
         self._setupMcuTargets()
+
+    def callbackFlexspiConnectionConfiguration( self ):
+        flexspiFrame = ui_cfg_flexspi_conn.memTesterUiCfgFlexspi(None)
+        flexspiFrame.show()
 
     def _retryToPingBootloader( self ):
         pingStatus = False
