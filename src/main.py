@@ -39,7 +39,6 @@ class memTesterMain(runcore.memTesterRun):
         self._setupMcuTargets()
 
     def callbackFlexspiConnectionConfiguration( self ):
-        flexspiFrame = ui_cfg_flexspi_conn.memTesterUiCfgFlexspi(None)
         flexspiFrame.show()
 
     def _retryToPingBootloader( self ):
@@ -96,6 +95,8 @@ if __name__ == '__main__':
     mainWin = memTesterMain(None)
     mainWin.setWindowTitle(u"MCU Mem Test Utility v1.0")
     mainWin.show()
+    flexspiFrame = ui_cfg_flexspi_conn.memTesterUiCfgFlexspi(None)
+    flexspiFrame.setWindowTitle(u"FlexSPI Connection Configuration")
 
     sys.exit(app.exec_())
 
