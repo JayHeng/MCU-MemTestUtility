@@ -59,3 +59,5 @@ kFlexspiNorDevice_XTXtech_X25Q64D       = 'XTXtech_X25FxxxB_X25QxxxD'
 kFlexspiNorDevice_Puya_P25Q64LE         = 'Puya_P25QxxxLE_P25QxxxH_P25QxxxU'
 kFlexspiNorDevice_AMIC_A25LQ64          = 'AMIC_A25LQxxx'
 
+kAdvancedSettings_Tool           = 0
+kAdvancedSettings_FlexspiConn    = 1

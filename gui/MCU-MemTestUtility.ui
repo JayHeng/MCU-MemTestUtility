@@ -78,7 +78,7 @@
        <x>10</x>
        <y>80</y>
        <width>221</width>
-       <height>181</height>
+       <height>131</height>
       </rect>
      </property>
      <property name="readOnly">
@@ -89,7 +89,7 @@
      <property name="geometry">
       <rect>
        <x>20</x>
-       <y>270</y>
+       <y>220</y>
        <width>111</width>
        <height>16</height>
       </rect>
@@ -107,8 +107,8 @@
     <widget class="QLineEdit" name="lineEdit_cpuSpeed">
      <property name="geometry">
       <rect>
-       <x>140</x>
-       <y>270</y>
+       <x>130</x>
+       <y>220</y>
        <width>91</width>
        <height>20</height>
       </rect>
@@ -124,7 +124,7 @@
      <property name="geometry">
       <rect>
        <x>60</x>
-       <y>300</y>
+       <y>250</y>
        <width>111</width>
        <height>20</height>
       </rect>
@@ -143,7 +143,7 @@
      <property name="geometry">
       <rect>
        <x>60</x>
-       <y>330</y>
+       <y>280</y>
        <width>111</width>
        <height>17</height>
       </rect>
@@ -161,8 +161,8 @@
     <widget class="QLabel" name="label_prefetchBufferSize">
      <property name="geometry">
       <rect>
-       <x>20</x>
-       <y>360</y>
+       <x>10</x>
+       <y>310</y>
        <width>121</width>
        <height>16</height>
       </rect>
@@ -180,8 +180,8 @@
     <widget class="QComboBox" name="comboBox_prefetchBufferSize">
      <property name="geometry">
       <rect>
-       <x>140</x>
-       <y>360</y>
+       <x>130</x>
+       <y>310</y>
        <width>91</width>
        <height>22</height>
       </rect>
@@ -209,6 +209,25 @@
      </property>
      <property name="text">
       <string>FlexSPI Connection Configuration</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_flexspiAdvancedConfiguration">
+     <property name="geometry">
+      <rect>
+       <x>14</x>
+       <y>350</y>
+       <width>211</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>FlexSPI Advanced Configuration</string>
      </property>
     </widget>
    </widget>
@@ -449,7 +468,7 @@
       <rect>
        <x>290</x>
        <y>10</y>
-       <width>251</width>
+       <width>241</width>
        <height>22</height>
       </rect>
      </property>
@@ -489,7 +508,47 @@
      </property>
      <item>
       <property name="text">
+       <string>30MHz</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>50MHz</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>60MHz</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>80MHz</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>100MHz</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>120MHz</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
        <string>133MHz</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>166MHz</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>200MHz</string>
       </property>
      </item>
     </widget>
@@ -517,7 +576,7 @@
       <rect>
        <x>80</x>
        <y>40</y>
-       <width>80</width>
+       <width>131</width>
        <height>22</height>
       </rect>
      </property>
@@ -545,7 +604,7 @@
     <widget class="QComboBox" name="comboBox_memInterfaceMode">
      <property name="geometry">
       <rect>
-       <x>170</x>
+       <x>220</x>
        <y>40</y>
        <width>160</width>
        <height>22</height>
@@ -570,9 +629,9 @@
     <widget class="QComboBox" name="comboBox_memDateRate">
      <property name="geometry">
       <rect>
-       <x>340</x>
+       <x>390</x>
        <y>40</y>
-       <width>130</width>
+       <width>141</width>
        <height>22</height>
       </rect>
      </property>
@@ -586,6 +645,52 @@
        <string>Double Transfer Rate</string>
       </property>
      </item>
+    </widget>
+    <widget class="QLabel" name="label_dummyCycles">
+     <property name="geometry">
+      <rect>
+       <x>540</x>
+       <y>40</y>
+       <width>91</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>Dummy Cycles:</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit_dummyCycles">
+     <property name="geometry">
+      <rect>
+       <x>630</x>
+       <y>40</y>
+       <width>81</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>MS Shell Dlg 2</family>
+      </font>
+     </property>
+     <property name="autoFillBackground">
+      <bool>true</bool>
+     </property>
+     <property name="text">
+      <string>8</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+     <property name="readOnly">
+      <bool>true</bool>
+     </property>
     </widget>
    </widget>
    <widget class="QFrame" name="dispFrame">

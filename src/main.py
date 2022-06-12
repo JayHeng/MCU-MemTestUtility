@@ -6,6 +6,7 @@ import time
 from PyQt5.Qt import *
 from ui import uidef
 from ui import uilang
+from ui import uivar
 from ui import ui_cfg_flexspi_conn
 from run import runcore
 
@@ -39,6 +40,7 @@ class memTesterMain(runcore.memTesterRun):
         self._setupMcuTargets()
 
     def callbackFlexspiConnectionConfiguration( self ):
+        flexspiFrame.setNecessaryInfo(self.mcuDevice, self.textEdit_flexspiConnection)
         flexspiFrame.show()
 
     def _retryToPingBootloader( self ):
@@ -76,6 +78,14 @@ class memTesterMain(runcore.memTesterRun):
             self.showContentOnSecPacketWin(u"【Action】: Click reset button to reboot system.")
             self.isDeviceConnected = False
             self.closeUartPort()
+
+    def _deinitToolToExit( self ):
+        uivar.setAdvancedSettings(uidef.kAdvancedSettings_Tool, self.toolCommDict)
+        uivar.deinitVar()
+
+    def closeEvent(self, event):
+        self._deinitToolToExit()
+        event.accept()
 
     def callbackShowHomePage(self):
         self.showAboutMessage(uilang.kMsgLanguageContentDict['homePage_title'][0], uilang.kMsgLanguageContentDict['homePage_info'][0] )

@@ -15,6 +15,8 @@ from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from . import uidef
 from . import uilang
+from . import uivar
+from . import ui_def_flexspi_conn_rt1170
 sys.path.append(os.path.abspath(".."))
 from win import memTesterWin
 
@@ -49,11 +51,17 @@ class memTesterUi(QMainWindow, memTesterWin.Ui_memTesterWin):
         exeMainFile = os.path.join(self.exeTopRoot, 'src', 'main.py')
         if not os.path.isfile(exeMainFile):
             self.exeTopRoot = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
+        uivar.setRuntimeSettings(None, self.exeTopRoot)
+        uivar.initVar(os.path.join(self.exeTopRoot, 'bin', 'mtu_settings.json'))
+        toolCommDict = uivar.getAdvancedSettings(uidef.kAdvancedSettings_Tool)
+        self.toolCommDict = toolCommDict.copy()
+        self.flexspiConnCfgDict = None
 
         self.mcuDevice = None
         self._initTargetSetupValue()
         self.setTargetSetupValue()
         self.initUi()
+        self._initFlexspiConn()
 
     def initUi( self ):
         self.uartComPort = None
@@ -95,10 +103,49 @@ class memTesterUi(QMainWindow, memTesterWin.Ui_memTesterWin):
     def _initTargetSetupValue( self ):
         self.comboBox_mcuDevice.clear()
         self.comboBox_mcuDevice.addItems(uidef.kMcuDevice_v1_0)
-        self.comboBox_mcuDevice.setCurrentIndex(0)
+        self.comboBox_mcuDevice.setCurrentIndex(self.toolCommDict['mcuDevice'])
 
     def setTargetSetupValue( self ):
         self.mcuDevice = self.comboBox_mcuDevice.currentText()
+        self.toolCommDict['mcuDevice'] = self.comboBox_mcuDevice.currentIndex()
+
+    def _initFlexspiConn( self ):
+        flexspiConnCfgDict = uivar.getAdvancedSettings(uidef.kAdvancedSettings_FlexspiConn)
+        self.flexspiConnCfgDict = flexspiConnCfgDict.copy()
+        instance = self.flexspiConnCfgDict['instance'] - 1
+        self.textEdit_flexspiConnection.clear()
+        if self.mcuDevice == uidef.kMcuDevice_iMXRT117x:
+            for key in ui_def_flexspi_conn_rt1170.kFlexspiConnSel_DataL4b[instance].keys():
+                if ui_def_flexspi_conn_rt1170.kFlexspiConnSel_DataL4b[instance][key] == self.flexspiConnCfgDict['dataL4b']:
+                    self.textEdit_flexspiConnection.append(key)
+                    break
+            for key in ui_def_flexspi_conn_rt1170.kFlexspiConnSel_DataH4b[instance].keys():
+                if ui_def_flexspi_conn_rt1170.kFlexspiConnSel_DataH4b[instance][key] == self.flexspiConnCfgDict['dataH4b']:
+                    if key != 'None':
+                        self.textEdit_flexspiConnection.append(key)
+                    break
+            for key in ui_def_flexspi_conn_rt1170.kFlexspiConnSel_ssb[instance].keys():
+                if ui_def_flexspi_conn_rt1170.kFlexspiConnSel_ssb[instance][key] == self.flexspiConnCfgDict['ssb']:
+                    self.textEdit_flexspiConnection.append(key)
+                    break
+            for key in ui_def_flexspi_conn_rt1170.kFlexspiConnSel_sclk[instance].keys():
+                if ui_def_flexspi_conn_rt1170.kFlexspiConnSel_sclk[instance][key] == self.flexspiConnCfgDict['sclk']:
+                    self.textEdit_flexspiConnection.append(key)
+                    break
+            for key in ui_def_flexspi_conn_rt1170.kFlexspiConnSel_dqs[instance].keys():
+                if ui_def_flexspi_conn_rt1170.kFlexspiConnSel_dqs[instance][key] == self.flexspiConnCfgDict['dqs']:
+                    self.textEdit_flexspiConnection.append(key)
+                    break
+            for key in ui_def_flexspi_conn_rt1170.kFlexspiConnSel_sclkn[instance].keys():
+                if ui_def_flexspi_conn_rt1170.kFlexspiConnSel_sclkn[instance][key] == self.flexspiConnCfgDict['sclkn']:
+                    if key != 'None':
+                        self.textEdit_flexspiConnection.append(key)
+                    break
+            for key in ui_def_flexspi_conn_rt1170.kFlexspiConnSel_rstb[instance].keys():
+                if ui_def_flexspi_conn_rt1170.kFlexspiConnSel_rstb[instance][key] == self.flexspiConnCfgDict['rstb']:
+                    if key != 'None':
+                        self.textEdit_flexspiConnection.append(key)
+                    break
 
     def updateUartPadInfo( self ):
         self.lineEdit_uartPad.setText(self.tgt.uartPeripheralPinStr)

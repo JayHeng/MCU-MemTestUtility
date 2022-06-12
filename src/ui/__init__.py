@@ -8,7 +8,9 @@
 from . import uicore
 from . import uidef
 from . import uilang
+from . import uivar
 from . import ui_cfg_flexspi_conn
+from . import ui_def_flexspi_conn_rt1170
 
-__all__ = ["uicore", "uidef", "uilang", "ui_cfg_flexspi_conn"]
+__all__ = ["uicore", "uidef", "uilang", "uivar", "ui_cfg_flexspi_conn", "ui_def_flexspi_conn_rt1170"]
 

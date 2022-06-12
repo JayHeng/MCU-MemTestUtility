@@ -251,32 +251,32 @@
    </property>
    <item>
     <property name="text">
-     <string>PortA_SS0 - GPIO_SD_B2[6]</string>
+     <string>PortA_SS0_B - GPIO_SD_B2[6]</string>
     </property>
    </item>
    <item>
     <property name="text">
-     <string>PortA_SS0 - GPIO_AD[18]</string>
+     <string>PortA_SS0_B - GPIO_AD[18]</string>
     </property>
    </item>
    <item>
     <property name="text">
-     <string>PortA_SS1 - GPIO_SD_B1[2]</string>
+     <string>PortA_SS1_B - GPIO_SD_B1[2]</string>
     </property>
    </item>
    <item>
     <property name="text">
-     <string>PortB_SS0 - GPIO_SD_B1[4]</string>
+     <string>PortB_SS0_B - GPIO_SD_B1[4]</string>
     </property>
    </item>
    <item>
     <property name="text">
-     <string>PortB_SS1 - GPIO_AD[35]</string>
+     <string>PortB_SS1_B - GPIO_AD[35]</string>
     </property>
    </item>
    <item>
     <property name="text">
-     <string>PortB_SS1 - GPIO_SD_B1[3]</string>
+     <string>PortB_SS1_B - GPIO_SD_B1[3]</string>
     </property>
    </item>
   </widget>
@@ -356,12 +356,12 @@
    </item>
    <item>
     <property name="text">
-     <string>PortB_SCLK - GPIO_SD_B2[4]</string>
+     <string>PortB_SCLKN - GPIO_SD_B2[4]</string>
     </property>
    </item>
    <item>
     <property name="text">
-     <string>PortB_SCLK - GPIO_AD[16]</string>
+     <string>PortB_SCLKN - GPIO_AD[16]</string>
     </property>
    </item>
   </widget>
@@ -381,7 +381,12 @@
    </item>
    <item>
     <property name="text">
-     <string>GPIO_SD_B1[0]</string>
+     <string>RST_B - GPIO_SD_B1[0]</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>RST_B - GPIO_EMC_B1[40]</string>
     </property>
    </item>
   </widget>
