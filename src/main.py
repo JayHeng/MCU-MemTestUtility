@@ -26,6 +26,7 @@ class memTesterMain(runcore.memTesterRun):
         self.menuHelpAction_revisionHistory.triggered.connect(self.callbackShowRevisionHistory)
         self.comboBox_mcuDevice.currentIndexChanged.connect(self.callbackSetMcuDevice)
         self.pushButton_flexspiConnectionConfiguration.clicked.connect(self.callbackFlexspiConnectionConfiguration)
+        self.comboBox_memType.currentIndexChanged.connect(self.callbackSetMemType)
         self.pushButton_connect.clicked.connect(self.callbackConnectToDevice)
         self.pushButton_clearScreen.clicked.connect(self.clearContentOfScreens)
 
@@ -78,6 +79,9 @@ class memTesterMain(runcore.memTesterRun):
             self.showContentOnSecPacketWin(u"【Action】: Click reset button to reboot system.")
             self.isDeviceConnected = False
             self.closeUartPort()
+
+    def callbackSetMemType( self ):
+        self.setMemType()
 
     def _deinitToolToExit( self ):
         uivar.setAdvancedSettings(uidef.kAdvancedSettings_Tool, self.toolCommDict)

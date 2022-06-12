@@ -62,6 +62,8 @@ class memTesterUi(QMainWindow, memTesterWin.Ui_memTesterWin):
         self.setTargetSetupValue()
         self.initUi()
         self._initFlexspiConn()
+        self.memType = None
+        self._initMemType()
 
     def initUi( self ):
         self.uartComPort = None
@@ -188,6 +190,25 @@ class memTesterUi(QMainWindow, memTesterWin.Ui_memTesterWin):
             if num != 0:
                 data = s_serialPort.read(num)
                 self.showContentOnMainDisplayWin(data.decode())
+
+    def _initMemType( self ):
+        self.setMemType()
+
+    def setMemType( self ):
+        self.memType = self.comboBox_memType.currentText()
+        self.comboBox_memChip.clear()
+        if self.memType == uidef.kMemType_QuadSPI:
+            self.comboBox_memChip.addItems(uidef.kFlexspiNorDevices_QuadSPI)
+        elif self.memType == uidef.kMemType_OctalSPI:
+            self.comboBox_memChip.addItems(uidef.kFlexspiNorDevices_OctalSPI)
+        elif self.memType == uidef.kMemType_HyperFlash:
+            self.comboBox_memChip.addItems(uidef.kFlexspiNorDevices_HyperFlash)
+        elif self.memType == uidef.kMemType_PSRAM:
+            self.comboBox_memChip.addItems(uidef.kFlexspiRamDevices_PSRAM)
+        elif self.memType == uidef.kMemType_HyperRAM:
+            self.comboBox_memChip.addItems(uidef.kFlexspiRamDevices_HyperRAM)
+        else:
+            pass
 
     def showContentOnMainDisplayWin( self, contentStr ):
         self.textEdit_displayWin.append(contentStr)

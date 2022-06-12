@@ -59,5 +59,52 @@ kFlexspiNorDevice_XTXtech_X25Q64D       = 'XTXtech_X25FxxxB_X25QxxxD'
 kFlexspiNorDevice_Puya_P25Q64LE         = 'Puya_P25QxxxLE_P25QxxxH_P25QxxxU'
 kFlexspiNorDevice_AMIC_A25LQ64          = 'AMIC_A25LQxxx'
 
+kFlexspiNorDevices_QuadSPI = [kFlexspiNorDevice_ISSI_IS25LP064A,
+                              kFlexspiNorDevice_MXIC_MX25L12845G,
+                              kFlexspiNorDevice_Micron_MT25QL128A,
+                              kFlexspiNorDevice_Adesto_AT25SF128A,
+                              kFlexspiNorDevice_Cypress_S25FL128S,
+                              kFlexspiNorDevice_GigaDevice_GD25LB256E,
+                              kFlexspiNorDevice_GigaDevice_GD25LT256E,
+                              kFlexspiNorDevice_GigaDevice_GD25LX256E,
+                              kFlexspiNorDevice_Winbond_W25Q128JV,
+                              kFlexspiNorDevice_Microchip_SST26VF064B,
+                              kFlexspiNorDevice_FudanMicro_FM25Q64,
+                              kFlexspiNorDevice_BoyaMicro_BY25Q16BS,
+                              kFlexspiNorDevice_XMC_XM25QH64B,
+                              kFlexspiNorDevice_XTXtech_X25Q64D,
+                              kFlexspiNorDevice_Puya_P25Q64LE,
+                              kFlexspiNorDevice_AMIC_A25LQ64
+                             ]
+
+kFlexspiNorDevices_OctalSPI = [kFlexspiNorDevice_MXIC_MX25UM51245G,
+                               kFlexspiNorDevice_MXIC_MX25UM51345G,
+                               kFlexspiNorDevice_Micron_MT35X,
+                               kFlexspiNorDevice_Adesto_ATXP032
+                              ]
+
+kFlexspiNorDevices_HyperFlash = [kFlexspiNorDevice_ISSI_IS26KS512S,
+                                 kFlexspiNorDevice_Cypress_S26KS512S
+                                ]
+
+kFlexspiRamDevice_APMemory_APS12808L       = 'APMemory_APSxxx08L'
+kFlexspiRamDevice_Cypress_S27KL0641        = 'Cypress_S27KLxxx1_S27KSxxx1'
+kFlexspiRamDevice_ISSI_IS66WVH8M8          = 'ISSI_IS66WVH8M8_IS67WVH8M8'
+kFlexspiRamDevice_Winbond_W957D8           = 'Winbond_W957D8_W957A8'
+
+kFlexspiRamDevices_PSRAM    = [kFlexspiRamDevice_APMemory_APS12808L
+                              ]
+
+kFlexspiRamDevices_HyperRAM = [kFlexspiRamDevice_Cypress_S27KL0641,
+                               kFlexspiRamDevice_ISSI_IS66WVH8M8,
+                               kFlexspiRamDevice_Winbond_W957D8
+                              ]
+
+kMemType_QuadSPI    = 'Quad SPI NOR Flash'
+kMemType_OctalSPI   = 'Octal SPI NOR Flash'
+kMemType_HyperFlash = 'HyperBus NOR Flash'
+kMemType_PSRAM      = 'PSRAM'
+kMemType_HyperRAM   = 'HyperRAM'
+
 kAdvancedSettings_Tool           = 0
 kAdvancedSettings_FlexspiConn    = 1
