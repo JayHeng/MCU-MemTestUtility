@@ -9,6 +9,7 @@ from ui import uilang
 from ui import uivar
 from ui import ui_cfg_flexspi_conn
 from ui import ui_cfg_flexspi_pintest
+from ui import ui_cfg_perf_test
 from run import runcore
 
 kRetryPingTimes = 5
@@ -30,6 +31,7 @@ class memTesterMain(runcore.memTesterRun):
         self.pushButton_connect.clicked.connect(self.callbackConnectToDevice)
         self.comboBox_memType.currentIndexChanged.connect(self.callbackSetMemType)
         self.pushButton_pinUnittest.clicked.connect(self.callbackFlexspiPinUnittest)
+        self.pushButton_perfTest.clicked.connect(self.callbackPerfTest)
         self.pushButton_clearScreen.clicked.connect(self.clearContentOfScreens)
 
     def _setupMcuTargets( self ):
@@ -88,6 +90,9 @@ class memTesterMain(runcore.memTesterRun):
     def callbackFlexspiPinUnittest( self ):
         flexspiPinUnittestFrame.show()
 
+    def callbackPerfTest( self ):
+        perfTestFrame.show()
+
     def _deinitToolToExit( self ):
         uivar.setAdvancedSettings(uidef.kAdvancedSettings_Tool, self.toolCommDict)
         uivar.deinitVar()
@@ -118,6 +123,8 @@ if __name__ == '__main__':
     flexspiConnCfgFrame.setWindowTitle(u"FlexSPI Connection Configuration")
     flexspiPinUnittestFrame = ui_cfg_flexspi_pintest.memTesterUiCfgFlexspiPin(None)
     flexspiPinUnittestFrame.setWindowTitle(u"FlexSPI Pin Unit Test")
+    perfTestFrame = ui_cfg_perf_test.memTesterUiPerfTest(None)
+    perfTestFrame.setWindowTitle(u"Perf Test")
 
     sys.exit(app.exec_())
 
