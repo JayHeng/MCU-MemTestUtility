@@ -8,6 +8,7 @@ from ui import uidef
 from ui import uilang
 from ui import uivar
 from ui import ui_cfg_flexspi_conn
+from ui import ui_cfg_flexspi_pintest
 from run import runcore
 
 kRetryPingTimes = 5
@@ -26,8 +27,9 @@ class memTesterMain(runcore.memTesterRun):
         self.menuHelpAction_revisionHistory.triggered.connect(self.callbackShowRevisionHistory)
         self.comboBox_mcuDevice.currentIndexChanged.connect(self.callbackSetMcuDevice)
         self.pushButton_flexspiConnectionConfiguration.clicked.connect(self.callbackFlexspiConnectionConfiguration)
-        self.comboBox_memType.currentIndexChanged.connect(self.callbackSetMemType)
         self.pushButton_connect.clicked.connect(self.callbackConnectToDevice)
+        self.comboBox_memType.currentIndexChanged.connect(self.callbackSetMemType)
+        self.pushButton_pinUnittest.clicked.connect(self.callbackFlexspiPinUnittest)
         self.pushButton_clearScreen.clicked.connect(self.clearContentOfScreens)
 
     def _setupMcuTargets( self ):
@@ -41,8 +43,8 @@ class memTesterMain(runcore.memTesterRun):
         self._setupMcuTargets()
 
     def callbackFlexspiConnectionConfiguration( self ):
-        flexspiFrame.setNecessaryInfo(self.mcuDevice, self.textEdit_flexspiConnection)
-        flexspiFrame.show()
+        flexspiConnCfgFrame.setNecessaryInfo(self.mcuDevice, self.textEdit_flexspiConnection)
+        flexspiConnCfgFrame.show()
 
     def _retryToPingBootloader( self ):
         pingStatus = False
@@ -83,6 +85,9 @@ class memTesterMain(runcore.memTesterRun):
     def callbackSetMemType( self ):
         self.setMemType()
 
+    def callbackFlexspiPinUnittest( self ):
+        flexspiPinUnittestFrame.show()
+
     def _deinitToolToExit( self ):
         uivar.setAdvancedSettings(uidef.kAdvancedSettings_Tool, self.toolCommDict)
         uivar.deinitVar()
@@ -109,8 +114,10 @@ if __name__ == '__main__':
     mainWin = memTesterMain(None)
     mainWin.setWindowTitle(u"MCU Mem Test Utility v1.0")
     mainWin.show()
-    flexspiFrame = ui_cfg_flexspi_conn.memTesterUiCfgFlexspi(None)
-    flexspiFrame.setWindowTitle(u"FlexSPI Connection Configuration")
+    flexspiConnCfgFrame = ui_cfg_flexspi_conn.memTesterUiCfgFlexspiConn(None)
+    flexspiConnCfgFrame.setWindowTitle(u"FlexSPI Connection Configuration")
+    flexspiPinUnittestFrame = ui_cfg_flexspi_pintest.memTesterUiCfgFlexspiPin(None)
+    flexspiPinUnittestFrame.setWindowTitle(u"FlexSPI Pin Unit Test")
 
     sys.exit(app.exec_())
 

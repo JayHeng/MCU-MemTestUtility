@@ -11,10 +11,10 @@ from . import ui_def_flexspi_conn_rt1170
 sys.path.append(os.path.abspath(".."))
 from win import flexspiConnectCfgWin
 
-class memTesterUiCfgFlexspi(QMainWindow, flexspiConnectCfgWin.Ui_flexspiConnCfgDialog):
+class memTesterUiCfgFlexspiConn(QMainWindow, flexspiConnectCfgWin.Ui_flexspiConnCfgDialog):
 
     def __init__(self, parent=None):
-        super(memTesterUiCfgFlexspi, self).__init__(parent)
+        super(memTesterUiCfgFlexspiConn, self).__init__(parent)
         self.setupUi(self)
         self._register_callbacks()
         self.mcuDevice = None
@@ -133,9 +133,6 @@ class memTesterUiCfgFlexspi(QMainWindow, flexspiConnectCfgWin.Ui_flexspiConnCfgD
         self.close()
 
     def callbackCancel( self, event ):
-        self.close()
-
-    def callbackClose( self, event ):
         self.close()
 
 

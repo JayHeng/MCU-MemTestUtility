@@ -186,9 +186,25 @@
        <height>22</height>
       </rect>
      </property>
+     <property name="currentIndex">
+      <number>2</number>
+     </property>
+     <property name="maxVisibleItems">
+      <number>13</number>
+     </property>
      <item>
       <property name="text">
        <string>64bit</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>2KB</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>4KB</string>
       </property>
      </item>
     </widget>
@@ -711,7 +727,7 @@
     <widget class="QPushButton" name="pushButton_memInfo">
      <property name="geometry">
       <rect>
-       <x>120</x>
+       <x>210</x>
        <y>10</y>
        <width>81</width>
        <height>31</height>
@@ -752,7 +768,7 @@
     <widget class="QPushButton" name="pushButton_perfTest">
      <property name="geometry">
       <rect>
-       <x>210</x>
+       <x>300</x>
        <y>10</y>
        <width>81</width>
        <height>31</height>
@@ -778,7 +794,7 @@
       </rect>
      </property>
      <property name="value">
-      <number>24</number>
+      <number>100</number>
      </property>
     </widget>
     <widget class="QTextEdit" name="textEdit_packetWin">
@@ -814,7 +830,7 @@
      <property name="geometry">
       <rect>
        <x>620</x>
-       <y>10</y>
+       <y>280</y>
        <width>91</width>
        <height>31</height>
       </rect>
@@ -832,7 +848,7 @@
     <widget class="QPushButton" name="pushButton_stressTest">
      <property name="geometry">
       <rect>
-       <x>300</x>
+       <x>390</x>
        <y>10</y>
        <width>81</width>
        <height>31</height>
@@ -851,9 +867,9 @@
     <widget class="QPushButton" name="pushButton_pinUnittest">
      <property name="geometry">
       <rect>
-       <x>540</x>
+       <x>120</x>
        <y>10</y>
-       <width>75</width>
+       <width>81</width>
        <height>31</height>
       </rect>
      </property>
@@ -872,9 +888,28 @@
       <rect>
        <x>10</x>
        <y>230</y>
-       <width>701</width>
+       <width>601</width>
        <height>81</height>
       </rect>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_Go">
+     <property name="geometry">
+      <rect>
+       <x>620</x>
+       <y>240</y>
+       <width>91</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>Go</string>
      </property>
     </widget>
    </widget>
