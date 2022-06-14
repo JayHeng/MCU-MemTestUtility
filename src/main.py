@@ -10,6 +10,7 @@ from ui import uivar
 from ui import ui_cfg_flexspi_conn
 from ui import ui_cfg_flexspi_pintest
 from ui import ui_cfg_perf_test
+from ui import ui_cfg_stress_test
 from run import runcore
 
 kRetryPingTimes = 5
@@ -32,6 +33,7 @@ class memTesterMain(runcore.memTesterRun):
         self.comboBox_memType.currentIndexChanged.connect(self.callbackSetMemType)
         self.pushButton_pinUnittest.clicked.connect(self.callbackFlexspiPinUnittest)
         self.pushButton_perfTest.clicked.connect(self.callbackPerfTest)
+        self.pushButton_stressTest.clicked.connect(self.callbackStressTest)
         self.pushButton_clearScreen.clicked.connect(self.clearContentOfScreens)
 
     def _setupMcuTargets( self ):
@@ -93,6 +95,9 @@ class memTesterMain(runcore.memTesterRun):
     def callbackPerfTest( self ):
         perfTestFrame.show()
 
+    def callbackStressTest( self ):
+        stressTestFrame.show()
+
     def _deinitToolToExit( self ):
         uivar.setAdvancedSettings(uidef.kAdvancedSettings_Tool, self.toolCommDict)
         uivar.deinitVar()
@@ -125,6 +130,8 @@ if __name__ == '__main__':
     flexspiPinUnittestFrame.setWindowTitle(u"FlexSPI Pin Unit Test")
     perfTestFrame = ui_cfg_perf_test.memTesterUiPerfTest(None)
     perfTestFrame.setWindowTitle(u"Perf Test")
+    stressTestFrame = ui_cfg_stress_test.memTesterUiStressTest(None)
+    stressTestFrame.setWindowTitle(u"Stress Test")
 
     sys.exit(app.exec_())
 
