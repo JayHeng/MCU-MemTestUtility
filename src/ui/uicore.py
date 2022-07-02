@@ -16,6 +16,7 @@ from PyQt5.QtGui import *
 from . import uidef
 from . import uilang
 from . import uivar
+from . import uipacket
 from . import ui_def_flexspi_conn_rt1170
 sys.path.append(os.path.abspath(".."))
 from win import memTesterWin
@@ -190,6 +191,19 @@ class memTesterUi(QMainWindow, memTesterWin.Ui_memTesterWin):
             if num != 0:
                 data = s_serialPort.read(num)
                 self.showContentOnMainDisplayWin(data.decode())
+
+    def sendUartData( self , byteList ):
+        if s_serialPort.isOpen():
+            #num = s_serialPort.out_waiting()
+            #while num != 0:
+            #    num = s_serialPort.out_waiting()
+            s_serialPort.write(byteList)
+            self.showContentOnSecPacketWin(u"Cmd Packet ->: " + str(byteList))
+
+    def sendPinTestPacket( self ):
+        mypacket = uipacket.pinTestPacket()
+        mypacket.set_members()
+        self.sendUartData(mypacket.out_bytes())
 
     def _initMemType( self ):
         self.setMemType()

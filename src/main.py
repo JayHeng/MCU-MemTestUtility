@@ -14,6 +14,7 @@ from ui import ui_cfg_stress_test
 from run import runcore
 
 kRetryPingTimes = 5
+s_goAction = None
 
 class memTesterMain(runcore.memTesterRun):
 
@@ -31,9 +32,12 @@ class memTesterMain(runcore.memTesterRun):
         self.pushButton_flexspiConnectionConfiguration.clicked.connect(self.callbackFlexspiConnectionConfiguration)
         self.pushButton_connect.clicked.connect(self.callbackConnectToDevice)
         self.comboBox_memType.currentIndexChanged.connect(self.callbackSetMemType)
+        self.pushButton_configSystem.clicked.connect(self.callbackConfigSystem)
         self.pushButton_pinUnittest.clicked.connect(self.callbackFlexspiPinUnittest)
+        self.pushButton_memInfo.clicked.connect(self.callbackMemInfo)
         self.pushButton_perfTest.clicked.connect(self.callbackPerfTest)
         self.pushButton_stressTest.clicked.connect(self.callbackStressTest)
+        self.pushButton_Go.clicked.connect(self.callbackGo)
         self.pushButton_clearScreen.clicked.connect(self.clearContentOfScreens)
 
     def _setupMcuTargets( self ):
@@ -66,8 +70,8 @@ class memTesterMain(runcore.memTesterRun):
             self.showContentOnSecPacketWin(u"【Action】: Click connect button to load boot firmware.")
             self.updatePortSetupValue()
             self.connectToDevice()
-            if self._retryToPingBootloader():
-                if self.jumpToFirmware():
+            if True:#self._retryToPingBootloader():
+                if True:#self.jumpToFirmware():
                     self.showContentOnSecPacketWin(u"【  Info 】: boot firmware is loaded.")
                     self.openUartPort()
                     self.isDeviceConnected = True
@@ -89,14 +93,52 @@ class memTesterMain(runcore.memTesterRun):
     def callbackSetMemType( self ):
         self.setMemType()
 
+    def _resetAllActionButtonColor( self ):
+        self.pushButton_configSystem.setStyleSheet("background-color: " + uidef.kButtonColor_Disable)
+        self.pushButton_memInfo.setStyleSheet("background-color: " + uidef.kButtonColor_Disable)
+        self.pushButton_pinUnittest.setStyleSheet("background-color: " + uidef.kButtonColor_Disable)
+        self.pushButton_perfTest.setStyleSheet("background-color: " + uidef.kButtonColor_Disable)
+        self.pushButton_stressTest.setStyleSheet("background-color: " + uidef.kButtonColor_Disable)
+
+    def callbackConfigSystem( self ):
+        global s_goAction
+        s_goAction = uidef.kGoAction_ConfigSystem
+        self._resetAllActionButtonColor()
+        self.pushButton_configSystem.setStyleSheet("background-color: " + uidef.kButtonColor_Enable)
+
+    def callbackMemInfo( self ):
+        global s_goAction
+        s_goAction = uidef.kGoAction_MemInfo
+        self._resetAllActionButtonColor()
+        self.pushButton_memInfo.setStyleSheet("background-color: " + uidef.kButtonColor_Enable)
+
     def callbackFlexspiPinUnittest( self ):
+        global s_goAction
+        s_goAction = uidef.kGoAction_PinUnittest
         flexspiPinUnittestFrame.show()
+        self._resetAllActionButtonColor()
+        self.pushButton_pinUnittest.setStyleSheet("background-color: " + uidef.kButtonColor_Enable)
 
     def callbackPerfTest( self ):
+        global s_goAction
+        s_goAction = uidef.kGoAction_PerfTest
         perfTestFrame.show()
+        self._resetAllActionButtonColor()
+        self.pushButton_perfTest.setStyleSheet("background-color: " + uidef.kButtonColor_Enable)
 
     def callbackStressTest( self ):
+        global s_goAction
+        s_goAction = uidef.kGoAction_StressTest
         stressTestFrame.show()
+        self._resetAllActionButtonColor()
+        self.pushButton_stressTest.setStyleSheet("background-color: " + uidef.kButtonColor_Enable)
+
+    def callbackGo( self ):
+        self._resetAllActionButtonColor()
+        global s_goAction
+        if s_goAction == uidef.kGoAction_PinUnittest:
+            self.sendPinTestPacket()
+            s_goAction = None
 
     def _deinitToolToExit( self ):
         uivar.setAdvancedSettings(uidef.kAdvancedSettings_Tool, self.toolCommDict)

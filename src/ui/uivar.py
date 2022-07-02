@@ -4,6 +4,7 @@ import sys
 import os
 import json
 from . import uidef
+from . import uivar
 
 g_exeTopRoot = None
 g_hasSubWinBeenOpened = False
@@ -21,11 +22,22 @@ g_flexspiConnCfgDict = {'instance':1,
                         'rstb':None,
                        }
 
+g_flexspiUnittestCfgDict = {'wavePulse':None,
+                            'dataL4b_en':None,
+                            'dataH4b_en':None,
+                            'ssb_en':None,
+                            'sclk_en':None,
+                            'dqs_en':None,
+                            'sclkn_en':None,
+                            'rstb_en':None,
+                            }
+
 def initVar(cfgFilename):
     global g_hasSubWinBeenOpened
     global g_cfgFilename
     global g_toolCommDict
     global g_flexspiConnCfgDict
+    global g_flexspiUnittestCfgDict
 
     g_hasSubWinBeenOpened = False
     g_cfgFilename = cfgFilename
@@ -37,6 +49,7 @@ def initVar(cfgFilename):
 
         g_toolCommDict = cfgDict["cfgToolCommon"][0]
         g_flexspiConnCfgDict = cfgDict["cfgFlexspiConn"][0]
+        g_flexspiUnittestCfgDict = cfgDict["cfgFlexspiUnittest"][0]
     else:
         g_toolCommDict = {'mcuDevice':0
                          }
@@ -49,6 +62,15 @@ def initVar(cfgFilename):
                                 'sclkn':0xFF,
                                 'rstb':0xFF,
                                }
+        g_flexspiUnittestCfgDict = {'wavePulse':10,
+                                    'dataL4b_dis':0,
+                                    'dataH4b_dis':1,
+                                    'ssb_dis':0,
+                                    'sclk_dis':0,
+                                    'dqs_dis':1,
+                                    'sclkn_dis':1,
+                                    'rstb_dis':1,
+                                    }
 
 def deinitVar(cfgFilename=None):
     global g_cfgFilename
@@ -59,7 +81,8 @@ def deinitVar(cfgFilename=None):
         global g_flexspiConnCfgDict
         cfgDict = {
             "cfgToolCommon": [g_toolCommDict],
-            "cfgFlexspiConn": [g_flexspiConnCfgDict]
+            "cfgFlexspiConn": [g_flexspiConnCfgDict],
+            "cfgFlexspiUnittest": [g_flexspiUnittestCfgDict]
         }
         json.dump(cfgDict, fileObj, indent=1)
         fileObj.close()
@@ -71,6 +94,9 @@ def getAdvancedSettings( group ):
     elif group == uidef.kAdvancedSettings_FlexspiConn:
         global g_flexspiConnCfgDict
         return g_flexspiConnCfgDict
+    elif group == uidef.kAdvancedSettings_FlexspiUnittest:
+        global g_flexspiUnittestCfgDict
+        return g_flexspiUnittestCfgDict
     else:
         pass
 
@@ -81,6 +107,9 @@ def setAdvancedSettings( group, *args ):
     elif group == uidef.kAdvancedSettings_FlexspiConn:
         global g_flexspiConnCfgDict
         g_flexspiConnCfgDict = args[0]
+    elif group == uidef.kAdvancedSettings_FlexspiUnittest:
+        global g_flexspiUnittestCfgDict
+        g_flexspiUnittestCfgDict = args[0]
     else:
         pass
 

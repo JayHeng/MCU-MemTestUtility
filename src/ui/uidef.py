@@ -106,5 +106,15 @@ kMemType_HyperFlash = 'HyperBus NOR Flash'
 kMemType_PSRAM      = 'PSRAM'
 kMemType_HyperRAM   = 'HyperRAM'
 
-kAdvancedSettings_Tool           = 0
-kAdvancedSettings_FlexspiConn    = 1
+kAdvancedSettings_Tool             = 0
+kAdvancedSettings_FlexspiConn      = 1
+kAdvancedSettings_FlexspiUnittest  = 2
+
+kGoAction_ConfigSystem           = 0
+kGoAction_PinUnittest            = 1
+kGoAction_MemInfo                = 2
+kGoAction_PerfTest               = 3
+kGoAction_StressTest             = 4
+
+kButtonColor_Enable  = "rgb(142,229,238)"
+kButtonColor_Disable = "rgb(248,248,255)"
