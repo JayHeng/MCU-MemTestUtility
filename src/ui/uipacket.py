@@ -115,5 +115,6 @@ class pinTestPacket(object):
                          self.reserved1[0],
                          self.reserved1[1]
                         ])
-        return startbytes + self.memConnection.out_bytes() + self.unittestEn.out_bytes() + mybytes
+        endbytes = bytes([0xFF])
+        return startbytes + self.memConnection.out_bytes() + self.unittestEn.out_bytes() + mybytes + endbytes
 
