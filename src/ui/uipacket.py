@@ -92,9 +92,8 @@ class pinTestPacket(object):
         #super(pinTestPacket, self).__init__(parent)
         self.memConnection = None
         self.unittestEn = None
-        self.reserved0 = [0x0, 0x0, 0x0]
         self.crcCheckSum = None
-        self.reserved1 = [0x0, 0x0]
+        self.reserved0 = [0x0, 0x0]
 
     def set_members( self ):
         self.memConnection = flexspiConnectionStruct()
@@ -107,14 +106,10 @@ class pinTestPacket(object):
 
     def out_bytes( self ):
         startbytes = bytes(kPacketTag, 'ascii') + bytes([kCommandTag_PinUnittest])
-        mybytes = bytes([self.reserved0[0],
-                         self.reserved0[1],
-                         self.reserved0[2], 
-                         self.crcCheckSum & 0xFF,
+        mybytes = bytes([self.crcCheckSum & 0xFF,
                          (self.crcCheckSum & 0xFF00) >> 8,
-                         self.reserved1[0],
-                         self.reserved1[1]
+                         self.reserved0[0],
+                         self.reserved0[1]
                         ])
-        endbytes = bytes([0xFF])
-        return startbytes + self.memConnection.out_bytes() + self.unittestEn.out_bytes() + mybytes + endbytes
+        return startbytes + self.memConnection.out_bytes() + self.unittestEn.out_bytes() + mybytes
 
