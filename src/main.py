@@ -139,6 +139,14 @@ class memTesterMain(runcore.memTesterRun):
         if s_goAction == uidef.kGoAction_PinUnittest:
             self.sendPinTestPacket()
             s_goAction = None
+        elif s_goAction == uidef.kGoAction_ConfigSystem:
+            if self.updateTargetSetupValue():
+                self.sendConfigSystemPacket()
+                s_goAction = None
+            else:
+                self.pushButton_configSystem.setStyleSheet("background-color: " + uidef.kButtonColor_Enable)
+        else:
+            pass
 
     def _deinitToolToExit( self ):
         uivar.setAdvancedSettings(uidef.kAdvancedSettings_Tool, self.toolCommDict)

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file '.\gui\MCU-MemTestUtility.ui'
+# Form implementation generated from reading ui file '..\gui\MCU-MemTestUtility.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.1
 #
@@ -254,8 +254,8 @@ class Ui_memTesterWin(object):
         self.textEdit_displayWin = QtWidgets.QTextEdit(self.dispFrame)
         self.textEdit_displayWin.setGeometry(QtCore.QRect(10, 50, 701, 171))
         font = QtGui.QFont()
-        font.setBold(True)
-        font.setWeight(75)
+        font.setBold(False)
+        font.setWeight(50)
         self.textEdit_displayWin.setFont(font)
         self.textEdit_displayWin.setFrameShadow(QtWidgets.QFrame.Plain)
         self.textEdit_displayWin.setReadOnly(True)

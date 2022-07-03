@@ -9,7 +9,11 @@ from . import uivar
 g_exeTopRoot = None
 g_hasSubWinBeenOpened = False
 g_cfgFilename = None
-g_toolCommDict = {'mcuDevice':None
+g_toolCommDict = {'mcuDevice':None,
+                  'cpuSpeedMHz':None,
+                  'enableL1Cache':None,
+                  'enablePrefetch':None,
+                  'prefetchBufSizeInByte':None
                  }
 
 g_flexspiConnCfgDict = {'instance':1,
@@ -51,7 +55,11 @@ def initVar(cfgFilename):
         g_flexspiConnCfgDict = cfgDict["cfgFlexspiConn"][0]
         g_flexspiUnittestCfgDict = cfgDict["cfgFlexspiUnittest"][0]
     else:
-        g_toolCommDict = {'mcuDevice':0
+        g_toolCommDict = {'mcuDevice':0,
+                          'cpuSpeedMHz':996,
+                          'enableL1Cache':0,
+                          'enablePrefetch':0,
+                          'prefetchBufSizeInByte':4096
                          }
         g_flexspiConnCfgDict = {'instance':0x1,
                                 'dataL4b':0x0,

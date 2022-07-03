@@ -107,6 +107,15 @@ class memTesterUi(QMainWindow, memTesterWin.Ui_memTesterWin):
         self.comboBox_mcuDevice.clear()
         self.comboBox_mcuDevice.addItems(uidef.kMcuDevice_v1_0)
         self.comboBox_mcuDevice.setCurrentIndex(self.toolCommDict['mcuDevice'])
+        self.lineEdit_cpuSpeed.setText(str(self.toolCommDict['cpuSpeedMHz']))
+        if self.toolCommDict['enableL1Cache']:
+            self.checkBox_enableL1Cache.setChecked(True)
+        else:
+            self.checkBox_enableL1Cache.setChecked(False)
+        if self.toolCommDict['enablePrefetch']:
+            self.checkBox_enablePrefetch.setChecked(True)
+        else:
+            self.checkBox_enablePrefetch.setChecked(False)
 
     def setTargetSetupValue( self ):
         self.mcuDevice = self.comboBox_mcuDevice.currentText()
@@ -149,6 +158,27 @@ class memTesterUi(QMainWindow, memTesterWin.Ui_memTesterWin):
                     if key != 'None':
                         self.textEdit_flexspiConnection.append(key)
                     break
+
+    def updateTargetSetupValue( self ):
+        try:
+            cpuSpeed = int(self.lineEdit_cpuSpeed.text())
+            if cpuSpeed > self.tgt.maxCpuFreqInMHz:
+                self.showInfoMessage('Range Error', 'cpu speed should not be more than max freq ' + str(self.tgt.maxCpuFreqInMHz) + ' MHz!')
+                return False
+            self.toolCommDict['cpuSpeedMHz'] = cpuSpeed
+        except:
+            self.showInfoMessage('Input Error', 'cpu speed should be an integer!')
+            return False
+        if self.checkBox_enableL1Cache.isChecked():
+            self.toolCommDict['enableL1Cache'] = 1
+        else:
+            self.toolCommDict['enableL1Cache'] = 0
+        if self.checkBox_enablePrefetch.isChecked():
+            self.toolCommDict['enablePrefetch'] = 1
+        else:
+            self.toolCommDict['enablePrefetch'] = 0
+        uivar.setAdvancedSettings(uidef.kAdvancedSettings_Tool, self.toolCommDict)
+        return True
 
     def updateUartPadInfo( self ):
         self.lineEdit_uartPad.setText(self.tgt.uartPeripheralPinStr)
@@ -202,6 +232,11 @@ class memTesterUi(QMainWindow, memTesterWin.Ui_memTesterWin):
 
     def sendPinTestPacket( self ):
         mypacket = uipacket.pinTestPacket()
+        mypacket.set_members()
+        self.sendUartData(mypacket.out_bytes())
+
+    def sendConfigSystemPacket( self ):
+        mypacket = uipacket.configSystemPacket()
         mypacket.set_members()
         self.sendUartData(mypacket.out_bytes())
 
