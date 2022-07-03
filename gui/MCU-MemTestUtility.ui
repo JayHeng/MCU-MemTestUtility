@@ -727,7 +727,7 @@
     <widget class="QPushButton" name="pushButton_memInfo">
      <property name="geometry">
       <rect>
-       <x>210</x>
+       <x>200</x>
        <y>10</y>
        <width>81</width>
        <height>31</height>
@@ -768,7 +768,7 @@
     <widget class="QPushButton" name="pushButton_perfTest">
      <property name="geometry">
       <rect>
-       <x>300</x>
+       <x>380</x>
        <y>10</y>
        <width>81</width>
        <height>31</height>
@@ -810,7 +810,7 @@
     <widget class="QPushButton" name="pushButton_configSystem">
      <property name="geometry">
       <rect>
-       <x>20</x>
+       <x>100</x>
        <y>10</y>
        <width>91</width>
        <height>31</height>
@@ -848,7 +848,7 @@
     <widget class="QPushButton" name="pushButton_stressTest">
      <property name="geometry">
       <rect>
-       <x>390</x>
+       <x>470</x>
        <y>10</y>
        <width>81</width>
        <height>31</height>
@@ -867,7 +867,7 @@
     <widget class="QPushButton" name="pushButton_pinUnittest">
      <property name="geometry">
       <rect>
-       <x>120</x>
+       <x>10</x>
        <y>10</y>
        <width>81</width>
        <height>31</height>
@@ -910,6 +910,25 @@
      </property>
      <property name="text">
       <string>Go</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_rwTest">
+     <property name="geometry">
+      <rect>
+       <x>290</x>
+       <y>10</y>
+       <width>81</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>R/W Test</string>
      </property>
     </widget>
    </widget>

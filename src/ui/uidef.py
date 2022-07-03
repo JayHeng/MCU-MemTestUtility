@@ -110,11 +110,12 @@ kAdvancedSettings_Tool             = 0
 kAdvancedSettings_FlexspiConn      = 1
 kAdvancedSettings_FlexspiUnittest  = 2
 
-kGoAction_ConfigSystem           = 0
-kGoAction_PinUnittest            = 1
+kGoAction_PinUnittest            = 0
+kGoAction_ConfigSystem           = 1
 kGoAction_MemInfo                = 2
-kGoAction_PerfTest               = 3
-kGoAction_StressTest             = 4
+kGoAction_RwTest                 = 3
+kGoAction_PerfTest               = 4
+kGoAction_StressTest             = 5
 
 kButtonColor_Enable  = "rgb(142,229,238)"
 kButtonColor_Disable = "rgb(248,248,255)"

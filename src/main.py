@@ -32,9 +32,10 @@ class memTesterMain(runcore.memTesterRun):
         self.pushButton_flexspiConnectionConfiguration.clicked.connect(self.callbackFlexspiConnectionConfiguration)
         self.pushButton_connect.clicked.connect(self.callbackConnectToDevice)
         self.comboBox_memType.currentIndexChanged.connect(self.callbackSetMemType)
-        self.pushButton_configSystem.clicked.connect(self.callbackConfigSystem)
         self.pushButton_pinUnittest.clicked.connect(self.callbackFlexspiPinUnittest)
+        self.pushButton_configSystem.clicked.connect(self.callbackConfigSystem)
         self.pushButton_memInfo.clicked.connect(self.callbackMemInfo)
+        self.pushButton_rwTest.clicked.connect(self.callbackRwTest)
         self.pushButton_perfTest.clicked.connect(self.callbackPerfTest)
         self.pushButton_stressTest.clicked.connect(self.callbackStressTest)
         self.pushButton_Go.clicked.connect(self.callbackGo)
@@ -94,11 +95,19 @@ class memTesterMain(runcore.memTesterRun):
         self.setMemType()
 
     def _resetAllActionButtonColor( self ):
+        self.pushButton_pinUnittest.setStyleSheet("background-color: " + uidef.kButtonColor_Disable)
         self.pushButton_configSystem.setStyleSheet("background-color: " + uidef.kButtonColor_Disable)
         self.pushButton_memInfo.setStyleSheet("background-color: " + uidef.kButtonColor_Disable)
-        self.pushButton_pinUnittest.setStyleSheet("background-color: " + uidef.kButtonColor_Disable)
+        self.pushButton_rwTest.setStyleSheet("background-color: " + uidef.kButtonColor_Disable)
         self.pushButton_perfTest.setStyleSheet("background-color: " + uidef.kButtonColor_Disable)
         self.pushButton_stressTest.setStyleSheet("background-color: " + uidef.kButtonColor_Disable)
+
+    def callbackFlexspiPinUnittest( self ):
+        global s_goAction
+        s_goAction = uidef.kGoAction_PinUnittest
+        flexspiPinUnittestFrame.show()
+        self._resetAllActionButtonColor()
+        self.pushButton_pinUnittest.setStyleSheet("background-color: " + uidef.kButtonColor_Enable)
 
     def callbackConfigSystem( self ):
         global s_goAction
@@ -112,12 +121,11 @@ class memTesterMain(runcore.memTesterRun):
         self._resetAllActionButtonColor()
         self.pushButton_memInfo.setStyleSheet("background-color: " + uidef.kButtonColor_Enable)
 
-    def callbackFlexspiPinUnittest( self ):
+    def callbackRwTest( self ):
         global s_goAction
-        s_goAction = uidef.kGoAction_PinUnittest
-        flexspiPinUnittestFrame.show()
+        s_goAction = uidef.kGoAction_RwTest
         self._resetAllActionButtonColor()
-        self.pushButton_pinUnittest.setStyleSheet("background-color: " + uidef.kButtonColor_Enable)
+        self.pushButton_rwTest.setStyleSheet("background-color: " + uidef.kButtonColor_Enable)
 
     def callbackPerfTest( self ):
         global s_goAction
@@ -145,6 +153,9 @@ class memTesterMain(runcore.memTesterRun):
                 s_goAction = None
             else:
                 self.pushButton_configSystem.setStyleSheet("background-color: " + uidef.kButtonColor_Enable)
+        elif s_goAction == uidef.kGoAction_RwTest:
+            self.sendRwTestPacket()
+            s_goAction = None
         else:
             pass
 
@@ -167,12 +178,12 @@ class memTesterMain(runcore.memTesterRun):
         self.showAboutMessage(uilang.kMsgLanguageContentDict['aboutAuthor_title'][0], msgText )
 
     def callbackShowRevisionHistory(self):
-        self.showAboutMessage(uilang.kMsgLanguageContentDict['revisionHistory_title'][0], uilang.kMsgLanguageContentDict['revisionHistory_v1_0_0'][0] )
+        self.showAboutMessage(uilang.kMsgLanguageContentDict['revisionHistory_title'][0], uilang.kMsgLanguageContentDict['revisionHistory_v0_1_0'][0] )
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
     mainWin = memTesterMain(None)
-    mainWin.setWindowTitle(u"MCU Mem Test Utility v1.0")
+    mainWin.setWindowTitle(u"MCU Mem Test Utility v0.1")
     mainWin.show()
     flexspiConnCfgFrame = ui_cfg_flexspi_conn.memTesterUiCfgFlexspiConn(None)
     flexspiConnCfgFrame.setWindowTitle(u"FlexSPI Connection Configuration")

@@ -11,8 +11,9 @@ kPacketTag = "FTAG"
 kCommandTag_PinUnittest    = 0x01
 kCommandTag_ConfigSystem   = 0x02
 kCommandTag_GetMemInfo     = 0x03
-kCommandTag_RunPerfTest    = 0x04
-kCommandTag_RunStressTest  = 0x05
+kCommandTag_RunRwTest      = 0x04
+kCommandTag_RunPerfTest    = 0x05
+kCommandTag_RunStressTest  = 0x06
 
 class flexspiConnectionStruct(object):
 
@@ -195,3 +196,34 @@ class configSystemPacket(object):
                           self.reserved1[1]
                          ])
         return startbytes + mybytes1 + self.memConnection.out_bytes() + self.memProperty.out_bytes() + mybytes2
+
+class rwTestPacket(object):
+
+    def __init__( self, parent=None):
+        #super(rwTestPacket, self).__init__(parent)
+        self.memStart = None
+        self.memLen = None
+        self.crcCheckSum = None
+        self.reserved0 = [0x0, 0x0]
+
+    def set_members( self ):
+        self.memStart = 0x00000000
+        self.memLen = 0x00000400
+        self.crcCheckSum = 0x0000
+
+    def out_bytes( self ):
+        startbytes = bytes(kPacketTag, 'ascii') + bytes([kCommandTag_RunRwTest])
+        mybytes = bytes([self.memStart & 0xFF,
+                         (self.memStart & 0xFF00) >> 8,
+                         (self.memStart & 0xFF0000) >> 16, 
+                         (self.memStart & 0xFF000000) >> 24,
+                         self.memLen & 0xFF,
+                         (self.memLen & 0xFF00) >> 8,
+                         (self.memLen & 0xFF0000) >> 16, 
+                         (self.memLen & 0xFF000000) >> 24,
+                         self.crcCheckSum & 0xFF,
+                         (self.crcCheckSum & 0xFF00) >> 8,
+                         self.reserved0[0],
+                         self.reserved0[1]
+                        ])
+        return startbytes + mybytes
