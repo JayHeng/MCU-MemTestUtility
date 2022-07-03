@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file '.\gui\FlexSPI-Pin-Unittest.ui'
+# Form implementation generated from reading ui file '..\gui\FlexSPI-Pin-Unittest.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.1
 #
@@ -15,13 +15,13 @@ class Ui_flexspiPinUnittestDialog(object):
     def setupUi(self, flexspiPinUnittestDialog):
         flexspiPinUnittestDialog.setObjectName("flexspiPinUnittestDialog")
         flexspiPinUnittestDialog.resize(244, 322)
-        self.label_instance = QtWidgets.QLabel(flexspiPinUnittestDialog)
-        self.label_instance.setGeometry(QtCore.QRect(20, 20, 81, 20))
+        self.label_wavePulse = QtWidgets.QLabel(flexspiPinUnittestDialog)
+        self.label_wavePulse.setGeometry(QtCore.QRect(20, 20, 81, 20))
         font = QtGui.QFont()
         font.setBold(True)
         font.setWeight(75)
-        self.label_instance.setFont(font)
-        self.label_instance.setObjectName("label_instance")
+        self.label_wavePulse.setFont(font)
+        self.label_wavePulse.setObjectName("label_wavePulse")
         self.label_dataL4b = QtWidgets.QLabel(flexspiPinUnittestDialog)
         self.label_dataL4b.setGeometry(QtCore.QRect(20, 50, 81, 20))
         font = QtGui.QFont()
@@ -112,10 +112,17 @@ class Ui_flexspiPinUnittestDialog(object):
         self.pushButton_cancel = QtWidgets.QPushButton(flexspiPinUnittestDialog)
         self.pushButton_cancel.setGeometry(QtCore.QRect(140, 270, 75, 31))
         self.pushButton_cancel.setObjectName("pushButton_cancel")
-        self.lineEdit = QtWidgets.QLineEdit(flexspiPinUnittestDialog)
-        self.lineEdit.setGeometry(QtCore.QRect(110, 20, 111, 20))
-        self.lineEdit.setAlignment(QtCore.Qt.AlignCenter)
-        self.lineEdit.setObjectName("lineEdit")
+        self.lineEdit_wavePulse = QtWidgets.QLineEdit(flexspiPinUnittestDialog)
+        self.lineEdit_wavePulse.setGeometry(QtCore.QRect(110, 20, 81, 20))
+        self.lineEdit_wavePulse.setAlignment(QtCore.Qt.AlignCenter)
+        self.lineEdit_wavePulse.setObjectName("lineEdit_wavePulse")
+        self.label_wavePulseMs = QtWidgets.QLabel(flexspiPinUnittestDialog)
+        self.label_wavePulseMs.setGeometry(QtCore.QRect(200, 20, 31, 20))
+        font = QtGui.QFont()
+        font.setBold(True)
+        font.setWeight(75)
+        self.label_wavePulseMs.setFont(font)
+        self.label_wavePulseMs.setObjectName("label_wavePulseMs")
 
         self.retranslateUi(flexspiPinUnittestDialog)
         self.comboBox_dataH4b.setCurrentIndex(1)
@@ -126,7 +133,7 @@ class Ui_flexspiPinUnittestDialog(object):
     def retranslateUi(self, flexspiPinUnittestDialog):
         _translate = QtCore.QCoreApplication.translate
         flexspiPinUnittestDialog.setWindowTitle(_translate("flexspiPinUnittestDialog", "Dialog"))
-        self.label_instance.setText(_translate("flexspiPinUnittestDialog", "Wave Pulse:"))
+        self.label_wavePulse.setText(_translate("flexspiPinUnittestDialog", "Wave Pulse:"))
         self.label_dataL4b.setText(_translate("flexspiPinUnittestDialog", "DATA_L4B:"))
         self.label_dataH4b.setText(_translate("flexspiPinUnittestDialog", "DATA_H4B:"))
         self.label_ssb.setText(_translate("flexspiPinUnittestDialog", "SS_B:"))
@@ -150,4 +157,5 @@ class Ui_flexspiPinUnittestDialog(object):
         self.comboBox_rstb.setItemText(1, _translate("flexspiPinUnittestDialog", "Disable"))
         self.pushButton_ok.setText(_translate("flexspiPinUnittestDialog", "Ok"))
         self.pushButton_cancel.setText(_translate("flexspiPinUnittestDialog", "Cancel"))
-        self.lineEdit.setText(_translate("flexspiPinUnittestDialog", "10ms"))
+        self.lineEdit_wavePulse.setText(_translate("flexspiPinUnittestDialog", "10"))
+        self.label_wavePulseMs.setText(_translate("flexspiPinUnittestDialog", "ms"))

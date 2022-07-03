@@ -16,6 +16,8 @@ class memTesterUiCfgFlexspiPin(QMainWindow, flexspiPinUnittestWin.Ui_flexspiPinU
         super(memTesterUiCfgFlexspiPin, self).__init__(parent)
         self.setupUi(self)
         self._register_callbacks()
+        flexspiUnittestCfgDict= uivar.getAdvancedSettings(uidef.kAdvancedSettings_FlexspiUnittest)
+        self.flexspiUnittestCfgDict = flexspiUnittestCfgDict.copy()
         self._recoverLastSettings()
 
     def _register_callbacks(self):
@@ -23,9 +25,25 @@ class memTesterUiCfgFlexspiPin(QMainWindow, flexspiPinUnittestWin.Ui_flexspiPinU
         self.pushButton_cancel.clicked.connect(self.callbackCancel)
 
     def _recoverLastSettings ( self ):
-        pass
+        self.lineEdit_wavePulse.setText(str(self.flexspiUnittestCfgDict['wavePulse']))
+        self.comboBox_dataL4b.setCurrentIndex(self.flexspiUnittestCfgDict['dataL4b_dis'])
+        self.comboBox_dataH4b.setCurrentIndex(self.flexspiUnittestCfgDict['dataH4b_dis'])
+        self.comboBox_ssb.setCurrentIndex(self.flexspiUnittestCfgDict['ssb_dis'])
+        self.comboBox_sclk.setCurrentIndex(self.flexspiUnittestCfgDict['sclk_dis'])
+        self.comboBox_dqs.setCurrentIndex(self.flexspiUnittestCfgDict['dqs_dis'])
+        self.comboBox_sclkn.setCurrentIndex(self.flexspiUnittestCfgDict['sclkn_dis'])
+        self.comboBox_rstb.setCurrentIndex(self.flexspiUnittestCfgDict['rstb_dis'])
 
     def callbackOk( self, event ):
+        self.flexspiUnittestCfgDict['wavePulse'] = int(self.lineEdit_wavePulse.text())
+        self.flexspiUnittestCfgDict['dataL4b_dis'] = self.comboBox_dataL4b.currentIndex()
+        self.flexspiUnittestCfgDict['dataH4b_dis'] = self.comboBox_dataH4b.currentIndex()
+        self.flexspiUnittestCfgDict['ssb_dis'] = self.comboBox_ssb.currentIndex()
+        self.flexspiUnittestCfgDict['sclk_dis'] = self.comboBox_sclk.currentIndex()
+        self.flexspiUnittestCfgDict['dqs_dis'] = self.comboBox_dqs.currentIndex()
+        self.flexspiUnittestCfgDict['sclkn_dis'] = self.comboBox_sclkn.currentIndex()
+        self.flexspiUnittestCfgDict['rstb_dis'] = self.comboBox_rstb.currentIndex()
+        uivar.setAdvancedSettings(uidef.kAdvancedSettings_FlexspiUnittest, self.flexspiUnittestCfgDict)
         self.close()
 
     def callbackCancel( self, event ):

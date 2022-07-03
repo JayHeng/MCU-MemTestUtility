@@ -13,7 +13,7 @@
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
-  <widget class="QLabel" name="label_instance">
+  <widget class="QLabel" name="label_wavePulse">
    <property name="geometry">
     <rect>
      <x>20</x>
@@ -340,20 +340,39 @@
     <string>Cancel</string>
    </property>
   </widget>
-  <widget class="QLineEdit" name="lineEdit">
+  <widget class="QLineEdit" name="lineEdit_wavePulse">
    <property name="geometry">
     <rect>
      <x>110</x>
      <y>20</y>
-     <width>111</width>
+     <width>81</width>
      <height>20</height>
     </rect>
    </property>
    <property name="text">
-    <string>10ms</string>
+    <string>10</string>
    </property>
    <property name="alignment">
     <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_wavePulseMs">
+   <property name="geometry">
+    <rect>
+     <x>200</x>
+     <y>20</y>
+     <width>31</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="text">
+    <string>ms</string>
    </property>
   </widget>
  </widget>
