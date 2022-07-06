@@ -13,6 +13,14 @@ from PyQt5.Qt import *
 from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
+
+import matplotlib
+matplotlib.use("Qt5Agg")
+from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
+from matplotlib.figure import Figure
+import matplotlib.pyplot as plt
+import matplotlib.animation as animation
+
 from . import uidef
 from . import uilang
 from . import uivar
@@ -23,6 +31,8 @@ from win import memTesterWin
 
 s_serialPort = serial.Serial()
 s_recvInterval = 1
+s_recvPinWave = [0] * 100
+s_isRecvAsciiMode = True
 
 class uartRecvWorker(QThread):
     sinOut = pyqtSignal()
@@ -38,6 +48,27 @@ class uartRecvWorker(QThread):
         while self.working == True:
             self.sinOut.emit()
             self.sleep(s_recvInterval)
+
+class pinWaveformFigure(FigureCanvas):
+
+    def __init__(self,width=5, height=4, dpi=100):
+        self.fig = Figure(figsize=(width, height), dpi=dpi)
+        super(pinWaveformFigure,self).__init__(self.fig)
+        self.axes = self.fig.add_subplot(111)
+        self.axes.set_xlabel('Time(ms)')
+        self.axes.set_ylabel('Volt(3.3V)')
+        self.axes.set_ylim(0,1.1)
+        self.ani = animation.FuncAnimation(self.fig, self.animate, interval=1000, blit=True, save_count=50)
+
+    def plotwave(self):
+        self.line, = self.axes.plot(s_recvPinWave)
+
+    def animate(self, i):
+        #global s_recvPinWave
+        #for i in range(len(s_recvPinWave)):
+        #    s_recvPinWave[i] = (int(i/10) % 2)
+        self.line.set_ydata(s_recvPinWave)
+        return self.line,
 
 class memTesterUi(QMainWindow, memTesterWin.Ui_memTesterWin):
 
@@ -65,6 +96,11 @@ class memTesterUi(QMainWindow, memTesterWin.Ui_memTesterWin):
         self._initFlexspiConn()
         self.memType = None
         self._initMemType()
+
+        self.pinWaveFig = pinWaveformFigure(width=2, height=4, dpi=50)
+        self.pinWaveFig.plotwave()
+        self.pinWaveGridlayout = QGridLayout(self.groupBox_pinWaveform)
+        self.pinWaveGridlayout.addWidget(self.pinWaveFig,0,0)
 
     def initUi( self ):
         self.uartComPort = None
@@ -202,6 +238,7 @@ class memTesterUi(QMainWindow, memTesterWin.Ui_memTesterWin):
         except:
             QMessageBox.information(self, 'Port Error', 'Com Port cannot opened!')
             return
+        s_serialPort.set_buffer_size(rx_size=1024 * 16)
         s_serialPort.reset_input_buffer()
         s_serialPort.reset_output_buffer()
         self.uartRecvThread.start()
@@ -216,11 +253,37 @@ class memTesterUi(QMainWindow, memTesterWin.Ui_memTesterWin):
             self.pushButton_connect.setStyleSheet("background-color: grey")
 
     def receiveUartData( self ):
+        global s_isRecvAsciiMode
         if s_serialPort.isOpen():
             num = s_serialPort.inWaiting()
             if num != 0:
                 data = s_serialPort.read(num)
-                self.showContentOnMainDisplayWin(data.decode())
+                string = data.decode()
+                if not s_isRecvAsciiMode:
+                    asciiLoc = string.find("Switch_To_ASCII_Mode")
+                    if asciiLoc != -1:
+                        string = string[asciiLoc+20:len(string)]
+                        s_isRecvAsciiMode = True
+                        #self.showContentOnMainDisplayWin("  __it is ascii mode")
+                    else:
+                        global s_recvPinWave
+                        # We just use first 10 conv result each time
+                        if num > 10:
+                            # To show square, every conv reslur will repeat 10 times in s_recvPinWave
+                            for i in range(len(s_recvPinWave)):
+                                s_recvPinWave[i] = data[int(i/10)]
+                        #self.showContentOnMainDisplayWin("  __it is in hex mode output")
+                        return
+                else:
+                    hexLoc = string.find("Switch_To_Hex_Mode")
+                    if hexLoc != -1:
+                        string = string[0:hexLoc]
+                        s_isRecvAsciiMode = False
+                        #self.showContentOnMainDisplayWin("  __it is hex mode")
+                    asciiLoc = string.find("Switch_To_ASCII_Mode")
+                    if asciiLoc != -1:
+                        string = string[0:asciiLoc] + string[asciiLoc+20:len(string)]
+                self.showContentOnMainDisplayWin(string)
 
     def sendUartData( self , byteList ):
         if s_serialPort.isOpen():

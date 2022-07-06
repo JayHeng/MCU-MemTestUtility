@@ -801,9 +801,9 @@
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>320</y>
+       <y>330</y>
        <width>701</width>
-       <height>111</height>
+       <height>101</height>
       </rect>
      </property>
     </widget>
@@ -883,16 +883,6 @@
       <string>Pin Unittest</string>
      </property>
     </widget>
-    <widget class="QGraphicsView" name="graphicsView">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>230</y>
-       <width>601</width>
-       <height>81</height>
-      </rect>
-     </property>
-    </widget>
     <widget class="QPushButton" name="pushButton_Go">
      <property name="geometry">
       <rect>
@@ -929,6 +919,19 @@
      </property>
      <property name="text">
       <string>R/W Test</string>
+     </property>
+    </widget>
+    <widget class="QGroupBox" name="groupBox_pinWaveform">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>230</y>
+       <width>601</width>
+       <height>91</height>
+      </rect>
+     </property>
+     <property name="title">
+      <string>Pin Waveform</string>
      </property>
     </widget>
    </widget>
