@@ -267,11 +267,11 @@ class memTesterUi(QMainWindow, memTesterWin.Ui_memTesterWin):
                         #self.showContentOnMainDisplayWin("  __it is ascii mode")
                     else:
                         global s_recvPinWave
-                        # We just use first 10 conv result each time
-                        if num > 10:
-                            # To show square, every conv reslur will repeat 10 times in s_recvPinWave
+                        # We just use first 20 conv result each time
+                        if num >= 20:
+                            # To show square, every conv reslur will repeat 5 times in s_recvPinWave
                             for i in range(len(s_recvPinWave)):
-                                s_recvPinWave[i] = data[int(i/10)]
+                                s_recvPinWave[i] = data[int(i/5)]
                         #self.showContentOnMainDisplayWin("  __it is in hex mode output")
                         return
                 else:
