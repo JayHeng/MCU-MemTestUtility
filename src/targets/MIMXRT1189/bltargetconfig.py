@@ -32,17 +32,17 @@ import sys, os
 sys.path.append(os.path.abspath(".."))
 from boot.memoryrange import MemoryRange
 from ui import uidef
-from ui import ui_def_flexspi_conn_rt1170
+from ui import ui_def_flexspi_conn_rt1180
 
-cpu = 'MIMXRT1176'
+cpu = 'MIMXRT1189'
 board = 'EVK'
 compiler = 'iar'
 build = 'Release'
 mcuSeries = uidef.kMcuSeries_iMXRT11yy
-maxCpuFreqInMHz = 996
+maxCpuFreqInMHz = 240
 
 availablePeripherals = 0x11
-uartPeripheralPinStr = 'LPUART1 - GPIO_AD[25:24]'
+uartPeripheralPinStr = 'LPUART1 - GPIO_AON[9:8]'
 firmwareLoadAddr = None
 firmwareJumpAddr = None
 firmwareInitialSp = None
@@ -50,18 +50,16 @@ availableCommands = 0x5EFDF
 supportedPeripheralSpeed_uart = [4800, 9600, 19200, 57600, 115200] # @todo Verify
 
 flexspiNorDevice = uidef.kFlexspiNorDevice_ISSI_IS25LP064A
-flexspiNorMemBase0 = 0x30000000
-flexspiNorMemBase1 = 0x60000000
+flexspiNorMemBase0 = 0x38000000
+flexspiNorMemBase1 = 0x32000000
 isSipFlexspiNorDevice = False
 
-flexspiConnDict = ui_def_flexspi_conn_rt1170.kFlexspiConnSelDict
+flexspiConnDict = ui_def_flexspi_conn_rt1180.kFlexspiConnSelDict
 
 # memory map
 memoryRange = {
-    # ITCM_CM7, 512KByte
-    'itcm' : MemoryRange(0x00000000, 0x80000, 'state_mem0.dat'),
-    # ITCM_CM4, 128KByte
-    'itcm_cm4' : MemoryRange(0x1FFE0000, 0x20000, 'state_mem0.dat'),
+    # ITCM_CM33, 512KByte
+    'itcm' : MemoryRange(0x1FFC0000, 0x40000, 'state_mem0.dat'),
     # DTCM, 512KByte
     'dtcm' : MemoryRange(0x20000000, 0x80000, 'state_mem1.dat'),
     # OCRAM, 2MByte

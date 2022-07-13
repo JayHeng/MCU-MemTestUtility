@@ -29,9 +29,10 @@ kMcuDevice_iMXRT10yy = [kMcuDevice_iMXRT1011, kMcuDevice_iMXRT1015, kMcuDevice_i
 
 kMcuDevice_iMXRT116x = 'i.MXRT116x'
 kMcuDevice_iMXRT117x = 'i.MXRT117x'
-kMcuDevice_iMXRT11yy = [kMcuDevice_iMXRT116x, kMcuDevice_iMXRT117x]
+kMcuDevice_iMXRT118x = 'i.MXRT118x'
+kMcuDevice_iMXRT11yy = [kMcuDevice_iMXRT116x, kMcuDevice_iMXRT117x, kMcuDevice_iMXRT118x]
 
-kMcuDevice_v1_0       = [kMcuDevice_iMXRT500, kMcuDevice_iMXRT106x, kMcuDevice_iMXRT117x]
+kMcuDevice_v1_0       = [kMcuDevice_iMXRT500, kMcuDevice_iMXRT106x, kMcuDevice_iMXRT117x, kMcuDevice_iMXRT118x]
 kMcuDevice_Latest     = kMcuDevice_iMXRTxxx + kMcuDevice_iMXRT10yy + kMcuDevice_iMXRT11yy
 
 kFlexspiNorDevice_ISSI_IS25LP064A       = 'ISSI_IS25LPxxxA_IS25WPxxxA'

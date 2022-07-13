@@ -52,7 +52,7 @@ class memTesterMain(runcore.memTesterRun):
         self._setupMcuTargets()
 
     def callbackFlexspiConnectionConfiguration( self ):
-        flexspiConnCfgFrame.setNecessaryInfo(self.mcuDevice, self.textEdit_flexspiConnection)
+        flexspiConnCfgFrame.setNecessaryInfo(self.tgt.flexspiConnDict, self.textEdit_flexspiConnection)
         flexspiConnCfgFrame.show()
 
     def _retryToPingBootloader( self ):
