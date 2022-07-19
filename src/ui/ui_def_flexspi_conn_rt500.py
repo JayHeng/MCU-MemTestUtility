@@ -6,46 +6,41 @@
 
 import sys, os
 
+
 kFlexspiConnSel_Instance = {'1':0x1,
                             '2':0x2
                            }
 
 kFlexspiConnSel_DataL4b = [
-                              {'PortA_DATA[3:0] - GPIO_B2[13:10]':0x00,
-                               'PortB_DATA[3:0] - GPIO_SD_B2[11:8]':0x10
+                              {'PortA_DATA[3:0] - PIO1[23:20]':0x00
                               },
                               {'None':0xFF
                               }
                           ]
 
 kFlexspiConnSel_DataH4b = [
-                              {'PortA_DATA[7:4] - GPIO_B2[6:3]':0x01,
-                               'PortB_DATA[7:4] - GPIO_SD_B2[3:0]':0x11,
-                               'None':0xFF
+                              {'None':0xFF
                               },
                               {'None':0xFF
                               }
                           ]
 
 kFlexspiConnSel_ssb     = [
-                              {'PortA_SS0_B - GPIO_B2[9]':0x00,
-                               'PortB_SS0_B - GPIO_SD_B2[6]':0x10
+                              {'PortA_SS0_B - PIO1[19]':0x00
                               },
                               {'None':0xFF
                               }
                           ]
 
 kFlexspiConnSel_sclk    = [
-                              {'PortA_SCLK - GPIO_B2[8]':0x00,
-                               'PortB_SCLK - GPIO_SD_B2[7]':0x10
+                              {'PortA_SCLK - PIO1[18]':0x00
                               },
                               {'None':0xFF
                               }
                           ]
 
 kFlexspiConnSel_dqs     = [
-                              {'PortA_DQS - GPIO_B2[7]':0x00,
-                               'PortB_DQS - GPIO_SD_B2[5]':0x10
+                              {'PortA_DQS - PIO1[28]':0x00
                               },
                               {'None':0xFF
                               }
@@ -59,7 +54,8 @@ kFlexspiConnSel_sclkn   = [
                           ]
 
 kFlexspiConnSel_rstb    = [
-                              {'None':0xFF
+                              {'None':0xFF,
+                               'RST_B - PIO0[14]':0x00
                               },
                               {'None':0xFF
                               }
@@ -75,3 +71,6 @@ kFlexspiConnSelDict = {
                        'sclkn'   :kFlexspiConnSel_sclkn,
                        'rstb'    :kFlexspiConnSel_rstb,
                       }
+
+
+

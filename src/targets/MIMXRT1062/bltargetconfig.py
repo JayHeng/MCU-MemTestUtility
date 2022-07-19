@@ -32,6 +32,7 @@ import sys, os
 sys.path.append(os.path.abspath(".."))
 from boot.memoryrange import MemoryRange
 from ui import uidef
+from ui import ui_def_flexspi_conn_rt1060
 
 cpu = 'MIMXRT1062'
 board = 'EVK'
@@ -52,6 +53,8 @@ flexspiNorDevice = uidef.kFlexspiNorDevice_ISSI_IS25LP064A
 flexspiNorMemBase0 = 0x60000000
 flexspiNorMemBase1 = None
 isSipFlexspiNorDevice = False
+
+flexspiConnDict = ui_def_flexspi_conn_rt1060.kFlexspiConnSelDict
 
 # memory map
 memoryRange = {

@@ -32,14 +32,14 @@ import sys, os
 sys.path.append(os.path.abspath(".."))
 from boot.memoryrange import MemoryRange
 from ui import uidef
-from ui import ui_def_flexspi_conn_rt500
+from ui import ui_def_flexspi_conn_rt600
 
-cpu = 'MIMXRT595'
+cpu = 'MIMXRT685'
 board = 'EVK'
 compiler = 'iar'
 build = 'Release'
 mcuSeries = uidef.kMcuSeries_iMXRTxxx
-maxCpuFreqInMHz = 200
+maxCpuFreqInMHz = 300
 
 availablePeripherals = 0x11
 uartPeripheralPinStr = 'Flexcomm0 UART - PIO0[2:1]'
@@ -54,7 +54,7 @@ flexspiNorMemBase0 = 0x08000000
 flexspiNorMemBase1 = None
 isSipFlexspiNorDevice = False
 
-flexspiConnDict = ui_def_flexspi_conn_rt500.kFlexspiConnSelDict
+flexspiConnDict = ui_def_flexspi_conn_rt600.kFlexspiConnSelDict
 
 # memory map
 memoryRange = {

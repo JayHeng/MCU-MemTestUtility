@@ -111,7 +111,8 @@ class memTesterUiCfgFlexspiConn(QMainWindow, flexspiConnectCfgWin.Ui_flexspiConn
         self.flexspiConnCfgDict['sclk'] = self.flexspiConnDict['sclk'][instance][pinStr]
 
         pinStr = self.comboBox_dqs.currentText()
-        self.textEdit_flexspiConnection.append(pinStr)
+        if pinStr != 'None':
+            self.textEdit_flexspiConnection.append(pinStr)
         self.flexspiConnCfgDict['dqs'] = self.flexspiConnDict['dqs'][instance][pinStr]
 
         pinStr = self.comboBox_sclkn.currentText()
