@@ -3,6 +3,7 @@
 import sys
 import os
 import json
+from crc import CrcCalculator, Configuration
 from . import uidef
 from . import uivar
 
@@ -14,6 +15,21 @@ kCommandTag_GetMemInfo     = 0x03
 kCommandTag_RunRwTest      = 0x04
 kCommandTag_RunPerfTest    = 0x05
 kCommandTag_RunStressTest  = 0x06
+
+def calculate_crc16( crcDataBytes ):
+    #crc_calculator = CrcCalculator(Crc16.CCITT)
+    #checksum = crc_calculator.calculate_checksum(crcDataBytes)
+    width = 16
+    poly = 0x1021
+    init_value = 0x00
+    final_xor_value = 0x00
+    reverse_input = False
+    reverse_output = False
+    configuration = Configuration(width, poly, init_value, final_xor_value, reverse_input, reverse_output)
+    use_table = True
+    crc_calculator = CrcCalculator(configuration, use_table)
+    checksum = crc_calculator.calculate_checksum(crcDataBytes)
+    return checksum
 
 class flexspiConnectionStruct(object):
 
@@ -107,12 +123,14 @@ class pinTestPacket(object):
 
     def out_bytes( self ):
         startbytes = bytes(kPacketTag, 'ascii') + bytes([kCommandTag_PinUnittest])
-        mybytes = bytes([self.crcCheckSum & 0xFF,
+        packetBytes = self.memConnection.out_bytes() + self.unittestEn.out_bytes()
+        self.crcCheckSum = calculate_crc16(packetBytes)
+        crcbytes = bytes([self.crcCheckSum & 0xFF,
                          (self.crcCheckSum & 0xFF00) >> 8,
                          self.reserved0[0],
                          self.reserved0[1]
                         ])
-        return startbytes + self.memConnection.out_bytes() + self.unittestEn.out_bytes() + mybytes
+        return startbytes + packetBytes + crcbytes
 
 class memoryPropertyStruct(object):
 
@@ -181,7 +199,7 @@ class configSystemPacket(object):
 
     def out_bytes( self ):
         startbytes = bytes(kPacketTag, 'ascii') + bytes([kCommandTag_ConfigSystem])
-        mybytes1 = bytes([self.cpuSpeedMHz & 0xFF,
+        mybytes = bytes([self.cpuSpeedMHz & 0xFF,
                           (self.cpuSpeedMHz & 0xFF00) >> 8,
                           self.enableL1Cache,
                           self.enablePrefetch,
@@ -190,12 +208,14 @@ class configSystemPacket(object):
                           self.reserved0[0],
                           self.reserved0[1]
                          ])
-        mybytes2 = bytes([self.crcCheckSum & 0xFF,
+        packetBytes = mybytes + self.memConnection.out_bytes() + self.memProperty.out_bytes()
+        self.crcCheckSum = calculate_crc16(packetBytes)
+        crcbytes = bytes([self.crcCheckSum & 0xFF,
                           (self.crcCheckSum & 0xFF00) >> 8,
                           self.reserved1[0],
                           self.reserved1[1]
                          ])
-        return startbytes + mybytes1 + self.memConnection.out_bytes() + self.memProperty.out_bytes() + mybytes2
+        return startbytes + packetBytes + crcbytes
 
 class rwTestPacket(object):
 
@@ -220,10 +240,13 @@ class rwTestPacket(object):
                          self.memLen & 0xFF,
                          (self.memLen & 0xFF00) >> 8,
                          (self.memLen & 0xFF0000) >> 16, 
-                         (self.memLen & 0xFF000000) >> 24,
-                         self.crcCheckSum & 0xFF,
-                         (self.crcCheckSum & 0xFF00) >> 8,
-                         self.reserved0[0],
-                         self.reserved0[1]
+                         (self.memLen & 0xFF000000) >> 24
                         ])
-        return startbytes + mybytes
+        packetBytes = mybytes
+        self.crcCheckSum = calculate_crc16(packetBytes)
+        crcbytes = bytes([self.crcCheckSum & 0xFF,
+                          (self.crcCheckSum & 0xFF00) >> 8,
+                          self.reserved1[0],
+                          self.reserved1[1]
+                         ])
+        return startbytes + packetBytes + crcbytes
