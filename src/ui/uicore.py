@@ -291,7 +291,12 @@ class memTesterUi(QMainWindow, memTesterWin.Ui_memTesterWin):
             #while num != 0:
             #    num = s_serialPort.out_waiting()
             s_serialPort.write(byteList)
-            self.showContentOnSecPacketWin(u"Cmd Packet ->: " + str(byteList))
+            packetStr = ''
+            for i in range(len(byteList)):
+                packetStr = packetStr + hex(byteList[i])
+                if i != len(byteList) - 1:
+                    packetStr = packetStr + ', '
+            self.showContentOnSecPacketWin(u"Cmd Packet ->: " + packetStr)
 
     def sendPinTestPacket( self ):
         mypacket = uipacket.pinTestPacket()
