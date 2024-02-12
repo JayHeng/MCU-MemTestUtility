@@ -5,4 +5,4 @@ pip.exe install pyserial==3.5
 pip.exe install matplotlib==3.3.3
 pip.exe install crc==1.2.0
 
-pip.exe install PyInstaller
+pip.exe install PyInstaller==4.2
