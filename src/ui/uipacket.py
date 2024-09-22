@@ -16,6 +16,8 @@ kCommandTag_RunRwTest      = 0x04
 kCommandTag_RunPerfTest    = 0x05
 kCommandTag_RunStressTest  = 0x06
 
+kCommandTag_TestStop       = 0xF0
+
 def calculate_crc16( crcDataBytes ):
     #crc_calculator = CrcCalculator(Crc16.CCITT)
     #checksum = crc_calculator.calculate_checksum(crcDataBytes)
@@ -250,3 +252,15 @@ class rwTestPacket(object):
                           self.reserved1[1]
                          ])
         return startbytes + packetBytes + crcbytes
+
+class testStopPacket(object):
+
+    def __init__( self, parent=None):
+        pass
+
+    def set_members( self ):
+        pass
+
+    def out_bytes( self ):
+        startbytes = bytes(kPacketTag, 'ascii') + bytes([kCommandTag_TestStop])
+        return startbytes

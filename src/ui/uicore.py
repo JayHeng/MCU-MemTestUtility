@@ -331,6 +331,11 @@ class memTesterUi(QMainWindow, memTesterWin.Ui_memTesterWin):
         mypacket.set_members()
         self.sendUartData(mypacket.out_bytes())
 
+    def sendTestStopPacket( self ):
+        mypacket = uipacket.testStopPacket()
+        mypacket.set_members()
+        self.sendUartData(mypacket.out_bytes())
+
     def _initMemType( self ):
         self.setMemType()
 
@@ -359,3 +364,36 @@ class memTesterUi(QMainWindow, memTesterWin.Ui_memTesterWin):
     def clearContentOfScreens( self ):
         self.textEdit_displayWin.clear()
         self.textEdit_packetWin.clear()
+
+    def resetAllActionButtonColor( self ):
+        self.pushButton_pinUnittest.setStyleSheet("background-color: " + uidef.kButtonColor_Disable)
+        self.pushButton_configSystem.setStyleSheet("background-color: " + uidef.kButtonColor_Disable)
+        self.pushButton_memInfo.setStyleSheet("background-color: " + uidef.kButtonColor_Disable)
+        self.pushButton_rwTest.setStyleSheet("background-color: " + uidef.kButtonColor_Disable)
+        self.pushButton_perfTest.setStyleSheet("background-color: " + uidef.kButtonColor_Disable)
+        self.pushButton_stressTest.setStyleSheet("background-color: " + uidef.kButtonColor_Disable)
+
+    def setActionButtonColor( self, goAction ):
+        if goAction == uidef.kGoAction_PinUnittest:
+            self.pushButton_pinUnittest.setStyleSheet("background-color: " + uidef.kButtonColor_Enable)
+        elif goAction == uidef.kGoAction_ConfigSystem:
+            self.pushButton_configSystem.setStyleSheet("background-color: " + uidef.kButtonColor_Enable)
+        elif goAction == uidef.kGoAction_MemInfo:
+            self.pushButton_memInfo.setStyleSheet("background-color: " + uidef.kButtonColor_Enable)
+        elif goAction == uidef.kGoAction_RwTest:
+            self.pushButton_rwTest.setStyleSheet("background-color: " + uidef.kButtonColor_Enable)
+        elif goAction == uidef.kGoAction_PerfTest:
+            self.pushButton_perfTest.setStyleSheet("background-color: " + uidef.kButtonColor_Enable)
+        elif goAction == uidef.kGoAction_StressTest:
+            self.pushButton_stressTest.setStyleSheet("background-color: " + uidef.kButtonColor_Enable)
+        else:
+            pass
+
+    def isGoActionWorking( self ):
+        return (self.pushButton_Go.text() == "Stop")
+
+    def updateGoActionButton( self ):
+        self.pushButton_Go.setText("Stop")
+
+    def recoverGoActionButton( self ):
+        self.pushButton_Go.setText("Go")

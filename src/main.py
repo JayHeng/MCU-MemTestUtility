@@ -94,70 +94,72 @@ class memTesterMain(runcore.memTesterRun):
     def callbackSetMemType( self ):
         self.setMemType()
 
-    def _resetAllActionButtonColor( self ):
-        self.pushButton_pinUnittest.setStyleSheet("background-color: " + uidef.kButtonColor_Disable)
-        self.pushButton_configSystem.setStyleSheet("background-color: " + uidef.kButtonColor_Disable)
-        self.pushButton_memInfo.setStyleSheet("background-color: " + uidef.kButtonColor_Disable)
-        self.pushButton_rwTest.setStyleSheet("background-color: " + uidef.kButtonColor_Disable)
-        self.pushButton_perfTest.setStyleSheet("background-color: " + uidef.kButtonColor_Disable)
-        self.pushButton_stressTest.setStyleSheet("background-color: " + uidef.kButtonColor_Disable)
-
     def callbackFlexspiPinUnittest( self ):
         global s_goAction
         s_goAction = uidef.kGoAction_PinUnittest
         flexspiPinUnittestFrame.show()
-        self._resetAllActionButtonColor()
-        self.pushButton_pinUnittest.setStyleSheet("background-color: " + uidef.kButtonColor_Enable)
+        self.resetAllActionButtonColor()
+        self.setActionButtonColor(s_goAction)
 
     def callbackConfigSystem( self ):
         global s_goAction
         s_goAction = uidef.kGoAction_ConfigSystem
-        self._resetAllActionButtonColor()
-        self.pushButton_configSystem.setStyleSheet("background-color: " + uidef.kButtonColor_Enable)
+        self.resetAllActionButtonColor()
+        self.setActionButtonColor(s_goAction)
 
     def callbackMemInfo( self ):
         global s_goAction
         s_goAction = uidef.kGoAction_MemInfo
-        self._resetAllActionButtonColor()
-        self.pushButton_memInfo.setStyleSheet("background-color: " + uidef.kButtonColor_Enable)
+        self.resetAllActionButtonColor()
+        self.setActionButtonColor(s_goAction)
 
     def callbackRwTest( self ):
         global s_goAction
         s_goAction = uidef.kGoAction_RwTest
-        self._resetAllActionButtonColor()
-        self.pushButton_rwTest.setStyleSheet("background-color: " + uidef.kButtonColor_Enable)
+        self.resetAllActionButtonColor()
+        self.setActionButtonColor(s_goAction)
 
     def callbackPerfTest( self ):
         global s_goAction
         s_goAction = uidef.kGoAction_PerfTest
         perfTestFrame.show()
-        self._resetAllActionButtonColor()
-        self.pushButton_perfTest.setStyleSheet("background-color: " + uidef.kButtonColor_Enable)
+        self.resetAllActionButtonColor()
+        self.setActionButtonColor(s_goAction)
 
     def callbackStressTest( self ):
         global s_goAction
         s_goAction = uidef.kGoAction_StressTest
         stressTestFrame.show()
-        self._resetAllActionButtonColor()
-        self.pushButton_stressTest.setStyleSheet("background-color: " + uidef.kButtonColor_Enable)
+        self.resetAllActionButtonColor()
+        self.setActionButtonColor(s_goAction)
 
     def callbackGo( self ):
-        self._resetAllActionButtonColor()
         global s_goAction
+        if s_goAction == None:
+            return
+        if self.isGoActionWorking():
+            self.sendTestStopPacket()
+            self.resetAllActionButtonColor()
+            s_goAction = None
+            self.recoverGoActionButton()
         if s_goAction == uidef.kGoAction_PinUnittest:
             self.sendPinTestPacket()
-            s_goAction = None
         elif s_goAction == uidef.kGoAction_ConfigSystem:
             if self.updateTargetSetupValue():
                 self.sendConfigSystemPacket()
-                s_goAction = None
             else:
-                self.pushButton_configSystem.setStyleSheet("background-color: " + uidef.kButtonColor_Enable)
+                return
+        elif s_goAction == uidef.kGoAction_MemInfo:
+            pass
         elif s_goAction == uidef.kGoAction_RwTest:
             self.sendRwTestPacket()
-            s_goAction = None
-        else:
+        elif s_goAction == uidef.kGoAction_PerfTest:
             pass
+        elif s_goAction == uidef.kGoAction_StressTest:
+            pass
+        else:
+            return
+        self.updateGoActionButton()
 
     def _deinitToolToExit( self ):
         uivar.setAdvancedSettings(uidef.kAdvancedSettings_Tool, self.toolCommDict)
