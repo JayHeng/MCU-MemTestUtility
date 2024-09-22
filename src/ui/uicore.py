@@ -25,7 +25,11 @@ from . import uidef
 from . import uilang
 from . import uivar
 from . import uipacket
+from . import ui_def_flexspi_conn_rt500
+from . import ui_def_flexspi_conn_rt600
+from . import ui_def_flexspi_conn_rt1060
 from . import ui_def_flexspi_conn_rt1170
+from . import ui_def_flexspi_conn_rt1180
 sys.path.append(os.path.abspath(".."))
 from win import memTesterWin
 
@@ -162,38 +166,52 @@ class memTesterUi(QMainWindow, memTesterWin.Ui_memTesterWin):
         self.flexspiConnCfgDict = flexspiConnCfgDict.copy()
         instance = self.flexspiConnCfgDict['instance'] - 1
         self.textEdit_flexspiConnection.clear()
-        if self.mcuDevice == uidef.kMcuDevice_iMXRT117x:
-            for key in ui_def_flexspi_conn_rt1170.kFlexspiConnSel_DataL4b[instance].keys():
-                if ui_def_flexspi_conn_rt1170.kFlexspiConnSel_DataL4b[instance][key] == self.flexspiConnCfgDict['dataL4b']:
+        flexspiConnSelDict = None
+        if self.mcuDevice == uidef.kMcuDevice_iMXRT500:
+            flexspiConnSelDict = ui_def_flexspi_conn_rt500.kFlexspiConnSelDict.copy()
+        elif self.mcuDevice == uidef.kMcuDevice_iMXRT600:
+            flexspiConnSelDict = ui_def_flexspi_conn_rt600.kFlexspiConnSelDict.copy()
+        elif self.mcuDevice == uidef.kMcuDevice_iMXRT106x:
+            flexspiConnSelDict = ui_def_flexspi_conn_rt1060.kFlexspiConnSelDict.copy()
+        elif self.mcuDevice == uidef.kMcuDevice_iMXRT117x:
+            flexspiConnSelDict = ui_def_flexspi_conn_rt1170.kFlexspiConnSelDict.copy()
+        elif self.mcuDevice == uidef.kMcuDevice_iMXRT118x:
+            flexspiConnSelDict = ui_def_flexspi_conn_rt1180.kFlexspiConnSelDict.copy()
+        else:
+            pass
+
+        for key in flexspiConnSelDict['dataL4b'][instance].keys():
+            if flexspiConnSelDict['dataL4b'][instance][key] == self.flexspiConnCfgDict['dataL4b']:
+                self.textEdit_flexspiConnection.append(key)
+                break
+        for key in flexspiConnSelDict['dataH4b'][instance].keys():
+            if flexspiConnSelDict['dataH4b'][instance][key] == self.flexspiConnCfgDict['dataH4b']:
+                if key != 'None':
                     self.textEdit_flexspiConnection.append(key)
-                    break
-            for key in ui_def_flexspi_conn_rt1170.kFlexspiConnSel_DataH4b[instance].keys():
-                if ui_def_flexspi_conn_rt1170.kFlexspiConnSel_DataH4b[instance][key] == self.flexspiConnCfgDict['dataH4b']:
-                    if key != 'None':
-                        self.textEdit_flexspiConnection.append(key)
-                    break
-            for key in ui_def_flexspi_conn_rt1170.kFlexspiConnSel_ssb[instance].keys():
-                if ui_def_flexspi_conn_rt1170.kFlexspiConnSel_ssb[instance][key] == self.flexspiConnCfgDict['ssb']:
+                break
+        for key in flexspiConnSelDict['ssb'][instance].keys():
+            if flexspiConnSelDict['ssb'][instance][key] == self.flexspiConnCfgDict['ssb']:
+                self.textEdit_flexspiConnection.append(key)
+                break
+        for key in flexspiConnSelDict['sclk'][instance].keys():
+            if flexspiConnSelDict['sclk'][instance][key] == self.flexspiConnCfgDict['sclk']:
+                self.textEdit_flexspiConnection.append(key)
+                break
+        for key in flexspiConnSelDict['dqs'][instance].keys():
+            if flexspiConnSelDict['dqs'][instance][key] == self.flexspiConnCfgDict['dqs']:
+                if key != 'None':
                     self.textEdit_flexspiConnection.append(key)
-                    break
-            for key in ui_def_flexspi_conn_rt1170.kFlexspiConnSel_sclk[instance].keys():
-                if ui_def_flexspi_conn_rt1170.kFlexspiConnSel_sclk[instance][key] == self.flexspiConnCfgDict['sclk']:
+                break
+        for key in flexspiConnSelDict['sclkn'][instance].keys():
+            if flexspiConnSelDict['sclkn'][instance][key] == self.flexspiConnCfgDict['sclkn']:
+                if key != 'None':
                     self.textEdit_flexspiConnection.append(key)
-                    break
-            for key in ui_def_flexspi_conn_rt1170.kFlexspiConnSel_dqs[instance].keys():
-                if ui_def_flexspi_conn_rt1170.kFlexspiConnSel_dqs[instance][key] == self.flexspiConnCfgDict['dqs']:
+                break
+        for key in flexspiConnSelDict['rstb'][instance].keys():
+            if flexspiConnSelDict['rstb'][instance][key] == self.flexspiConnCfgDict['rstb']:
+                if key != 'None':
                     self.textEdit_flexspiConnection.append(key)
-                    break
-            for key in ui_def_flexspi_conn_rt1170.kFlexspiConnSel_sclkn[instance].keys():
-                if ui_def_flexspi_conn_rt1170.kFlexspiConnSel_sclkn[instance][key] == self.flexspiConnCfgDict['sclkn']:
-                    if key != 'None':
-                        self.textEdit_flexspiConnection.append(key)
-                    break
-            for key in ui_def_flexspi_conn_rt1170.kFlexspiConnSel_rstb[instance].keys():
-                if ui_def_flexspi_conn_rt1170.kFlexspiConnSel_rstb[instance][key] == self.flexspiConnCfgDict['rstb']:
-                    if key != 'None':
-                        self.textEdit_flexspiConnection.append(key)
-                    break
+                break
 
     def updateTargetSetupValue( self ):
         try:
@@ -258,7 +276,7 @@ class memTesterUi(QMainWindow, memTesterWin.Ui_memTesterWin):
             num = s_serialPort.inWaiting()
             if num != 0:
                 data = s_serialPort.read(num)
-                string = data.decode()
+                string = data.decode('utf-8')
                 if not s_isRecvAsciiMode:
                     asciiLoc = string.find("Switch_To_ASCII_Mode")
                     if asciiLoc != -1:
