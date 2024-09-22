@@ -109,7 +109,7 @@ kMemType_HyperRAM   = 'HyperRAM'
 
 kAdvancedSettings_Tool             = 0
 kAdvancedSettings_FlexspiConn      = 1
-kAdvancedSettings_FlexspiUnittest  = 2
+kAdvancedSettings_FlexspiPintest   = 2
 
 kGoAction_PinUnittest            = 0
 kGoAction_ConfigSystem           = 1

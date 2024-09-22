@@ -117,7 +117,7 @@ class pinTestPacket(object):
         flexspiConnCfgDict = uivar.getAdvancedSettings(uidef.kAdvancedSettings_FlexspiConn)
         self.memConnection.set_members(flexspiConnCfgDict)
         self.unittestEn = flexspiUnittestEnStruct()
-        flexspiUnittestCfgDict = uivar.getAdvancedSettings(uidef.kAdvancedSettings_FlexspiUnittest)
+        flexspiUnittestCfgDict = uivar.getAdvancedSettings(uidef.kAdvancedSettings_FlexspiPintest)
         self.unittestEn.set_members(flexspiUnittestCfgDict)
         self.crcCheckSum = 0x0000
 
