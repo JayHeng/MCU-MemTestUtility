@@ -964,6 +964,17 @@
     <property name="title">
      <string>Tools</string>
     </property>
+    <widget class="QMenu" name="menu_loadFirmware">
+     <property name="inputMethodHints">
+      <set>Qt::ImhNone</set>
+     </property>
+     <property name="title">
+      <string>Load Firmware</string>
+     </property>
+     <addaction name="menuLoadFwAction_Yes"/>
+     <addaction name="menuLoadFwAction_No"/>
+    </widget>
+    <addaction name="menu_loadFirmware"/>
    </widget>
    <widget class="QMenu" name="menuWindow">
     <property name="title">
@@ -999,6 +1010,28 @@
   <action name="menuHelpAction_revisionHistory">
    <property name="text">
     <string>Revision History</string>
+   </property>
+  </action>
+  <action name="menuLoadFwAction_No">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>No - For Dev</string>
+   </property>
+  </action>
+  <action name="menuLoadFwAction_Yes">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Yes</string>
    </property>
   </action>
  </widget>

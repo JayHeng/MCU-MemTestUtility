@@ -23,11 +23,15 @@ class memTesterMain(runcore.memTesterRun):
         self._register_callbacks()
         self.isDeviceConnected = False
         self._setupMcuTargets()
+        self.isLoadFirmwareEnabled = True
+        self.initToolMenu()
 
     def _register_callbacks(self):
         self.menuHelpAction_homePage.triggered.connect(self.callbackShowHomePage)
         self.menuHelpAction_aboutAuthor.triggered.connect(self.callbackShowAboutAuthor)
         self.menuHelpAction_revisionHistory.triggered.connect(self.callbackShowRevisionHistory)
+        self.menuLoadFwAction_No.triggered.connect(self.callbackSetLoadFirmwareOpt)
+        self.menuLoadFwAction_Yes.triggered.connect(self.callbackSetLoadFirmwareOpt)
         self.comboBox_mcuDevice.currentIndexChanged.connect(self.callbackSetMcuDevice)
         self.pushButton_flexspiConnectionConfiguration.clicked.connect(self.callbackFlexspiConnectionConfiguration)
         self.pushButton_connect.clicked.connect(self.callbackConnectToDevice)
@@ -43,8 +47,8 @@ class memTesterMain(runcore.memTesterRun):
 
     def _setupMcuTargets( self ):
         self.setTargetSetupValue()
-        self.initUi()
-        self.initRun()
+        self.initFuncUi()
+        self.initFuncRun()
         self.updateCpuSpeedInfo()
         self.updateUartPadInfo()
 
@@ -57,6 +61,8 @@ class memTesterMain(runcore.memTesterRun):
         flexspiConnCfgFrame.show()
 
     def _retryToPingBootloader( self ):
+        if not self.isLoadFirmwareEnabled:
+            return True
         pingStatus = False
         pingCnt = kRetryPingTimes
         while (not pingStatus) and pingCnt > 0:
@@ -72,8 +78,8 @@ class memTesterMain(runcore.memTesterRun):
             self.showContentOnSecPacketWin(u"【Action】: Click <Connect> button to load boot firmware.")
             self.updatePortSetupValue()
             self.connectToDevice()
-            if True:#self._retryToPingBootloader():
-                if True:#self.jumpToFirmware():
+            if self._retryToPingBootloader():
+                if self.jumpToFirmware():
                     self.showContentOnSecPacketWin(u"【  Info 】: boot firmware is loaded.")
                     self.openUartPort()
                     self.isDeviceConnected = True
@@ -178,6 +184,9 @@ class memTesterMain(runcore.memTesterRun):
     def closeEvent(self, event):
         self._deinitToolToExit()
         event.accept()
+
+    def callbackSetLoadFirmwareOpt( self ):
+        self.setLoadFwOpt()
 
     def callbackShowHomePage(self):
         self.showAboutMessage(uilang.kMsgLanguageContentDict['homePage_title'][0], uilang.kMsgLanguageContentDict['homePage_info'][0] )

@@ -97,7 +97,7 @@ class memTesterUi(QMainWindow, memTesterWin.Ui_memTesterWin):
         self.mcuDevice = None
         self._initTargetSetupValue()
         self.setTargetSetupValue()
-        self.initUi()
+        self.initFuncUi()
         self._initFlexspiConn()
         self.memType = None
         self._initMemType()
@@ -107,7 +107,16 @@ class memTesterUi(QMainWindow, memTesterWin.Ui_memTesterWin):
         self.pinWaveGridlayout = QGridLayout(self.groupBox_pinWaveform)
         self.pinWaveGridlayout.addWidget(self.pinWaveFig,0,0)
 
-    def initUi( self ):
+    def initToolMenu( self ):
+        loadFwActionGroup = QActionGroup(self)
+        loadFwActionGroup.addAction(self.menuLoadFwAction_No)
+        loadFwActionGroup.addAction(self.menuLoadFwAction_Yes)
+        loadFwActionGroup.setExclusive(True)
+
+    def setLoadFwOpt( self ):
+        self.isLoadFirmwareEnabled = self.menuLoadFwAction_Yes.isChecked()
+
+    def initFuncUi( self ):
         self.uartComPort = None
         self.uartBaudrate = None
         self.setPortSetupValue()

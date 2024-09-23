@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file '..\gui\MCU-MemTestUtility.ui'
+# Form implementation generated from reading ui file 'D:\github_repo_jay\MCU-MemTestUtility\gui\MCU-MemTestUtility.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.1
 #
@@ -331,6 +331,9 @@ class Ui_memTesterWin(object):
         self.menuView.setObjectName("menuView")
         self.menuTools = QtWidgets.QMenu(self.menubar)
         self.menuTools.setObjectName("menuTools")
+        self.menu_loadFirmware = QtWidgets.QMenu(self.menuTools)
+        self.menu_loadFirmware.setInputMethodHints(QtCore.Qt.ImhNone)
+        self.menu_loadFirmware.setObjectName("menu_loadFirmware")
         self.menuWindow = QtWidgets.QMenu(self.menubar)
         self.menuWindow.setObjectName("menuWindow")
         self.menuHelp = QtWidgets.QMenu(self.menubar)
@@ -345,6 +348,17 @@ class Ui_memTesterWin(object):
         self.menuHelpAction_aboutAuthor.setObjectName("menuHelpAction_aboutAuthor")
         self.menuHelpAction_revisionHistory = QtWidgets.QAction(memTesterWin)
         self.menuHelpAction_revisionHistory.setObjectName("menuHelpAction_revisionHistory")
+        self.menuLoadFwAction_No = QtWidgets.QAction(memTesterWin)
+        self.menuLoadFwAction_No.setCheckable(True)
+        self.menuLoadFwAction_No.setChecked(False)
+        self.menuLoadFwAction_No.setObjectName("menuLoadFwAction_No")
+        self.menuLoadFwAction_Yes = QtWidgets.QAction(memTesterWin)
+        self.menuLoadFwAction_Yes.setCheckable(True)
+        self.menuLoadFwAction_Yes.setChecked(True)
+        self.menuLoadFwAction_Yes.setObjectName("menuLoadFwAction_Yes")
+        self.menu_loadFirmware.addAction(self.menuLoadFwAction_Yes)
+        self.menu_loadFirmware.addAction(self.menuLoadFwAction_No)
+        self.menuTools.addAction(self.menu_loadFirmware.menuAction())
         self.menuHelp.addAction(self.menuHelpAction_homePage)
         self.menuHelp.addAction(self.menuHelpAction_aboutAuthor)
         self.menuHelp.addAction(self.menuHelpAction_revisionHistory)
@@ -422,8 +436,11 @@ class Ui_memTesterWin(object):
         self.menuEdit.setTitle(_translate("memTesterWin", "Edit"))
         self.menuView.setTitle(_translate("memTesterWin", "View"))
         self.menuTools.setTitle(_translate("memTesterWin", "Tools"))
+        self.menu_loadFirmware.setTitle(_translate("memTesterWin", "Load Firmware"))
         self.menuWindow.setTitle(_translate("memTesterWin", "Window"))
         self.menuHelp.setTitle(_translate("memTesterWin", "Help"))
         self.menuHelpAction_homePage.setText(_translate("memTesterWin", "Home Page"))
         self.menuHelpAction_aboutAuthor.setText(_translate("memTesterWin", "About Author"))
         self.menuHelpAction_revisionHistory.setText(_translate("memTesterWin", "Revision History"))
+        self.menuLoadFwAction_No.setText(_translate("memTesterWin", "No - For Dev"))
+        self.menuLoadFwAction_Yes.setText(_translate("memTesterWin", "Yes"))

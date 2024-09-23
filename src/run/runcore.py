@@ -87,9 +87,9 @@ class memTesterRun(uicore.memTesterUi):
 
     def __init__(self, parent=None):
         super(memTesterRun, self).__init__(parent)
-        self.initRun()
+        self.initFuncRun()
 
-    def initRun( self ):
+    def initFuncRun( self ):
         self.blhost = None
         self.sdphost = None
         self.tgt = None
@@ -148,6 +148,8 @@ class memTesterRun(uicore.memTesterUi):
             pass
 
     def jumpToFirmware( self ):
+        if not self.isLoadFirmwareEnabled:
+            return True
         firmwareBinFile = os.path.join(self.cpuDir, 'boot_firmware.bin')
         firmwareLoadAddr = self.tgt.firmwareLoadAddr
         firmwareJumpAddr = self.tgt.firmwareJumpAddr
