@@ -52,6 +52,7 @@ class memTesterMain(runcore.memTesterRun):
         self._setupMcuTargets()
 
     def callbackFlexspiConnectionConfiguration( self ):
+        self.showContentOnSecPacketWin(u"【Action】: Click <FlexSPI Connnect Configuration> button.")
         flexspiConnCfgFrame.setNecessaryInfo(self.tgt.flexspiConnDict, self.textEdit_flexspiConnection)
         flexspiConnCfgFrame.show()
 
@@ -68,7 +69,7 @@ class memTesterMain(runcore.memTesterRun):
 
     def callbackConnectToDevice( self ):
         if not self.isDeviceConnected:
-            self.showContentOnSecPacketWin(u"【Action】: Click connect button to load boot firmware.")
+            self.showContentOnSecPacketWin(u"【Action】: Click <Connect> button to load boot firmware.")
             self.updatePortSetupValue()
             self.connectToDevice()
             if True:#self._retryToPingBootloader():
@@ -87,7 +88,7 @@ class memTesterMain(runcore.memTesterRun):
                 else:
                     pass
         else:
-            self.showContentOnSecPacketWin(u"【Action】: Click reset button to reboot system.")
+            self.showContentOnSecPacketWin(u"【Action】: Click <Reset> button to reboot system.")
             self.isDeviceConnected = False
             self.closeUartPort()
 
@@ -95,6 +96,7 @@ class memTesterMain(runcore.memTesterRun):
         self.setMemType()
 
     def callbackFlexspiPinUnittest( self ):
+        self.showContentOnSecPacketWin(u"【Action】: Click <Pin Unittest> button.")
         global s_goAction
         s_goAction = uidef.kGoAction_PinUnittest
         flexspiPinUnittestFrame.show()
@@ -102,24 +104,28 @@ class memTesterMain(runcore.memTesterRun):
         self.setActionButtonColor(s_goAction)
 
     def callbackConfigSystem( self ):
+        self.showContentOnSecPacketWin(u"【Action】: Click <Config System> button.")
         global s_goAction
         s_goAction = uidef.kGoAction_ConfigSystem
         self.resetAllActionButtonColor()
         self.setActionButtonColor(s_goAction)
 
     def callbackMemInfo( self ):
+        self.showContentOnSecPacketWin(u"【Action】: Click <Mem Info> button.")
         global s_goAction
         s_goAction = uidef.kGoAction_MemInfo
         self.resetAllActionButtonColor()
         self.setActionButtonColor(s_goAction)
 
     def callbackRwTest( self ):
+        self.showContentOnSecPacketWin(u"【Action】: Click <R/W Test> button.")
         global s_goAction
         s_goAction = uidef.kGoAction_RwTest
         self.resetAllActionButtonColor()
         self.setActionButtonColor(s_goAction)
 
     def callbackPerfTest( self ):
+        self.showContentOnSecPacketWin(u"【Action】: Click <Perf Test> button.")
         global s_goAction
         s_goAction = uidef.kGoAction_PerfTest
         perfTestFrame.show()
@@ -127,6 +133,7 @@ class memTesterMain(runcore.memTesterRun):
         self.setActionButtonColor(s_goAction)
 
     def callbackStressTest( self ):
+        self.showContentOnSecPacketWin(u"【Action】: Click <Stress Test> button.")
         global s_goAction
         s_goAction = uidef.kGoAction_StressTest
         stressTestFrame.show()
@@ -138,10 +145,13 @@ class memTesterMain(runcore.memTesterRun):
         if s_goAction == None:
             return
         if self.isGoActionWorking():
+            self.showContentOnSecPacketWin(u"【Action】: Click <Stop> button.")
             self.sendTestStopPacket()
             self.resetAllActionButtonColor()
             s_goAction = None
             self.recoverGoActionButton()
+        else:
+            self.showContentOnSecPacketWin(u"【Action】: Click <Go> button.")
         if s_goAction == uidef.kGoAction_PinUnittest:
             self.sendPinTestPacket()
         elif s_goAction == uidef.kGoAction_ConfigSystem:
