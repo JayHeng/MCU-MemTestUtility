@@ -285,7 +285,7 @@ class memTesterUi(QMainWindow, memTesterWin.Ui_memTesterWin):
         status = None
         string = ""
         try:
-            string += data.decode('utf-8')
+            string += uartData.decode('utf-8')
             if len(string) > len(magic):
                 status = False
             elif string in magic:
@@ -303,6 +303,7 @@ class memTesterUi(QMainWindow, memTesterWin.Ui_memTesterWin):
         if s_serialPort.isOpen():
             num = s_serialPort.inWaiting()
             if num != 0:
+                #self.showContentOnMainDisplayWin('Get {:} bytes from UART\r\n'.format(num))
                 data = s_serialPort.read(num)
                 if not s_isRecvAsciiMode:
                     status, string = self._findUartPrintSwitchMagic(data, "Switch_To_ASCII_Mode")
