@@ -37,6 +37,7 @@ s_serialPort = serial.Serial()
 s_recvInterval = 1
 s_recvPinWave = [0] * 100
 s_isRecvAsciiMode = True
+s_recvUartMagic = ""
 
 class uartRecvWorker(QThread):
     sinOut = pyqtSignal()
@@ -270,19 +271,37 @@ class memTesterUi(QMainWindow, memTesterWin.Ui_memTesterWin):
             self.pushButton_connect.setText('Connect')
             self.pushButton_connect.setStyleSheet("background-color: grey")
 
+    def _findUartPrintSwitchMagic( self, uartData, magic ):
+        global s_recvUartMagic
+        status = None
+        string = ""
+        try:
+            string += data.decode('utf-8')
+            if len(string) > len(magic):
+                status = False
+            elif string in magic:
+                status = True
+                s_recvUartMagic += string
+            else:
+                status = False
+        except:
+            pass
+        return status, string
+
     def receiveUartData( self ):
         global s_isRecvAsciiMode
+        global s_recvUartMagic
         if s_serialPort.isOpen():
             num = s_serialPort.inWaiting()
             if num != 0:
                 data = s_serialPort.read(num)
-                string = data.decode('utf-8')
                 if not s_isRecvAsciiMode:
-                    asciiLoc = string.find("Switch_To_ASCII_Mode")
-                    if asciiLoc != -1:
-                        string = string[asciiLoc+20:len(string)]
-                        s_isRecvAsciiMode = True
-                        #self.showContentOnMainDisplayWin("  __it is ascii mode")
+                    status, string = self._findUartPrintSwitchMagic(data, "Switch_To_ASCII_Mode")
+                    if status:
+                        if s_recvUartMagic == "Switch_To_ASCII_Mode":
+                            s_isRecvAsciiMode = True
+                            s_recvUartMagic = ""
+                            #self.showContentOnMainDisplayWin("  __it is ascii mode")
                     else:
                         global s_recvPinWave
                         # We just use first 20 conv result each time
@@ -291,17 +310,16 @@ class memTesterUi(QMainWindow, memTesterWin.Ui_memTesterWin):
                             for i in range(len(s_recvPinWave)):
                                 s_recvPinWave[i] = data[int(i/5)]
                         #self.showContentOnMainDisplayWin("  __it is in hex mode output")
-                        return
+                    return
                 else:
-                    hexLoc = string.find("Switch_To_Hex_Mode")
-                    if hexLoc != -1:
-                        string = string[0:hexLoc]
-                        s_isRecvAsciiMode = False
-                        #self.showContentOnMainDisplayWin("  __it is hex mode")
-                    asciiLoc = string.find("Switch_To_ASCII_Mode")
-                    if asciiLoc != -1:
-                        string = string[0:asciiLoc] + string[asciiLoc+20:len(string)]
-                self.showContentOnMainDisplayWin(string)
+                    status, string = self._findUartPrintSwitchMagic(data, "Switch_To_HEX8B_Mode")
+                    if status:
+                        if s_recvUartMagic == "Switch_To_HEX8B_Mode":
+                            s_isRecvAsciiMode = False
+                            s_recvUartMagic = ""
+                            #self.showContentOnMainDisplayWin("  __it is hex mode")
+                    else:
+                         self.showContentOnMainDisplayWin(string)
 
     def sendUartData( self , byteList ):
         if s_serialPort.isOpen():
