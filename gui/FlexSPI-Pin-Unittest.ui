@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>244</width>
-    <height>354</height>
+    <height>384</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -51,11 +51,11 @@
     <string>DATA_L4B:</string>
    </property>
   </widget>
-  <widget class="QLabel" name="label_dataH4b">
+  <widget class="QLabel" name="label_dataT8b">
    <property name="geometry">
     <rect>
      <x>20</x>
-     <y>110</y>
+     <y>140</y>
      <width>81</width>
      <height>20</height>
     </rect>
@@ -67,14 +67,14 @@
     </font>
    </property>
    <property name="text">
-    <string>DATA_H4B:</string>
+    <string>DATA_T8B:</string>
    </property>
   </widget>
   <widget class="QLabel" name="label_ssb">
    <property name="geometry">
     <rect>
      <x>20</x>
-     <y>140</y>
+     <y>170</y>
      <width>81</width>
      <height>20</height>
     </rect>
@@ -93,7 +93,7 @@
    <property name="geometry">
     <rect>
      <x>20</x>
-     <y>170</y>
+     <y>200</y>
      <width>81</width>
      <height>20</height>
     </rect>
@@ -112,7 +112,7 @@
    <property name="geometry">
     <rect>
      <x>20</x>
-     <y>200</y>
+     <y>230</y>
      <width>100</width>
      <height>20</height>
     </rect>
@@ -131,7 +131,7 @@
    <property name="geometry">
     <rect>
      <x>20</x>
-     <y>230</y>
+     <y>260</y>
      <width>100</width>
      <height>20</height>
     </rect>
@@ -150,7 +150,7 @@
    <property name="geometry">
     <rect>
      <x>20</x>
-     <y>260</y>
+     <y>290</y>
      <width>100</width>
      <height>20</height>
     </rect>
@@ -185,11 +185,11 @@
     </property>
    </item>
   </widget>
-  <widget class="QComboBox" name="comboBox_dataH4b">
+  <widget class="QComboBox" name="comboBox_dataT8b">
    <property name="geometry">
     <rect>
      <x>110</x>
-     <y>110</y>
+     <y>140</y>
      <width>111</width>
      <height>20</height>
     </rect>
@@ -212,7 +212,7 @@
    <property name="geometry">
     <rect>
      <x>110</x>
-     <y>140</y>
+     <y>170</y>
      <width>111</width>
      <height>20</height>
     </rect>
@@ -232,7 +232,7 @@
    <property name="geometry">
     <rect>
      <x>110</x>
-     <y>170</y>
+     <y>200</y>
      <width>111</width>
      <height>20</height>
     </rect>
@@ -252,7 +252,7 @@
    <property name="geometry">
     <rect>
      <x>110</x>
-     <y>200</y>
+     <y>230</y>
      <width>111</width>
      <height>20</height>
     </rect>
@@ -269,29 +269,6 @@
    </item>
   </widget>
   <widget class="QComboBox" name="comboBox_sclkn">
-   <property name="geometry">
-    <rect>
-     <x>110</x>
-     <y>230</y>
-     <width>111</width>
-     <height>20</height>
-    </rect>
-   </property>
-   <property name="currentIndex">
-    <number>1</number>
-   </property>
-   <item>
-    <property name="text">
-     <string>Enable</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>Disable</string>
-    </property>
-   </item>
-  </widget>
-  <widget class="QComboBox" name="comboBox_rstb">
    <property name="geometry">
     <rect>
      <x>110</x>
@@ -314,11 +291,34 @@
     </property>
    </item>
   </widget>
+  <widget class="QComboBox" name="comboBox_rstb">
+   <property name="geometry">
+    <rect>
+     <x>110</x>
+     <y>290</y>
+     <width>111</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="currentIndex">
+    <number>1</number>
+   </property>
+   <item>
+    <property name="text">
+     <string>Enable</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Disable</string>
+    </property>
+   </item>
+  </widget>
   <widget class="QPushButton" name="pushButton_ok">
    <property name="geometry">
     <rect>
      <x>30</x>
-     <y>300</y>
+     <y>330</y>
      <width>75</width>
      <height>31</height>
     </rect>
@@ -331,7 +331,7 @@
    <property name="geometry">
     <rect>
      <x>140</x>
-     <y>300</y>
+     <y>330</y>
      <width>75</width>
      <height>31</height>
     </rect>
@@ -414,6 +414,45 @@
    <item>
     <property name="text">
      <string>Via On-chip ADC</string>
+    </property>
+   </item>
+  </widget>
+  <widget class="QLabel" name="label_dataH4b">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>110</y>
+     <width>81</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="text">
+    <string>DATA_H4B:</string>
+   </property>
+  </widget>
+  <widget class="QComboBox" name="comboBox_dataH4b">
+   <property name="geometry">
+    <rect>
+     <x>110</x>
+     <y>110</y>
+     <width>111</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <item>
+    <property name="text">
+     <string>Enable</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Disable</string>
     </property>
    </item>
   </widget>

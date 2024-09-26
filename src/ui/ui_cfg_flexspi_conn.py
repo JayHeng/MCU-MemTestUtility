@@ -36,6 +36,8 @@ class memTesterUiCfgFlexspiConn(QMainWindow, flexspiConnectCfgWin.Ui_flexspiConn
         self.comboBox_dataL4b.addItems(self.flexspiConnDict['dataL4b'][instance].keys())
         self.comboBox_dataH4b.clear()
         self.comboBox_dataH4b.addItems(self.flexspiConnDict['dataH4b'][instance].keys())
+        self.comboBox_dataT8b.clear()
+        self.comboBox_dataT8b.addItems(self.flexspiConnDict['dataT8b'][instance].keys())
         self.comboBox_ssb.clear()
         self.comboBox_ssb.addItems(self.flexspiConnDict['ssb'][instance].keys())
         self.comboBox_sclk.clear()
@@ -64,6 +66,10 @@ class memTesterUiCfgFlexspiConn(QMainWindow, flexspiConnectCfgWin.Ui_flexspiConn
         for key in self.flexspiConnDict['dataH4b'][instance].keys():
             if self.flexspiConnDict['dataH4b'][instance][key] == self.flexspiConnCfgDict['dataH4b']:
                 self.comboBox_dataH4b.setCurrentIndex(self.comboBox_dataH4b.findText(key))
+                break
+        for key in self.flexspiConnDict['dataT8b'][instance].keys():
+            if self.flexspiConnDict['dataT8b'][instance][key] == self.flexspiConnCfgDict['dataT8b']:
+                self.comboBox_dataT8b.setCurrentIndex(self.comboBox_dataT8b.findText(key))
                 break
         for key in self.flexspiConnDict['ssb'][instance].keys():
             if self.flexspiConnDict['ssb'][instance][key] == self.flexspiConnCfgDict['ssb']:
@@ -101,6 +107,11 @@ class memTesterUiCfgFlexspiConn(QMainWindow, flexspiConnectCfgWin.Ui_flexspiConn
         if pinStr != 'None':
             self.textEdit_flexspiConnection.append(pinStr)
         self.flexspiConnCfgDict['dataH4b'] = self.flexspiConnDict['dataH4b'][instance][pinStr]
+
+        pinStr = self.comboBox_dataT8b.currentText()
+        if pinStr != 'None':
+            self.textEdit_flexspiConnection.append(pinStr)
+        self.flexspiConnCfgDict['dataT8b'] = self.flexspiConnDict['dataT8b'][instance][pinStr]
 
         pinStr = self.comboBox_ssb.currentText()
         self.textEdit_flexspiConnection.append(pinStr)

@@ -29,6 +29,13 @@ kFlexspiConnSel_DataH4b = [
                               }
                           ]
 
+kFlexspiConnSel_DataT8b    = [
+                              {'None':0xFF
+                              },
+                              {'None':0xFF
+                              }
+                          ]
+
 kFlexspiConnSel_ssb     = [
                               {'PortA_SS0_B - GPIO_SD_B2[6]':0x00,
                                'PortA_SS0_B - GPIO_AD[18]':0x01,
@@ -83,6 +90,7 @@ kFlexspiConnSelDict = {
                        'instance':kFlexspiConnSel_Instance,
                        'dataL4b' :kFlexspiConnSel_DataL4b,
                        'dataH4b' :kFlexspiConnSel_DataH4b,
+                       'dataT8b' :kFlexspiConnSel_DataT8b,
                        'ssb'     :kFlexspiConnSel_ssb,
                        'sclk'    :kFlexspiConnSel_sclk,
                        'dqs'     :kFlexspiConnSel_dqs,
