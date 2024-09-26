@@ -199,6 +199,11 @@ class memTesterUi(QMainWindow, memTesterWin.Ui_memTesterWin):
                 if key != 'None':
                     self.textEdit_flexspiConnection.append(key)
                 break
+        for key in flexspiConnSelDict['dataT8b'][instance].keys():
+            if flexspiConnSelDict['dataT8b'][instance][key] == self.flexspiConnCfgDict['dataT8b']:
+                if key != 'None':
+                    self.textEdit_flexspiConnection.append(key)
+                break
         for key in flexspiConnSelDict['ssb'][instance].keys():
             if flexspiConnSelDict['ssb'][instance][key] == self.flexspiConnCfgDict['ssb']:
                 self.textEdit_flexspiConnection.append(key)
