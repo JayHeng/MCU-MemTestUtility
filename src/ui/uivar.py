@@ -27,6 +27,7 @@ g_flexspiConnCfgDict = {'instance':1,
                        }
 
 g_flexspiPintestCfgDict = {'wavePulse':None,
+                           'waveSample':None,
                            'dataL4b_en':None,
                            'dataH4b_en':None,
                            'ssb_en':None,
@@ -71,6 +72,7 @@ def initVar(cfgFilename):
                                 'rstb':0xFF,
                                }
         g_flexspiPintestCfgDict = {'wavePulse':10,
+                                   'waveSample':0,
                                    'dataL4b_dis':0,
                                    'dataH4b_dis':1,
                                    'ssb_dis':0,

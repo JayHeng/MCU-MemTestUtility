@@ -26,6 +26,7 @@ class memTesterUiCfgFlexspiPin(QMainWindow, flexspiPinUnittestWin.Ui_flexspiPinU
 
     def _recoverLastSettings ( self ):
         self.lineEdit_wavePulse.setText(str(self.flexspiPintestCfgDict['wavePulse']))
+        self.comboBox_dataL4b.setCurrentIndex(self.flexspiPintestCfgDict['waveSample'])
         self.comboBox_dataL4b.setCurrentIndex(self.flexspiPintestCfgDict['dataL4b_dis'])
         self.comboBox_dataH4b.setCurrentIndex(self.flexspiPintestCfgDict['dataH4b_dis'])
         self.comboBox_ssb.setCurrentIndex(self.flexspiPintestCfgDict['ssb_dis'])
@@ -36,6 +37,7 @@ class memTesterUiCfgFlexspiPin(QMainWindow, flexspiPinUnittestWin.Ui_flexspiPinU
 
     def callbackOk( self, event ):
         self.flexspiPintestCfgDict['wavePulse'] = int(self.lineEdit_wavePulse.text())
+        self.flexspiPintestCfgDict['waveSample'] = self.comboBox_waveSample.currentIndex()
         self.flexspiPintestCfgDict['dataL4b_dis'] = self.comboBox_dataL4b.currentIndex()
         self.flexspiPintestCfgDict['dataH4b_dis'] = self.comboBox_dataH4b.currentIndex()
         self.flexspiPintestCfgDict['ssb_dis'] = self.comboBox_ssb.currentIndex()

@@ -73,10 +73,13 @@ class flexspiUnittestEnStruct(object):
     def __init__( self, parent=None):
         #super(flexspiUnittestEnStruct, self).__init__(parent)
         self.pulseInMs = None
+        self.enableAdcSample = None
+        self.reserved0 = [0x0, 0x0, 0x0]
         self.option = None
 
     def set_members( self, flexspiUnittestCfgDict ):
         self.pulseInMs = flexspiUnittestCfgDict['wavePulse']
+        self.enableAdcSample = flexspiUnittestCfgDict['waveSample']
         self.option = 0x00000000
         if flexspiUnittestCfgDict['dataL4b_dis'] == 0:
             self.option = self.option | (1 << 0)
@@ -98,6 +101,10 @@ class flexspiUnittestEnStruct(object):
                          (self.pulseInMs & 0xFF00) >> 8,
                          (self.pulseInMs & 0xFF0000) >> 16, 
                          (self.pulseInMs & 0xFF000000) >> 24,
+                         self.enableAdcSample,
+                         self.reserved0[0],
+                         self.reserved0[1],
+                         self.reserved0[2],
                          self.option & 0xFF,
                          (self.option & 0xFF00) >> 8,
                          (self.option & 0xFF0000) >> 16, 
