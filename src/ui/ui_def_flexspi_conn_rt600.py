@@ -40,13 +40,18 @@ kFlexspiConnSel_sclk    = [
                               }
                           ]
 
-kFlexspiConnSel_dqs     = [
+kFlexspiConnSel_sclkn   = [
+                              {'None':0xFF
+                              }
+                          ]
+
+kFlexspiConnSel_dqs0    = [
                               {'None':0xFF,
                                'PortA_DQS - PIO1[28]':0x00
                               }
                           ]
 
-kFlexspiConnSel_sclkn   = [
+kFlexspiConnSel_dqs1    = [
                               {'None':0xFF
                               }
                           ]
@@ -64,8 +69,9 @@ kFlexspiConnSelDict = {
                        'dataT8b' :kFlexspiConnSel_DataT8b,
                        'ssb'     :kFlexspiConnSel_ssb,
                        'sclk'    :kFlexspiConnSel_sclk,
-                       'dqs'     :kFlexspiConnSel_dqs,
                        'sclkn'   :kFlexspiConnSel_sclkn,
+                       'dqs0'     :kFlexspiConnSel_dqs0,
+                       'dqs1'     :kFlexspiConnSel_dqs1,
                        'rstb'    :kFlexspiConnSel_rstb,
                       }
 

@@ -51,7 +51,14 @@ kFlexspiConnSel_sclk    = [
                               }
                           ]
 
-kFlexspiConnSel_dqs     = [
+kFlexspiConnSel_sclkn   = [
+                              {'None':0xFF
+                              },
+                              {'None':0xFF
+                              }
+                          ]
+
+kFlexspiConnSel_dqs0    = [
                               {'PortA_DQS - GPIO_SD_B1[5]':0x00,
                                'PortB_DQS - GPIO_SD_B0[5]':0x10
                               },
@@ -59,7 +66,7 @@ kFlexspiConnSel_dqs     = [
                               }
                           ]
 
-kFlexspiConnSel_sclkn   = [
+kFlexspiConnSel_dqs1    = [
                               {'None':0xFF
                               },
                               {'None':0xFF
@@ -81,8 +88,9 @@ kFlexspiConnSelDict = {
                        'dataT8b' :kFlexspiConnSel_DataT8b,
                        'ssb'     :kFlexspiConnSel_ssb,
                        'sclk'    :kFlexspiConnSel_sclk,
-                       'dqs'     :kFlexspiConnSel_dqs,
                        'sclkn'   :kFlexspiConnSel_sclkn,
+                       'dqs0'     :kFlexspiConnSel_dqs0,
+                       'dqs1'     :kFlexspiConnSel_dqs1,
                        'rstb'    :kFlexspiConnSel_rstb,
                       }
 

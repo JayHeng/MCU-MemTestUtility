@@ -22,8 +22,9 @@ g_flexspiConnCfgDict = {'instance':1,
                         'dataT8b':None,
                         'ssb':None,
                         'sclk':None,
-                        'dqs':None,
                         'sclkn':None,
+                        'dqs0':None,
+                        'dqs1':None,
                         'rstb':None,
                        }
 
@@ -34,8 +35,9 @@ g_flexspiPintestCfgDict = {'wavePulse':None,
                            'dataT8b_en':None,
                            'ssb_en':None,
                            'sclk_en':None,
-                           'dqs_en':None,
                            'sclkn_en':None,
+                           'dqs0_en':None,
+                           'dqs1_en':None,
                            'rstb_en':None,
                             }
 
@@ -70,8 +72,9 @@ def initVar(cfgFilename):
                                 'dataT8b':0xFF,
                                 'ssb':0x0,
                                 'sclk':0x0,
-                                'dqs':0x0,
                                 'sclkn':0xFF,
+                                'dqs0':0x0,
+                                'dqs1':0xFF,
                                 'rstb':0xFF,
                                }
         g_flexspiPintestCfgDict = {'wavePulse':10,
@@ -81,8 +84,9 @@ def initVar(cfgFilename):
                                    'dataT8b_dis':1,
                                    'ssb_dis':0,
                                    'sclk_dis':0,
-                                   'dqs_dis':1,
                                    'sclkn_dis':1,
+                                   'dqs0_dis':0,
+                                   'dqs1_dis':1,
                                    'rstb_dis':1,
                                    }
 

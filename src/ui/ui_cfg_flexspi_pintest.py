@@ -32,8 +32,9 @@ class memTesterUiCfgFlexspiPin(QMainWindow, flexspiPinUnittestWin.Ui_flexspiPinU
         self.comboBox_dataT8b.setCurrentIndex(self.flexspiPintestCfgDict['dataT8b_dis'])
         self.comboBox_ssb.setCurrentIndex(self.flexspiPintestCfgDict['ssb_dis'])
         self.comboBox_sclk.setCurrentIndex(self.flexspiPintestCfgDict['sclk_dis'])
-        self.comboBox_dqs.setCurrentIndex(self.flexspiPintestCfgDict['dqs_dis'])
         self.comboBox_sclkn.setCurrentIndex(self.flexspiPintestCfgDict['sclkn_dis'])
+        self.comboBox_dqs0.setCurrentIndex(self.flexspiPintestCfgDict['dqs0_dis'])
+        self.comboBox_dqs1.setCurrentIndex(self.flexspiPintestCfgDict['dqs1_dis'])
         self.comboBox_rstb.setCurrentIndex(self.flexspiPintestCfgDict['rstb_dis'])
 
     def callbackOk( self, event ):
@@ -44,8 +45,9 @@ class memTesterUiCfgFlexspiPin(QMainWindow, flexspiPinUnittestWin.Ui_flexspiPinU
         self.flexspiPintestCfgDict['dataT8b_dis'] = self.comboBox_dataT8b.currentIndex()
         self.flexspiPintestCfgDict['ssb_dis'] = self.comboBox_ssb.currentIndex()
         self.flexspiPintestCfgDict['sclk_dis'] = self.comboBox_sclk.currentIndex()
-        self.flexspiPintestCfgDict['dqs_dis'] = self.comboBox_dqs.currentIndex()
         self.flexspiPintestCfgDict['sclkn_dis'] = self.comboBox_sclkn.currentIndex()
+        self.flexspiPintestCfgDict['dqs0_dis'] = self.comboBox_dqs0.currentIndex()
+        self.flexspiPintestCfgDict['dqs1_dis'] = self.comboBox_dqs1.currentIndex()
         self.flexspiPintestCfgDict['rstb_dis'] = self.comboBox_rstb.currentIndex()
         uivar.setAdvancedSettings(uidef.kAdvancedSettings_FlexspiPintest, self.flexspiPintestCfgDict)
         self.close()

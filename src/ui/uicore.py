@@ -212,13 +212,18 @@ class memTesterUi(QMainWindow, memTesterWin.Ui_memTesterWin):
             if flexspiConnSelDict['sclk'][instance][key] == self.flexspiConnCfgDict['sclk']:
                 self.textEdit_flexspiConnection.append(key)
                 break
-        for key in flexspiConnSelDict['dqs'][instance].keys():
-            if flexspiConnSelDict['dqs'][instance][key] == self.flexspiConnCfgDict['dqs']:
+        for key in flexspiConnSelDict['sclkn'][instance].keys():
+            if flexspiConnSelDict['sclkn'][instance][key] == self.flexspiConnCfgDict['sclkn']:
                 if key != 'None':
                     self.textEdit_flexspiConnection.append(key)
                 break
-        for key in flexspiConnSelDict['sclkn'][instance].keys():
-            if flexspiConnSelDict['sclkn'][instance][key] == self.flexspiConnCfgDict['sclkn']:
+        for key in flexspiConnSelDict['dqs0'][instance].keys():
+            if flexspiConnSelDict['dqs0'][instance][key] == self.flexspiConnCfgDict['dqs0']:
+                if key != 'None':
+                    self.textEdit_flexspiConnection.append(key)
+                break
+        for key in flexspiConnSelDict['dqs1'][instance].keys():
+            if flexspiConnSelDict['dqs1'][instance][key] == self.flexspiConnCfgDict['dqs1']:
                 if key != 'None':
                     self.textEdit_flexspiConnection.append(key)
                 break

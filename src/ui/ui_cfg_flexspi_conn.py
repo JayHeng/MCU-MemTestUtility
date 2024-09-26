@@ -42,10 +42,12 @@ class memTesterUiCfgFlexspiConn(QMainWindow, flexspiConnectCfgWin.Ui_flexspiConn
         self.comboBox_ssb.addItems(self.flexspiConnDict['ssb'][instance].keys())
         self.comboBox_sclk.clear()
         self.comboBox_sclk.addItems(self.flexspiConnDict['sclk'][instance].keys())
-        self.comboBox_dqs.clear()
-        self.comboBox_dqs.addItems(self.flexspiConnDict['dqs'][instance].keys())
         self.comboBox_sclkn.clear()
         self.comboBox_sclkn.addItems(self.flexspiConnDict['sclkn'][instance].keys())
+        self.comboBox_dqs0.clear()
+        self.comboBox_dqs0.addItems(self.flexspiConnDict['dqs0'][instance].keys())
+        self.comboBox_dqs1.clear()
+        self.comboBox_dqs1.addItems(self.flexspiConnDict['dqs1'][instance].keys())
         self.comboBox_rstb.clear()
         self.comboBox_rstb.addItems(self.flexspiConnDict['rstb'][instance].keys())
 
@@ -79,13 +81,17 @@ class memTesterUiCfgFlexspiConn(QMainWindow, flexspiConnectCfgWin.Ui_flexspiConn
             if self.flexspiConnDict['sclk'][instance][key] == self.flexspiConnCfgDict['sclk']:
                 self.comboBox_sclk.setCurrentIndex(self.comboBox_sclk.findText(key))
                 break
-        for key in self.flexspiConnDict['dqs'][instance].keys():
-            if self.flexspiConnDict['dqs'][instance][key] == self.flexspiConnCfgDict['dqs']:
-                self.comboBox_dqs.setCurrentIndex(self.comboBox_dqs.findText(key))
-                break
         for key in self.flexspiConnDict['sclkn'][instance].keys():
             if self.flexspiConnDict['sclkn'][instance][key] == self.flexspiConnCfgDict['sclkn']:
                 self.comboBox_sclkn.setCurrentIndex(self.comboBox_sclkn.findText(key))
+                break
+        for key in self.flexspiConnDict['dqs0'][instance].keys():
+            if self.flexspiConnDict['dqs0'][instance][key] == self.flexspiConnCfgDict['dqs0']:
+                self.comboBox_dqs0.setCurrentIndex(self.comboBox_dqs0.findText(key))
+                break
+        for key in self.flexspiConnDict['dqs1'][instance].keys():
+            if self.flexspiConnDict['dqs1'][instance][key] == self.flexspiConnCfgDict['dqs1']:
+                self.comboBox_dqs1.setCurrentIndex(self.comboBox_dqs1.findText(key))
                 break
         for key in self.flexspiConnDict['rstb'][instance].keys():
             if self.flexspiConnDict['rstb'][instance][key] == self.flexspiConnCfgDict['rstb']:
@@ -121,15 +127,20 @@ class memTesterUiCfgFlexspiConn(QMainWindow, flexspiConnectCfgWin.Ui_flexspiConn
         self.textEdit_flexspiConnection.append(pinStr)
         self.flexspiConnCfgDict['sclk'] = self.flexspiConnDict['sclk'][instance][pinStr]
 
-        pinStr = self.comboBox_dqs.currentText()
-        if pinStr != 'None':
-            self.textEdit_flexspiConnection.append(pinStr)
-        self.flexspiConnCfgDict['dqs'] = self.flexspiConnDict['dqs'][instance][pinStr]
-
         pinStr = self.comboBox_sclkn.currentText()
         if pinStr != 'None':
             self.textEdit_flexspiConnection.append(pinStr)
         self.flexspiConnCfgDict['sclkn'] = self.flexspiConnDict['sclkn'][instance][pinStr]
+
+        pinStr = self.comboBox_dqs0.currentText()
+        if pinStr != 'None':
+            self.textEdit_flexspiConnection.append(pinStr)
+        self.flexspiConnCfgDict['dqs0'] = self.flexspiConnDict['dqs0'][instance][pinStr]
+
+        pinStr = self.comboBox_dqs1.currentText()
+        if pinStr != 'None':
+            self.textEdit_flexspiConnection.append(pinStr)
+        self.flexspiConnCfgDict['dqs1'] = self.flexspiConnDict['dqs1'][instance][pinStr]
 
         pinStr = self.comboBox_rstb.currentText()
         if pinStr != 'None':

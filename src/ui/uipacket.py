@@ -43,10 +43,11 @@ class flexspiConnectionStruct(object):
         self.dataTop8bit = None
         self.ss_b = None
         self.sclk = None
-        self.dqs = None
         self.sclk_n = None
+        self.dqs0 = None
+        self.dqs1 = None
         self.rst_b = None
-        self.reserved0 = [0x0, 0x0, 0x0]
+        self.reserved0 = [0x0, 0x0]
 
     def set_members( self, flexspiConnCfgDict ):
         self.instance = flexspiConnCfgDict['instance']
@@ -55,8 +56,9 @@ class flexspiConnectionStruct(object):
         self.dataTop8bit = flexspiConnCfgDict['dataT8b']
         self.ss_b = flexspiConnCfgDict['ssb']
         self.sclk = flexspiConnCfgDict['sclk']
-        self.dqs = flexspiConnCfgDict['dqs']
         self.sclk_n = flexspiConnCfgDict['sclkn']
+        self.dqs0 = flexspiConnCfgDict['dqs0']
+        self.dqs1 = flexspiConnCfgDict['dqs1']
         self.rst_b = flexspiConnCfgDict['rstb']
 
     def out_bytes( self ):
@@ -66,12 +68,12 @@ class flexspiConnectionStruct(object):
                          self.dataTop8bit, 
                          self.ss_b,
                          self.sclk,
-                         self.dqs,
                          self.sclk_n,
+                         self.dqs0,
+                         self.dqs1,
                          self.rst_b,
                          self.reserved0[0],
                          self.reserved0[1],
-                         self.reserved0[2],
                         ])
         return mybytes
 
@@ -98,12 +100,14 @@ class flexspiUnittestEnStruct(object):
             self.option = self.option | (1 << 3)
         if flexspiUnittestCfgDict['sclk_dis'] == 0:
             self.option = self.option | (1 << 4)
-        if flexspiUnittestCfgDict['dqs_dis'] == 0:
-            self.option = self.option | (1 << 5)
         if flexspiUnittestCfgDict['sclkn_dis'] == 0:
+            self.option = self.option | (1 << 5)
+        if flexspiUnittestCfgDict['dqs0_dis'] == 0:
             self.option = self.option | (1 << 6)
-        if flexspiUnittestCfgDict['rstb_dis'] == 0:
+        if flexspiUnittestCfgDict['dqs1_dis'] == 0:
             self.option = self.option | (1 << 7)
+        if flexspiUnittestCfgDict['rstb_dis'] == 0:
+            self.option = self.option | (1 << 8)
 
     def out_bytes( self ):
         mybytes = bytes([self.pulseInMs & 0xFF,
