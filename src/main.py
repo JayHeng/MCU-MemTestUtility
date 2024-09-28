@@ -166,7 +166,7 @@ class memTesterMain(runcore.memTesterRun):
             else:
                 return
         elif s_goAction == uidef.kGoAction_MemInfo:
-            pass
+            self.sendMemInfoPacket()
         elif s_goAction == uidef.kGoAction_RwTest:
             self.sendRwTestPacket()
         elif s_goAction == uidef.kGoAction_PerfTest:

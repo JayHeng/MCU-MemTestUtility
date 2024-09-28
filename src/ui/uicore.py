@@ -364,6 +364,11 @@ class memTesterUi(QMainWindow, memTesterWin.Ui_memTesterWin):
         mypacket.set_members()
         self.sendUartData(mypacket.out_bytes())
 
+    def sendMemInfoPacket( self ):
+        mypacket = uipacket.memInfoPacket()
+        mypacket.set_members()
+        self.sendUartData(mypacket.out_bytes())
+
     def sendRwTestPacket( self ):
         mypacket = uipacket.rwTestPacket()
         mypacket.set_members()

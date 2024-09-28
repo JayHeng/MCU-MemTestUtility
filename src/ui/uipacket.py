@@ -239,6 +239,18 @@ class configSystemPacket(object):
                          ])
         return startbytes + packetBytes + crcbytes
 
+class memInfoPacket(object):
+
+    def __init__( self, parent=None):
+        pass
+
+    def set_members( self ):
+        pass
+
+    def out_bytes( self ):
+        startbytes = bytes(kPacketTag, 'ascii') + bytes([kCommandTag_GetMemInfo])
+        return startbytes
+
 class rwTestPacket(object):
 
     def __init__( self, parent=None):
