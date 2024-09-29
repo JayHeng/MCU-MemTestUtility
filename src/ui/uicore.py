@@ -24,6 +24,7 @@ import matplotlib.animation as animation
 from . import uidef
 from . import uilang
 from . import uivar
+from . import uilut
 from . import uipacket
 from . import ui_def_flexspi_conn_rt500
 from . import ui_def_flexspi_conn_rt600
@@ -33,6 +34,8 @@ from . import ui_def_flexspi_conn_rt1170
 from . import ui_def_flexspi_conn_rt1180
 sys.path.append(os.path.abspath(".."))
 from win import memTesterWin
+
+from targets.mem_model import ISSI_IS25LPxxxA_IS25WPxxxA
 
 s_serialPort = serial.Serial()
 s_recvInterval = 1
@@ -102,6 +105,8 @@ class memTesterUi(QMainWindow, memTesterWin.Ui_memTesterWin):
         self._initFlexspiConn()
         self.memType = None
         self._initMemType()
+        self.memChip = None
+        self.memLut = []
 
         self.pinWaveFig = pinWaveformFigure(width=2, height=4, dpi=50)
         self.pinWaveFig.plotwave()
@@ -363,7 +368,8 @@ class memTesterUi(QMainWindow, memTesterWin.Ui_memTesterWin):
         self.sendUartData(mypacket.out_bytes())
 
     def sendConfigSystemPacket( self ):
-        mypacket = uipacket.configSystemPacket()
+        self.getLutFromMemChip()
+        mypacket = uipacket.configSystemPacket(self.memLut)
         mypacket.set_members()
         self.sendUartData(mypacket.out_bytes())
 
@@ -400,6 +406,11 @@ class memTesterUi(QMainWindow, memTesterWin.Ui_memTesterWin):
             self.comboBox_memChip.addItems(uidef.kFlexspiRamDevices_HyperRAM)
         else:
             pass
+
+    def getLutFromMemChip( self ):
+        self.memChip = self.comboBox_memChip.currentText()
+        if self.memChip == uidef.kFlexspiNorDevice_ISSI_IS25LP064A:
+            self.memLut = uilut.generateCompleteMemLut(ISSI_IS25LPxxxA_IS25WPxxxA.mixspiLutDict)
 
     def showContentOnMainDisplayWin( self, contentStr ):
         self.textEdit_displayWin.append(contentStr)

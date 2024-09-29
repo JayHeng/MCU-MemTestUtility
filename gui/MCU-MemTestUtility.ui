@@ -567,6 +567,11 @@
        <string>200MHz</string>
       </property>
      </item>
+     <item>
+      <property name="text">
+       <string>250MHz</string>
+      </property>
+     </item>
     </widget>
     <widget class="QLabel" name="label_memMode">
      <property name="geometry">
@@ -616,6 +621,11 @@
        <string>Octal I/O</string>
       </property>
      </item>
+     <item>
+      <property name="text">
+       <string>Hex I/O</string>
+      </property>
+     </item>
     </widget>
     <widget class="QComboBox" name="comboBox_memInterfaceMode">
      <property name="geometry">
@@ -639,6 +649,16 @@
      <item>
       <property name="text">
        <string>Octa Peripheral Interface</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>HyperBus</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>HyperBus-Extend-IO</string>
       </property>
      </item>
     </widget>

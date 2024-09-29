@@ -6,6 +6,7 @@ import json
 from crc import CrcCalculator, Configuration
 from . import uidef
 from . import uivar
+from . import uilut
 
 kPacketTag = "FTAG"
 
@@ -195,7 +196,7 @@ class memoryPropertyStruct(object):
 
 class configSystemPacket(object):
 
-    def __init__( self, parent=None):
+    def __init__( self, memLut):
         #super(configSystemPacket, self).__init__(parent)
         self.cpuSpeedMHz = None
         self.enableL1Cache = None
@@ -204,6 +205,7 @@ class configSystemPacket(object):
         self.reserved0 = [0x0, 0x0]
         self.memConnection = None
         self.memProperty = None
+        self.memLut = memLut
         self.crcCheckSum = None
         self.reserved1 = [0x0, 0x0]
 
@@ -231,6 +233,12 @@ class configSystemPacket(object):
                           self.reserved0[1]
                          ])
         packetBytes = mybytes + self.memConnection.out_bytes() + self.memProperty.out_bytes()
+        for i in range(uilut.CUSTOM_LUT_LENGTH):
+            packetBytes += bytes([self.memLut[i] & 0xFF,
+                                 (self.memLut[i] & 0xFF00) >> 8,
+                                 (self.memLut[i] & 0xFF0000) >> 16,
+                                 (self.memLut[i] & 0xFF000000) >> 24
+                                 ])
         self.crcCheckSum = calculate_crc16(packetBytes)
         crcbytes = bytes([self.crcCheckSum & 0xFF,
                           (self.crcCheckSum & 0xFF00) >> 8,

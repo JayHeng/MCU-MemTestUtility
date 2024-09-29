@@ -199,12 +199,12 @@ class memTesterMain(runcore.memTesterRun):
         self.showAboutMessage(uilang.kMsgLanguageContentDict['aboutAuthor_title'][0], msgText )
 
     def callbackShowRevisionHistory(self):
-        self.showAboutMessage(uilang.kMsgLanguageContentDict['revisionHistory_title'][0], uilang.kMsgLanguageContentDict['revisionHistory_v0_1_0'][0] )
+        self.showAboutMessage(uilang.kMsgLanguageContentDict['revisionHistory_title'][0], uilang.kMsgLanguageContentDict['revisionHistory_v1_0_0'][0] )
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
     mainWin = memTesterMain(None)
-    mainWin.setWindowTitle(u"MCU Mem Test Utility v0.1")
+    mainWin.setWindowTitle(u"MCU Mem Test Utility v1.0")
     mainWin.show()
     mixspiConnCfgFrame = ui_cfg_conn.memTesterUiConn(None)
     mixspiConnCfgFrame.setWindowTitle(u"MixSPI Connection Configuration")
