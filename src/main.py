@@ -7,8 +7,8 @@ from PyQt5.Qt import *
 from ui import uidef
 from ui import uilang
 from ui import uivar
-from ui import ui_cfg_flexspi_conn
-from ui import ui_cfg_flexspi_pintest
+from ui import ui_cfg_conn
+from ui import ui_cfg_pin_test
 from ui import ui_cfg_perf_test
 from ui import ui_cfg_stress_test
 from run import runcore
@@ -33,10 +33,10 @@ class memTesterMain(runcore.memTesterRun):
         self.menuLoadFwAction_No.triggered.connect(self.callbackSetLoadFirmwareOpt)
         self.menuLoadFwAction_Yes.triggered.connect(self.callbackSetLoadFirmwareOpt)
         self.comboBox_mcuDevice.currentIndexChanged.connect(self.callbackSetMcuDevice)
-        self.pushButton_flexspiConnectionConfiguration.clicked.connect(self.callbackFlexspiConnectionConfiguration)
+        self.pushButton_mixspiConnectionConfiguration.clicked.connect(self.callbackMixspiConnectionConfiguration)
         self.pushButton_connect.clicked.connect(self.callbackConnectToDevice)
         self.comboBox_memType.currentIndexChanged.connect(self.callbackSetMemType)
-        self.pushButton_pinUnittest.clicked.connect(self.callbackFlexspiPinUnittest)
+        self.pushButton_pinTest.clicked.connect(self.callbackPinTest)
         self.pushButton_configSystem.clicked.connect(self.callbackConfigSystem)
         self.pushButton_memInfo.clicked.connect(self.callbackMemInfo)
         self.pushButton_rwTest.clicked.connect(self.callbackRwTest)
@@ -55,10 +55,10 @@ class memTesterMain(runcore.memTesterRun):
     def callbackSetMcuDevice( self ):
         self._setupMcuTargets()
 
-    def callbackFlexspiConnectionConfiguration( self ):
-        self.showContentOnSecPacketWin(u"【Action】: Click <FlexSPI Connnect Configuration> button.")
-        flexspiConnCfgFrame.setNecessaryInfo(self.tgt.flexspiConnDict, self.textEdit_flexspiConnection)
-        flexspiConnCfgFrame.show()
+    def callbackMixspiConnectionConfiguration( self ):
+        self.showContentOnSecPacketWin(u"【Action】: Click <MixSPI Connnect Configuration> button.")
+        mixspiConnCfgFrame.setNecessaryInfo(self.tgt.mixspiConnDict, self.textEdit_mixspiConnection)
+        mixspiConnCfgFrame.show()
 
     def _retryToPingBootloader( self ):
         if not self.isLoadFirmwareEnabled:
@@ -101,11 +101,11 @@ class memTesterMain(runcore.memTesterRun):
     def callbackSetMemType( self ):
         self.setMemType()
 
-    def callbackFlexspiPinUnittest( self ):
-        self.showContentOnSecPacketWin(u"【Action】: Click <Pin Unittest> button.")
+    def callbackPinTest( self ):
+        self.showContentOnSecPacketWin(u"【Action】: Click <Pin Test> button.")
         global s_goAction
-        s_goAction = uidef.kGoAction_PinUnittest
-        flexspiPinUnittestFrame.show()
+        s_goAction = uidef.kGoAction_PinTest
+        pinTestFrame.show()
         self.resetAllActionButtonColor()
         self.setActionButtonColor(s_goAction)
 
@@ -158,7 +158,7 @@ class memTesterMain(runcore.memTesterRun):
             self.recoverGoActionButton()
         else:
             self.showContentOnSecPacketWin(u"【Action】: Click <Go> button.")
-        if s_goAction == uidef.kGoAction_PinUnittest:
+        if s_goAction == uidef.kGoAction_PinTest:
             self.sendPinTestPacket()
         elif s_goAction == uidef.kGoAction_ConfigSystem:
             if self.updateTargetSetupValue():
@@ -206,10 +206,10 @@ if __name__ == '__main__':
     mainWin = memTesterMain(None)
     mainWin.setWindowTitle(u"MCU Mem Test Utility v0.1")
     mainWin.show()
-    flexspiConnCfgFrame = ui_cfg_flexspi_conn.memTesterUiCfgFlexspiConn(None)
-    flexspiConnCfgFrame.setWindowTitle(u"FlexSPI Connection Configuration")
-    flexspiPinUnittestFrame = ui_cfg_flexspi_pintest.memTesterUiCfgFlexspiPin(None)
-    flexspiPinUnittestFrame.setWindowTitle(u"FlexSPI Pin Unit Test")
+    mixspiConnCfgFrame = ui_cfg_conn.memTesterUiConn(None)
+    mixspiConnCfgFrame.setWindowTitle(u"MixSPI Connection Configuration")
+    pinTestFrame = ui_cfg_pin_test.memTesterUiPinTest(None)
+    pinTestFrame.setWindowTitle(u"Pin Test")
     perfTestFrame = ui_cfg_perf_test.memTesterUiPerfTest(None)
     perfTestFrame.setWindowTitle(u"Perf Test")
     stressTestFrame = ui_cfg_stress_test.memTesterUiStressTest(None)

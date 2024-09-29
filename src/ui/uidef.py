@@ -109,10 +109,10 @@ kMemType_PSRAM      = 'PSRAM'
 kMemType_HyperRAM   = 'HyperRAM'
 
 kAdvancedSettings_Tool             = 0
-kAdvancedSettings_FlexspiConn      = 1
-kAdvancedSettings_FlexspiPintest   = 2
+kAdvancedSettings_Conn             = 1
+kAdvancedSettings_Pintest          = 2
 
-kGoAction_PinUnittest            = 0
+kGoAction_PinTest                = 0
 kGoAction_ConfigSystem           = 1
 kGoAction_MemInfo                = 2
 kGoAction_RwTest                 = 3

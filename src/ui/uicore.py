@@ -27,6 +27,7 @@ from . import uivar
 from . import uipacket
 from . import ui_def_flexspi_conn_rt500
 from . import ui_def_flexspi_conn_rt600
+from . import ui_def_xspi_conn_rt700
 from . import ui_def_flexspi_conn_rt1060
 from . import ui_def_flexspi_conn_rt1170
 from . import ui_def_flexspi_conn_rt1180
@@ -92,7 +93,7 @@ class memTesterUi(QMainWindow, memTesterWin.Ui_memTesterWin):
         uivar.initVar(os.path.join(self.exeTopRoot, 'bin', 'mtu_settings.json'))
         toolCommDict = uivar.getAdvancedSettings(uidef.kAdvancedSettings_Tool)
         self.toolCommDict = toolCommDict.copy()
-        self.flexspiConnCfgDict = None
+        self.mixspiConnCfgDict = None
 
         self.mcuDevice = None
         self._initTargetSetupValue()
@@ -172,65 +173,67 @@ class memTesterUi(QMainWindow, memTesterWin.Ui_memTesterWin):
         self.toolCommDict['mcuDevice'] = self.comboBox_mcuDevice.currentIndex()
 
     def _initFlexspiConn( self ):
-        flexspiConnCfgDict = uivar.getAdvancedSettings(uidef.kAdvancedSettings_FlexspiConn)
-        self.flexspiConnCfgDict = flexspiConnCfgDict.copy()
-        instance = self.flexspiConnCfgDict['instance'] - 1
-        self.textEdit_flexspiConnection.clear()
-        flexspiConnSelDict = None
+        mixspiConnCfgDict = uivar.getAdvancedSettings(uidef.kAdvancedSettings_Conn)
+        self.mixspiConnCfgDict = mixspiConnCfgDict.copy()
+        instance = self.mixspiConnCfgDict['instance'] - 1
+        self.textEdit_mixspiConnection.clear()
+        mixspiConnSelDict = None
         if self.mcuDevice == uidef.kMcuDevice_iMXRT500:
-            flexspiConnSelDict = ui_def_flexspi_conn_rt500.kFlexspiConnSelDict.copy()
+            mixspiConnSelDict = ui_def_flexspi_conn_rt500.kFlexspiConnSelDict.copy()
         elif self.mcuDevice == uidef.kMcuDevice_iMXRT600:
-            flexspiConnSelDict = ui_def_flexspi_conn_rt600.kFlexspiConnSelDict.copy()
+            mixspiConnSelDict = ui_def_flexspi_conn_rt600.kFlexspiConnSelDict.copy()
+        elif self.mcuDevice == uidef.kMcuDevice_iMXRT700:
+            mixspiConnSelDict = ui_def_xspi_conn_rt700.kXspiConnSelDict.copy()
         elif self.mcuDevice == uidef.kMcuDevice_iMXRT106x:
-            flexspiConnSelDict = ui_def_flexspi_conn_rt1060.kFlexspiConnSelDict.copy()
+            mixspiConnSelDict = ui_def_flexspi_conn_rt1060.kFlexspiConnSelDict.copy()
         elif self.mcuDevice == uidef.kMcuDevice_iMXRT117x:
-            flexspiConnSelDict = ui_def_flexspi_conn_rt1170.kFlexspiConnSelDict.copy()
+            mixspiConnSelDict = ui_def_flexspi_conn_rt1170.kFlexspiConnSelDict.copy()
         elif self.mcuDevice == uidef.kMcuDevice_iMXRT118x:
-            flexspiConnSelDict = ui_def_flexspi_conn_rt1180.kFlexspiConnSelDict.copy()
+            mixspiConnSelDict = ui_def_flexspi_conn_rt1180.kFlexspiConnSelDict.copy()
         else:
             pass
 
-        for key in flexspiConnSelDict['dataL4b'][instance].keys():
-            if flexspiConnSelDict['dataL4b'][instance][key] == self.flexspiConnCfgDict['dataL4b']:
-                self.textEdit_flexspiConnection.append(key)
+        for key in mixspiConnSelDict['dataL4b'][instance].keys():
+            if mixspiConnSelDict['dataL4b'][instance][key] == self.mixspiConnCfgDict['dataL4b']:
+                self.textEdit_mixspiConnection.append(key)
                 break
-        for key in flexspiConnSelDict['dataH4b'][instance].keys():
-            if flexspiConnSelDict['dataH4b'][instance][key] == self.flexspiConnCfgDict['dataH4b']:
+        for key in mixspiConnSelDict['dataH4b'][instance].keys():
+            if mixspiConnSelDict['dataH4b'][instance][key] == self.mixspiConnCfgDict['dataH4b']:
                 if key != 'None':
-                    self.textEdit_flexspiConnection.append(key)
+                    self.textEdit_mixspiConnection.append(key)
                 break
-        for key in flexspiConnSelDict['dataT8b'][instance].keys():
-            if flexspiConnSelDict['dataT8b'][instance][key] == self.flexspiConnCfgDict['dataT8b']:
+        for key in mixspiConnSelDict['dataT8b'][instance].keys():
+            if mixspiConnSelDict['dataT8b'][instance][key] == self.mixspiConnCfgDict['dataT8b']:
                 if key != 'None':
-                    self.textEdit_flexspiConnection.append(key)
+                    self.textEdit_mixspiConnection.append(key)
                 break
-        for key in flexspiConnSelDict['ssb'][instance].keys():
-            if flexspiConnSelDict['ssb'][instance][key] == self.flexspiConnCfgDict['ssb']:
-                self.textEdit_flexspiConnection.append(key)
+        for key in mixspiConnSelDict['ssb'][instance].keys():
+            if mixspiConnSelDict['ssb'][instance][key] == self.mixspiConnCfgDict['ssb']:
+                self.textEdit_mixspiConnection.append(key)
                 break
-        for key in flexspiConnSelDict['sclk'][instance].keys():
-            if flexspiConnSelDict['sclk'][instance][key] == self.flexspiConnCfgDict['sclk']:
-                self.textEdit_flexspiConnection.append(key)
+        for key in mixspiConnSelDict['sclk'][instance].keys():
+            if mixspiConnSelDict['sclk'][instance][key] == self.mixspiConnCfgDict['sclk']:
+                self.textEdit_mixspiConnection.append(key)
                 break
-        for key in flexspiConnSelDict['sclkn'][instance].keys():
-            if flexspiConnSelDict['sclkn'][instance][key] == self.flexspiConnCfgDict['sclkn']:
+        for key in mixspiConnSelDict['sclkn'][instance].keys():
+            if mixspiConnSelDict['sclkn'][instance][key] == self.mixspiConnCfgDict['sclkn']:
                 if key != 'None':
-                    self.textEdit_flexspiConnection.append(key)
+                    self.textEdit_mixspiConnection.append(key)
                 break
-        for key in flexspiConnSelDict['dqs0'][instance].keys():
-            if flexspiConnSelDict['dqs0'][instance][key] == self.flexspiConnCfgDict['dqs0']:
+        for key in mixspiConnSelDict['dqs0'][instance].keys():
+            if mixspiConnSelDict['dqs0'][instance][key] == self.mixspiConnCfgDict['dqs0']:
                 if key != 'None':
-                    self.textEdit_flexspiConnection.append(key)
+                    self.textEdit_mixspiConnection.append(key)
                 break
-        for key in flexspiConnSelDict['dqs1'][instance].keys():
-            if flexspiConnSelDict['dqs1'][instance][key] == self.flexspiConnCfgDict['dqs1']:
+        for key in mixspiConnSelDict['dqs1'][instance].keys():
+            if mixspiConnSelDict['dqs1'][instance][key] == self.mixspiConnCfgDict['dqs1']:
                 if key != 'None':
-                    self.textEdit_flexspiConnection.append(key)
+                    self.textEdit_mixspiConnection.append(key)
                 break
-        for key in flexspiConnSelDict['rstb'][instance].keys():
-            if flexspiConnSelDict['rstb'][instance][key] == self.flexspiConnCfgDict['rstb']:
+        for key in mixspiConnSelDict['rstb'][instance].keys():
+            if mixspiConnSelDict['rstb'][instance][key] == self.mixspiConnCfgDict['rstb']:
                 if key != 'None':
-                    self.textEdit_flexspiConnection.append(key)
+                    self.textEdit_mixspiConnection.append(key)
                 break
 
     def updateTargetSetupValue( self ):
@@ -409,7 +412,7 @@ class memTesterUi(QMainWindow, memTesterWin.Ui_memTesterWin):
         self.textEdit_packetWin.clear()
 
     def resetAllActionButtonColor( self ):
-        self.pushButton_pinUnittest.setStyleSheet("background-color: " + uidef.kButtonColor_Disable)
+        self.pushButton_pinTest.setStyleSheet("background-color: " + uidef.kButtonColor_Disable)
         self.pushButton_configSystem.setStyleSheet("background-color: " + uidef.kButtonColor_Disable)
         self.pushButton_memInfo.setStyleSheet("background-color: " + uidef.kButtonColor_Disable)
         self.pushButton_rwTest.setStyleSheet("background-color: " + uidef.kButtonColor_Disable)
@@ -417,8 +420,8 @@ class memTesterUi(QMainWindow, memTesterWin.Ui_memTesterWin):
         self.pushButton_stressTest.setStyleSheet("background-color: " + uidef.kButtonColor_Disable)
 
     def setActionButtonColor( self, goAction ):
-        if goAction == uidef.kGoAction_PinUnittest:
-            self.pushButton_pinUnittest.setStyleSheet("background-color: " + uidef.kButtonColor_Enable)
+        if goAction == uidef.kGoAction_PinTest:
+            self.pushButton_pinTest.setStyleSheet("background-color: " + uidef.kButtonColor_Enable)
         elif goAction == uidef.kGoAction_ConfigSystem:
             self.pushButton_configSystem.setStyleSheet("background-color: " + uidef.kButtonColor_Enable)
         elif goAction == uidef.kGoAction_MemInfo:

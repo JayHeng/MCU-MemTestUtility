@@ -69,7 +69,7 @@
       </property>
      </item>
     </widget>
-    <widget class="QTextEdit" name="textEdit_flexspiConnection">
+    <widget class="QTextEdit" name="textEdit_mixspiConnection">
      <property name="enabled">
       <bool>true</bool>
      </property>
@@ -208,7 +208,7 @@
       </property>
      </item>
     </widget>
-    <widget class="QPushButton" name="pushButton_flexspiConnectionConfiguration">
+    <widget class="QPushButton" name="pushButton_mixspiConnectionConfiguration">
      <property name="geometry">
       <rect>
        <x>14</x>
@@ -224,10 +224,10 @@
       </font>
      </property>
      <property name="text">
-      <string>FlexSPI Connection Configuration</string>
+      <string>MixSPI Connection Configuration</string>
      </property>
     </widget>
-    <widget class="QPushButton" name="pushButton_flexspiAdvancedConfiguration">
+    <widget class="QPushButton" name="pushButton_mixspiAdvancedConfiguration">
      <property name="geometry">
       <rect>
        <x>14</x>
@@ -243,7 +243,7 @@
       </font>
      </property>
      <property name="text">
-      <string>FlexSPI Advanced Configuration</string>
+      <string>MixSPI Advanced Configuration</string>
      </property>
     </widget>
    </widget>
@@ -864,7 +864,7 @@
       <string>Stress Test</string>
      </property>
     </widget>
-    <widget class="QPushButton" name="pushButton_pinUnittest">
+    <widget class="QPushButton" name="pushButton_pinTest">
      <property name="geometry">
       <rect>
        <x>10</x>
@@ -880,7 +880,7 @@
       </font>
      </property>
      <property name="text">
-      <string>Pin Unittest</string>
+      <string>Pin Test</string>
      </property>
     </widget>
     <widget class="QPushButton" name="pushButton_Go">

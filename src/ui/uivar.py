@@ -16,7 +16,7 @@ g_toolCommDict = {'mcuDevice':None,
                   'prefetchBufSizeInByte':None
                  }
 
-g_flexspiConnCfgDict = {'instance':1,
+g_mixspiConnCfgDict  = {'instance':1,
                         'dataL4b':None,
                         'dataH4b':None,
                         'dataT8b':None,
@@ -28,7 +28,7 @@ g_flexspiConnCfgDict = {'instance':1,
                         'rstb':None,
                        }
 
-g_flexspiPintestCfgDict = {'wavePulse':None,
+g_mixspiPintestCfgDict  = {'wavePulse':None,
                            'waveSample':None,
                            'dataL4b_en':None,
                            'dataH4b_en':None,
@@ -45,8 +45,8 @@ def initVar(cfgFilename):
     global g_hasSubWinBeenOpened
     global g_cfgFilename
     global g_toolCommDict
-    global g_flexspiConnCfgDict
-    global g_flexspiPintestCfgDict
+    global g_mixspiConnCfgDict
+    global g_mixspiPintestCfgDict
 
     g_hasSubWinBeenOpened = False
     g_cfgFilename = cfgFilename
@@ -57,8 +57,8 @@ def initVar(cfgFilename):
             fileObj.close()
 
         g_toolCommDict = cfgDict["cfgToolCommon"][0]
-        g_flexspiConnCfgDict = cfgDict["cfgFlexspiConn"][0]
-        g_flexspiPintestCfgDict = cfgDict["cfgFlexspiPintest"][0]
+        g_mixspiConnCfgDict = cfgDict["cfgConn"][0]
+        g_mixspiPintestCfgDict = cfgDict["cfgPintest"][0]
     else:
         g_toolCommDict = {'mcuDevice':0,
                           'cpuSpeedMHz':996,
@@ -66,7 +66,7 @@ def initVar(cfgFilename):
                           'enablePrefetch':0,
                           'prefetchBufSizeInByte':4096
                          }
-        g_flexspiConnCfgDict = {'instance':0x1,
+        g_mixspiConnCfgDict  = {'instance':0x1,
                                 'dataL4b':0x00,
                                 'dataH4b':0xFF,
                                 'dataT8b':0xFF,
@@ -77,7 +77,7 @@ def initVar(cfgFilename):
                                 'dqs1':0xFF,
                                 'rstb':0xFF,
                                }
-        g_flexspiPintestCfgDict = {'wavePulse':10,
+        g_mixspiPintestCfgDict  = {'wavePulse':10,
                                    'waveSample':1,
                                    'dataL4b_dis':0,
                                    'dataH4b_dis':1,
@@ -96,12 +96,12 @@ def deinitVar(cfgFilename=None):
         cfgFilename = g_cfgFilename
     with open(cfgFilename, 'w') as fileObj:
         global g_toolCommDict
-        global g_flexspiConnCfgDict
-        global g_flexspiPintestCfgDict
+        global g_mixspiConnCfgDict
+        global g_mixspiPintestCfgDict
         cfgDict = {
             "cfgToolCommon": [g_toolCommDict],
-            "cfgFlexspiConn": [g_flexspiConnCfgDict],
-            "cfgFlexspiPintest": [g_flexspiPintestCfgDict]
+            "cfgConn": [g_mixspiConnCfgDict],
+            "cfgPintest": [g_mixspiPintestCfgDict]
         }
         json.dump(cfgDict, fileObj, indent=1)
         fileObj.close()
@@ -110,12 +110,12 @@ def getAdvancedSettings( group ):
     if group == uidef.kAdvancedSettings_Tool:
         global g_toolCommDict
         return g_toolCommDict
-    elif group == uidef.kAdvancedSettings_FlexspiConn:
-        global g_flexspiConnCfgDict
-        return g_flexspiConnCfgDict
-    elif group == uidef.kAdvancedSettings_FlexspiPintest:
-        global g_flexspiPintestCfgDict
-        return g_flexspiPintestCfgDict
+    elif group == uidef.kAdvancedSettings_Conn:
+        global g_mixspiConnCfgDict
+        return g_mixspiConnCfgDict
+    elif group == uidef.kAdvancedSettings_Pintest:
+        global g_mixspiPintestCfgDict
+        return g_mixspiPintestCfgDict
     else:
         pass
 
@@ -123,12 +123,12 @@ def setAdvancedSettings( group, *args ):
     if group == uidef.kAdvancedSettings_Tool:
         global g_toolCommDict
         g_toolCommDict = args[0]
-    elif group == uidef.kAdvancedSettings_FlexspiConn:
-        global g_flexspiConnCfgDict
-        g_flexspiConnCfgDict = args[0]
-    elif group == uidef.kAdvancedSettings_FlexspiPintest:
-        global g_flexspiPintestCfgDict
-        g_flexspiPintestCfgDict = args[0]
+    elif group == uidef.kAdvancedSettings_Conn:
+        global g_mixspiConnCfgDict
+        g_mixspiConnCfgDict = args[0]
+    elif group == uidef.kAdvancedSettings_Pintest:
+        global g_mixspiPintestCfgDict
+        g_mixspiPintestCfgDict = args[0]
     else:
         pass
 

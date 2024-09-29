@@ -9,7 +9,7 @@ from . import uivar
 
 kPacketTag = "FTAG"
 
-kCommandTag_PinUnittest    = 0x01
+kCommandTag_PinTest        = 0x01
 kCommandTag_ConfigSystem   = 0x02
 kCommandTag_GetMemInfo     = 0x03
 kCommandTag_RunRwTest      = 0x04
@@ -33,10 +33,10 @@ def calculate_crc16( crcDataBytes ):
     checksum = crc_calculator.calculate_checksum(crcDataBytes)
     return checksum
 
-class flexspiConnectionStruct(object):
+class mixspiConnectionStruct(object):
 
     def __init__( self, parent=None):
-        #super(flexspiConnectionStruct, self).__init__(parent)
+        #super(mixspiConnectionStruct, self).__init__(parent)
         self.instance = None
         self.dataLow4bit = None
         self.dataHigh4bit = None
@@ -49,17 +49,17 @@ class flexspiConnectionStruct(object):
         self.rst_b = None
         self.reserved0 = [0x0, 0x0]
 
-    def set_members( self, flexspiConnCfgDict ):
-        self.instance = flexspiConnCfgDict['instance']
-        self.dataLow4bit = flexspiConnCfgDict['dataL4b']
-        self.dataHigh4bit = flexspiConnCfgDict['dataH4b']
-        self.dataTop8bit = flexspiConnCfgDict['dataT8b']
-        self.ss_b = flexspiConnCfgDict['ssb']
-        self.sclk = flexspiConnCfgDict['sclk']
-        self.sclk_n = flexspiConnCfgDict['sclkn']
-        self.dqs0 = flexspiConnCfgDict['dqs0']
-        self.dqs1 = flexspiConnCfgDict['dqs1']
-        self.rst_b = flexspiConnCfgDict['rstb']
+    def set_members( self, mixspiConnCfgDict ):
+        self.instance = mixspiConnCfgDict['instance']
+        self.dataLow4bit = mixspiConnCfgDict['dataL4b']
+        self.dataHigh4bit = mixspiConnCfgDict['dataH4b']
+        self.dataTop8bit = mixspiConnCfgDict['dataT8b']
+        self.ss_b = mixspiConnCfgDict['ssb']
+        self.sclk = mixspiConnCfgDict['sclk']
+        self.sclk_n = mixspiConnCfgDict['sclkn']
+        self.dqs0 = mixspiConnCfgDict['dqs0']
+        self.dqs1 = mixspiConnCfgDict['dqs1']
+        self.rst_b = mixspiConnCfgDict['rstb']
 
     def out_bytes( self ):
         mybytes = bytes([self.instance,
@@ -77,36 +77,36 @@ class flexspiConnectionStruct(object):
                         ])
         return mybytes
 
-class flexspiUnittestEnStruct(object):
+class mixspiPintestEnStruct(object):
 
     def __init__( self, parent=None):
-        #super(flexspiUnittestEnStruct, self).__init__(parent)
+        #super(mixspiPintestEnStruct, self).__init__(parent)
         self.pulseInMs = None
         self.enableAdcSample = None
         self.reserved0 = [0x0, 0x0, 0x0]
         self.option = None
 
-    def set_members( self, flexspiUnittestCfgDict ):
-        self.pulseInMs = flexspiUnittestCfgDict['wavePulse']
-        self.enableAdcSample = flexspiUnittestCfgDict['waveSample']
+    def set_members( self, mixspiPintestCfgDict ):
+        self.pulseInMs = mixspiPintestCfgDict['wavePulse']
+        self.enableAdcSample = mixspiPintestCfgDict['waveSample']
         self.option = 0x00000000
-        if flexspiUnittestCfgDict['dataL4b_dis'] == 0:
+        if mixspiPintestCfgDict['dataL4b_dis'] == 0:
             self.option = self.option | (1 << 0)
-        if flexspiUnittestCfgDict['dataH4b_dis'] == 0:
+        if mixspiPintestCfgDict['dataH4b_dis'] == 0:
             self.option = self.option | (1 << 1)
-        if flexspiUnittestCfgDict['dataT8b_dis'] == 0:
+        if mixspiPintestCfgDict['dataT8b_dis'] == 0:
             self.option = self.option | (1 << 2)
-        if flexspiUnittestCfgDict['ssb_dis'] == 0:
+        if mixspiPintestCfgDict['ssb_dis'] == 0:
             self.option = self.option | (1 << 3)
-        if flexspiUnittestCfgDict['sclk_dis'] == 0:
+        if mixspiPintestCfgDict['sclk_dis'] == 0:
             self.option = self.option | (1 << 4)
-        if flexspiUnittestCfgDict['sclkn_dis'] == 0:
+        if mixspiPintestCfgDict['sclkn_dis'] == 0:
             self.option = self.option | (1 << 5)
-        if flexspiUnittestCfgDict['dqs0_dis'] == 0:
+        if mixspiPintestCfgDict['dqs0_dis'] == 0:
             self.option = self.option | (1 << 6)
-        if flexspiUnittestCfgDict['dqs1_dis'] == 0:
+        if mixspiPintestCfgDict['dqs1_dis'] == 0:
             self.option = self.option | (1 << 7)
-        if flexspiUnittestCfgDict['rstb_dis'] == 0:
+        if mixspiPintestCfgDict['rstb_dis'] == 0:
             self.option = self.option | (1 << 8)
 
     def out_bytes( self ):
@@ -135,16 +135,16 @@ class pinTestPacket(object):
         self.reserved0 = [0x0, 0x0]
 
     def set_members( self ):
-        self.memConnection = flexspiConnectionStruct()
-        flexspiConnCfgDict = uivar.getAdvancedSettings(uidef.kAdvancedSettings_FlexspiConn)
-        self.memConnection.set_members(flexspiConnCfgDict)
-        self.unittestEn = flexspiUnittestEnStruct()
-        flexspiUnittestCfgDict = uivar.getAdvancedSettings(uidef.kAdvancedSettings_FlexspiPintest)
-        self.unittestEn.set_members(flexspiUnittestCfgDict)
+        self.memConnection = mixspiConnectionStruct()
+        mixspiConnCfgDict = uivar.getAdvancedSettings(uidef.kAdvancedSettings_Conn)
+        self.memConnection.set_members(mixspiConnCfgDict)
+        self.unittestEn = mixspiPintestEnStruct()
+        mixspiPintestCfgDict = uivar.getAdvancedSettings(uidef.kAdvancedSettings_Pintest)
+        self.unittestEn.set_members(mixspiPintestCfgDict)
         self.crcCheckSum = 0x0000
 
     def out_bytes( self ):
-        startbytes = bytes(kPacketTag, 'ascii') + bytes([kCommandTag_PinUnittest])
+        startbytes = bytes(kPacketTag, 'ascii') + bytes([kCommandTag_PinTest])
         packetBytes = self.memConnection.out_bytes() + self.unittestEn.out_bytes()
         self.crcCheckSum = calculate_crc16(packetBytes)
         crcbytes = bytes([self.crcCheckSum & 0xFF,
@@ -208,9 +208,9 @@ class configSystemPacket(object):
         self.reserved1 = [0x0, 0x0]
 
     def set_members( self ):
-        self.memConnection = flexspiConnectionStruct()
-        flexspiConnCfgDict = uivar.getAdvancedSettings(uidef.kAdvancedSettings_FlexspiConn)
-        self.memConnection.set_members(flexspiConnCfgDict)
+        self.memConnection = mixspiConnectionStruct()
+        mixspiConnCfgDict = uivar.getAdvancedSettings(uidef.kAdvancedSettings_Conn)
+        self.memConnection.set_members(mixspiConnCfgDict)
         self.memProperty = memoryPropertyStruct()
         self.memProperty.set_members(None)
         toolCommDict = uivar.getAdvancedSettings(uidef.kAdvancedSettings_Tool)
