@@ -67,13 +67,13 @@ def initVar(cfgFilename):
                           'prefetchBufSizeInByte':4096
                          }
         g_flexspiConnCfgDict = {'instance':0x1,
-                                'dataL4b':0x0,
+                                'dataL4b':0x00,
                                 'dataH4b':0xFF,
                                 'dataT8b':0xFF,
-                                'ssb':0x0,
-                                'sclk':0x0,
+                                'ssb':0x00,
+                                'sclk':0x00,
                                 'sclkn':0xFF,
-                                'dqs0':0x0,
+                                'dqs0':0x00,
                                 'dqs1':0xFF,
                                 'rstb':0xFF,
                                }

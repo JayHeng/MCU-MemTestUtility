@@ -53,13 +53,15 @@ class memTesterUiCfgFlexspiConn(QMainWindow, flexspiConnectCfgWin.Ui_flexspiConn
 
     def callbackSwitchInstance( self ):
         instance = self.comboBox_instance.currentIndex()
-        self._switchInstance(instance)
+        self.flexspiConnCfgDict['instance'] = instance + 1
+        self._recoverLastSettings(False)
 
-    def _recoverLastSettings ( self ):
+    def _recoverLastSettings ( self , needToUpdateInst = True):
         instance = self.flexspiConnCfgDict['instance'] - 1
-        self.comboBox_instance.clear()
-        self.comboBox_instance.addItems(self.flexspiConnDict['instance'].keys())
-        self.comboBox_instance.setCurrentIndex(instance)
+        if needToUpdateInst:
+            self.comboBox_instance.clear()
+            self.comboBox_instance.addItems(self.flexspiConnDict['instance'].keys())
+            self.comboBox_instance.setCurrentIndex(instance)
         self._switchInstance(instance)
         for key in self.flexspiConnDict['dataL4b'][instance].keys():
             if self.flexspiConnDict['dataL4b'][instance][key] == self.flexspiConnCfgDict['dataL4b']:

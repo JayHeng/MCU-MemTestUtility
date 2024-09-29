@@ -54,7 +54,8 @@ kFlexspiConnSel_sclkn   = [
                           ]
 
 kFlexspiConnSel_dqs0    = [
-                              {'PortA_DQS - PIO1[28]':0x00,
+                              {'None':0xFF,
+                               'PortA_DQS - PIO1[28]':0x00,
                               },
                               {'None':0xFF,
                               }

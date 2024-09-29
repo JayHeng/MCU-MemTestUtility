@@ -68,7 +68,8 @@ kFlexspiConnSel_sclkn   = [
                           ]
 
 kFlexspiConnSel_dqs0    = [
-                              {'PortA_DQS - GPIO_SD_B2[5]':0x00,
+                              {'None':0xFF,
+                               'PortA_DQS - GPIO_SD_B2[5]':0x00,
                                'PortA_DQS - GPIO_AD[17]':0x01,
                                'PortA_DQS - GPIO_EMC_B2[18]':0x02,
                                'PortB_DQS - GPIO_SD_B1[5]':0x10,
