@@ -36,6 +36,7 @@ sys.path.append(os.path.abspath(".."))
 from win import memTesterWin
 
 from targets.mem_model import ISSI_IS25LPxxxA_IS25WPxxxA
+from targets.mem_model import Winbond_W25QxxxJV
 
 s_serialPort = serial.Serial()
 s_recvInterval = 1
@@ -411,6 +412,10 @@ class memTesterUi(QMainWindow, memTesterWin.Ui_memTesterWin):
         self.memChip = self.comboBox_memChip.currentText()
         if self.memChip == uidef.kFlexspiNorDevice_ISSI_IS25LP064A:
             self.memLut = uilut.generateCompleteMemLut(ISSI_IS25LPxxxA_IS25WPxxxA.mixspiLutDict)
+        elif self.memChip == uidef.kFlexspiNorDevice_Winbond_W25Q128JV:
+            self.memLut = uilut.generateCompleteMemLut(Winbond_W25QxxxJV.mixspiLutDict)
+        else:
+            pass
 
     def showContentOnMainDisplayWin( self, contentStr ):
         self.textEdit_displayWin.append(contentStr)

@@ -16,7 +16,7 @@ NOR_CMD_LUT_SEQ_IDX_SETDUMMY        = 5
 NOR_CMD_LUT_SEQ_IDX_SETDRIVE        = 6
 NOR_CMD_LUT_SEQ_IDX_UNIQUECFG       = 6
 NOR_CMD_LUT_SEQ_IDX_WRITEENABLE     = 7
-NOR_CMD_LUT_SEQ_IDX_READREG         = 8
+NOR_CMD_LUT_SEQ_IDX_READREG1        = 8
 NOR_CMD_LUT_SEQ_IDX_PAGEPROGRAM     = 10
 NOR_CMD_LUT_SEQ_IDX_READREG2        = 11
 # FlexSPI LUT seq defn (1bit spi)
@@ -100,4 +100,12 @@ def generateCompleteMemLut( mixspiLutDict ):
     for key in mixspiLutDict.keys():
         if key == 'READ':
             memLut[(NOR_CMD_LUT_SEQ_IDX_READ * 4):((NOR_CMD_LUT_SEQ_IDX_READ + 1) * 4)] = mixspiLutDict[key].sequence
+        if key == 'READSTATUS':
+            memLut[(NOR_CMD_LUT_SEQ_IDX_READSTATUS * 4):((NOR_CMD_LUT_SEQ_IDX_READSTATUS + 1) * 4)] = mixspiLutDict[key].sequence
+        if key == 'WRITEENABLE':
+            memLut[(NOR_CMD_LUT_SEQ_IDX_WRITEENABLE * 4):((NOR_CMD_LUT_SEQ_IDX_WRITEENABLE + 1) * 4)] = mixspiLutDict[key].sequence
+        if key == 'READREG1':
+            memLut[(NOR_CMD_LUT_SEQ_IDX_READREG1 * 4):((NOR_CMD_LUT_SEQ_IDX_READREG1 + 1) * 4)] = mixspiLutDict[key].sequence
+        if key == 'READREG2':
+            memLut[(NOR_CMD_LUT_SEQ_IDX_READREG2 * 4):((NOR_CMD_LUT_SEQ_IDX_READREG2 + 1) * 4)] = mixspiLutDict[key].sequence
     return memLut
