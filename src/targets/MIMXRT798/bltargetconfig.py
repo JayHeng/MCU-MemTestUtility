@@ -32,45 +32,40 @@ import sys, os
 sys.path.append(os.path.abspath(".."))
 from boot.memoryrange import MemoryRange
 from ui import uidef
-from ui import ui_def_flexspi_conn_rt1180
+from ui import ui_def_xspi_conn_rt700
 
-cpu = 'MIMXRT1189'
+cpu = 'MIMXRT798'
 board = 'EVK'
 compiler = 'iar'
 build = 'Release'
-mcuSeries = uidef.kMcuSeries_iMXRT11yy
-maxCpuFreqInMHz = 240
+mcuSeries = uidef.kMcuSeries_iMXRTxxx
+maxCpuFreqInMHz = 320
 
 availablePeripherals = 0x11
-uartPeripheralPinStr = 'LPUART1 - GPIO_AON[9:8]'
-firmwareLoadAddr = None
-firmwareJumpAddr = None
-firmwareInitialSp = None
+uartPeripheralPinStr = 'LP-Flexcomm0 UART - PIO0[31,0]'
+firmwareLoadAddr = 0x00080000
+firmwareJumpAddr = 0x00083175
+firmwareInitialSp = 0x20300000
 availableCommands = 0x5EFDF
 supportedPeripheralSpeed_uart = [4800, 9600, 19200, 57600, 115200] # @todo Verify
 
-flexspiNorDevice = uidef.kFlexspiNorDevice_ISSI_IS25LP064A
-flexspiNorMemBase0 = 0x38000000
-flexspiNorMemBase1 = 0x32000000
+flexspiNorDevice = uidef.kFlexspiNorDevice_MXIC_MX25UM51345G
+flexspiNorMemBase0 = 0x28000000
+flexspiNorMemBase1 = 0x08000000
 isSipFlexspiNorDevice = False
 
-mixspiConnDict = ui_def_flexspi_conn_rt1180.kFlexspiConnSelDict
+mixspiConnDict = ui_def_xspi_conn_rt700.kXspiConnSelDict
 
 # memory map
 memoryRange = {
-    # ITCM_CM33, 512KByte
-    'itcm' : MemoryRange(0x1FFC0000, 0x40000, 'state_mem0.dat'),
-    # DTCM, 512KByte
-    'dtcm' : MemoryRange(0x20000000, 0x80000, 'state_mem1.dat'),
-    # OCRAM, 2MByte
-    'ocram' : MemoryRange(0x20200000, 0x200000, 'state_mem2.dat'),
+    # SRAM, 3MByte
+    'sram' : MemoryRange(0x00000000, 0x780000, 'state_mem0.dat'),
 
     # FLASH, 64KByte / 512MByte
     'flash': MemoryRange(0x00000000, 0x20000000, 'state_flash_mem.dat', True, 0x10000)
 }
 
-reservedRegionDict = {   # new
-    # OCRAM, 2MB
-    'ram' : [0x20203800, 0x20207F58]
+reservedRegionDict = {
+    # SRAM, 80KB
+    'sram' : [0x00000000, 0x00013FFF]
 }
-

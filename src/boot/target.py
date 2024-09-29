@@ -61,7 +61,7 @@ class Target(object):
         self.flexspiNorMemBase0 = misc.get_dict_default(kwargs, 'flexspiNorMemBase0', None)
         self.flexspiNorMemBase1 = misc.get_dict_default(kwargs, 'flexspiNorMemBase1', None)
         self.isSipFlexspiNorDevice = misc.get_dict_default(kwargs, 'isSipFlexspiNorDevice', None)
-        self.flexspiConnDict = misc.get_dict_default(kwargs, 'flexspiConnDict', None)
+        self.mixspiConnDict = misc.get_dict_default(kwargs, 'mixspiConnDict', None)
 
     ##
     # @brief Check if a command is supported by the target.

@@ -54,7 +54,7 @@ flexspiNorMemBase0 = 0x30000000
 flexspiNorMemBase1 = 0x60000000
 isSipFlexspiNorDevice = False
 
-flexspiConnDict = ui_def_flexspi_conn_rt1170.kFlexspiConnSelDict
+mixspiConnDict = ui_def_flexspi_conn_rt1170.kFlexspiConnSelDict
 
 # memory map
 memoryRange = {
