@@ -109,6 +109,7 @@ class memTesterUi(QMainWindow, memTesterWin.Ui_memTesterWin):
         self.memChip = None
         self.memLut = []
         self.flashPropertyDict = None
+        self.memUserSettingDict = {'memSpeed': 0}
 
         self.pinWaveFig = pinWaveformFigure(width=2, height=4, dpi=50)
         self.pinWaveFig.plotwave()
@@ -370,9 +371,9 @@ class memTesterUi(QMainWindow, memTesterWin.Ui_memTesterWin):
         self.sendUartData(mypacket.out_bytes())
 
     def sendConfigSystemPacket( self ):
-        self.getLutFromMemChip()
+        self.getMemUserSettings()
         mypacket = uipacket.configSystemPacket(self.memLut, self.flashPropertyDict)
-        mypacket.set_members()
+        mypacket.set_members(self.memUserSettingDict)
         self.sendUartData(mypacket.out_bytes())
 
     def sendMemInfoPacket( self ):
@@ -409,7 +410,7 @@ class memTesterUi(QMainWindow, memTesterWin.Ui_memTesterWin):
         else:
             pass
 
-    def getLutFromMemChip( self ):
+    def _getLutFromMemChip( self ):
         self.memChip = self.comboBox_memChip.currentText()
         if self.memChip == uidef.kFlexspiNorDevice_ISSI_IS25LP064A:
             self.memLut = uilut.generateCompleteMemLut(ISSI_IS25LPxxxA_IS25WPxxxA.mixspiLutDict)
@@ -419,6 +420,12 @@ class memTesterUi(QMainWindow, memTesterWin.Ui_memTesterWin):
             self.flashPropertyDict = Winbond_W25QxxxJV.flashPropertyDict.copy()
         else:
             pass
+
+    def getMemUserSettings( self ):
+        self._getLutFromMemChip()
+        memSpeed = self.comboBox_memSpeed.currentText()
+        spdIdx = memSpeed.find('MHz')
+        self.memUserSettingDict['memSpeed'] = int(memSpeed[0:spdIdx])
 
     def showContentOnMainDisplayWin( self, contentStr ):
         self.textEdit_displayWin.append(contentStr)

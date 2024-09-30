@@ -172,10 +172,10 @@ class memoryPropertyStruct(object):
         self.reserved0 = 0x0
         self.memLut = memLut
 
-    def set_members( self, memoryPropertyCfgDict ):
+    def set_members( self, memUserSettingDict ):
         self.type = 0
         self.chip = 0
-        self.speedMHz = 1
+        self.speedMHz = memUserSettingDict['memSpeed']
         self.sizeInByte = 0x00000000
         self.ioMode = 0
         self.interfaceMode = 0
@@ -225,12 +225,12 @@ class configSystemPacket(object):
         self.memLut = memLut
         self.flashPropertyDict = flashPropertyDict
 
-    def set_members( self ):
+    def set_members( self, memUserSettingDict ):
         self.memConnection = mixspiConnectionStruct()
         mixspiConnCfgDict = uivar.getAdvancedSettings(uidef.kAdvancedSettings_Conn)
         self.memConnection.set_members(mixspiConnCfgDict)
         self.memProperty = memoryPropertyStruct(self.memLut, self.flashPropertyDict)
-        self.memProperty.set_members(None)
+        self.memProperty.set_members(memUserSettingDict)
         toolCommDict = uivar.getAdvancedSettings(uidef.kAdvancedSettings_Tool)
         self.cpuSpeedMHz = toolCommDict['cpuSpeedMHz']
         self.enableL1Cache = toolCommDict['enableL1Cache']
