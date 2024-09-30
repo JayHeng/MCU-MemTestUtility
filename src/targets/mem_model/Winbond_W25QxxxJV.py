@@ -6,6 +6,11 @@ from ui import uidef
 from ui import uilut
 from ui.uilut import mixspiLutSequence
 
+flashPropertyDict = {
+    'qe_cfg':     0x02,
+    'qe_bytes':   0x01,
+}
+
 # LUT
 mixspiLutDict = {
     'READ' :         mixspiLutSequence(uilut.kFLEXSPI_Command_SDR,       uilut.kFLEXSPI_1PAD, 0xEB, 
@@ -19,6 +24,12 @@ mixspiLutDict = {
                                        uilut.kFLEXSPI_Command_READ_SDR,  uilut.kFLEXSPI_1PAD, 0x01),
 
     'WRITEENABLE' :  mixspiLutSequence(uilut.kFLEXSPI_Command_SDR,       uilut.kFLEXSPI_1PAD, 0x06),
+
+    'ENABLEQE' :     mixspiLutSequence(uilut.kFLEXSPI_Command_SDR,       uilut.kFLEXSPI_1PAD, 0x31,
+                                       uilut.kFLEXSPI_Command_WRITE_SDR, uilut.kFLEXSPI_1PAD, 0x01),
+
+    'READID' :       mixspiLutSequence(uilut.kFLEXSPI_Command_SDR,       uilut.kFLEXSPI_1PAD, 0x9F,
+                                       uilut.kFLEXSPI_Command_READ_SDR,  uilut.kFLEXSPI_1PAD, 0x04),
 
     'READREG1' :     mixspiLutSequence(uilut.kFLEXSPI_Command_SDR,       uilut.kFLEXSPI_1PAD, 0x35, 
                                        uilut.kFLEXSPI_Command_READ_SDR,  uilut.kFLEXSPI_1PAD, 0x01),

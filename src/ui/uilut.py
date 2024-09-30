@@ -104,6 +104,10 @@ def generateCompleteMemLut( mixspiLutDict ):
             memLut[(NOR_CMD_LUT_SEQ_IDX_READSTATUS * 4):((NOR_CMD_LUT_SEQ_IDX_READSTATUS + 1) * 4)] = mixspiLutDict[key].sequence
         if key == 'WRITEENABLE':
             memLut[(NOR_CMD_LUT_SEQ_IDX_WRITEENABLE * 4):((NOR_CMD_LUT_SEQ_IDX_WRITEENABLE + 1) * 4)] = mixspiLutDict[key].sequence
+        if key == 'ENABLEQE':
+            memLut[(NOR_CMD_LUT_SEQ_IDX_ENABLEQE * 4):((NOR_CMD_LUT_SEQ_IDX_ENABLEQE + 1) * 4)] = mixspiLutDict[key].sequence
+        if key == 'READID':
+            memLut[(NOR_CMD_LUT_SEQ_IDX_READID * 4):((NOR_CMD_LUT_SEQ_IDX_READID + 1) * 4)] = mixspiLutDict[key].sequence
         if key == 'READREG1':
             memLut[(NOR_CMD_LUT_SEQ_IDX_READREG1 * 4):((NOR_CMD_LUT_SEQ_IDX_READREG1 + 1) * 4)] = mixspiLutDict[key].sequence
         if key == 'READREG2':

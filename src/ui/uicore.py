@@ -108,6 +108,7 @@ class memTesterUi(QMainWindow, memTesterWin.Ui_memTesterWin):
         self._initMemType()
         self.memChip = None
         self.memLut = []
+        self.flashPropertyDict = None
 
         self.pinWaveFig = pinWaveformFigure(width=2, height=4, dpi=50)
         self.pinWaveFig.plotwave()
@@ -370,7 +371,7 @@ class memTesterUi(QMainWindow, memTesterWin.Ui_memTesterWin):
 
     def sendConfigSystemPacket( self ):
         self.getLutFromMemChip()
-        mypacket = uipacket.configSystemPacket(self.memLut)
+        mypacket = uipacket.configSystemPacket(self.memLut, self.flashPropertyDict)
         mypacket.set_members()
         self.sendUartData(mypacket.out_bytes())
 
@@ -412,8 +413,10 @@ class memTesterUi(QMainWindow, memTesterWin.Ui_memTesterWin):
         self.memChip = self.comboBox_memChip.currentText()
         if self.memChip == uidef.kFlexspiNorDevice_ISSI_IS25LP064A:
             self.memLut = uilut.generateCompleteMemLut(ISSI_IS25LPxxxA_IS25WPxxxA.mixspiLutDict)
+            self.flashPropertyDict = ISSI_IS25LPxxxA_IS25WPxxxA.flashPropertyDict.copy()
         elif self.memChip == uidef.kFlexspiNorDevice_Winbond_W25Q128JV:
             self.memLut = uilut.generateCompleteMemLut(Winbond_W25QxxxJV.mixspiLutDict)
+            self.flashPropertyDict = Winbond_W25QxxxJV.flashPropertyDict.copy()
         else:
             pass
 
