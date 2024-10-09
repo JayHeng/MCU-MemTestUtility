@@ -172,7 +172,7 @@ class memTesterMain(runcore.memTesterRun):
         elif s_goAction == uidef.kGoAction_PerfTest:
             self.sendPerfTestPacket()
         elif s_goAction == uidef.kGoAction_StressTest:
-            pass
+            self.sendStressTestPacket()
         else:
             return
         self.updateGoActionButton()

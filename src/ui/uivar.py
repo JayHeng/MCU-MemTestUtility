@@ -50,6 +50,14 @@ g_mixspiPerfTestCfgDict = {'testSet':None,
                            'testBlockSize':None,
                             }
 
+g_mixspiStressTestCfgDict = {'testSet':None,
+                             'iterations':None,
+                             'enableStopWhenFail':None,
+                             'testRamStart':None,
+                             'testRamSize':None,
+                             'testPageSize':None,
+                            }
+
 def initVar(cfgFilename):
     global g_hasSubWinBeenOpened
     global g_cfgFilename
@@ -57,6 +65,7 @@ def initVar(cfgFilename):
     global g_mixspiConnCfgDict
     global g_mixspiPintestCfgDict
     global g_mixspiPerfTestCfgDict
+    global g_mixspiStressTestCfgDict
 
     g_hasSubWinBeenOpened = False
     g_cfgFilename = cfgFilename
@@ -70,6 +79,7 @@ def initVar(cfgFilename):
         g_mixspiConnCfgDict = cfgDict["cfgConn"][0]
         g_mixspiPintestCfgDict = cfgDict["cfgPintest"][0]
         g_mixspiPerfTestCfgDict = cfgDict["cfgPerfTest"][0]
+        g_mixspiStressTestCfgDict = cfgDict["cfgStressTest"][0]
     else:
         g_toolCommDict = {'mcuDevice':0,
                           'cpuSpeedMHz':996,
@@ -102,12 +112,20 @@ def initVar(cfgFilename):
                                    }
 
         g_mixspiPerfTestCfgDict = {'testSet':0xC0,
-                                   'iterations':8000,
+                                   'iterations':10,
                                    'subTestSet':0xC1,
                                    'enableAverageShow':1,
                                    'testRamStart':0x20500000,
                                    'testRamSize':0x20000,
                                    'testBlockSize':0x400,
+                                    }
+
+        g_mixspiStressTestCfgDict = {'testSet':0xE0,
+                                     'iterations':1,
+                                     'enableStopWhenFail':1,
+                                     'testRamStart':0x20500000,
+                                     'testRamSize':0x10000,
+                                     'testPageSize':0x400,
                                     }
 
 def deinitVar(cfgFilename=None):
@@ -118,11 +136,14 @@ def deinitVar(cfgFilename=None):
         global g_toolCommDict
         global g_mixspiConnCfgDict
         global g_mixspiPintestCfgDict
+        global g_mixspiPerfTestCfgDict
+        global g_mixspiStressTestCfgDict
         cfgDict = {
             "cfgToolCommon": [g_toolCommDict],
             "cfgConn": [g_mixspiConnCfgDict],
             "cfgPintest": [g_mixspiPintestCfgDict],
             "cfgPerfTest": [g_mixspiPerfTestCfgDict],
+            "cfgStressTest": [g_mixspiStressTestCfgDict],
         }
         json.dump(cfgDict, fileObj, indent=1)
         fileObj.close()
@@ -140,6 +161,9 @@ def getAdvancedSettings( group ):
     elif group == uidef.kAdvancedSettings_PerfTest:
         global g_mixspiPerfTestCfgDict
         return g_mixspiPerfTestCfgDict
+    elif group == uidef.kAdvancedSettings_StressTest:
+        global g_mixspiStressTestCfgDict
+        return g_mixspiStressTestCfgDict
     else:
         pass
 
@@ -156,6 +180,9 @@ def setAdvancedSettings( group, *args ):
     elif group == uidef.kAdvancedSettings_PerfTest:
         global g_mixspiPerfTestCfgDict
         g_mixspiPerfTestCfgDict = args[0]
+    elif group == uidef.kAdvancedSettings_StressTest:
+        global g_mixspiStressTestCfgDict
+        g_mixspiStressTestCfgDict = args[0]
     else:
         pass
 

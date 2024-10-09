@@ -361,6 +361,62 @@ class perfTestPacket(object):
                          ])
         return startbytes + packetBytes + crcbytes
 
+class stressTestPacket(object):
+
+    def __init__( self, parent=None):
+        #super(stressTestPacket, self).__init__(parent)
+        self.testSet = None
+        self.enableStopWhenFail = None
+        self.reserved0 = [0x0, 0x0]
+        self.iterations = None
+        self.testRamStart = None
+        self.testRamSize = None
+        self.testPageSize = None
+        self.crcCheckSum = None
+        self.reserved1 = [0x0, 0x0]
+
+    def set_members( self ):
+        mixspiStressTestCfgDict = uivar.getAdvancedSettings(uidef.kAdvancedSettings_StressTest)
+        self.testSet = mixspiStressTestCfgDict['testSet']
+        self.enableStopWhenFail = mixspiStressTestCfgDict['enableStopWhenFail']
+        self.iterations = mixspiStressTestCfgDict['iterations']
+        self.testRamStart = mixspiStressTestCfgDict['testRamStart']
+        self.testRamSize = mixspiStressTestCfgDict['testRamSize']
+        self.testPageSize = mixspiStressTestCfgDict['testPageSize']
+        self.crcCheckSum = 0x0000
+
+    def out_bytes( self ):
+        startbytes = bytes(kPacketTag, 'ascii') + bytes([kCommandTag_RunStressTest])
+        mybytes = bytes([self.testSet,
+                         self.enableStopWhenFail,
+                         self.reserved0[0],
+                         self.reserved0[1],
+                         self.iterations & 0xFF,
+                         (self.iterations & 0xFF00) >> 8,
+                         (self.iterations & 0xFF0000) >> 16, 
+                         (self.iterations & 0xFF000000) >> 24,
+                         self.testRamStart & 0xFF,
+                         (self.testRamStart & 0xFF00) >> 8,
+                         (self.testRamStart & 0xFF0000) >> 16, 
+                         (self.testRamStart & 0xFF000000) >> 24,
+                         self.testRamSize & 0xFF,
+                         (self.testRamSize & 0xFF00) >> 8,
+                         (self.testRamSize & 0xFF0000) >> 16, 
+                         (self.testRamSize & 0xFF000000) >> 24,
+                         self.testPageSize & 0xFF,
+                         (self.testPageSize & 0xFF00) >> 8,
+                         (self.testPageSize & 0xFF0000) >> 16, 
+                         (self.testPageSize & 0xFF000000) >> 24
+                        ])
+        packetBytes = mybytes
+        self.crcCheckSum = calculate_crc16(packetBytes)
+        crcbytes = bytes([self.crcCheckSum & 0xFF,
+                          (self.crcCheckSum & 0xFF00) >> 8,
+                          self.reserved1[0],
+                          self.reserved1[1]
+                         ])
+        return startbytes + packetBytes + crcbytes
+
 class testStopPacket(object):
 
     def __init__( self, parent=None):
