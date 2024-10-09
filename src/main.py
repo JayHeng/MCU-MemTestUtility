@@ -38,7 +38,7 @@ class memTesterMain(runcore.memTesterRun):
         self.comboBox_memType.currentIndexChanged.connect(self.callbackSetMemType)
         self.pushButton_pinTest.clicked.connect(self.callbackPinTest)
         self.pushButton_configSystem.clicked.connect(self.callbackConfigSystem)
-        self.pushButton_memInfo.clicked.connect(self.callbackMemInfo)
+        self.pushButton_memRegs.clicked.connect(self.callbackMemRegs)
         self.pushButton_rwTest.clicked.connect(self.callbackRwTest)
         self.pushButton_perfTest.clicked.connect(self.callbackPerfTest)
         self.pushButton_stressTest.clicked.connect(self.callbackStressTest)
@@ -116,10 +116,10 @@ class memTesterMain(runcore.memTesterRun):
         self.resetAllActionButtonColor()
         self.setActionButtonColor(s_goAction)
 
-    def callbackMemInfo( self ):
-        self.showContentOnSecPacketWin(u"【Action】: Click <Mem Info> button.")
+    def callbackMemRegs( self ):
+        self.showContentOnSecPacketWin(u"【Action】: Click <Mem REGs> button.")
         global s_goAction
-        s_goAction = uidef.kGoAction_MemInfo
+        s_goAction = uidef.kGoAction_MemRegs
         self.resetAllActionButtonColor()
         self.setActionButtonColor(s_goAction)
 
@@ -165,8 +165,8 @@ class memTesterMain(runcore.memTesterRun):
                 self.sendConfigSystemPacket()
             else:
                 return
-        elif s_goAction == uidef.kGoAction_MemInfo:
-            self.sendMemInfoPacket()
+        elif s_goAction == uidef.kGoAction_MemRegs:
+            self.sendMemRegsPacket()
         elif s_goAction == uidef.kGoAction_RwTest:
             self.sendRwTestPacket()
         elif s_goAction == uidef.kGoAction_PerfTest:

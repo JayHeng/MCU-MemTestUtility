@@ -376,8 +376,8 @@ class memTesterUi(QMainWindow, memTesterWin.Ui_memTesterWin):
         mypacket.set_members(self.memUserSettingDict)
         self.sendUartData(mypacket.out_bytes())
 
-    def sendMemInfoPacket( self ):
-        mypacket = uipacket.memInfoPacket()
+    def sendMemRegsPacket( self ):
+        mypacket = uipacket.memRegsPacket()
         mypacket.set_members()
         self.sendUartData(mypacket.out_bytes())
 
@@ -450,7 +450,7 @@ class memTesterUi(QMainWindow, memTesterWin.Ui_memTesterWin):
     def resetAllActionButtonColor( self ):
         self.pushButton_pinTest.setStyleSheet("background-color: " + uidef.kButtonColor_Disable)
         self.pushButton_configSystem.setStyleSheet("background-color: " + uidef.kButtonColor_Disable)
-        self.pushButton_memInfo.setStyleSheet("background-color: " + uidef.kButtonColor_Disable)
+        self.pushButton_memRegs.setStyleSheet("background-color: " + uidef.kButtonColor_Disable)
         self.pushButton_rwTest.setStyleSheet("background-color: " + uidef.kButtonColor_Disable)
         self.pushButton_perfTest.setStyleSheet("background-color: " + uidef.kButtonColor_Disable)
         self.pushButton_stressTest.setStyleSheet("background-color: " + uidef.kButtonColor_Disable)
@@ -460,8 +460,8 @@ class memTesterUi(QMainWindow, memTesterWin.Ui_memTesterWin):
             self.pushButton_pinTest.setStyleSheet("background-color: " + uidef.kButtonColor_Enable)
         elif goAction == uidef.kGoAction_ConfigSystem:
             self.pushButton_configSystem.setStyleSheet("background-color: " + uidef.kButtonColor_Enable)
-        elif goAction == uidef.kGoAction_MemInfo:
-            self.pushButton_memInfo.setStyleSheet("background-color: " + uidef.kButtonColor_Enable)
+        elif goAction == uidef.kGoAction_MemRegs:
+            self.pushButton_memRegs.setStyleSheet("background-color: " + uidef.kButtonColor_Enable)
         elif goAction == uidef.kGoAction_RwTest:
             self.pushButton_rwTest.setStyleSheet("background-color: " + uidef.kButtonColor_Enable)
         elif goAction == uidef.kGoAction_PerfTest:

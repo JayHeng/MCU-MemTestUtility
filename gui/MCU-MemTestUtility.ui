@@ -744,7 +744,7 @@
     <property name="frameShadow">
      <enum>QFrame::Plain</enum>
     </property>
-    <widget class="QPushButton" name="pushButton_memInfo">
+    <widget class="QPushButton" name="pushButton_memRegs">
      <property name="geometry">
       <rect>
        <x>200</x>
@@ -760,7 +760,7 @@
       </font>
      </property>
      <property name="text">
-      <string>Mem Info</string>
+      <string>Mem REGs</string>
      </property>
     </widget>
     <widget class="QTextEdit" name="textEdit_displayWin">

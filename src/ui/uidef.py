@@ -116,7 +116,7 @@ kAdvancedSettings_StressTest       = 4
 
 kGoAction_PinTest                = 0
 kGoAction_ConfigSystem           = 1
-kGoAction_MemInfo                = 2
+kGoAction_MemRegs                = 2
 kGoAction_RwTest                 = 3
 kGoAction_PerfTest               = 4
 kGoAction_StressTest             = 5

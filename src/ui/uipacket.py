@@ -12,7 +12,7 @@ kPacketTag = "FTAG"
 
 kCommandTag_PinTest        = 0xF1
 kCommandTag_ConfigSystem   = 0xF2
-kCommandTag_GetMemInfo     = 0xF3
+kCommandTag_AccessMemRegs  = 0xF3
 kCommandTag_RunRwTest      = 0xF4
 kCommandTag_RunPerfTest    = 0xF5
 kCommandTag_RunStressTest  = 0xF6
@@ -257,7 +257,7 @@ class configSystemPacket(object):
                          ])
         return startbytes + packetBytes + crcbytes
 
-class memInfoPacket(object):
+class memRegsPacket(object):
 
     def __init__( self, parent=None):
         pass
@@ -266,7 +266,7 @@ class memInfoPacket(object):
         pass
 
     def out_bytes( self ):
-        startbytes = bytes(kPacketTag, 'ascii') + bytes([kCommandTag_GetMemInfo])
+        startbytes = bytes(kPacketTag, 'ascii') + bytes([kCommandTag_AccessMemRegs])
         return startbytes
 
 class rwTestPacket(object):
