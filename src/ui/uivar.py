@@ -30,15 +30,24 @@ g_mixspiConnCfgDict  = {'instance':1,
 
 g_mixspiPintestCfgDict  = {'wavePulse':None,
                            'waveSample':None,
-                           'dataL4b_en':None,
-                           'dataH4b_en':None,
-                           'dataT8b_en':None,
-                           'ssb_en':None,
-                           'sclk_en':None,
-                           'sclkn_en':None,
-                           'dqs0_en':None,
-                           'dqs1_en':None,
-                           'rstb_en':None,
+                           'dataL4b_dis':None,
+                           'dataH4b_dis':None,
+                           'dataT8b_dis':None,
+                           'ssb_dis':None,
+                           'sclk_dis':None,
+                           'sclkn_dis':None,
+                           'dqs0_dis':None,
+                           'dqs1_dis':None,
+                           'rstb_dis':None,
+                            }
+
+g_mixspiPerfTestCfgDict = {'testSet':None,
+                           'iterations':None,
+                           'subTestSet':None,
+                           'enableAverageShow':None,
+                           'testRamStart':None,
+                           'testRamSize':None,
+                           'testBlockSize':None,
                             }
 
 def initVar(cfgFilename):
@@ -47,6 +56,7 @@ def initVar(cfgFilename):
     global g_toolCommDict
     global g_mixspiConnCfgDict
     global g_mixspiPintestCfgDict
+    global g_mixspiPerfTestCfgDict
 
     g_hasSubWinBeenOpened = False
     g_cfgFilename = cfgFilename
@@ -59,6 +69,7 @@ def initVar(cfgFilename):
         g_toolCommDict = cfgDict["cfgToolCommon"][0]
         g_mixspiConnCfgDict = cfgDict["cfgConn"][0]
         g_mixspiPintestCfgDict = cfgDict["cfgPintest"][0]
+        g_mixspiPerfTestCfgDict = cfgDict["cfgPerfTest"][0]
     else:
         g_toolCommDict = {'mcuDevice':0,
                           'cpuSpeedMHz':996,
@@ -90,6 +101,15 @@ def initVar(cfgFilename):
                                    'rstb_dis':1,
                                    }
 
+        g_mixspiPerfTestCfgDict = {'testSet':0xC0,
+                                   'iterations':8000,
+                                   'subTestSet':0xC1,
+                                   'enableAverageShow':1,
+                                   'testRamStart':0x20500000,
+                                   'testRamSize':0x20000,
+                                   'testBlockSize':0x400,
+                                    }
+
 def deinitVar(cfgFilename=None):
     global g_cfgFilename
     if cfgFilename == None and g_cfgFilename != None:
@@ -101,7 +121,8 @@ def deinitVar(cfgFilename=None):
         cfgDict = {
             "cfgToolCommon": [g_toolCommDict],
             "cfgConn": [g_mixspiConnCfgDict],
-            "cfgPintest": [g_mixspiPintestCfgDict]
+            "cfgPintest": [g_mixspiPintestCfgDict],
+            "cfgPerfTest": [g_mixspiPerfTestCfgDict],
         }
         json.dump(cfgDict, fileObj, indent=1)
         fileObj.close()
@@ -116,6 +137,9 @@ def getAdvancedSettings( group ):
     elif group == uidef.kAdvancedSettings_Pintest:
         global g_mixspiPintestCfgDict
         return g_mixspiPintestCfgDict
+    elif group == uidef.kAdvancedSettings_PerfTest:
+        global g_mixspiPerfTestCfgDict
+        return g_mixspiPerfTestCfgDict
     else:
         pass
 
@@ -129,6 +153,9 @@ def setAdvancedSettings( group, *args ):
     elif group == uidef.kAdvancedSettings_Pintest:
         global g_mixspiPintestCfgDict
         g_mixspiPintestCfgDict = args[0]
+    elif group == uidef.kAdvancedSettings_PerfTest:
+        global g_mixspiPerfTestCfgDict
+        g_mixspiPerfTestCfgDict = args[0]
     else:
         pass
 

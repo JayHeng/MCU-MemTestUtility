@@ -10,12 +10,12 @@ from . import uilut
 
 kPacketTag = "FTAG"
 
-kCommandTag_PinTest        = 0x01
-kCommandTag_ConfigSystem   = 0x02
-kCommandTag_GetMemInfo     = 0x03
-kCommandTag_RunRwTest      = 0x04
-kCommandTag_RunPerfTest    = 0x05
-kCommandTag_RunStressTest  = 0x06
+kCommandTag_PinTest        = 0xF1
+kCommandTag_ConfigSystem   = 0xF2
+kCommandTag_GetMemInfo     = 0xF3
+kCommandTag_RunRwTest      = 0xF4
+kCommandTag_RunPerfTest    = 0xF5
+kCommandTag_RunStressTest  = 0xF6
 
 kCommandTag_TestStop       = 0xF0
 
@@ -293,6 +293,64 @@ class rwTestPacket(object):
                          (self.memLen & 0xFF00) >> 8,
                          (self.memLen & 0xFF0000) >> 16, 
                          (self.memLen & 0xFF000000) >> 24
+                        ])
+        packetBytes = mybytes
+        self.crcCheckSum = calculate_crc16(packetBytes)
+        crcbytes = bytes([self.crcCheckSum & 0xFF,
+                          (self.crcCheckSum & 0xFF00) >> 8,
+                          self.reserved0[0],
+                          self.reserved0[1]
+                         ])
+        return startbytes + packetBytes + crcbytes
+
+class perfTestPacket(object):
+
+    def __init__( self, parent=None):
+        #super(perfTestPacket, self).__init__(parent)
+        self.testSet = None
+        self.subTestSet = None
+        self.enableAverageShow = None
+        self.reserved0 = 0x0
+        self.iterations = None
+        self.testRamStart = None
+        self.testRamSize = None
+        self.testBlockSize = None
+        self.crcCheckSum = None
+        self.reserved1 = [0x0, 0x0]
+
+    def set_members( self ):
+        mixspiPerfTestCfgDict = uivar.getAdvancedSettings(uidef.kAdvancedSettings_PerfTest)
+        self.testSet = mixspiPerfTestCfgDict['testSet']
+        self.subTestSet = mixspiPerfTestCfgDict['subTestSet']
+        self.enableAverageShow = mixspiPerfTestCfgDict['enableAverageShow']
+        self.iterations = mixspiPerfTestCfgDict['iterations']
+        self.testRamStart = mixspiPerfTestCfgDict['testRamStart']
+        self.testRamSize = mixspiPerfTestCfgDict['testRamSize']
+        self.testBlockSize = mixspiPerfTestCfgDict['testBlockSize']
+        self.crcCheckSum = 0x0000
+
+    def out_bytes( self ):
+        startbytes = bytes(kPacketTag, 'ascii') + bytes([kCommandTag_RunPerfTest])
+        mybytes = bytes([self.testSet,
+                         self.subTestSet,
+                         self.enableAverageShow,
+                         self.reserved0,
+                         self.iterations & 0xFF,
+                         (self.iterations & 0xFF00) >> 8,
+                         (self.iterations & 0xFF0000) >> 16, 
+                         (self.iterations & 0xFF000000) >> 24,
+                         self.testRamStart & 0xFF,
+                         (self.testRamStart & 0xFF00) >> 8,
+                         (self.testRamStart & 0xFF0000) >> 16, 
+                         (self.testRamStart & 0xFF000000) >> 24,
+                         self.testRamSize & 0xFF,
+                         (self.testRamSize & 0xFF00) >> 8,
+                         (self.testRamSize & 0xFF0000) >> 16, 
+                         (self.testRamSize & 0xFF000000) >> 24,
+                         self.testBlockSize & 0xFF,
+                         (self.testBlockSize & 0xFF00) >> 8,
+                         (self.testBlockSize & 0xFF0000) >> 16, 
+                         (self.testBlockSize & 0xFF000000) >> 24
                         ])
         packetBytes = mybytes
         self.crcCheckSum = calculate_crc16(packetBytes)

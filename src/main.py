@@ -170,7 +170,7 @@ class memTesterMain(runcore.memTesterRun):
         elif s_goAction == uidef.kGoAction_RwTest:
             self.sendRwTestPacket()
         elif s_goAction == uidef.kGoAction_PerfTest:
-            pass
+            self.sendPerfTestPacket()
         elif s_goAction == uidef.kGoAction_StressTest:
             pass
         else:
