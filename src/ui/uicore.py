@@ -109,7 +109,6 @@ class memTesterUi(QMainWindow, memTesterWin.Ui_memTesterWin):
         self.memChip = None
         self.memLut = []
         self.flashPropertyDict = None
-        self.memUserSettingDict = {'memSpeed': 0}
 
         self.pinWaveFig = pinWaveformFigure(width=2, height=4, dpi=50)
         self.pinWaveFig.plotwave()
@@ -373,7 +372,7 @@ class memTesterUi(QMainWindow, memTesterWin.Ui_memTesterWin):
     def sendConfigSystemPacket( self ):
         self.getMemUserSettings()
         mypacket = uipacket.configSystemPacket(self.memLut, self.flashPropertyDict)
-        mypacket.set_members(self.memUserSettingDict)
+        mypacket.set_members(self.toolCommDict)
         self.sendUartData(mypacket.out_bytes())
 
     def sendMemRegsPacket( self ):
@@ -433,9 +432,11 @@ class memTesterUi(QMainWindow, memTesterWin.Ui_memTesterWin):
 
     def getMemUserSettings( self ):
         self._getLutFromMemChip()
+        memType = self.comboBox_memType.currentIndex()
+        self.toolCommDict['memType'] = memType
         memSpeed = self.comboBox_memSpeed.currentText()
         spdIdx = memSpeed.find('MHz')
-        self.memUserSettingDict['memSpeed'] = int(memSpeed[0:spdIdx])
+        self.toolCommDict['memSpeed'] = int(memSpeed[0:spdIdx])
 
     def showContentOnMainDisplayWin( self, contentStr ):
         self.textEdit_displayWin.append(contentStr)

@@ -162,43 +162,36 @@ class memoryPropertyStruct(object):
         self.type = None
         self.chip = None
         self.speedMHz = None
-        self.sizeInByte = 0x00000000
-        self.ioMode = None
+        self.ioPadsMode = None
         self.interfaceMode = None
-        self.dataRateMode = None
-        self.dummyCycles = None
+        self.sampleRateMode = None
+        self.reserved0 = 0x0
         self.flashQuadEnableCfg = flashPropertyDict['qe_cfg']
         self.flashQuadEnableBytes = flashPropertyDict['qe_bytes']
-        self.reserved0 = 0x0
+        self.reserved1 = 0x0
         self.memLut = memLut
 
     def set_members( self, memUserSettingDict ):
-        self.type = 0
+        self.type = memUserSettingDict['memType']
         self.chip = 0
         self.speedMHz = memUserSettingDict['memSpeed']
-        self.sizeInByte = 0x00000000
-        self.ioMode = 0
+        self.ioPadsMode = 0
         self.interfaceMode = 0
-        self.dataRateMode = 0
-        self.dummyCycles = 0
+        self.sampleRateMode = 0
 
     def out_bytes( self ):
         mybytes = bytes([self.type,
                          self.chip,
                          self.speedMHz & 0xFF,
                          (self.speedMHz & 0xFF00) >> 8,
-                         self.sizeInByte & 0xFF,
-                         (self.sizeInByte & 0xFF00) >> 8,
-                         (self.sizeInByte & 0xFF0000) >> 16, 
-                         (self.sizeInByte & 0xFF000000) >> 24,
-                         self.ioMode,
+                         self.ioPadsMode,
                          self.interfaceMode,
-                         self.dataRateMode,
-                         self.dummyCycles,
+                         self.sampleRateMode,
+                         self.reserved0,
                          self.flashQuadEnableCfg & 0xFF,
                          (self.flashQuadEnableCfg & 0xFF00) >> 8,
                          self.flashQuadEnableBytes,
-                         self.reserved0
+                         self.reserved1
                         ])
         for i in range(uilut.CUSTOM_LUT_LENGTH):
             mybytes += bytes([self.memLut[i] & 0xFF,

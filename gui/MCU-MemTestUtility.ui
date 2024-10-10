@@ -592,7 +592,7 @@
       <string>Mem Mode:</string>
      </property>
     </widget>
-    <widget class="QComboBox" name="comboBox_memIoMode">
+    <widget class="QComboBox" name="comboBox_memIoPadsMode">
      <property name="geometry">
       <rect>
        <x>80</x>
@@ -662,7 +662,7 @@
       </property>
      </item>
     </widget>
-    <widget class="QComboBox" name="comboBox_memDateRate">
+    <widget class="QComboBox" name="comboBox_memSampleRateMode">
      <property name="geometry">
       <rect>
        <x>390</x>

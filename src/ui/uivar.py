@@ -13,7 +13,13 @@ g_toolCommDict = {'mcuDevice':None,
                   'cpuSpeedMHz':None,
                   'enableL1Cache':None,
                   'enablePrefetch':None,
-                  'prefetchBufSizeInByte':None
+                  'prefetchBufSizeInByte':None,
+                  'memType':None,
+                  'memChip':None,
+                  'memSpeed':None,
+                  'memMode0IoPads':None,
+                  'memMode1Interface':None,
+                  'memMode2SampleRate':None
                  }
 
 g_mixspiConnCfgDict  = {'instance':1,
@@ -93,7 +99,13 @@ def initVar(cfgFilename):
                           'cpuSpeedMHz':996,
                           'enableL1Cache':0,
                           'enablePrefetch':0,
-                          'prefetchBufSizeInByte':4096
+                          'prefetchBufSizeInByte':4096,
+                          'memType':0,
+                          'memChip':0,
+                          'memSpeed':30,
+                          'memMode0IoPads':0,
+                          'memMode1Interface':0,
+                          'memMode2SampleRate':0
                          }
         g_mixspiConnCfgDict  = {'instance':0x1,
                                 'dataL4b':0x00,
