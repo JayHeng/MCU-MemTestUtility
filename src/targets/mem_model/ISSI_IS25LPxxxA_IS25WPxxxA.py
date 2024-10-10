@@ -36,6 +36,12 @@ mixspiLutDict = {
 
     'READREG2' :     mixspiLutSequence(uilut.kFLEXSPI_Command_SDR,       uilut.kFLEXSPI_1PAD, 0x61, 
                                        uilut.kFLEXSPI_Command_READ_SDR,  uilut.kFLEXSPI_1PAD, 0x01),
+
+    'ERASESECTOR' :  mixspiLutSequence(uilut.kFLEXSPI_Command_SDR,       uilut.kFLEXSPI_1PAD, 0x20,
+                                       uilut.kFLEXSPI_Command_RADDR_SDR, uilut.kFLEXSPI_1PAD, 0x18),
+
+    'PAGEPROGRAM' :  mixspiLutSequence(uilut.kFLEXSPI_Command_SDR,       uilut.kFLEXSPI_1PAD, 0x02,
+                                       uilut.kFLEXSPI_Command_RADDR_SDR, uilut.kFLEXSPI_1PAD, 0x18,
+                                       uilut.kFLEXSPI_Command_WRITE_SDR, uilut.kFLEXSPI_1PAD, 0x04,
+                                       uilut.kFLEXSPI_Command_STOP,      uilut.kFLEXSPI_1PAD, 0x00),
 }
-
-

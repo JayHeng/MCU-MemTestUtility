@@ -112,4 +112,8 @@ def generateCompleteMemLut( mixspiLutDict ):
             memLut[(NOR_CMD_LUT_SEQ_IDX_READREG1 * 4):((NOR_CMD_LUT_SEQ_IDX_READREG1 + 1) * 4)] = mixspiLutDict[key].sequence
         if key == 'READREG2':
             memLut[(NOR_CMD_LUT_SEQ_IDX_READREG2 * 4):((NOR_CMD_LUT_SEQ_IDX_READREG2 + 1) * 4)] = mixspiLutDict[key].sequence
+        if key == 'ERASESECTOR':
+            memLut[(NOR_CMD_LUT_SEQ_IDX_ERASESECTOR * 4):((NOR_CMD_LUT_SEQ_IDX_ERASESECTOR + 1) * 4)] = mixspiLutDict[key].sequence
+        if key == 'PAGEPROGRAM':
+            memLut[(NOR_CMD_LUT_SEQ_IDX_PAGEPROGRAM * 4):((NOR_CMD_LUT_SEQ_IDX_PAGEPROGRAM + 1) * 4)] = mixspiLutDict[key].sequence
     return memLut
