@@ -52,9 +52,9 @@ class memTesterUiStressTest(QMainWindow, stressTestWin.Ui_stressTestDialog):
             else:
                 self.comboBox_stopWhenFail.setCurrentIndex(1)
         self.lineEdit_numOfRuns.setText(str(self.mixspiStresstestCfgDict['iterations']))
-        self.lineEdit_testRamStart.setText(str(hex(self.mixspiStresstestCfgDict['testRamStart'])))
-        self.lineEdit_testRamSize.setText(str(hex(self.mixspiStresstestCfgDict['testRamSize'])))
-        self.lineEdit_ramPageSize.setText(str(hex(self.mixspiStresstestCfgDict['testPageSize'])))
+        self.lineEdit_testMemStart.setText(str(hex(self.mixspiStresstestCfgDict['testMemStart'])))
+        self.lineEdit_testMemSize.setText(str(hex(self.mixspiStresstestCfgDict['testMemSize'])))
+        self.lineEdit_testPageSize.setText(str(hex(self.mixspiStresstestCfgDict['testPageSize'])))
 
     def callbackOk( self, event ):
         testSetIdx = self.comboBox_testSet.currentIndex()
@@ -67,17 +67,17 @@ class memTesterUiStressTest(QMainWindow, stressTestWin.Ui_stressTestDialog):
         else:
             pass
         self.mixspiStresstestCfgDict['iterations'] = int(self.lineEdit_numOfRuns.text())
-        status, ramStart = self._getVal32FromHexText(self.lineEdit_testRamStart.text())
+        status, ramStart = self._getVal32FromHexText(self.lineEdit_testMemStart.text())
         if status:
-            self.mixspiStresstestCfgDict['testRamStart'] = ramStart
+            self.mixspiStresstestCfgDict['testMemStart'] = ramStart
         else:
             return
-        status, ramSize = self._getVal32FromHexText(self.lineEdit_testRamSize.text())
+        status, ramSize = self._getVal32FromHexText(self.lineEdit_testMemSize.text())
         if status:
-            self.mixspiStresstestCfgDict['testRamSize'] = ramSize
+            self.mixspiStresstestCfgDict['testMemSize'] = ramSize
         else:
             return
-        status, pageSize = self._getVal32FromHexText(self.lineEdit_ramPageSize.text())
+        status, pageSize = self._getVal32FromHexText(self.lineEdit_testPageSize.text())
         if status:
             self.mixspiStresstestCfgDict['testPageSize'] = pageSize
         else:

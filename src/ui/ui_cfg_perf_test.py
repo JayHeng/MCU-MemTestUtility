@@ -70,8 +70,8 @@ class memTesterUiPerfTest(QMainWindow, perfTestWin.Ui_perfTestDialog):
         else:
             pass
         self.lineEdit_numOfRuns.setText(str(self.mixspiPerftestCfgDict['iterations']))
-        self.lineEdit_testRamStart.setText(str(hex(self.mixspiPerftestCfgDict['testRamStart'])))
-        self.lineEdit_testRamSize.setText(str(hex(self.mixspiPerftestCfgDict['testRamSize'])))
+        self.lineEdit_testMemStart.setText(str(hex(self.mixspiPerftestCfgDict['testMemStart'])))
+        self.lineEdit_testMemSize.setText(str(hex(self.mixspiPerftestCfgDict['testMemSize'])))
         self.lineEdit_testBlockSize.setText(str(hex(self.mixspiPerftestCfgDict['testBlockSize'])))
 
     def callbackOk( self, event ):
@@ -92,14 +92,14 @@ class memTesterUiPerfTest(QMainWindow, perfTestWin.Ui_perfTestDialog):
         else:
             pass
         self.mixspiPerftestCfgDict['iterations'] = int(self.lineEdit_numOfRuns.text())
-        status, ramStart = self._getVal32FromHexText(self.lineEdit_testRamStart.text())
+        status, ramStart = self._getVal32FromHexText(self.lineEdit_testMemStart.text())
         if status:
-            self.mixspiPerftestCfgDict['testRamStart'] = ramStart
+            self.mixspiPerftestCfgDict['testMemStart'] = ramStart
         else:
             return
-        status, ramSize = self._getVal32FromHexText(self.lineEdit_testRamSize.text())
+        status, ramSize = self._getVal32FromHexText(self.lineEdit_testMemSize.text())
         if status:
-            self.mixspiPerftestCfgDict['testRamSize'] = ramSize
+            self.mixspiPerftestCfgDict['testMemSize'] = ramSize
         else:
             return
         status, blockSize = self._getVal32FromHexText(self.lineEdit_testBlockSize.text())

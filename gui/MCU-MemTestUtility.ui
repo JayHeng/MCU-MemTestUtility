@@ -682,52 +682,6 @@
       </property>
      </item>
     </widget>
-    <widget class="QLabel" name="label_dummyCycles">
-     <property name="geometry">
-      <rect>
-       <x>540</x>
-       <y>40</y>
-       <width>91</width>
-       <height>16</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <weight>75</weight>
-       <bold>true</bold>
-      </font>
-     </property>
-     <property name="text">
-      <string>Dummy Cycles:</string>
-     </property>
-    </widget>
-    <widget class="QLineEdit" name="lineEdit_dummyCycles">
-     <property name="geometry">
-      <rect>
-       <x>630</x>
-       <y>40</y>
-       <width>81</width>
-       <height>20</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <family>MS Shell Dlg 2</family>
-      </font>
-     </property>
-     <property name="autoFillBackground">
-      <bool>true</bool>
-     </property>
-     <property name="text">
-      <string>8</string>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignCenter</set>
-     </property>
-     <property name="readOnly">
-      <bool>true</bool>
-     </property>
-    </widget>
    </widget>
    <widget class="QFrame" name="dispFrame">
     <property name="geometry">

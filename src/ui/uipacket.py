@@ -324,8 +324,8 @@ class perfTestPacket(object):
         self.subTestSet = mixspiPerfTestCfgDict['subTestSet']
         self.enableAverageShow = mixspiPerfTestCfgDict['enableAverageShow']
         self.iterations = mixspiPerfTestCfgDict['iterations']
-        self.testRamStart = mixspiPerfTestCfgDict['testRamStart']
-        self.testRamSize = mixspiPerfTestCfgDict['testRamSize']
+        self.testMemStart = mixspiPerfTestCfgDict['testMemStart']
+        self.testMemSize = mixspiPerfTestCfgDict['testMemSize']
         self.testBlockSize = mixspiPerfTestCfgDict['testBlockSize']
         self.crcCheckSum = 0x0000
 
@@ -339,14 +339,14 @@ class perfTestPacket(object):
                          (self.iterations & 0xFF00) >> 8,
                          (self.iterations & 0xFF0000) >> 16, 
                          (self.iterations & 0xFF000000) >> 24,
-                         self.testRamStart & 0xFF,
-                         (self.testRamStart & 0xFF00) >> 8,
-                         (self.testRamStart & 0xFF0000) >> 16, 
-                         (self.testRamStart & 0xFF000000) >> 24,
-                         self.testRamSize & 0xFF,
-                         (self.testRamSize & 0xFF00) >> 8,
-                         (self.testRamSize & 0xFF0000) >> 16, 
-                         (self.testRamSize & 0xFF000000) >> 24,
+                         self.testMemStart & 0xFF,
+                         (self.testMemStart & 0xFF00) >> 8,
+                         (self.testMemStart & 0xFF0000) >> 16, 
+                         (self.testMemStart & 0xFF000000) >> 24,
+                         self.testMemSize & 0xFF,
+                         (self.testMemSize & 0xFF00) >> 8,
+                         (self.testMemSize & 0xFF0000) >> 16, 
+                         (self.testMemSize & 0xFF000000) >> 24,
                          self.testBlockSize & 0xFF,
                          (self.testBlockSize & 0xFF00) >> 8,
                          (self.testBlockSize & 0xFF0000) >> 16, 
@@ -369,8 +369,8 @@ class stressTestPacket(object):
         self.enableStopWhenFail = None
         self.reserved0 = [0x0, 0x0]
         self.iterations = None
-        self.testRamStart = None
-        self.testRamSize = None
+        self.testMemStart = None
+        self.testMemSize = None
         self.testPageSize = None
         self.crcCheckSum = None
         self.reserved1 = [0x0, 0x0]
@@ -380,8 +380,8 @@ class stressTestPacket(object):
         self.testSet = mixspiStressTestCfgDict['testSet']
         self.enableStopWhenFail = mixspiStressTestCfgDict['enableStopWhenFail']
         self.iterations = mixspiStressTestCfgDict['iterations']
-        self.testRamStart = mixspiStressTestCfgDict['testRamStart']
-        self.testRamSize = mixspiStressTestCfgDict['testRamSize']
+        self.testMemStart = mixspiStressTestCfgDict['testMemStart']
+        self.testMemSize = mixspiStressTestCfgDict['testMemSize']
         self.testPageSize = mixspiStressTestCfgDict['testPageSize']
         self.crcCheckSum = 0x0000
 
@@ -395,14 +395,14 @@ class stressTestPacket(object):
                          (self.iterations & 0xFF00) >> 8,
                          (self.iterations & 0xFF0000) >> 16, 
                          (self.iterations & 0xFF000000) >> 24,
-                         self.testRamStart & 0xFF,
-                         (self.testRamStart & 0xFF00) >> 8,
-                         (self.testRamStart & 0xFF0000) >> 16, 
-                         (self.testRamStart & 0xFF000000) >> 24,
-                         self.testRamSize & 0xFF,
-                         (self.testRamSize & 0xFF00) >> 8,
-                         (self.testRamSize & 0xFF0000) >> 16, 
-                         (self.testRamSize & 0xFF000000) >> 24,
+                         self.testMemStart & 0xFF,
+                         (self.testMemStart & 0xFF00) >> 8,
+                         (self.testMemStart & 0xFF0000) >> 16, 
+                         (self.testMemStart & 0xFF000000) >> 24,
+                         self.testMemSize & 0xFF,
+                         (self.testMemSize & 0xFF00) >> 8,
+                         (self.testMemSize & 0xFF0000) >> 16, 
+                         (self.testMemSize & 0xFF000000) >> 24,
                          self.testPageSize & 0xFF,
                          (self.testPageSize & 0xFF00) >> 8,
                          (self.testPageSize & 0xFF0000) >> 16, 

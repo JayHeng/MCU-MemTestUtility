@@ -186,7 +186,7 @@
     <string>Show Average:</string>
    </property>
   </widget>
-  <widget class="QLabel" name="label_testRamStart">
+  <widget class="QLabel" name="label_testMemStart">
    <property name="geometry">
     <rect>
      <x>20</x>
@@ -202,10 +202,10 @@
     </font>
    </property>
    <property name="text">
-    <string>Test RAM start:</string>
+    <string>Test MEM start:</string>
    </property>
   </widget>
-  <widget class="QLabel" name="label_testRamSize">
+  <widget class="QLabel" name="label_testMemSize">
    <property name="geometry">
     <rect>
      <x>20</x>
@@ -221,7 +221,7 @@
     </font>
    </property>
    <property name="text">
-    <string>Test RAM size:</string>
+    <string>Test MEM size:</string>
    </property>
   </widget>
   <widget class="QLabel" name="label_testBlockSize">
@@ -243,7 +243,7 @@
     <string>Test Block size:</string>
    </property>
   </widget>
-  <widget class="QLineEdit" name="lineEdit_testRamSize">
+  <widget class="QLineEdit" name="lineEdit_testMemSize">
    <property name="geometry">
     <rect>
      <x>140</x>
@@ -275,7 +275,7 @@
     <set>Qt::AlignCenter</set>
    </property>
   </widget>
-  <widget class="QLineEdit" name="lineEdit_testRamStart">
+  <widget class="QLineEdit" name="lineEdit_testMemStart">
    <property name="geometry">
     <rect>
      <x>140</x>

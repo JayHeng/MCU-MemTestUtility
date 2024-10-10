@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>353</width>
-    <height>316</height>
+    <height>279</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -70,7 +70,7 @@
    <property name="geometry">
     <rect>
      <x>80</x>
-     <y>270</y>
+     <y>220</y>
      <width>75</width>
      <height>31</height>
     </rect>
@@ -83,7 +83,7 @@
    <property name="geometry">
     <rect>
      <x>210</x>
-     <y>270</y>
+     <y>220</y>
      <width>75</width>
      <height>31</height>
     </rect>
@@ -127,7 +127,7 @@
     <string>Stop When Fail:</string>
    </property>
   </widget>
-  <widget class="QLabel" name="label_testRamStart">
+  <widget class="QLabel" name="label_testMemStart">
    <property name="geometry">
     <rect>
      <x>20</x>
@@ -143,10 +143,10 @@
     </font>
    </property>
    <property name="text">
-    <string>Test RAM start:</string>
+    <string>Test MEM start:</string>
    </property>
   </widget>
-  <widget class="QLabel" name="label_testRamSize">
+  <widget class="QLabel" name="label_testMemSize">
    <property name="geometry">
     <rect>
      <x>20</x>
@@ -162,10 +162,10 @@
     </font>
    </property>
    <property name="text">
-    <string>Test RAM size:</string>
+    <string>Test MEM size:</string>
    </property>
   </widget>
-  <widget class="QLabel" name="label_ramPageSize">
+  <widget class="QLabel" name="label_testPageSize">
    <property name="geometry">
     <rect>
      <x>20</x>
@@ -181,10 +181,10 @@
     </font>
    </property>
    <property name="text">
-    <string>RAM Page size:</string>
+    <string>Test Page size:</string>
    </property>
   </widget>
-  <widget class="QLineEdit" name="lineEdit_testRamSize">
+  <widget class="QLineEdit" name="lineEdit_testMemSize">
    <property name="geometry">
     <rect>
      <x>140</x>
@@ -200,7 +200,7 @@
     <set>Qt::AlignCenter</set>
    </property>
   </widget>
-  <widget class="QLineEdit" name="lineEdit_ramPageSize">
+  <widget class="QLineEdit" name="lineEdit_testPageSize">
    <property name="geometry">
     <rect>
      <x>140</x>
@@ -216,7 +216,7 @@
     <set>Qt::AlignCenter</set>
    </property>
   </widget>
-  <widget class="QLineEdit" name="lineEdit_testRamStart">
+  <widget class="QLineEdit" name="lineEdit_testMemStart">
    <property name="geometry">
     <rect>
      <x>140</x>

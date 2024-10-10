@@ -45,16 +45,16 @@ g_mixspiPerfTestCfgDict = {'testSet':None,
                            'iterations':None,
                            'subTestSet':None,
                            'enableAverageShow':None,
-                           'testRamStart':None,
-                           'testRamSize':None,
+                           'testMemStart':None,
+                           'testMemSize':None,
                            'testBlockSize':None,
                             }
 
 g_mixspiStressTestCfgDict = {'testSet':None,
                              'iterations':None,
                              'enableStopWhenFail':None,
-                             'testRamStart':None,
-                             'testRamSize':None,
+                             'testMemStart':None,
+                             'testMemSize':None,
                              'testPageSize':None,
                             }
 
@@ -115,16 +115,16 @@ def initVar(cfgFilename):
                                    'iterations':10,
                                    'subTestSet':0xC1,
                                    'enableAverageShow':1,
-                                   'testRamStart':0x20500000,
-                                   'testRamSize':0x20000,
+                                   'testMemStart':0x20500000,
+                                   'testMemSize':0x20000,
                                    'testBlockSize':0x400,
                                     }
 
         g_mixspiStressTestCfgDict = {'testSet':0xE0,
                                      'iterations':1,
                                      'enableStopWhenFail':1,
-                                     'testRamStart':0x20500000,
-                                     'testRamSize':0x10000,
+                                     'testMemStart':0x20500000,
+                                     'testMemSize':0x10000,
                                      'testPageSize':0x400,
                                     }
 
