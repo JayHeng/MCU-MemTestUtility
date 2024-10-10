@@ -36,6 +36,7 @@ class memTesterMain(runcore.memTesterRun):
         self.comboBox_mcuDevice.currentIndexChanged.connect(self.callbackSetMcuDevice)
         self.pushButton_mixspiConnectionConfiguration.clicked.connect(self.callbackMixspiConnectionConfiguration)
         self.pushButton_connect.clicked.connect(self.callbackConnectToDevice)
+        self.comboBox_memVendor.currentIndexChanged.connect(self.callbackSetMemVendor)
         self.comboBox_memType.currentIndexChanged.connect(self.callbackSetMemType)
         self.pushButton_pinTest.clicked.connect(self.callbackPinTest)
         self.pushButton_configSystem.clicked.connect(self.callbackConfigSystem)
@@ -98,6 +99,9 @@ class memTesterMain(runcore.memTesterRun):
             self.showContentOnSecPacketWin(u"【Action】: Click <Reset> button to reboot system.")
             self.isDeviceConnected = False
             self.closeUartPort()
+
+    def callbackSetMemVendor( self ):
+        self.setMemVendor()
 
     def callbackSetMemType( self ):
         self.setMemType()

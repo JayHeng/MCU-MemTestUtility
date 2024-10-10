@@ -104,9 +104,10 @@ class memTesterUi(QMainWindow, memTesterWin.Ui_memTesterWin):
         self.setTargetSetupValue()
         self.initFuncUi()
         self._initFlexspiConn()
+        self.memVendor = None
         self.memType = None
-        self._initMemType()
         self.memChip = None
+        self._initMemVendor()
         self.memLut = []
         self.flashPropertyDict = None
 
@@ -400,24 +401,26 @@ class memTesterUi(QMainWindow, memTesterWin.Ui_memTesterWin):
         mypacket.set_members()
         self.sendUartData(mypacket.out_bytes())
 
-    def _initMemType( self ):
+    def _initMemVendor( self ):
+        self.comboBox_memVendor.clear()
+        self.comboBox_memVendor.addItems(uidef.kMemVendorList)
+        self.comboBox_memVendor.setCurrentIndex(0)
+        self.setMemVendor()
+
+    def setMemVendor( self ):
+        self.memVendor = self.comboBox_memVendor.currentText()
+        #print(self.memVendor)
+        self.comboBox_memType.clear()
+        self.comboBox_memType.addItems(uidef.kMemDeviceDict[self.memVendor].keys())
+        self.comboBox_memType.setCurrentIndex(0)
         self.setMemType()
 
     def setMemType( self ):
         self.memType = self.comboBox_memType.currentText()
+        #print(self.memType)
         self.comboBox_memChip.clear()
-        if self.memType == uidef.kMemType_QuadSPI:
-            self.comboBox_memChip.addItems(uidef.kFlexspiNorDevices_QuadSPI)
-        elif self.memType == uidef.kMemType_OctalSPI:
-            self.comboBox_memChip.addItems(uidef.kFlexspiNorDevices_OctalSPI)
-        elif self.memType == uidef.kMemType_HyperFlash:
-            self.comboBox_memChip.addItems(uidef.kFlexspiNorDevices_HyperFlash)
-        elif self.memType == uidef.kMemType_PSRAM:
-            self.comboBox_memChip.addItems(uidef.kFlexspiRamDevices_PSRAM)
-        elif self.memType == uidef.kMemType_HyperRAM:
-            self.comboBox_memChip.addItems(uidef.kFlexspiRamDevices_HyperRAM)
-        else:
-            pass
+        self.comboBox_memChip.addItems(uidef.kMemDeviceDict[self.memVendor][self.memType])
+        self.comboBox_memChip.setCurrentIndex(0)
 
     def _getLutFromMemChip( self ):
         self.memChip = self.comboBox_memChip.currentText()

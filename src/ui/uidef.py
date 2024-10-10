@@ -38,6 +38,7 @@ kMcuDevice_Latest     = kMcuDevice_iMXRTxxx + kMcuDevice_iMXRT10yy + kMcuDevice_
 
 kFlexspiNorDevice_ISSI_IS25LP064A       = 'ISSI_IS25LPxxxA_IS25WPxxxA'
 kFlexspiNorDevice_ISSI_IS26KS512S       = 'ISSI_IS26KSxxxS_IS26KLxxxS'
+kFlexspiNorDevice_ISSI_IS25WX256        = 'ISSI_IS25WX256'
 kFlexspiNorDevice_MXIC_MX25L12845G      = 'Macronix_MX25Uxxx32F_MX25Lxxx45G'
 kFlexspiNorDevice_MXIC_MX25UM51245G     = 'Macronix_MX25UMxxx45G_MX66UMxxx45G_MX25LMxxx45G'
 kFlexspiNorDevice_MXIC_MX25UM51345G     = 'Macronix_MX25UM51345G'
@@ -47,12 +48,14 @@ kFlexspiNorDevice_Micron_MT35X          = 'Micron_MT35XLxxxA_MT35XUxxxA'
 kFlexspiNorDevice_Adesto_AT25SF128A     = 'Adesto_AT25SFxxxA'
 kFlexspiNorDevice_Adesto_ATXP032        = 'Adesto_ATXPxxx'
 kFlexspiNorDevice_Cypress_S25FL128S     = 'Cypress_S25FSxxxS_S25FLxxxS'
+kFlexspiNorDevice_Cypress_S28HS512T     = 'Cypress_S28HSxxxT_S28HLxxxT'
 kFlexspiNorDevice_Cypress_S26KS512S     = 'Cypress_S26KSxxxS_S26KLxxxS'
 kFlexspiNorDevice_GigaDevice_GD25Q64C   = 'GigaDevice_GD25QxxxC'
 kFlexspiNorDevice_GigaDevice_GD25LB256E = 'GigaDevice_GD25LBxxxE'
 kFlexspiNorDevice_GigaDevice_GD25LT256E = 'GigaDevice_GD25LTxxxE'
 kFlexspiNorDevice_GigaDevice_GD25LX256E = 'GigaDevice_GD25LXxxxE'
 kFlexspiNorDevice_Winbond_W25Q128JV     = 'Winbond_W25QxxxJV'
+kFlexspiNorDevice_Winbond_W35T51NW      = 'Winbond_W35T51NW'
 kFlexspiNorDevice_Microchip_SST26VF064B = 'Microchip_SST26VFxxxB'
 kFlexspiNorDevice_FudanMicro_FM25Q64    = 'FudanMicro_FM25Qxxx'
 kFlexspiNorDevice_BoyaMicro_BY25Q16BS   = 'BoyaMicro_BY25QxxxBS'
@@ -68,7 +71,6 @@ kFlexspiNorDevices_QuadSPI = [kFlexspiNorDevice_ISSI_IS25LP064A,
                               kFlexspiNorDevice_Cypress_S25FL128S,
                               kFlexspiNorDevice_GigaDevice_GD25LB256E,
                               kFlexspiNorDevice_GigaDevice_GD25LT256E,
-                              kFlexspiNorDevice_GigaDevice_GD25LX256E,
                               kFlexspiNorDevice_Winbond_W25Q128JV,
                               kFlexspiNorDevice_Microchip_SST26VF064B,
                               kFlexspiNorDevice_FudanMicro_FM25Q64,
@@ -82,7 +84,10 @@ kFlexspiNorDevices_QuadSPI = [kFlexspiNorDevice_ISSI_IS25LP064A,
 kFlexspiNorDevices_OctalSPI = [kFlexspiNorDevice_MXIC_MX25UM51245G,
                                kFlexspiNorDevice_MXIC_MX25UM51345G,
                                kFlexspiNorDevice_Micron_MT35X,
-                               kFlexspiNorDevice_Adesto_ATXP032
+                               kFlexspiNorDevice_Adesto_ATXP032,
+                               kFlexspiNorDevice_ISSI_IS25WX256,
+                               kFlexspiNorDevice_Winbond_W35T51NW,
+                               kFlexspiNorDevice_GigaDevice_GD25LX256E,
                               ]
 
 kFlexspiNorDevices_HyperFlash = [kFlexspiNorDevice_ISSI_IS26KS512S,
@@ -91,10 +96,12 @@ kFlexspiNorDevices_HyperFlash = [kFlexspiNorDevice_ISSI_IS26KS512S,
 
 kFlexspiRamDevice_APMemory_APS12808L       = 'APMemory_APSxxx08L'
 kFlexspiRamDevice_Cypress_S27KL0641        = 'Cypress_S27KLxxx1_S27KSxxx1'
-kFlexspiRamDevice_ISSI_IS66WVH8M8          = 'ISSI_IS66WVH8M8_IS67WVH8M8'
+kFlexspiRamDevice_ISSI_IS66WVH8M8          = 'ISSI_IS66WVHxxM8_IS67WVHxxM8'
+kFlexspiRamDevice_ISSI_IS66WVO8M8          = 'ISSI_IS66WVOxxM8_IS67WVOxxM8'
 kFlexspiRamDevice_Winbond_W957D8           = 'Winbond_W957D8_W957A8'
 
-kFlexspiRamDevices_PSRAM    = [kFlexspiRamDevice_APMemory_APS12808L
+kFlexspiRamDevices_PSRAM    = [kFlexspiRamDevice_APMemory_APS12808L,
+                               kFlexspiRamDevice_ISSI_IS66WVO8M8
                               ]
 
 kFlexspiRamDevices_HyperRAM = [kFlexspiRamDevice_Cypress_S27KL0641,
@@ -102,11 +109,80 @@ kFlexspiRamDevices_HyperRAM = [kFlexspiRamDevice_Cypress_S27KL0641,
                                kFlexspiRamDevice_Winbond_W957D8
                               ]
 
-kMemType_QuadSPI    = 'Quad SPI NOR Flash'
-kMemType_OctalSPI   = 'Octal SPI NOR Flash'
-kMemType_HyperFlash = 'HyperBus NOR Flash'
+kMemVendor_Winbond    = 'Winbond'
+kMemVendor_Macronix   = 'Macronix'
+kMemVendor_GigaDevice = 'GigaDevice'
+kMemVendor_Infineon   = 'Infineon_Cypress_Spansion'
+kMemVendor_Micron     = 'Micron'
+kMemVendor_ISSI       = 'ISSI'
+kMemVendor_Renesas    = 'Renesas_Dialog__Adesto'
+kMemVendor_APMemory   = 'APMemory'
+kMemVendor_Misc       = 'Misc'
+
+kMemVendorList = [kMemVendor_Winbond,
+                  kMemVendor_Macronix,
+                  kMemVendor_GigaDevice,
+                  kMemVendor_Infineon,
+                  kMemVendor_Micron,
+                  kMemVendor_ISSI,
+                  kMemVendor_Renesas,
+                  kMemVendor_APMemory,
+                  kMemVendor_Misc]
+
+kMemType_QuadSPI    = 'QuadSPI NOR'
+kMemType_OctalSPI   = 'OctalSPI NOR'
+kMemType_HyperFlash = 'HyperFlash'
 kMemType_PSRAM      = 'PSRAM'
 kMemType_HyperRAM   = 'HyperRAM'
+
+kMemDeviceDict = {
+    kMemVendor_Winbond:{
+         kMemType_QuadSPI:[kFlexspiNorDevice_Winbond_W25Q128JV],
+         kMemType_OctalSPI:[kFlexspiNorDevice_Winbond_W35T51NW],
+         kMemType_HyperRAM:[kFlexspiRamDevice_Winbond_W957D8],
+    },
+    kMemVendor_Macronix:{
+         kMemType_QuadSPI:[kFlexspiNorDevice_MXIC_MX25L12845G],
+         kMemType_OctalSPI:[kFlexspiNorDevice_MXIC_MX25UM51245G, kFlexspiNorDevice_MXIC_MX25UM51345G],
+    },
+    kMemVendor_GigaDevice:{
+         kMemType_QuadSPI:[kFlexspiNorDevice_GigaDevice_GD25LB256E, kFlexspiNorDevice_GigaDevice_GD25LT256E],
+         kMemType_OctalSPI:[kFlexspiNorDevice_GigaDevice_GD25LX256E],
+    },
+    kMemVendor_Infineon:{
+         kMemType_QuadSPI:[kFlexspiNorDevice_Cypress_S25FL128S],
+         kMemType_OctalSPI:[kFlexspiNorDevice_Cypress_S28HS512T],
+         kMemType_HyperFlash:[kFlexspiNorDevice_Cypress_S26KS512S],
+         kMemType_HyperRAM:[kFlexspiRamDevice_Cypress_S27KL0641],
+    },
+    kMemVendor_Micron:{
+         kMemType_QuadSPI:[kFlexspiNorDevice_Micron_MT25QL128A],
+         kMemType_OctalSPI:[kFlexspiNorDevice_Micron_MT35X],
+    },
+    kMemVendor_ISSI:{
+         kMemType_QuadSPI:[kFlexspiNorDevice_ISSI_IS25LP064A],
+         kMemType_OctalSPI:[kFlexspiNorDevice_ISSI_IS25WX256],
+         kMemType_HyperFlash:[kFlexspiNorDevice_ISSI_IS26KS512S],
+         kMemType_PSRAM:[kFlexspiRamDevice_ISSI_IS66WVO8M8],
+         kMemType_HyperRAM:[kFlexspiRamDevice_ISSI_IS66WVH8M8],
+    },
+    kMemVendor_Renesas:{
+         kMemType_QuadSPI:[kFlexspiNorDevice_Adesto_AT25SF128A],
+         kMemType_OctalSPI:[kFlexspiNorDevice_Adesto_ATXP032],
+    },
+    kMemVendor_APMemory:{
+         kMemType_PSRAM:[kFlexspiRamDevice_APMemory_APS12808L],
+    },
+    kMemVendor_Misc:{
+         kMemType_QuadSPI:[kFlexspiNorDevice_Microchip_SST26VF064B,
+                           kFlexspiNorDevice_FudanMicro_FM25Q64,
+                           kFlexspiNorDevice_BoyaMicro_BY25Q16BS,
+                           kFlexspiNorDevice_XMC_XM25QH64B,
+                           kFlexspiNorDevice_XTXtech_X25Q64D,
+                           kFlexspiNorDevice_Puya_P25Q64LE,
+                           kFlexspiNorDevice_AMIC_A25LQ64],
+    },
+}
 
 kAdvancedSettings_Tool             = 0
 kAdvancedSettings_Conn             = 1
