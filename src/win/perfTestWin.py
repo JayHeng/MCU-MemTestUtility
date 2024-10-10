@@ -14,7 +14,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_perfTestDialog(object):
     def setupUi(self, perfTestDialog):
         perfTestDialog.setObjectName("perfTestDialog")
-        perfTestDialog.resize(353, 316)
+        perfTestDialog.resize(353, 294)
         self.label_testSet = QtWidgets.QLabel(perfTestDialog)
         self.label_testSet.setGeometry(QtCore.QRect(20, 20, 111, 20))
         font = QtGui.QFont()
@@ -37,10 +37,10 @@ class Ui_perfTestDialog(object):
         self.comboBox_testSet.addItem("")
         self.comboBox_testSet.addItem("")
         self.pushButton_ok = QtWidgets.QPushButton(perfTestDialog)
-        self.pushButton_ok.setGeometry(QtCore.QRect(80, 270, 75, 31))
+        self.pushButton_ok.setGeometry(QtCore.QRect(80, 240, 75, 31))
         self.pushButton_ok.setObjectName("pushButton_ok")
         self.pushButton_cancel = QtWidgets.QPushButton(perfTestDialog)
-        self.pushButton_cancel.setGeometry(QtCore.QRect(210, 270, 75, 31))
+        self.pushButton_cancel.setGeometry(QtCore.QRect(210, 240, 75, 31))
         self.pushButton_cancel.setObjectName("pushButton_cancel")
         self.lineEdit_numOfRuns = QtWidgets.QLineEdit(perfTestDialog)
         self.lineEdit_numOfRuns.setGeometry(QtCore.QRect(140, 50, 191, 20))

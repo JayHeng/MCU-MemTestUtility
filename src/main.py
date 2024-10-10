@@ -9,6 +9,7 @@ from ui import uilang
 from ui import uivar
 from ui import ui_cfg_conn
 from ui import ui_cfg_pin_test
+from ui import ui_cfg_rw_test
 from ui import ui_cfg_perf_test
 from ui import ui_cfg_stress_test
 from run import runcore
@@ -127,6 +128,7 @@ class memTesterMain(runcore.memTesterRun):
         self.showContentOnSecPacketWin(u"【Action】: Click <R/W Test> button.")
         global s_goAction
         s_goAction = uidef.kGoAction_RwTest
+        rwTestFrame.show()
         self.resetAllActionButtonColor()
         self.setActionButtonColor(s_goAction)
 
@@ -210,6 +212,8 @@ if __name__ == '__main__':
     mixspiConnCfgFrame.setWindowTitle(u"MixSPI Connection Configuration")
     pinTestFrame = ui_cfg_pin_test.memTesterUiPinTest(None)
     pinTestFrame.setWindowTitle(u"Pin Test")
+    rwTestFrame = ui_cfg_rw_test.memTesterUiRwTest(None)
+    rwTestFrame.setWindowTitle(u"R/W Test")
     perfTestFrame = ui_cfg_perf_test.memTesterUiPerfTest(None)
     perfTestFrame.setWindowTitle(u"Perf Test")
     stressTestFrame = ui_cfg_stress_test.memTesterUiStressTest(None)

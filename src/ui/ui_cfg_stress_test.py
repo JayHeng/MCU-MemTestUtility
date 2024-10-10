@@ -67,14 +67,14 @@ class memTesterUiStressTest(QMainWindow, stressTestWin.Ui_stressTestDialog):
         else:
             pass
         self.mixspiStresstestCfgDict['iterations'] = int(self.lineEdit_numOfRuns.text())
-        status, ramStart = self._getVal32FromHexText(self.lineEdit_testMemStart.text())
+        status, memStart = self._getVal32FromHexText(self.lineEdit_testMemStart.text())
         if status:
-            self.mixspiStresstestCfgDict['testMemStart'] = ramStart
+            self.mixspiStresstestCfgDict['testMemStart'] = memStart
         else:
             return
-        status, ramSize = self._getVal32FromHexText(self.lineEdit_testMemSize.text())
+        status, memSize = self._getVal32FromHexText(self.lineEdit_testMemSize.text())
         if status:
-            self.mixspiStresstestCfgDict['testMemSize'] = ramSize
+            self.mixspiStresstestCfgDict['testMemSize'] = memSize
         else:
             return
         status, pageSize = self._getVal32FromHexText(self.lineEdit_testPageSize.text())

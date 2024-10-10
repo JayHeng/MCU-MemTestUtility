@@ -41,6 +41,12 @@ g_mixspiPintestCfgDict  = {'wavePulse':None,
                            'rstb_dis':None,
                             }
 
+g_mixspiRwTestCfgDict = {'testSet':None,
+                         'testMemStart':None,
+                         'testMemSize':None,
+                         'fillPatternWord':None,
+                          }
+
 g_mixspiPerfTestCfgDict = {'testSet':None,
                            'iterations':None,
                            'subTestSet':None,
@@ -64,6 +70,7 @@ def initVar(cfgFilename):
     global g_toolCommDict
     global g_mixspiConnCfgDict
     global g_mixspiPintestCfgDict
+    global g_mixspiRwTestCfgDict
     global g_mixspiPerfTestCfgDict
     global g_mixspiStressTestCfgDict
 
@@ -78,6 +85,7 @@ def initVar(cfgFilename):
         g_toolCommDict = cfgDict["cfgToolCommon"][0]
         g_mixspiConnCfgDict = cfgDict["cfgConn"][0]
         g_mixspiPintestCfgDict = cfgDict["cfgPintest"][0]
+        g_mixspiRwTestCfgDict = cfgDict["cfgRwTest"][0]
         g_mixspiPerfTestCfgDict = cfgDict["cfgPerfTest"][0]
         g_mixspiStressTestCfgDict = cfgDict["cfgStressTest"][0]
     else:
@@ -111,6 +119,12 @@ def initVar(cfgFilename):
                                    'rstb_dis':1,
                                    }
 
+        g_mixspiRwTestCfgDict = {'testSet':0x90,
+                                 'testMemStart':0x20500000,
+                                 'testMemSize':0x20000,
+                                 'fillPatternWord':0x5AA5FF00,
+                                  }
+
         g_mixspiPerfTestCfgDict = {'testSet':0xC0,
                                    'iterations':10,
                                    'subTestSet':0xC1,
@@ -136,12 +150,14 @@ def deinitVar(cfgFilename=None):
         global g_toolCommDict
         global g_mixspiConnCfgDict
         global g_mixspiPintestCfgDict
+        global g_mixspiRwTestCfgDict
         global g_mixspiPerfTestCfgDict
         global g_mixspiStressTestCfgDict
         cfgDict = {
             "cfgToolCommon": [g_toolCommDict],
             "cfgConn": [g_mixspiConnCfgDict],
             "cfgPintest": [g_mixspiPintestCfgDict],
+            "cfgRwTest": [g_mixspiRwTestCfgDict],
             "cfgPerfTest": [g_mixspiPerfTestCfgDict],
             "cfgStressTest": [g_mixspiStressTestCfgDict],
         }
@@ -158,6 +174,9 @@ def getAdvancedSettings( group ):
     elif group == uidef.kAdvancedSettings_Pintest:
         global g_mixspiPintestCfgDict
         return g_mixspiPintestCfgDict
+    elif group == uidef.kAdvancedSettings_RwTest:
+        global g_mixspiRwTestCfgDict
+        return g_mixspiRwTestCfgDict
     elif group == uidef.kAdvancedSettings_PerfTest:
         global g_mixspiPerfTestCfgDict
         return g_mixspiPerfTestCfgDict
@@ -177,6 +196,9 @@ def setAdvancedSettings( group, *args ):
     elif group == uidef.kAdvancedSettings_Pintest:
         global g_mixspiPintestCfgDict
         g_mixspiPintestCfgDict = args[0]
+    elif group == uidef.kAdvancedSettings_RwTest:
+        global g_mixspiRwTestCfgDict
+        g_mixspiRwTestCfgDict = args[0]
     elif group == uidef.kAdvancedSettings_PerfTest:
         global g_mixspiPerfTestCfgDict
         g_mixspiPerfTestCfgDict = args[0]

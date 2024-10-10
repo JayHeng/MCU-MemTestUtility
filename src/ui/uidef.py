@@ -111,8 +111,9 @@ kMemType_HyperRAM   = 'HyperRAM'
 kAdvancedSettings_Tool             = 0
 kAdvancedSettings_Conn             = 1
 kAdvancedSettings_Pintest          = 2
-kAdvancedSettings_PerfTest         = 3
-kAdvancedSettings_StressTest       = 4
+kAdvancedSettings_RwTest           = 3
+kAdvancedSettings_PerfTest         = 4
+kAdvancedSettings_StressTest       = 5
 
 kGoAction_PinTest                = 0
 kGoAction_ConfigSystem           = 1

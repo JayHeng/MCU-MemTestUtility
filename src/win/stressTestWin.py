@@ -14,7 +14,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_stressTestDialog(object):
     def setupUi(self, stressTestDialog):
         stressTestDialog.setObjectName("stressTestDialog")
-        stressTestDialog.resize(353, 279)
+        stressTestDialog.resize(353, 267)
         self.label_testSet = QtWidgets.QLabel(stressTestDialog)
         self.label_testSet.setGeometry(QtCore.QRect(20, 20, 111, 20))
         font = QtGui.QFont()
@@ -34,10 +34,10 @@ class Ui_stressTestDialog(object):
         self.comboBox_testSet.setObjectName("comboBox_testSet")
         self.comboBox_testSet.addItem("")
         self.pushButton_ok = QtWidgets.QPushButton(stressTestDialog)
-        self.pushButton_ok.setGeometry(QtCore.QRect(80, 220, 75, 31))
+        self.pushButton_ok.setGeometry(QtCore.QRect(80, 210, 75, 31))
         self.pushButton_ok.setObjectName("pushButton_ok")
         self.pushButton_cancel = QtWidgets.QPushButton(stressTestDialog)
-        self.pushButton_cancel.setGeometry(QtCore.QRect(210, 220, 75, 31))
+        self.pushButton_cancel.setGeometry(QtCore.QRect(210, 210, 75, 31))
         self.pushButton_cancel.setObjectName("pushButton_cancel")
         self.lineEdit_numOfRuns = QtWidgets.QLineEdit(stressTestDialog)
         self.lineEdit_numOfRuns.setGeometry(QtCore.QRect(140, 50, 191, 20))
