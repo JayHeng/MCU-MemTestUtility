@@ -408,19 +408,25 @@ class memTesterUi(QMainWindow, memTesterWin.Ui_memTesterWin):
         self.setMemVendor()
 
     def setMemVendor( self ):
-        self.memVendor = self.comboBox_memVendor.currentText()
-        #print(self.memVendor)
-        self.comboBox_memType.clear()
-        self.comboBox_memType.addItems(uidef.kMemDeviceDict[self.memVendor].keys())
-        self.comboBox_memType.setCurrentIndex(0)
-        self.setMemType()
+        try:
+            self.memVendor = self.comboBox_memVendor.currentText()
+            #print(self.memVendor)
+            self.comboBox_memType.clear()
+            self.comboBox_memType.addItems(uidef.kMemDeviceDict[self.memVendor].keys())
+            self.comboBox_memType.setCurrentIndex(0)
+            self.setMemType()
+        except:
+            pass
 
     def setMemType( self ):
-        self.memType = self.comboBox_memType.currentText()
-        #print(self.memType)
-        self.comboBox_memChip.clear()
-        self.comboBox_memChip.addItems(uidef.kMemDeviceDict[self.memVendor][self.memType])
-        self.comboBox_memChip.setCurrentIndex(0)
+        try:
+            self.memType = self.comboBox_memType.currentText()
+            #print(self.memType)
+            self.comboBox_memChip.clear()
+            self.comboBox_memChip.addItems(uidef.kMemDeviceDict[self.memVendor][self.memType])
+            self.comboBox_memChip.setCurrentIndex(0)
+        except:
+            pass
 
     def _getLutFromMemChip( self ):
         self.memChip = self.comboBox_memChip.currentText()
