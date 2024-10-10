@@ -37,6 +37,7 @@ from win import memTesterWin
 
 from targets.mem_model import ISSI_IS25LPxxxA_IS25WPxxxA
 from targets.mem_model import Winbond_W25QxxxJV
+from targets.mem_model import APMemory_APSxxx08L
 
 s_serialPort = serial.Serial()
 s_recvInterval = 1
@@ -109,7 +110,7 @@ class memTesterUi(QMainWindow, memTesterWin.Ui_memTesterWin):
         self.memChip = None
         self._initMemVendor()
         self.memLut = []
-        self.flashPropertyDict = None
+        self.memPropertyDict = None
 
         self.pinWaveFig = pinWaveformFigure(width=2, height=4, dpi=50)
         self.pinWaveFig.plotwave()
@@ -372,7 +373,7 @@ class memTesterUi(QMainWindow, memTesterWin.Ui_memTesterWin):
 
     def sendConfigSystemPacket( self ):
         self.getMemUserSettings()
-        mypacket = uipacket.configSystemPacket(self.memLut, self.flashPropertyDict)
+        mypacket = uipacket.configSystemPacket(self.memLut, self.memPropertyDict)
         mypacket.set_members(self.toolCommDict)
         self.sendUartData(mypacket.out_bytes())
 
@@ -431,18 +432,26 @@ class memTesterUi(QMainWindow, memTesterWin.Ui_memTesterWin):
     def _getLutFromMemChip( self ):
         self.memChip = self.comboBox_memChip.currentText()
         if self.memChip == uidef.kFlexspiNorDevice_ISSI_IS25LP064A:
-            self.memLut = uilut.generateCompleteMemLut(ISSI_IS25LPxxxA_IS25WPxxxA.mixspiLutDict)
-            self.flashPropertyDict = ISSI_IS25LPxxxA_IS25WPxxxA.flashPropertyDict.copy()
+            self.memLut = uilut.generateCompleteNorLut(ISSI_IS25LPxxxA_IS25WPxxxA.mixspiLutDict)
+            self.memPropertyDict = ISSI_IS25LPxxxA_IS25WPxxxA.flashPropertyDict.copy()
         elif self.memChip == uidef.kFlexspiNorDevice_Winbond_W25Q128JV:
-            self.memLut = uilut.generateCompleteMemLut(Winbond_W25QxxxJV.mixspiLutDict)
-            self.flashPropertyDict = Winbond_W25QxxxJV.flashPropertyDict.copy()
+            self.memLut = uilut.generateCompleteNorLut(Winbond_W25QxxxJV.mixspiLutDict)
+            self.memPropertyDict = Winbond_W25QxxxJV.flashPropertyDict.copy()
+        elif self.memChip == uidef.kFlexspiRamDevice_APMemory_APS12808L:
+            self.memLut = uilut.generateCompleteRamLut(APMemory_APSxxx08L.mixspiLutDict)
         else:
             pass
 
+    def _convertMemTypeValue(self, typeStr):
+        for i in range(len(uidef.kMemTypeList)):
+            if uidef.kMemTypeList[i] == typeStr:
+                return i
+        return 0
+
     def getMemUserSettings( self ):
         self._getLutFromMemChip()
-        memType = self.comboBox_memType.currentIndex()
-        self.toolCommDict['memType'] = memType
+        memType = self.comboBox_memType.currentText()
+        self.toolCommDict['memType'] = self._convertMemTypeValue(memType)
         memSpeed = self.comboBox_memSpeed.currentText()
         spdIdx = memSpeed.find('MHz')
         self.toolCommDict['memSpeed'] = int(memSpeed[0:spdIdx])

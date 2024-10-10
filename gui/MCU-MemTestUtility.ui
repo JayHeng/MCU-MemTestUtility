@@ -569,7 +569,27 @@
      </item>
      <item>
       <property name="text">
+       <string>240MHz</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
        <string>250MHz</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>266MHz</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>332MHz</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>400MHz</string>
       </property>
      </item>
     </widget>

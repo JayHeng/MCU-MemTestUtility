@@ -135,6 +135,8 @@ kMemType_HyperFlash = 'HyperFlash'
 kMemType_PSRAM      = 'PSRAM'
 kMemType_HyperRAM   = 'HyperRAM'
 
+kMemTypeList = [kMemType_QuadSPI, kMemType_OctalSPI, kMemType_HyperFlash, kMemType_PSRAM, kMemType_HyperRAM]
+
 kMemDeviceDict = {
     kMemVendor_Winbond:{
          kMemType_QuadSPI:[kFlexspiNorDevice_Winbond_W25Q128JV],

@@ -157,7 +157,7 @@ class pinTestPacket(object):
 
 class memoryPropertyStruct(object):
 
-    def __init__( self, memLut, flashPropertyDict):
+    def __init__( self, memLut, memPropertyDict):
         #super(memoryPropertyStruct, self).__init__(parent)
         self.type = None
         self.chip = None
@@ -166,8 +166,12 @@ class memoryPropertyStruct(object):
         self.interfaceMode = None
         self.sampleRateMode = None
         self.reserved0 = 0x0
-        self.flashQuadEnableCfg = flashPropertyDict['qe_cfg']
-        self.flashQuadEnableBytes = flashPropertyDict['qe_bytes']
+        try:
+            self.flashQuadEnableCfg = memPropertyDict['qe_cfg']
+            self.flashQuadEnableBytes = memPropertyDict['qe_bytes']
+        except:
+            self.flashQuadEnableCfg = 0x0
+            self.flashQuadEnableBytes = 0x0
         self.reserved1 = 0x0
         self.memLut = memLut
 

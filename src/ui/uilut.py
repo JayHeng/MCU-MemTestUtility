@@ -34,6 +34,15 @@ NOR_CMD_LUT_SEQ_IDX_READSTATUS_OPI  = 12
 NOR_CMD_LUT_SEQ_IDX_WRITEENABLE_OPI = 13
 NOR_CMD_LUT_SEQ_IDX_ERASESECTOR_OPI = 14
 NOR_CMD_LUT_SEQ_IDX_PAGEPROGRAM_OPI = 15
+
+############################################################################
+PSRAM_CMD_LUT_SEQ_IDX_READDATA   = 0
+PSRAM_CMD_LUT_SEQ_IDX_WRITEDATA  = 1
+PSRAM_CMD_LUT_SEQ_IDX_READREG    = 2
+PSRAM_CMD_LUT_SEQ_IDX_WRITEREG   = 3
+PSRAM_CMD_LUT_SEQ_IDX_RESET      = 4
+PSRAM_CMD_LUT_SEQ_IDX_READID     = 5
+
 ############################################################################
 
 kFLEXSPI_Command_STOP           = 0x00
@@ -95,7 +104,7 @@ class mixspiLutSequence(object):
         self.sequence[3] |= (op6 & 0xFF) | ((pad6 << 8) & 0x300) | ((cmd6 << 10) & 0xFC00)
         self.sequence[3] |= ((op7 & 0xFF) | ((pad7 << 8) & 0x300) | ((cmd7 << 10) & 0xFC00)) << 16
 
-def generateCompleteMemLut( mixspiLutDict ):
+def generateCompleteNorLut( mixspiLutDict ):
     memLut = [0x0] * CUSTOM_LUT_LENGTH
     for key in mixspiLutDict.keys():
         if key == 'READ':
@@ -116,4 +125,21 @@ def generateCompleteMemLut( mixspiLutDict ):
             memLut[(NOR_CMD_LUT_SEQ_IDX_ERASESECTOR * 4):((NOR_CMD_LUT_SEQ_IDX_ERASESECTOR + 1) * 4)] = mixspiLutDict[key].sequence
         if key == 'PAGEPROGRAM':
             memLut[(NOR_CMD_LUT_SEQ_IDX_PAGEPROGRAM * 4):((NOR_CMD_LUT_SEQ_IDX_PAGEPROGRAM + 1) * 4)] = mixspiLutDict[key].sequence
+    return memLut
+
+def generateCompleteRamLut( mixspiLutDict ):
+    memLut = [0x0] * CUSTOM_LUT_LENGTH
+    for key in mixspiLutDict.keys():
+        if key == 'READDATA':
+            memLut[(PSRAM_CMD_LUT_SEQ_IDX_READDATA * 4):((PSRAM_CMD_LUT_SEQ_IDX_READDATA + 1) * 4)] = mixspiLutDict[key].sequence
+        if key == 'WRITEDATA':
+            memLut[(PSRAM_CMD_LUT_SEQ_IDX_WRITEDATA * 4):((PSRAM_CMD_LUT_SEQ_IDX_WRITEDATA + 1) * 4)] = mixspiLutDict[key].sequence
+        if key == 'READREG':
+            memLut[(PSRAM_CMD_LUT_SEQ_IDX_READREG * 4):((PSRAM_CMD_LUT_SEQ_IDX_READREG + 1) * 4)] = mixspiLutDict[key].sequence
+        if key == 'WRITEREG':
+            memLut[(PSRAM_CMD_LUT_SEQ_IDX_WRITEREG * 4):((PSRAM_CMD_LUT_SEQ_IDX_WRITEREG + 1) * 4)] = mixspiLutDict[key].sequence
+        if key == 'RESET':
+            memLut[(PSRAM_CMD_LUT_SEQ_IDX_RESET * 4):((PSRAM_CMD_LUT_SEQ_IDX_RESET + 1) * 4)] = mixspiLutDict[key].sequence
+        if key == 'READID':
+            memLut[(PSRAM_CMD_LUT_SEQ_IDX_READID * 4):((PSRAM_CMD_LUT_SEQ_IDX_READID + 1) * 4)] = mixspiLutDict[key].sequence
     return memLut
