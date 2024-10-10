@@ -273,33 +273,47 @@ class rwTestPacket(object):
 
     def __init__( self, parent=None):
         #super(rwTestPacket, self).__init__(parent)
-        self.memStart = None
-        self.memLen = None
+        self.testSet = None
+        self.reserved0 = [0x0, 0x0, 0x0]
+        self.testMemStart = None
+        self.testMemSize = None
+        self.fillPatternWord = None
         self.crcCheckSum = None
-        self.reserved0 = [0x0, 0x0]
+        self.reserved1 = [0x0, 0x0]
 
     def set_members( self ):
-        self.memStart = 0x00000000
-        self.memLen = 0x00000400
+        mixspiRwTestCfgDict = uivar.getAdvancedSettings(uidef.kAdvancedSettings_RwTest)
+        self.testSet = mixspiRwTestCfgDict['testSet']
+        self.testMemStart = mixspiRwTestCfgDict['testMemStart']
+        self.testMemSize = mixspiRwTestCfgDict['testMemSize']
+        self.fillPatternWord = mixspiRwTestCfgDict['fillPatternWord']
         self.crcCheckSum = 0x0000
 
     def out_bytes( self ):
         startbytes = bytes(kPacketTag, 'ascii') + bytes([kCommandTag_RunRwTest])
-        mybytes = bytes([self.memStart & 0xFF,
-                         (self.memStart & 0xFF00) >> 8,
-                         (self.memStart & 0xFF0000) >> 16, 
-                         (self.memStart & 0xFF000000) >> 24,
-                         self.memLen & 0xFF,
-                         (self.memLen & 0xFF00) >> 8,
-                         (self.memLen & 0xFF0000) >> 16, 
-                         (self.memLen & 0xFF000000) >> 24
+        mybytes = bytes([self.testSet,
+                         self.reserved0[0],
+                         self.reserved0[1],
+                         self.reserved0[2],
+                         self.testMemStart & 0xFF,
+                         (self.testMemStart & 0xFF00) >> 8,
+                         (self.testMemStart & 0xFF0000) >> 16, 
+                         (self.testMemStart & 0xFF000000) >> 24,
+                         self.testMemSize & 0xFF,
+                         (self.testMemSize & 0xFF00) >> 8,
+                         (self.testMemSize & 0xFF0000) >> 16, 
+                         (self.testMemSize & 0xFF000000) >> 24,
+                         self.fillPatternWord & 0xFF,
+                         (self.fillPatternWord & 0xFF00) >> 8,
+                         (self.fillPatternWord & 0xFF0000) >> 16, 
+                         (self.fillPatternWord & 0xFF000000) >> 24
                         ])
         packetBytes = mybytes
         self.crcCheckSum = calculate_crc16(packetBytes)
         crcbytes = bytes([self.crcCheckSum & 0xFF,
                           (self.crcCheckSum & 0xFF00) >> 8,
-                          self.reserved0[0],
-                          self.reserved0[1]
+                          self.reserved1[0],
+                          self.reserved1[1]
                          ])
         return startbytes + packetBytes + crcbytes
 
