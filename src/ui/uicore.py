@@ -38,6 +38,7 @@ from win import memTesterWin
 from targets.mem_model import ISSI_IS25LPxxxA_IS25WPxxxA
 from targets.mem_model import Winbond_W25QxxxJV
 from targets.mem_model import APMemory_APSxxx08L
+from targets.mem_model import ISSI_IS66WVQxxM4_IS67WVQxxM4
 
 s_serialPort = serial.Serial()
 s_recvInterval = 1
@@ -433,12 +434,16 @@ class memTesterUi(QMainWindow, memTesterWin.Ui_memTesterWin):
         self.memChip = self.comboBox_memChip.currentText()
         if self.memChip == uidef.kFlexspiNorDevice_ISSI_IS25LP064A:
             self.memLut = uilut.generateCompleteNorLut(ISSI_IS25LPxxxA_IS25WPxxxA.mixspiLutDict)
-            self.memPropertyDict = ISSI_IS25LPxxxA_IS25WPxxxA.flashPropertyDict.copy()
+            self.memPropertyDict = ISSI_IS25LPxxxA_IS25WPxxxA.memPropertyDict.copy()
         elif self.memChip == uidef.kFlexspiNorDevice_Winbond_W25Q128JV:
             self.memLut = uilut.generateCompleteNorLut(Winbond_W25QxxxJV.mixspiLutDict)
-            self.memPropertyDict = Winbond_W25QxxxJV.flashPropertyDict.copy()
+            self.memPropertyDict = Winbond_W25QxxxJV.memPropertyDict.copy()
         elif self.memChip == uidef.kFlexspiRamDevice_APMemory_APS12808L:
             self.memLut = uilut.generateCompleteRamLut(APMemory_APSxxx08L.mixspiLutDict)
+            self.memPropertyDict = APMemory_APSxxx08L.memPropertyDict.copy()
+        elif self.memChip == uidef.kFlexspiRamDevice_ISSI_IS66WVQ8M4:
+            self.memLut = uilut.generateCompleteRamLut(ISSI_IS66WVQ8M4.mixspiLutDict)
+            self.memPropertyDict = ISSI_IS66WVQ8M4.memPropertyDict.copy()
         else:
             pass
 

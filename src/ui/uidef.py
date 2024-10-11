@@ -98,10 +98,12 @@ kFlexspiRamDevice_APMemory_APS12808L       = 'APMemory_APSxxx08L'
 kFlexspiRamDevice_Cypress_S27KL0641        = 'Cypress_S27KLxxx1_S27KSxxx1'
 kFlexspiRamDevice_ISSI_IS66WVH8M8          = 'ISSI_IS66WVHxxM8_IS67WVHxxM8'
 kFlexspiRamDevice_ISSI_IS66WVO8M8          = 'ISSI_IS66WVOxxM8_IS67WVOxxM8'
+kFlexspiRamDevice_ISSI_IS66WVQ8M4          = 'ISSI_IS66WVQxxM4_IS67WVQxxM4'
 kFlexspiRamDevice_Winbond_W957D8           = 'Winbond_W957D8_W957A8'
 
 kFlexspiRamDevices_PSRAM    = [kFlexspiRamDevice_APMemory_APS12808L,
-                               kFlexspiRamDevice_ISSI_IS66WVO8M8
+                               kFlexspiRamDevice_ISSI_IS66WVO8M8,
+                               kFlexspiRamDevice_ISSI_IS66WVQ8M4
                               ]
 
 kFlexspiRamDevices_HyperRAM = [kFlexspiRamDevice_Cypress_S27KL0641,
@@ -165,7 +167,7 @@ kMemDeviceDict = {
          kMemType_QuadSPI:[kFlexspiNorDevice_ISSI_IS25LP064A],
          kMemType_OctalSPI:[kFlexspiNorDevice_ISSI_IS25WX256],
          kMemType_HyperFlash:[kFlexspiNorDevice_ISSI_IS26KS512S],
-         kMemType_PSRAM:[kFlexspiRamDevice_ISSI_IS66WVO8M8],
+         kMemType_PSRAM:[kFlexspiRamDevice_ISSI_IS66WVQ8M4, kFlexspiRamDevice_ISSI_IS66WVO8M8],
          kMemType_HyperRAM:[kFlexspiRamDevice_ISSI_IS66WVH8M8],
     },
     kMemVendor_Renesas:{

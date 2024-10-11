@@ -6,7 +6,7 @@ from ui import uidef
 from ui import uilut
 from ui.uilut import mixspiLutSequence
 
-flashPropertyDict = {
+memPropertyDict = {
     'qe_cfg':     0x40,
     'qe_bytes':   0x01,
 }
