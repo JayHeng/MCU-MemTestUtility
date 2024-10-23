@@ -119,13 +119,28 @@ class memTesterUi(QMainWindow, memTesterWin.Ui_memTesterWin):
         self.pinWaveGridlayout.addWidget(self.pinWaveFig,0,0)
 
     def initToolMenu( self ):
-        loadFwActionGroup = QActionGroup(self)
-        loadFwActionGroup.addAction(self.menuLoadFwAction_No)
-        loadFwActionGroup.addAction(self.menuLoadFwAction_Yes)
-        loadFwActionGroup.setExclusive(True)
+        self.loadFwActionGroup = QActionGroup(self)
+        self.loadFwActionGroup.setExclusive(True)
+        self.loadFwActionGroup.addAction(self.menuLoadFwAction_No)
+        self.loadFwActionGroup.addAction(self.menuLoadFwAction_Yes)
+        self.menuLoadFwAction_Yes.setChecked(self.toolCommDict['loadFwEn'])
+        self.menuLoadFwAction_No.setChecked(not self.toolCommDict['loadFwEn'])
+        self.setLoadFwOpt()
+        self.showCmdPacketGroup = QActionGroup(self)
+        self.showCmdPacketGroup.setExclusive(True)
+        self.showCmdPacketGroup.addAction(self.menuShowCmdPacket_No)
+        self.showCmdPacketGroup.addAction(self.menuShowCmdPacket_Yes)
+        self.menuShowCmdPacket_Yes.setChecked(self.toolCommDict['cmdPacketShowEn'])
+        self.menuShowCmdPacket_No.setChecked(not self.toolCommDict['cmdPacketShowEn'])
+        self.setShowCmdPacketOpt()
 
     def setLoadFwOpt( self ):
         self.isLoadFirmwareEnabled = self.menuLoadFwAction_Yes.isChecked()
+        self.toolCommDict['loadFwEn'] = self.isLoadFirmwareEnabled
+
+    def setShowCmdPacketOpt( self ):
+        self.isShowCmdPacketEnabled = self.menuShowCmdPacket_Yes.isChecked()
+        self.toolCommDict['cmdPacketShowEn'] = self.isShowCmdPacketEnabled
 
     def initFuncUi( self ):
         self.uartComPort = None
@@ -360,12 +375,13 @@ class memTesterUi(QMainWindow, memTesterWin.Ui_memTesterWin):
             #while num != 0:
             #    num = s_serialPort.out_waiting()
             s_serialPort.write(byteList)
-            packetStr = ''
-            for i in range(len(byteList)):
-                packetStr = packetStr + hex(byteList[i])
-                if i != len(byteList) - 1:
-                    packetStr = packetStr + ', '
-            self.showContentOnSecPacketWin(u"Cmd Packet ->: " + packetStr)
+            if self.isShowCmdPacketEnabled:
+                packetStr = ''
+                for i in range(len(byteList)):
+                    packetStr = packetStr + hex(byteList[i])
+                    if i != len(byteList) - 1:
+                        packetStr = packetStr + ', '
+                self.showContentOnSecPacketWin(u"Cmd Packet ->: " + packetStr)
 
     def sendPinTestPacket( self ):
         mypacket = uipacket.pinTestPacket()

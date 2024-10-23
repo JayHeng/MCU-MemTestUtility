@@ -25,6 +25,7 @@ class memTesterMain(runcore.memTesterRun):
         self.isDeviceConnected = False
         self._setupMcuTargets()
         self.isLoadFirmwareEnabled = True
+        self.isShowCmdPacketEnabled = False
         self.initToolMenu()
 
     def _register_callbacks(self):
@@ -33,6 +34,8 @@ class memTesterMain(runcore.memTesterRun):
         self.menuHelpAction_revisionHistory.triggered.connect(self.callbackShowRevisionHistory)
         self.menuLoadFwAction_No.triggered.connect(self.callbackSetLoadFirmwareOpt)
         self.menuLoadFwAction_Yes.triggered.connect(self.callbackSetLoadFirmwareOpt)
+        self.menuShowCmdPacket_No.triggered.connect(self.callbackSetShowCmdPacketOpt)
+        self.menuShowCmdPacket_Yes.triggered.connect(self.callbackSetShowCmdPacketOpt)
         self.comboBox_mcuDevice.currentIndexChanged.connect(self.callbackSetMcuDevice)
         self.pushButton_mixspiConnectionConfiguration.clicked.connect(self.callbackMixspiConnectionConfiguration)
         self.pushButton_connect.clicked.connect(self.callbackConnectToDevice)
@@ -193,6 +196,9 @@ class memTesterMain(runcore.memTesterRun):
 
     def callbackSetLoadFirmwareOpt( self ):
         self.setLoadFwOpt()
+
+    def callbackSetShowCmdPacketOpt( self ):
+        self.setShowCmdPacketOpt()
 
     def callbackShowHomePage(self):
         self.showAboutMessage(uilang.kMsgLanguageContentDict['homePage_title'][0], uilang.kMsgLanguageContentDict['homePage_info'][0] )

@@ -9,7 +9,9 @@ from . import uivar
 g_exeTopRoot = None
 g_hasSubWinBeenOpened = False
 g_cfgFilename = None
-g_toolCommDict = {'mcuDevice':None,
+g_toolCommDict = {'loadFwEn':None,
+                  'cmdPacketShowEn':None,
+                  'mcuDevice':None,
                   'cpuSpeedMHz':None,
                   'enableL1Cache':None,
                   'enablePrefetch':None,
@@ -95,7 +97,9 @@ def initVar(cfgFilename):
         g_mixspiPerfTestCfgDict = cfgDict["cfgPerfTest"][0]
         g_mixspiStressTestCfgDict = cfgDict["cfgStressTest"][0]
     else:
-        g_toolCommDict = {'mcuDevice':0,
+        g_toolCommDict = {'loadFwEn':True,
+                          'cmdPacketShowEn':False,
+                          'mcuDevice':0,
                           'cpuSpeedMHz':996,
                           'enableL1Cache':0,
                           'enablePrefetch':0,
