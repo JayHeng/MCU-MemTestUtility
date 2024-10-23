@@ -120,6 +120,7 @@ kMemVendor_ISSI       = 'ISSI'
 kMemVendor_Renesas    = 'Renesas_Dialog__Adesto'
 kMemVendor_APMemory   = 'APMemory'
 kMemVendor_Misc       = 'Misc'
+kMemVendor_NXP        = 'NXP'
 
 kMemVendorList = [kMemVendor_Winbond,
                   kMemVendor_Macronix,
@@ -129,15 +130,17 @@ kMemVendorList = [kMemVendor_Winbond,
                   kMemVendor_ISSI,
                   kMemVendor_Renesas,
                   kMemVendor_APMemory,
-                  kMemVendor_Misc]
+                  kMemVendor_Misc,
+                  kMemVendor_NXP]
 
-kMemType_QuadSPI    = 'QuadSPI NOR'
-kMemType_OctalSPI   = 'OctalSPI NOR'
-kMemType_HyperFlash = 'HyperFlash'
-kMemType_PSRAM      = 'PSRAM'
-kMemType_HyperRAM   = 'HyperRAM'
+kMemType_QuadSPI        = 'QuadSPI NOR'
+kMemType_OctalSPI       = 'OctalSPI NOR'
+kMemType_HyperFlash     = 'HyperFlash'
+kMemType_PSRAM          = 'PSRAM'
+kMemType_HyperRAM       = 'HyperRAM'
+kMemType_InternalMem    = 'Internal Memory'
 
-kMemTypeList = [kMemType_QuadSPI, kMemType_OctalSPI, kMemType_HyperFlash, kMemType_PSRAM, kMemType_HyperRAM]
+kMemTypeList = [kMemType_QuadSPI, kMemType_OctalSPI, kMemType_HyperFlash, 'none', kMemType_PSRAM, kMemType_HyperRAM, kMemType_InternalMem]
 
 kMemDeviceDict = {
     kMemVendor_Winbond:{
@@ -185,6 +188,9 @@ kMemDeviceDict = {
                            kFlexspiNorDevice_XTXtech_X25Q64D,
                            kFlexspiNorDevice_Puya_P25Q64LE,
                            kFlexspiNorDevice_AMIC_A25LQ64],
+    },
+    kMemVendor_NXP:{
+         kMemType_InternalMem:['SRAM'],
     },
 }
 

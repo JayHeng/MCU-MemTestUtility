@@ -173,7 +173,10 @@ class memoryPropertyStruct(object):
             self.flashQuadEnableCfg = 0x0
             self.flashQuadEnableBytes = 0x0
         self.reserved1 = 0x0
-        self.memLut = memLut
+        if memLut == None:
+            self.memLut = [0x00] * uilut.CUSTOM_LUT_LENGTH
+        else:
+            self.memLut = memLut
 
     def set_members( self, memUserSettingDict ):
         self.type = memUserSettingDict['memType']
@@ -207,7 +210,7 @@ class memoryPropertyStruct(object):
 
 class configSystemPacket(object):
 
-    def __init__( self, memLut, flashPropertyDict):
+    def __init__( self, memLut, memPropertyDict):
         #super(configSystemPacket, self).__init__(parent)
         self.cpuSpeedMHz = None
         self.enableL1Cache = None
@@ -220,13 +223,13 @@ class configSystemPacket(object):
         self.reserved1 = [0x0, 0x0]
 
         self.memLut = memLut
-        self.flashPropertyDict = flashPropertyDict
+        self.memPropertyDict = memPropertyDict
 
     def set_members( self, memUserSettingDict ):
         self.memConnection = mixspiConnectionStruct()
         mixspiConnCfgDict = uivar.getAdvancedSettings(uidef.kAdvancedSettings_Conn)
         self.memConnection.set_members(mixspiConnCfgDict)
-        self.memProperty = memoryPropertyStruct(self.memLut, self.flashPropertyDict)
+        self.memProperty = memoryPropertyStruct(self.memLut, self.memPropertyDict)
         self.memProperty.set_members(memUserSettingDict)
         toolCommDict = uivar.getAdvancedSettings(uidef.kAdvancedSettings_Tool)
         self.cpuSpeedMHz = toolCommDict['cpuSpeedMHz']

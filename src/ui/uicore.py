@@ -445,7 +445,8 @@ class memTesterUi(QMainWindow, memTesterWin.Ui_memTesterWin):
             self.memLut = uilut.generateCompleteRamLut(ISSI_IS66WVQ8M4.mixspiLutDict)
             self.memPropertyDict = ISSI_IS66WVQ8M4.memPropertyDict.copy()
         else:
-            pass
+            self.memLut = None
+            self.memPropertyDict = None
 
     def _convertMemTypeValue(self, typeStr):
         for i in range(len(uidef.kMemTypeList)):
