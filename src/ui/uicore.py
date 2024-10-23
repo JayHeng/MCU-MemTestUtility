@@ -479,7 +479,17 @@ class memTesterUi(QMainWindow, memTesterWin.Ui_memTesterWin):
         self.toolCommDict['memSpeed'] = int(memSpeed[0:spdIdx])
 
     def showContentOnMainDisplayWin( self, contentStr ):
-        self.textEdit_displayWin.append(contentStr)
+        if self.goAction == uidef.kGoAction_PinTest or \
+           self.goAction == uidef.kGoAction_ConfigSystem:
+            self.textEdit_displayWin.append(contentStr)
+        elif self.goAction == uidef.kGoAction_MemRegs:
+            self.textEdit_displayWinReg.append(contentStr)
+        elif self.goAction == uidef.kGoAction_RwTest or \
+             self.goAction == uidef.kGoAction_PerfTest or \
+             self.goAction == uidef.kGoAction_StressTest:
+            self.textEdit_displayWinTest.append(contentStr)
+        else:
+            self.textEdit_displayWin.append(contentStr)
 
     def showContentOnSecPacketWin( self, contentStr ):
         self.textEdit_packetWin.append(contentStr)
@@ -495,20 +505,29 @@ class memTesterUi(QMainWindow, memTesterWin.Ui_memTesterWin):
         self.pushButton_rwTest.setStyleSheet("background-color: " + uidef.kButtonColor_Disable)
         self.pushButton_perfTest.setStyleSheet("background-color: " + uidef.kButtonColor_Disable)
         self.pushButton_stressTest.setStyleSheet("background-color: " + uidef.kButtonColor_Disable)
+        self.textEdit_displayWin.setStyleSheet("background-color: " + uidef.kButtonColor_Disable)
+        self.textEdit_displayWinReg.setStyleSheet("background-color: " + uidef.kButtonColor_Disable)
+        self.textEdit_displayWinTest.setStyleSheet("background-color: " + uidef.kButtonColor_Disable)
 
     def setActionButtonColor( self, goAction ):
         if goAction == uidef.kGoAction_PinTest:
             self.pushButton_pinTest.setStyleSheet("background-color: " + uidef.kButtonColor_Enable)
+            self.textEdit_displayWin.setStyleSheet("background-color: " + uidef.kButtonColor_Enable)
         elif goAction == uidef.kGoAction_ConfigSystem:
             self.pushButton_configSystem.setStyleSheet("background-color: " + uidef.kButtonColor_Enable)
+            self.textEdit_displayWin.setStyleSheet("background-color: " + uidef.kButtonColor_Enable)
         elif goAction == uidef.kGoAction_MemRegs:
             self.pushButton_memRegs.setStyleSheet("background-color: " + uidef.kButtonColor_Enable)
+            self.textEdit_displayWinReg.setStyleSheet("background-color: " + uidef.kButtonColor_Enable)
         elif goAction == uidef.kGoAction_RwTest:
             self.pushButton_rwTest.setStyleSheet("background-color: " + uidef.kButtonColor_Enable)
+            self.textEdit_displayWinTest.setStyleSheet("background-color: " + uidef.kButtonColor_Enable)
         elif goAction == uidef.kGoAction_PerfTest:
             self.pushButton_perfTest.setStyleSheet("background-color: " + uidef.kButtonColor_Enable)
+            self.textEdit_displayWinTest.setStyleSheet("background-color: " + uidef.kButtonColor_Enable)
         elif goAction == uidef.kGoAction_StressTest:
             self.pushButton_stressTest.setStyleSheet("background-color: " + uidef.kButtonColor_Enable)
+            self.textEdit_displayWinTest.setStyleSheet("background-color: " + uidef.kButtonColor_Enable)
         else:
             pass
 

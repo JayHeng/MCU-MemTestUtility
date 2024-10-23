@@ -795,7 +795,7 @@
     <widget class="QPushButton" name="pushButton_memRegs">
      <property name="geometry">
       <rect>
-       <x>200</x>
+       <x>470</x>
        <y>10</y>
        <width>81</width>
        <height>31</height>
@@ -816,8 +816,8 @@
       <rect>
        <x>10</x>
        <y>50</y>
-       <width>701</width>
-       <height>171</height>
+       <width>451</width>
+       <height>81</height>
       </rect>
      </property>
      <property name="font">
@@ -836,7 +836,7 @@
     <widget class="QPushButton" name="pushButton_perfTest">
      <property name="geometry">
       <rect>
-       <x>380</x>
+       <x>290</x>
        <y>10</y>
        <width>81</width>
        <height>31</height>
@@ -916,7 +916,7 @@
     <widget class="QPushButton" name="pushButton_stressTest">
      <property name="geometry">
       <rect>
-       <x>470</x>
+       <x>380</x>
        <y>10</y>
        <width>81</width>
        <height>31</height>
@@ -973,7 +973,7 @@
     <widget class="QPushButton" name="pushButton_rwTest">
      <property name="geometry">
       <rect>
-       <x>290</x>
+       <x>200</x>
        <y>10</y>
        <width>81</width>
        <height>31</height>
@@ -1000,6 +1000,50 @@
      </property>
      <property name="title">
       <string>Pin Waveform</string>
+     </property>
+    </widget>
+    <widget class="QTextEdit" name="textEdit_displayWinReg">
+     <property name="geometry">
+      <rect>
+       <x>470</x>
+       <y>50</y>
+       <width>241</width>
+       <height>81</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <weight>50</weight>
+       <bold>false</bold>
+      </font>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Plain</enum>
+     </property>
+     <property name="readOnly">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QTextEdit" name="textEdit_displayWinTest">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>140</y>
+       <width>701</width>
+       <height>81</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <weight>50</weight>
+       <bold>false</bold>
+      </font>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Plain</enum>
+     </property>
+     <property name="readOnly">
+      <bool>true</bool>
      </property>
     </widget>
    </widget>

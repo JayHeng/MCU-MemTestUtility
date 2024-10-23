@@ -15,7 +15,6 @@ from ui import ui_cfg_stress_test
 from run import runcore
 
 kRetryPingTimes = 5
-s_goAction = None
 
 class memTesterMain(runcore.memTesterRun):
 
@@ -23,6 +22,7 @@ class memTesterMain(runcore.memTesterRun):
         super(memTesterMain, self).__init__(parent)
         self._register_callbacks()
         self.isDeviceConnected = False
+        self.goAction = None
         self._setupMcuTargets()
         self.isLoadFirmwareEnabled = True
         self.isShowCmdPacketEnabled = False
@@ -111,76 +111,70 @@ class memTesterMain(runcore.memTesterRun):
 
     def callbackPinTest( self ):
         self.showContentOnSecPacketWin(u"【Action】: Click <Pin Test> button.")
-        global s_goAction
-        s_goAction = uidef.kGoAction_PinTest
+        self.goAction = uidef.kGoAction_PinTest
         pinTestFrame.show()
         self.resetAllActionButtonColor()
-        self.setActionButtonColor(s_goAction)
+        self.setActionButtonColor(self.goAction)
 
     def callbackConfigSystem( self ):
         self.showContentOnSecPacketWin(u"【Action】: Click <Config System> button.")
-        global s_goAction
-        s_goAction = uidef.kGoAction_ConfigSystem
+        self.goAction = uidef.kGoAction_ConfigSystem
         self.resetAllActionButtonColor()
-        self.setActionButtonColor(s_goAction)
+        self.setActionButtonColor(self.goAction)
 
     def callbackMemRegs( self ):
         self.showContentOnSecPacketWin(u"【Action】: Click <Mem REGs> button.")
-        global s_goAction
-        s_goAction = uidef.kGoAction_MemRegs
+        self.goAction = uidef.kGoAction_MemRegs
         self.resetAllActionButtonColor()
-        self.setActionButtonColor(s_goAction)
+        self.setActionButtonColor(self.goAction)
 
     def callbackRwTest( self ):
         self.showContentOnSecPacketWin(u"【Action】: Click <R/W Test> button.")
-        global s_goAction
-        s_goAction = uidef.kGoAction_RwTest
+        self.goAction = uidef.kGoAction_RwTest
         rwTestFrame.show()
         self.resetAllActionButtonColor()
-        self.setActionButtonColor(s_goAction)
+        self.setActionButtonColor(self.goAction)
 
     def callbackPerfTest( self ):
         self.showContentOnSecPacketWin(u"【Action】: Click <Perf Test> button.")
-        global s_goAction
-        s_goAction = uidef.kGoAction_PerfTest
+        self.goAction = uidef.kGoAction_PerfTest
         perfTestFrame.show()
         self.resetAllActionButtonColor()
-        self.setActionButtonColor(s_goAction)
+        self.setActionButtonColor(self.goAction)
 
     def callbackStressTest( self ):
         self.showContentOnSecPacketWin(u"【Action】: Click <Stress Test> button.")
-        global s_goAction
-        s_goAction = uidef.kGoAction_StressTest
+        self.goAction = uidef.kGoAction_StressTest
         stressTestFrame.show()
         self.resetAllActionButtonColor()
-        self.setActionButtonColor(s_goAction)
+        self.setActionButtonColor(self.goAction)
 
     def callbackGo( self ):
-        global s_goAction
-        if s_goAction == None:
+        if self.goAction == None:
             return
         if self.isGoActionWorking():
             self.showContentOnSecPacketWin(u"【Action】: Click <Stop> button.")
             self.sendTestStopPacket()
-            self.resetAllActionButtonColor()
-            s_goAction = None
+            #self.resetAllActionButtonColor()
+            #self.goAction = None
             self.recoverGoActionButton()
+            return
         else:
             self.showContentOnSecPacketWin(u"【Action】: Click <Go> button.")
-        if s_goAction == uidef.kGoAction_PinTest:
+        if self.goAction == uidef.kGoAction_PinTest:
             self.sendPinTestPacket()
-        elif s_goAction == uidef.kGoAction_ConfigSystem:
+        elif self.goAction == uidef.kGoAction_ConfigSystem:
             if self.updateTargetSetupValue():
                 self.sendConfigSystemPacket()
             else:
                 return
-        elif s_goAction == uidef.kGoAction_MemRegs:
+        elif self.goAction == uidef.kGoAction_MemRegs:
             self.sendMemRegsPacket()
-        elif s_goAction == uidef.kGoAction_RwTest:
+        elif self.goAction == uidef.kGoAction_RwTest:
             self.sendRwTestPacket()
-        elif s_goAction == uidef.kGoAction_PerfTest:
+        elif self.goAction == uidef.kGoAction_PerfTest:
             self.sendPerfTestPacket()
-        elif s_goAction == uidef.kGoAction_StressTest:
+        elif self.goAction == uidef.kGoAction_StressTest:
             self.sendStressTestPacket()
         else:
             return
