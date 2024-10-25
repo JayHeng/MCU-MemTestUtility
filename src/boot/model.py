@@ -28,14 +28,15 @@
 # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 # SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-from . import bltest
-from . import commands
-from . import memoryrange
-from . import peripherals
-from . import properties
-from . import status
-from . import model
-from . import target
+import sys, os
+sys.path.append(os.path.abspath(".."))
+from utils import misc
 
-__all__ = ["bltest", "commands", "memoryrange", "peripherals", "properties", "status", "model", "target"]
+##
+# Memory Model definition.
+class Model(object):
+
+    def __init__(self, **kwargs):
+        self.memPropertyDict = misc.get_dict_default(kwargs, 'memPropertyDict', None)
+        self.mixspiLutDict = misc.get_dict_default(kwargs, 'mixspiLutDict', None)
 

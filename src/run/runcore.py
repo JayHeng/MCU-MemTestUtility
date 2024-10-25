@@ -17,16 +17,7 @@ from ui import uidef
 from ui import uilang
 from boot import bltest
 from boot import target
-
-def execfile(filepath, globals=None, locals=None):
-    if globals is None:
-        globals = {}
-    globals.update({
-        "__file__": filepath,
-        "__name__": "__main__",
-    })
-    with open(filepath, 'rb') as file:
-        exec(compile(file.read(), filepath, 'exec'), globals, locals)
+from utils import misc
 
 def createTarget(device, exeBinRoot):
     cpu = "MIMXRT1052"
@@ -78,7 +69,7 @@ def createTarget(device, exeBinRoot):
     targetConfig['__name__'] = 'bltargetconfig'
 
     # Execute the target config script.
-    execfile(targetConfigFile, globals(), targetConfig)
+    misc.execfile(targetConfigFile, globals(), targetConfig)
 
     # Create the target object.
     tgt = target.Target(**targetConfig)

@@ -133,12 +133,12 @@ kMemVendorList = [kMemVendor_Winbond,
                   kMemVendor_Misc,
                   kMemVendor_NXP]
 
-kMemType_QuadSPI        = 'QuadSPI NOR'
-kMemType_OctalSPI       = 'OctalSPI NOR'
+kMemType_QuadSPI        = 'QuadSPI_NOR'
+kMemType_OctalSPI       = 'OctalSPI_NOR'
 kMemType_HyperFlash     = 'HyperFlash'
 kMemType_PSRAM          = 'PSRAM'
 kMemType_HyperRAM       = 'HyperRAM'
-kMemType_InternalMem    = 'Internal Memory'
+kMemType_InternalMem    = 'Internal_Memory'
 
 kMemTypeList = [kMemType_QuadSPI, kMemType_OctalSPI, kMemType_HyperFlash, 'none', kMemType_PSRAM, kMemType_HyperRAM, kMemType_InternalMem]
 

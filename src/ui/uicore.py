@@ -34,17 +34,31 @@ from . import ui_def_flexspi_conn_rt1170
 from . import ui_def_flexspi_conn_rt1180
 sys.path.append(os.path.abspath(".."))
 from win import memTesterWin
-
-from targets.mem_model import ISSI_IS25LPxxxA_IS25WPxxxA
-from targets.mem_model import Winbond_W25QxxxJV
-from targets.mem_model import APMemory_APSxxx08L
-from targets.mem_model import ISSI_IS66WVQxxM4_IS67WVQxxM4
+from boot import model
+from utils import misc
 
 s_serialPort = serial.Serial()
 s_recvInterval = 1
 s_recvPinWave = [0] * 100
 s_isRecvAsciiMode = True
 s_recvUartMagic = ""
+
+def createModel(modelDescFile):
+    # Check for model file existence.
+    if not os.path.isfile(modelDescFile):
+        raise RuntimeError("Missing model file at path %s" % modelDescFile)
+
+    # Build locals dict by copying our locals and adjusting file path and name.
+    modelDesc = locals().copy()
+    modelDesc['__file__'] = modelDescFile
+
+    # Execute the model desc script.
+    misc.execfile(modelDescFile, globals(), modelDesc)
+
+    # Create the model object.
+    mdl = model.Model(**modelDesc)
+
+    return mdl
 
 class uartRecvWorker(QThread):
     sinOut = pyqtSignal()
@@ -95,6 +109,7 @@ class memTesterUi(QMainWindow, memTesterWin.Ui_memTesterWin):
         exeMainFile = os.path.join(self.exeTopRoot, 'src', 'main.py')
         if not os.path.isfile(exeMainFile):
             self.exeTopRoot = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
+        self.memModelRoot = os.path.join(os.path.dirname(self.exeBinRoot), 'src', 'targets', 'mem_model')
         uivar.setRuntimeSettings(None, self.exeTopRoot)
         uivar.initVar(os.path.join(self.exeTopRoot, 'bin', 'mtu_settings.json'))
         toolCommDict = uivar.getAdvancedSettings(uidef.kAdvancedSettings_Tool)
@@ -106,6 +121,7 @@ class memTesterUi(QMainWindow, memTesterWin.Ui_memTesterWin):
         self.setTargetSetupValue()
         self.initFuncUi()
         self._initFlexspiConn()
+        self.memModel = None
         self.memVendor = None
         self.memType = None
         self.memChip = None
@@ -390,7 +406,7 @@ class memTesterUi(QMainWindow, memTesterWin.Ui_memTesterWin):
 
     def sendConfigSystemPacket( self ):
         self.getMemUserSettings()
-        mypacket = uipacket.configSystemPacket(self.memLut, self.memPropertyDict)
+        mypacket = uipacket.configSystemPacket(self.memLut, self.memModel.memPropertyDict)
         mypacket.set_members(self.toolCommDict)
         self.sendUartData(mypacket.out_bytes())
 
@@ -425,44 +441,58 @@ class memTesterUi(QMainWindow, memTesterWin.Ui_memTesterWin):
         self.comboBox_memVendor.setCurrentIndex(0)
         self.setMemVendor()
 
+    def _findMemTypesFromVendor( self ):
+        vendorBaseDir = os.path.join(self.memModelRoot, self.memVendor)
+        return os.listdir(vendorBaseDir)
+
     def setMemVendor( self ):
         try:
             self.memVendor = self.comboBox_memVendor.currentText()
             #print(self.memVendor)
             self.comboBox_memType.clear()
-            self.comboBox_memType.addItems(uidef.kMemDeviceDict[self.memVendor].keys())
+            #self.comboBox_memType.addItems(uidef.kMemDeviceDict[self.memVendor].keys())
+            self.comboBox_memType.addItems(self._findMemTypesFromVendor())
             self.comboBox_memType.setCurrentIndex(0)
             self.setMemType()
         except:
             pass
+
+    def _findMemChipsFromType( self ):
+        typeBaseDir = os.path.join(self.memModelRoot, self.memVendor, self.memType)
+        files = os.listdir(typeBaseDir)
+        pyfiles = [file for file in files if file.endswith('.py')]
+        filenames = []
+        for pyfile in pyfiles:
+            filename, filetype = os.path.splitext(pyfile)
+            filenames.append(filename)
+        return filenames
 
     def setMemType( self ):
         try:
             self.memType = self.comboBox_memType.currentText()
             #print(self.memType)
             self.comboBox_memChip.clear()
-            self.comboBox_memChip.addItems(uidef.kMemDeviceDict[self.memVendor][self.memType])
+            #self.comboBox_memChip.addItems(uidef.kMemDeviceDict[self.memVendor][self.memType])
+            self.comboBox_memChip.addItems(self._findMemChipsFromType())
             self.comboBox_memChip.setCurrentIndex(0)
         except:
             pass
 
-    def _getLutFromMemChip( self ):
+    def _getMemChipInfo( self ):
         self.memChip = self.comboBox_memChip.currentText()
-        if self.memChip == uidef.kFlexspiNorDevice_ISSI_IS25LP064A:
-            self.memLut = uilut.generateCompleteNorLut(ISSI_IS25LPxxxA_IS25WPxxxA.mixspiLutDict)
-            self.memPropertyDict = ISSI_IS25LPxxxA_IS25WPxxxA.memPropertyDict.copy()
-        elif self.memChip == uidef.kFlexspiNorDevice_Winbond_W25Q128JV:
-            self.memLut = uilut.generateCompleteNorLut(Winbond_W25QxxxJV.mixspiLutDict)
-            self.memPropertyDict = Winbond_W25QxxxJV.memPropertyDict.copy()
-        elif self.memChip == uidef.kFlexspiRamDevice_APMemory_APS12808L:
-            self.memLut = uilut.generateCompleteRamLut(APMemory_APSxxx08L.mixspiLutDict)
-            self.memPropertyDict = APMemory_APSxxx08L.memPropertyDict.copy()
-        elif self.memChip == uidef.kFlexspiRamDevice_ISSI_IS66WVQ8M4:
-            self.memLut = uilut.generateCompleteRamLut(ISSI_IS66WVQ8M4.mixspiLutDict)
-            self.memPropertyDict = ISSI_IS66WVQ8M4.memPropertyDict.copy()
-        else:
+        modelDescFile = os.path.join(self.memModelRoot, self.memVendor, self.memType, self.memChip + '.py')
+        self.memModel = createModel(modelDescFile)
+        try:
+            if self.memType == uidef.kMemType_QuadSPI or \
+               self.memType == uidef.kMemType_OctalSPI:
+                self.memLut = uilut.generateCompleteNorLut(self.memModel.mixspiLutDict)
+            elif self.memType == uidef.kMemType_PSRAM or \
+                 self.memType == uidef.kMemType_HyperRAM:
+                self.memLut = uilut.generateCompleteRamLut(self.memModel.mixspiLutDict)
+            else:
+                self.memLut = None
+        except:
             self.memLut = None
-            self.memPropertyDict = None
 
     def _convertMemTypeValue(self, typeStr):
         for i in range(len(uidef.kMemTypeList)):
@@ -471,7 +501,7 @@ class memTesterUi(QMainWindow, memTesterWin.Ui_memTesterWin):
         return 0
 
     def getMemUserSettings( self ):
-        self._getLutFromMemChip()
+        self._getMemChipInfo()
         memType = self.comboBox_memType.currentText()
         self.toolCommDict['memType'] = self._convertMemTypeValue(memType)
         memSpeed = self.comboBox_memSpeed.currentText()
