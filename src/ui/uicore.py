@@ -84,6 +84,7 @@ class pinWaveformFigure(FigureCanvas):
         self.axes.set_xlabel('Time(ms)')
         self.axes.set_ylabel('Volt(3.3V)')
         self.axes.set_ylim(0,1.1)
+        self.plotwave()
         self.ani = animation.FuncAnimation(self.fig, self.animate, interval=1000, blit=True, save_count=50)
 
     def plotwave(self):

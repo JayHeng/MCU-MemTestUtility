@@ -3,6 +3,7 @@
 import sys
 import os
 import time
+import ctypes
 from PyQt5.Qt import *
 from ui import uidef
 from ui import uilang
@@ -222,6 +223,10 @@ if __name__ == '__main__':
     perfTestFrame.setWindowTitle(u"Perf Test")
     stressTestFrame = ui_cfg_stress_test.memTesterUiStressTest(None)
     stressTestFrame.setWindowTitle(u"Stress Test")
+
+    whnd = ctypes.windll.kernel32.GetConsoleWindow()
+    if whnd != 0:
+        ctypes.windll.user32.ShowWindow(whnd, 0)
 
     sys.exit(app.exec_())
 
