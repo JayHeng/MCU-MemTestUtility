@@ -526,7 +526,17 @@ class memTesterUi(QMainWindow, memTesterWin.Ui_memTesterWin):
         self.textEdit_packetWin.append(contentStr)
 
     def clearContentOfScreens( self ):
-        self.textEdit_displayWin.clear()
+        if self.goAction == uidef.kGoAction_PinTest or \
+           self.goAction == uidef.kGoAction_ConfigSystem:
+            self.textEdit_displayWin.clear()
+        elif self.goAction == uidef.kGoAction_MemRegs:
+            self.textEdit_displayWinReg.clear()
+        elif self.goAction == uidef.kGoAction_RwTest or \
+             self.goAction == uidef.kGoAction_PerfTest or \
+             self.goAction == uidef.kGoAction_StressTest:
+            self.textEdit_displayWinTest.clear()
+        else:
+            self.textEdit_displayWin.clear()
         self.textEdit_packetWin.clear()
 
     def resetAllActionButtonColor( self ):
