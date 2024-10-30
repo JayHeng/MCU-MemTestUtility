@@ -13,7 +13,7 @@ kXspiConnSel_Instance   = { '1':0x1,
                            }
 
 kXspiConnSel_DataL4b    = [
-                              {'TargetGroup0_DATA[3:0] - PIO6[11:8]':0x00
+                              {'TargetGroup0_DATA[3:0] - PIO6[11:08]':0x00
                               },
                               {'None':0xFF,
                               },
@@ -40,7 +40,7 @@ kXspiConnSel_DataT8b    = [
                           ]
 
 kXspiConnSel_ssb        = [
-                              {'TargetGroup0_SS0_B        - PIO6[2]':0x00,
+                              {'TargetGroup0_SS0_B        - PIO6[02]':0x00,
                               },
                               {'None':0xFF,
                               },
@@ -49,7 +49,7 @@ kXspiConnSel_ssb        = [
                           ]
 
 kXspiConnSel_sclk       = [
-                              {'TargetGroup0_SCLK          - PIO6[1]':0x00,
+                              {'TargetGroup0_SCLK          - PIO6[01]':0x00,
                               },
                               {'None':0xFF,
                               },
@@ -68,7 +68,7 @@ kXspiConnSel_sclkn      = [
 
 kXspiConnSel_dqs0       = [
                               {'None':0xFF,
-                               'TargetGroup0_DQS           - PIO6[7]':0x00,
+                               'TargetGroup0_DQS           - PIO6[07]':0x00,
                               },
                               {'None':0xFF,
                               },
