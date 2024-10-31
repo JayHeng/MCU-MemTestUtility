@@ -523,7 +523,7 @@
     <set>Qt::AlignCenter</set>
    </property>
   </widget>
-  <widget class="QLineEdit" name="lineEdit_padCtrlDataSsb">
+  <widget class="QLineEdit" name="lineEdit_padCtrlSsb">
    <property name="geometry">
     <rect>
      <x>420</x>
@@ -536,7 +536,7 @@
     <set>Qt::AlignCenter</set>
    </property>
   </widget>
-  <widget class="QLineEdit" name="lineEdit_padCtrlDataSclk">
+  <widget class="QLineEdit" name="lineEdit_padCtrlSclk">
    <property name="geometry">
     <rect>
      <x>420</x>
@@ -549,7 +549,7 @@
     <set>Qt::AlignCenter</set>
    </property>
   </widget>
-  <widget class="QLineEdit" name="lineEdit_padCtrlDataSclkn">
+  <widget class="QLineEdit" name="lineEdit_padCtrlSclkn">
    <property name="geometry">
     <rect>
      <x>420</x>
@@ -562,7 +562,7 @@
     <set>Qt::AlignCenter</set>
    </property>
   </widget>
-  <widget class="QLineEdit" name="lineEdit_padCtrlDataDqs0">
+  <widget class="QLineEdit" name="lineEdit_padCtrlDqs0">
    <property name="geometry">
     <rect>
      <x>420</x>
@@ -575,7 +575,7 @@
     <set>Qt::AlignCenter</set>
    </property>
   </widget>
-  <widget class="QLineEdit" name="lineEdit_padCtrlDataDqs1">
+  <widget class="QLineEdit" name="lineEdit_padCtrlDqs1">
    <property name="geometry">
     <rect>
      <x>420</x>
@@ -588,7 +588,7 @@
     <set>Qt::AlignCenter</set>
    </property>
   </widget>
-  <widget class="QLineEdit" name="lineEdit_padCtrlDataRstb">
+  <widget class="QLineEdit" name="lineEdit_padCtrlRstb">
    <property name="geometry">
     <rect>
      <x>420</x>
