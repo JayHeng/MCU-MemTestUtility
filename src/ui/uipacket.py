@@ -126,6 +126,71 @@ class mixspiPintestEnStruct(object):
                         ])
         return mybytes
 
+class mixspiPadCtrlStruct(object):
+
+    def __init__( self, parent=None):
+        #super(mixspiPadCtrlStruct, self).__init__(parent)
+        self.dataLow4bit = None
+        self.dataHigh4bit = None
+        self.dataTop8bit = None
+        self.ss_b = None
+        self.sclk = None
+        self.sclk_n = None
+        self.dqs0 = None
+        self.dqs1 = None
+        self.rst_b = None
+
+    def set_members( self, mixspiPadCtrlDict ):
+        self.dataLow4bit = mixspiPadCtrlDict['dataL4b_u32']
+        self.dataHigh4bit = mixspiPadCtrlDict['dataH4b_u32']
+        self.dataTop8bit = mixspiPadCtrlDict['dataT8b_u32']
+        self.ss_b = mixspiPadCtrlDict['ssb_u32']
+        self.sclk = mixspiPadCtrlDict['sclk_u32']
+        self.sclk_n = mixspiPadCtrlDict['sclkn_u32']
+        self.dqs0 = mixspiPadCtrlDict['dqs0_u32']
+        self.dqs1 = mixspiPadCtrlDict['dqs1_u32']
+        self.rst_b = mixspiPadCtrlDict['rstb_u32']
+
+    def out_bytes( self ):
+        mybytes = bytes([self.dataLow4bit & 0xFF,
+                        (self.dataLow4bit & 0xFF00) >> 8,
+                        (self.dataLow4bit & 0xFF0000) >> 16,
+                        (self.dataLow4bit & 0xFF000000) >> 24,
+                        self.dataHigh4bit & 0xFF,
+                        (self.dataHigh4bit & 0xFF00) >> 8,
+                        (self.dataHigh4bit & 0xFF0000) >> 16,
+                        (self.dataHigh4bit & 0xFF000000) >> 24,
+                        self.dataTop8bit & 0xFF,
+                        (self.dataTop8bit & 0xFF00) >> 8,
+                        (self.dataTop8bit & 0xFF0000) >> 16,
+                        (self.dataTop8bit & 0xFF000000) >> 24,
+                        self.ss_b & 0xFF,
+                        (self.ss_b & 0xFF00) >> 8,
+                        (self.ss_b & 0xFF0000) >> 16,
+                        (self.ss_b & 0xFF000000) >> 24,
+                        self.sclk & 0xFF,
+                        (self.sclk & 0xFF00) >> 8,
+                        (self.sclk & 0xFF0000) >> 16,
+                        (self.sclk & 0xFF000000) >> 24,
+                        self.sclk_n & 0xFF,
+                        (self.sclk_n & 0xFF00) >> 8,
+                        (self.sclk_n & 0xFF0000) >> 16,
+                        (self.sclk_n & 0xFF000000) >> 24,
+                        self.dqs0 & 0xFF,
+                        (self.dqs0 & 0xFF00) >> 8,
+                        (self.dqs0 & 0xFF0000) >> 16,
+                        (self.dqs0 & 0xFF000000) >> 24,
+                        self.dqs1 & 0xFF,
+                        (self.dqs1 & 0xFF00) >> 8,
+                        (self.dqs1 & 0xFF0000) >> 16,
+                        (self.dqs1 & 0xFF000000) >> 24,
+                        self.rst_b & 0xFF,
+                        (self.rst_b & 0xFF00) >> 8,
+                        (self.rst_b & 0xFF0000) >> 16,
+                        (self.rst_b & 0xFF000000) >> 24
+                        ])
+        return mybytes
+
 class pinTestPacket(object):
 
     def __init__( self, parent=None):
@@ -229,6 +294,9 @@ class configSystemPacket(object):
         self.memConnection = mixspiConnectionStruct()
         mixspiConnCfgDict = uivar.getAdvancedSettings(uidef.kAdvancedSettings_Conn)
         self.memConnection.set_members(mixspiConnCfgDict)
+        self.memPadCtrl = mixspiPadCtrlStruct()
+        mixspiPadCtrlDict = uivar.getAdvancedSettings(uidef.kAdvancedSettings_PadCtrl)
+        self.memPadCtrl.set_members(mixspiPadCtrlDict)
         self.memProperty = memoryPropertyStruct(self.memLut, self.memPropertyDict)
         self.memProperty.set_members(memUserSettingDict)
         toolCommDict = uivar.getAdvancedSettings(uidef.kAdvancedSettings_Tool)
@@ -248,7 +316,7 @@ class configSystemPacket(object):
                           self.reserved0[0],
                           self.reserved0[1]
                          ])
-        packetBytes = mybytes + self.memConnection.out_bytes() + self.memProperty.out_bytes()
+        packetBytes = mybytes + self.memConnection.out_bytes() + self.memPadCtrl.out_bytes() + self.memProperty.out_bytes()
         self.crcCheckSum = calculate_crc16(packetBytes)
         crcbytes = bytes([self.crcCheckSum & 0xFF,
                           (self.crcCheckSum & 0xFF00) >> 8,
