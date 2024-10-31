@@ -60,6 +60,8 @@ class memTesterUiConn(QMainWindow, connCfgWin.Ui_connCfgDialog):
         self.pushButton_padCtrl.clicked.connect(self.callbackPadCtrl)
         self.pushButton_ok.clicked.connect(self.callbackOk)
         self.pushButton_cancel.clicked.connect(self.callbackCancel)
+        self.padCtrlRTxxxFrame.exitSignal.connect(self.callbackRefreshUserPadCtrlSettings)
+        self.padCtrlRT10yyFrame.exitSignal.connect(self.callbackRefreshUserPadCtrlSettings)
         self.padCtrlRT11yyFrame.exitSignal.connect(self.callbackRefreshUserPadCtrlSettings)
         self.comboBox_dataL4b.currentIndexChanged.connect(self.callbackRefreshUserPadCtrlSettings)
         self.comboBox_dataH4b.currentIndexChanged.connect(self.callbackRefreshUserPadCtrlSettings)
@@ -159,7 +161,45 @@ class memTesterUiConn(QMainWindow, connCfgWin.Ui_connCfgDialog):
         padCtrlDict= uivar.getAdvancedSettings(uidef.kAdvancedSettings_PadCtrl)
         self.mixspiPadCtrlDict = padCtrlDict.copy()
         padCtrl = 0
-        if self.mcuDevice in uidef.kMcuDevice_iMXRT11yy:
+        if self.mcuDevice in uidef.kMcuDevice_iMXRTxxx or self.mcuDevice in uidef.kMcuDevice_iMXRT10yy:
+            if self.mcuDevice in uidef.kMcuDevice_iMXRTxxx:
+                padCtrl = self.mixspiPadCtrlDict['rtxxxVal']
+            else:
+                padCtrl = self.mixspiPadCtrlDict['rt10yyVal']
+            self.lineEdit_padCtrlDataL4b.setText(str(hex(padCtrl)))
+            self.lineEdit_padCtrlSsb.setText(str(hex(padCtrl)))
+            self.lineEdit_padCtrlSclk.setText(str(hex(padCtrl)))
+            pinStr = self.comboBox_dataH4b.currentText()
+            if pinStr != 'None':
+                self.lineEdit_padCtrlDataH4b.setText(str(hex(padCtrl)))
+            else:
+                self.lineEdit_padCtrlDataH4b.setText('N/A')
+            pinStr = self.comboBox_dataT8b.currentText()
+            if pinStr != 'None':
+                self.lineEdit_padCtrlDataT8b.setText(str(hex(padCtrl)))
+            else:
+                self.lineEdit_padCtrlDataT8b.setText('N/A')
+            pinStr = self.comboBox_sclkn.currentText()
+            if pinStr != 'None':
+                self.lineEdit_padCtrlSclkn.setText(str(hex(padCtrl)))
+            else:
+                self.lineEdit_padCtrlSclkn.setText('N/A')
+            pinStr = self.comboBox_dqs0.currentText()
+            if pinStr != 'None':
+                self.lineEdit_padCtrlDqs0.setText(str(hex(padCtrl)))
+            else:
+                self.lineEdit_padCtrlDqs0.setText('N/A')
+            pinStr = self.comboBox_dqs1.currentText()
+            if pinStr != 'None':
+                self.lineEdit_padCtrlDqs1.setText(str(hex(padCtrl)))
+            else:
+                self.lineEdit_padCtrlDqs1.setText('N/A')
+            pinStr = self.comboBox_rstb.currentText()
+            if pinStr != 'None':
+                self.lineEdit_padCtrlRstb.setText(str(hex(padCtrl)))
+            else:
+                self.lineEdit_padCtrlRstb.setText('N/A')
+        elif self.mcuDevice in uidef.kMcuDevice_iMXRT11yy:
             pinStr = self.comboBox_dataL4b.currentText()
             if self._isGpioGroupMatched(pinStr, kRT1xxxGpioGroupList_COMM):
                 padCtrl = self.mixspiPadCtrlDict['rt11yyValC']
@@ -240,6 +280,8 @@ class memTesterUiConn(QMainWindow, connCfgWin.Ui_connCfgDialog):
                 self.lineEdit_padCtrlRstb.setText(str(hex(padCtrl)))
             else:
                 self.lineEdit_padCtrlRstb.setText('N/A')
+        else:
+            pass
 
     def callbackPadCtrl( self ):
         if self.mcuDevice in uidef.kMcuDevice_iMXRTxxx:

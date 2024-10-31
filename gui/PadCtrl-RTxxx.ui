@@ -13,7 +13,7 @@
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
-  <widget class="QLabel" name="label_hys">
+  <widget class="QLabel" name="label_drive">
    <property name="geometry">
     <rect>
      <x>20</x>
@@ -32,7 +32,7 @@
     <string>[13-12] - DRIVE</string>
    </property>
   </widget>
-  <widget class="QLabel" name="label_pue">
+  <widget class="QLabel" name="label_odena">
    <property name="geometry">
     <rect>
      <x>20</x>
@@ -51,7 +51,7 @@
     <string>[10-10] - ODENA</string>
    </property>
   </widget>
-  <widget class="QLabel" name="label_pke">
+  <widget class="QLabel" name="label_amena">
    <property name="geometry">
     <rect>
      <x>20</x>
@@ -70,7 +70,7 @@
     <string>[09-09] - AMENA</string>
    </property>
   </widget>
-  <widget class="QLabel" name="label_speed">
+  <widget class="QLabel" name="label_slewrate">
    <property name="geometry">
     <rect>
      <x>20</x>
@@ -89,7 +89,7 @@
     <string>[07-07] - SLEWRATE</string>
    </property>
   </widget>
-  <widget class="QLabel" name="label_ode">
+  <widget class="QLabel" name="label_fulldrv">
    <property name="geometry">
     <rect>
      <x>20</x>
@@ -108,7 +108,7 @@
     <string>[08-08] - FULLDRV</string>
    </property>
   </widget>
-  <widget class="QLabel" name="label_sre">
+  <widget class="QLabel" name="label_pupdsel">
    <property name="geometry">
     <rect>
      <x>20</x>
@@ -127,7 +127,7 @@
     <string>[05-05] - PUPDSEL</string>
    </property>
   </widget>
-  <widget class="QComboBox" name="comboBox_hys">
+  <widget class="QComboBox" name="comboBox_drive">
    <property name="geometry">
     <rect>
      <x>140</x>
@@ -157,7 +157,7 @@
     </property>
    </item>
   </widget>
-  <widget class="QComboBox" name="comboBox_pue">
+  <widget class="QComboBox" name="comboBox_odena">
    <property name="geometry">
     <rect>
      <x>140</x>
@@ -177,7 +177,7 @@
     </property>
    </item>
   </widget>
-  <widget class="QComboBox" name="comboBox_pke">
+  <widget class="QComboBox" name="comboBox_amena">
    <property name="geometry">
     <rect>
      <x>140</x>
@@ -197,7 +197,7 @@
     </property>
    </item>
   </widget>
-  <widget class="QComboBox" name="comboBox_speed">
+  <widget class="QComboBox" name="comboBox_slewrate">
    <property name="geometry">
     <rect>
      <x>140</x>
@@ -217,7 +217,7 @@
     </property>
    </item>
   </widget>
-  <widget class="QComboBox" name="comboBox_ode">
+  <widget class="QComboBox" name="comboBox_fulldrv">
    <property name="geometry">
     <rect>
      <x>140</x>
@@ -237,7 +237,7 @@
     </property>
    </item>
   </widget>
-  <widget class="QComboBox" name="comboBox_sre">
+  <widget class="QComboBox" name="comboBox_pupdsel">
    <property name="geometry">
     <rect>
      <x>140</x>
@@ -283,7 +283,7 @@
     <string>Cancel</string>
    </property>
   </widget>
-  <widget class="QComboBox" name="comboBox_pus">
+  <widget class="QComboBox" name="comboBox_iiena">
    <property name="geometry">
     <rect>
      <x>140</x>
@@ -303,7 +303,7 @@
     </property>
    </item>
   </widget>
-  <widget class="QLabel" name="label_pus">
+  <widget class="QLabel" name="label_iiena">
    <property name="geometry">
     <rect>
      <x>20</x>
@@ -322,7 +322,7 @@
     <string>[11-11] - IIENA</string>
    </property>
   </widget>
-  <widget class="QLabel" name="label_dse">
+  <widget class="QLabel" name="label_ibena">
    <property name="geometry">
     <rect>
      <x>20</x>
@@ -341,7 +341,7 @@
     <string>[06-06] - IBENA</string>
    </property>
   </widget>
-  <widget class="QComboBox" name="comboBox_dse">
+  <widget class="QComboBox" name="comboBox_ibena">
    <property name="geometry">
     <rect>
      <x>140</x>
@@ -417,7 +417,7 @@
     <bool>false</bool>
    </property>
   </widget>
-  <widget class="QComboBox" name="comboBox_sre_2">
+  <widget class="QComboBox" name="comboBox_pupdena">
    <property name="geometry">
     <rect>
      <x>140</x>
@@ -437,7 +437,7 @@
     </property>
    </item>
   </widget>
-  <widget class="QLabel" name="label_sre_2">
+  <widget class="QLabel" name="label_pupdena">
    <property name="geometry">
     <rect>
      <x>20</x>
