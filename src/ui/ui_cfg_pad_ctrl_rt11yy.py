@@ -3,6 +3,7 @@
 import sys
 import os
 import time
+from PyQt5 import QtCore
 from PyQt5.Qt import *
 from . import uidef
 from . import uilang
@@ -19,6 +20,12 @@ class memTesterUiPadCtrlRT11yy(QMainWindow, padCtrlRT11yyWin.Ui_padCtrlRT11yyDia
         padCtrlDict= uivar.getAdvancedSettings(uidef.kAdvancedSettings_PadCtrl)
         self.mixspiPadCtrlDict = padCtrlDict.copy()
         self._recoverLastSettings()
+
+    exitSignal = QtCore.pyqtSignal(str)
+
+    def sendExitSignal( self ):
+        content = '1'
+        self.exitSignal.emit(content)
 
     def _register_callbacks(self):
         self.pushButton_ok.clicked.connect(self.callbackOk)
@@ -48,6 +55,7 @@ class memTesterUiPadCtrlRT11yy(QMainWindow, padCtrlRT11yyWin.Ui_padCtrlRT11yyDia
         self.mixspiPadCtrlDict['rt11yyValC'] = rt11yyValC
         self.mixspiPadCtrlDict['rt11yyValA'] = rt11yyValA
         uivar.setAdvancedSettings(uidef.kAdvancedSettings_PadCtrl, self.mixspiPadCtrlDict)
+        self.sendExitSignal()
         self.close()
 
     def callbackCancel( self, event ):

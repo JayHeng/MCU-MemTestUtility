@@ -21,7 +21,6 @@ class memTesterUiConn(QMainWindow, connCfgWin.Ui_connCfgDialog):
     def __init__(self, parent=None):
         super(memTesterUiConn, self).__init__(parent)
         self.setupUi(self)
-        self._register_callbacks()
         self.mixspiConnDict = None
         self.textEdit_mixspiConnection = None
         connCfgDict= uivar.getAdvancedSettings(uidef.kAdvancedSettings_Conn)
@@ -32,12 +31,14 @@ class memTesterUiConn(QMainWindow, connCfgWin.Ui_connCfgDialog):
         self.padCtrlRT10yyFrame.setWindowTitle(u"i.MXRT1xxx IOMUXC SW PAD Control Register")
         self.padCtrlRT11yyFrame = ui_cfg_pad_ctrl_rt11yy.memTesterUiPadCtrlRT11yy()
         self.padCtrlRT11yyFrame.setWindowTitle(u"i.MXRT1xxx IOMUXC SW PAD Control Register")
+        self._register_callbacks()
 
     def _register_callbacks(self):
         self.comboBox_instance.currentIndexChanged.connect(self.callbackSwitchInstance)
         self.pushButton_padCtrl.clicked.connect(self.callbackPadCtrl)
         self.pushButton_ok.clicked.connect(self.callbackOk)
         self.pushButton_cancel.clicked.connect(self.callbackCancel)
+        self.padCtrlRT11yyFrame.exitSignal.connect(self.callbackRefreshUserPadCtrlSettings)
 
     def setNecessaryInfo( self, mcuDevice, mixspiConnDict, textEdit_mixspiConnection ):
         self.mcuDevice = mcuDevice
@@ -113,7 +114,7 @@ class memTesterUiConn(QMainWindow, connCfgWin.Ui_connCfgDialog):
             if self.mixspiConnDict['rstb'][instance][key] == self.mixspiConnCfgDict['rstb']:
                 self.comboBox_rstb.setCurrentIndex(self.comboBox_rstb.findText(key))
                 break
-        self.refreshUserPadCtrlSettings()
+        self.callbackRefreshUserPadCtrlSettings()
 
     def _isGpioGroupMatched( self, gpioName, gpioGroupList):
         isMatched = False
@@ -123,7 +124,7 @@ class memTesterUiConn(QMainWindow, connCfgWin.Ui_connCfgDialog):
                 break
         return isMatched
 
-    def refreshUserPadCtrlSettings( self ):
+    def callbackRefreshUserPadCtrlSettings( self ):
         padCtrlDict= uivar.getAdvancedSettings(uidef.kAdvancedSettings_PadCtrl)
         self.mixspiPadCtrlDict = padCtrlDict.copy()
         if self.mcuDevice in uidef.kMcuDevice_iMXRT11yy:
@@ -153,7 +154,6 @@ class memTesterUiConn(QMainWindow, connCfgWin.Ui_connCfgDialog):
             self.padCtrlRT11yyFrame.show()
         else:
             pass
-        self.refreshUserPadCtrlSettings()
 
     def callbackOk( self, event ):
         self.mixspiConnCfgDict['instance'] = int(self.comboBox_instance.currentText())
