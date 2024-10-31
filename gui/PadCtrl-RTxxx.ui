@@ -1,0 +1,462 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>padCtrlRTxxxDialog</class>
+ <widget class="QDialog" name="padCtrlRTxxxDialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>454</width>
+    <height>369</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <widget class="QLabel" name="label_hys">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>40</y>
+     <width>101</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="text">
+    <string>[13-12] - DRIVE</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_pue">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>100</y>
+     <width>101</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="text">
+    <string>[10-10] - ODENA</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_pke">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>130</y>
+     <width>101</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="text">
+    <string>[09-09] - AMENA</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_speed">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>190</y>
+     <width>121</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="text">
+    <string>[07-07] - SLEWRATE</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_ode">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>160</y>
+     <width>111</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="text">
+    <string>[08-08] - FULLDRV</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_sre">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>250</y>
+     <width>111</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="text">
+    <string>[05-05] - PUPDSEL</string>
+   </property>
+  </widget>
+  <widget class="QComboBox" name="comboBox_hys">
+   <property name="geometry">
+    <rect>
+     <x>140</x>
+     <y>40</y>
+     <width>291</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <item>
+    <property name="text">
+     <string>00b - 100 Ω</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>01b - 66 Ω</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>10b - 50 Ω</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>11b - 33 Ω</string>
+    </property>
+   </item>
+  </widget>
+  <widget class="QComboBox" name="comboBox_pue">
+   <property name="geometry">
+    <rect>
+     <x>140</x>
+     <y>100</y>
+     <width>291</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <item>
+    <property name="text">
+     <string>0b - Normal push-pull output</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>1b - Pseudo open-drain output (high drive disabled)</string>
+    </property>
+   </item>
+  </widget>
+  <widget class="QComboBox" name="comboBox_pke">
+   <property name="geometry">
+    <rect>
+     <x>140</x>
+     <y>130</y>
+     <width>291</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <item>
+    <property name="text">
+     <string>0b - Analog multiplexor disabled</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>1b - Analog multiplexor enabled</string>
+    </property>
+   </item>
+  </widget>
+  <widget class="QComboBox" name="comboBox_speed">
+   <property name="geometry">
+    <rect>
+     <x>140</x>
+     <y>190</y>
+     <width>291</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <item>
+    <property name="text">
+     <string>0b - Standard mode, output slew rate is not controlled.</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>1b - Slow mode, output slew rate control is enabled</string>
+    </property>
+   </item>
+  </widget>
+  <widget class="QComboBox" name="comboBox_ode">
+   <property name="geometry">
+    <rect>
+     <x>140</x>
+     <y>160</y>
+     <width>291</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <item>
+    <property name="text">
+     <string>0b - Normal output drive</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>1b - Full output drive, twice the drive of normal mode</string>
+    </property>
+   </item>
+  </widget>
+  <widget class="QComboBox" name="comboBox_sre">
+   <property name="geometry">
+    <rect>
+     <x>140</x>
+     <y>250</y>
+     <width>291</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <item>
+    <property name="text">
+     <string>0b - Pull-down</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>1b - Pull-up</string>
+    </property>
+   </item>
+  </widget>
+  <widget class="QPushButton" name="pushButton_ok">
+   <property name="geometry">
+    <rect>
+     <x>110</x>
+     <y>320</y>
+     <width>75</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Ok</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton_cancel">
+   <property name="geometry">
+    <rect>
+     <x>260</x>
+     <y>320</y>
+     <width>75</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Cancel</string>
+   </property>
+  </widget>
+  <widget class="QComboBox" name="comboBox_pus">
+   <property name="geometry">
+    <rect>
+     <x>140</x>
+     <y>70</y>
+     <width>291</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <item>
+    <property name="text">
+     <string>0b - Disabled, Input function is not inverted</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>1b - Enabled, Input is function inverted</string>
+    </property>
+   </item>
+  </widget>
+  <widget class="QLabel" name="label_pus">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>70</y>
+     <width>101</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="text">
+    <string>[11-11] - IIENA</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_dse">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>220</y>
+     <width>100</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="text">
+    <string>[06-06] - IBENA</string>
+   </property>
+  </widget>
+  <widget class="QComboBox" name="comboBox_dse">
+   <property name="geometry">
+    <rect>
+     <x>140</x>
+     <y>220</y>
+     <width>291</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <item>
+    <property name="text">
+     <string>0b - Input buffer disabled</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>1b - Input buffer enabled</string>
+    </property>
+   </item>
+  </widget>
+  <widget class="QLabel" name="label_field">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>10</y>
+     <width>81</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="autoFillBackground">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Field</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+   <property name="wordWrap">
+    <bool>false</bool>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_description">
+   <property name="geometry">
+    <rect>
+     <x>140</x>
+     <y>10</y>
+     <width>281</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="autoFillBackground">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Description</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+   <property name="wordWrap">
+    <bool>false</bool>
+   </property>
+  </widget>
+  <widget class="QComboBox" name="comboBox_sre_2">
+   <property name="geometry">
+    <rect>
+     <x>140</x>
+     <y>280</y>
+     <width>291</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <item>
+    <property name="text">
+     <string>0b - Disable</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>1b - Enable</string>
+    </property>
+   </item>
+  </widget>
+  <widget class="QLabel" name="label_sre_2">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>280</y>
+     <width>111</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="text">
+    <string>[04-04] - PUPDENA</string>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

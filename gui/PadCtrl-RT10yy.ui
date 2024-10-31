@@ -1,0 +1,463 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>padCtrlRT10yyDialog</class>
+ <widget class="QDialog" name="padCtrlRT10yyDialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>454</width>
+    <height>348</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <widget class="QLabel" name="label_hys">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>40</y>
+     <width>81</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="text">
+    <string>[16-16] - HYS</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_pue">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>100</y>
+     <width>81</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="text">
+    <string>[13-13] - PUE</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_pke">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>130</y>
+     <width>81</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="text">
+    <string>[12-12] - PKE</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_speed">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>190</y>
+     <width>100</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="text">
+    <string>[07-06] - SPEED</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_ode">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>160</y>
+     <width>100</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="text">
+    <string>[11-11] - ODE</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_sre">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>250</y>
+     <width>100</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="text">
+    <string>[00-00] - SRE</string>
+   </property>
+  </widget>
+  <widget class="QComboBox" name="comboBox_hys">
+   <property name="geometry">
+    <rect>
+     <x>140</x>
+     <y>40</y>
+     <width>291</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <item>
+    <property name="text">
+     <string>HYS_0_Hysteresis_Disabled</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>HYS_1_Hysteresis_Enabled</string>
+    </property>
+   </item>
+  </widget>
+  <widget class="QComboBox" name="comboBox_pue">
+   <property name="geometry">
+    <rect>
+     <x>140</x>
+     <y>100</y>
+     <width>291</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <item>
+    <property name="text">
+     <string>PUE_0_Keeper</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>PUE_1_Pull</string>
+    </property>
+   </item>
+  </widget>
+  <widget class="QComboBox" name="comboBox_pke">
+   <property name="geometry">
+    <rect>
+     <x>140</x>
+     <y>130</y>
+     <width>291</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <item>
+    <property name="text">
+     <string>PKE_0_Pull_Keeper_Disabled</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>PKE_1_Pull_Keeper_Enabled</string>
+    </property>
+   </item>
+  </widget>
+  <widget class="QComboBox" name="comboBox_speed">
+   <property name="geometry">
+    <rect>
+     <x>140</x>
+     <y>190</y>
+     <width>291</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <item>
+    <property name="text">
+     <string>SPEED_0_low_50MHz</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>SPEED_1_medium_100MHz</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>SPEED_2_fast_150MHz</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>SPEED_3_max_200MHz</string>
+    </property>
+   </item>
+  </widget>
+  <widget class="QComboBox" name="comboBox_ode">
+   <property name="geometry">
+    <rect>
+     <x>140</x>
+     <y>160</y>
+     <width>291</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <item>
+    <property name="text">
+     <string>ODE_0_Open_Drain_Disabled</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>ODE_1_Open_Drain_Enabled</string>
+    </property>
+   </item>
+  </widget>
+  <widget class="QComboBox" name="comboBox_sre">
+   <property name="geometry">
+    <rect>
+     <x>140</x>
+     <y>250</y>
+     <width>291</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <item>
+    <property name="text">
+     <string>SRE_0_Slow_Slew_Rate</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>SRE_1_Fast_Slew_Rate</string>
+    </property>
+   </item>
+  </widget>
+  <widget class="QPushButton" name="pushButton_ok">
+   <property name="geometry">
+    <rect>
+     <x>120</x>
+     <y>300</y>
+     <width>75</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Ok</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton_cancel">
+   <property name="geometry">
+    <rect>
+     <x>270</x>
+     <y>300</y>
+     <width>75</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Cancel</string>
+   </property>
+  </widget>
+  <widget class="QComboBox" name="comboBox_pus">
+   <property name="geometry">
+    <rect>
+     <x>140</x>
+     <y>70</y>
+     <width>291</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <item>
+    <property name="text">
+     <string>PUS_0_100K_Ohm_Pull_Down</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>PUS_1_47K_Ohm_Pull_Up</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>PUS_2_100K_Ohm_Pull_Up</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>PUS_3_22K_Ohm_Pull_Up</string>
+    </property>
+   </item>
+  </widget>
+  <widget class="QLabel" name="label_pus">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>70</y>
+     <width>81</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="text">
+    <string>[15-14] - PUS</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_dse">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>220</y>
+     <width>100</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="text">
+    <string>[05-03] - DSE</string>
+   </property>
+  </widget>
+  <widget class="QComboBox" name="comboBox_dse">
+   <property name="geometry">
+    <rect>
+     <x>140</x>
+     <y>220</y>
+     <width>291</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <item>
+    <property name="text">
+     <string>DSE_0_output_driver_disabled</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>DSE_1_R0_150_Ohm_3_3V_260_Ohm_1_8V</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>DSE_2_R0_2</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>DSE_3_R0_3</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>DSE_4_R0_4</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>DSE_5_R0_5</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>DSE_6_R0_6</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>DSE_7_R0_7</string>
+    </property>
+   </item>
+  </widget>
+  <widget class="QLabel" name="label_field">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>10</y>
+     <width>81</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="autoFillBackground">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Field</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+   <property name="wordWrap">
+    <bool>false</bool>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_description">
+   <property name="geometry">
+    <rect>
+     <x>140</x>
+     <y>10</y>
+     <width>281</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="autoFillBackground">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Description</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+   <property name="wordWrap">
+    <bool>false</bool>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

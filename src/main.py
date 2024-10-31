@@ -63,7 +63,7 @@ class memTesterMain(runcore.memTesterRun):
 
     def callbackMixspiConnectionConfiguration( self ):
         self.showContentOnSecPacketWin(u"【Action】: Click <MixSPI Connnect Configuration> button.")
-        mixspiConnCfgFrame.setNecessaryInfo(self.tgt.mixspiConnDict, self.textEdit_mixspiConnection)
+        mixspiConnCfgFrame.setNecessaryInfo(self.mcuDevice, self.tgt.mixspiConnDict, self.textEdit_mixspiConnection)
         mixspiConnCfgFrame.show()
 
     def _retryToPingBootloader( self ):
@@ -224,9 +224,9 @@ if __name__ == '__main__':
     stressTestFrame = ui_cfg_stress_test.memTesterUiStressTest(None)
     stressTestFrame.setWindowTitle(u"Stress Test")
 
-    whnd = ctypes.windll.kernel32.GetConsoleWindow()
-    if whnd != 0:
-        ctypes.windll.user32.ShowWindow(whnd, 0)
+    #whnd = ctypes.windll.kernel32.GetConsoleWindow()
+    #if whnd != 0:
+    #    ctypes.windll.user32.ShowWindow(whnd, 0)
 
     sys.exit(app.exec_())
 

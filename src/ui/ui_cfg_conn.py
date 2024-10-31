@@ -7,6 +7,9 @@ from PyQt5.Qt import *
 from . import uidef
 from . import uilang
 from . import uivar
+from . import ui_cfg_pad_ctrl_rtxxx
+from . import ui_cfg_pad_ctrl_rt10yy
+from . import ui_cfg_pad_ctrl_rt11yy
 sys.path.append(os.path.abspath(".."))
 from win import connCfgWin
 
@@ -20,13 +23,21 @@ class memTesterUiConn(QMainWindow, connCfgWin.Ui_connCfgDialog):
         self.textEdit_mixspiConnection = None
         connCfgDict= uivar.getAdvancedSettings(uidef.kAdvancedSettings_Conn)
         self.mixspiConnCfgDict = connCfgDict.copy()
+        self.padCtrlRTxxxFrame = ui_cfg_pad_ctrl_rtxxx.memTesterUiPadCtrlRTxxx()
+        self.padCtrlRTxxxFrame.setWindowTitle(u"i.MXRTxxx IOPCTL configuration")
+        self.padCtrlRT10yyFrame = ui_cfg_pad_ctrl_rt10yy.memTesterUiPadCtrlRT10yy()
+        self.padCtrlRT10yyFrame.setWindowTitle(u"i.MXRT1xxx IOMUXC SW PAD Control Register")
+        self.padCtrlRT11yyFrame = ui_cfg_pad_ctrl_rt11yy.memTesterUiPadCtrlRT11yy()
+        self.padCtrlRT11yyFrame.setWindowTitle(u"i.MXRT1xxx IOMUXC SW PAD Control Register")
 
     def _register_callbacks(self):
         self.comboBox_instance.currentIndexChanged.connect(self.callbackSwitchInstance)
+        self.pushButton_padCtrl.clicked.connect(self.callbackPadCtrl)
         self.pushButton_ok.clicked.connect(self.callbackOk)
         self.pushButton_cancel.clicked.connect(self.callbackCancel)
 
-    def setNecessaryInfo( self, mixspiConnDict, textEdit_mixspiConnection ):
+    def setNecessaryInfo( self, mcuDevice, mixspiConnDict, textEdit_mixspiConnection ):
+        self.mcuDevice = mcuDevice
         self.mixspiConnDict = mixspiConnDict
         self.textEdit_mixspiConnection = textEdit_mixspiConnection
         self._recoverLastSettings()
@@ -100,6 +111,15 @@ class memTesterUiConn(QMainWindow, connCfgWin.Ui_connCfgDialog):
                 self.comboBox_rstb.setCurrentIndex(self.comboBox_rstb.findText(key))
                 break
 
+    def callbackPadCtrl( self ):
+        if self.mcuDevice in uidef.kMcuDevice_iMXRTxxx:
+            self.padCtrlRTxxxFrame.show()
+        elif self.mcuDevice in uidef.kMcuDevice_iMXRT10yy:
+            self.padCtrlRT10yyFrame.show()
+        elif self.mcuDevice in uidef.kMcuDevice_iMXRT11yy:
+            self.padCtrlRT11yyFrame.show()
+        else:
+            pass
 
     def callbackOk( self, event ):
         self.mixspiConnCfgDict['instance'] = int(self.comboBox_instance.currentText())
