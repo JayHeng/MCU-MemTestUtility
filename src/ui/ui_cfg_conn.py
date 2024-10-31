@@ -13,6 +13,9 @@ from . import ui_cfg_pad_ctrl_rt11yy
 sys.path.append(os.path.abspath(".."))
 from win import connCfgWin
 
+kRT1xxxGpioGroupList_COMM = ["GPIO_EMC_B", "GPIO_SD_B", "GPIO_B"]
+kRT1xxxGpioGroupList_AD   = ["GPIO_AD", "GPIO_AON"]
+
 class memTesterUiConn(QMainWindow, connCfgWin.Ui_connCfgDialog):
 
     def __init__(self, parent=None):
@@ -110,6 +113,36 @@ class memTesterUiConn(QMainWindow, connCfgWin.Ui_connCfgDialog):
             if self.mixspiConnDict['rstb'][instance][key] == self.mixspiConnCfgDict['rstb']:
                 self.comboBox_rstb.setCurrentIndex(self.comboBox_rstb.findText(key))
                 break
+        self.refreshUserPadCtrlSettings()
+
+    def _isGpioGroupMatched( self, gpioName, gpioGroupList):
+        isMatched = False
+        for group in gpioGroupList:
+            if gpioName.find(group):
+                isMatched = True
+                break
+        return isMatched
+
+    def refreshUserPadCtrlSettings( self ):
+        padCtrlDict= uivar.getAdvancedSettings(uidef.kAdvancedSettings_PadCtrl)
+        self.mixspiPadCtrlDict = padCtrlDict.copy()
+        if self.mcuDevice in uidef.kMcuDevice_iMXRT11yy:
+            padCtrl = 0
+            if self._isGpioGroupMatched(self.comboBox_dataL4b.currentText(), kRT1xxxGpioGroupList_COMM):
+                padCtrl = self.mixspiPadCtrlDict['rt11yyValC']
+            elif self._isGpioGroupMatched(self.comboBox_dataL4b.currentText(), kRT1xxxGpioGroupList_AD):
+                padCtrl = self.mixspiPadCtrlDict['rt11yyValA']
+            self.lineEdit_padCtrlDataL4b.setText(str(padCtrl))
+            if self._isGpioGroupMatched(self.comboBox_ssb.currentText(), kRT1xxxGpioGroupList_COMM):
+                padCtrl = self.mixspiPadCtrlDict['rt11yyValC']
+            elif self._isGpioGroupMatched(self.comboBox_ssb.currentText(), kRT1xxxGpioGroupList_AD):
+                padCtrl = self.mixspiPadCtrlDict['rt11yyValA']
+            self.lineEdit_padCtrlDataSsb.setText(str(padCtrl))
+            if self._isGpioGroupMatched(self.comboBox_sclk.currentText(), kRT1xxxGpioGroupList_COMM):
+                padCtrl = self.mixspiPadCtrlDict['rt11yyValC']
+            elif self._isGpioGroupMatched(self.comboBox_sclk.currentText(), kRT1xxxGpioGroupList_AD):
+                padCtrl = self.mixspiPadCtrlDict['rt11yyValA']
+            self.lineEdit_padCtrlDataSclk.setText(str(padCtrl))
 
     def callbackPadCtrl( self ):
         if self.mcuDevice in uidef.kMcuDevice_iMXRTxxx:
@@ -120,6 +153,7 @@ class memTesterUiConn(QMainWindow, connCfgWin.Ui_connCfgDialog):
             self.padCtrlRT11yyFrame.show()
         else:
             pass
+        self.refreshUserPadCtrlSettings()
 
     def callbackOk( self, event ):
         self.mixspiConnCfgDict['instance'] = int(self.comboBox_instance.currentText())

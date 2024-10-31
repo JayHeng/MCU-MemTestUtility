@@ -201,6 +201,8 @@ kAdvancedSettings_RwTest           = 3
 kAdvancedSettings_PerfTest         = 4
 kAdvancedSettings_StressTest       = 5
 
+kAdvancedSettings_PadCtrl          = 6
+
 kGoAction_PinTest                = 0
 kGoAction_ConfigSystem           = 1
 kGoAction_MemRegs                = 2
