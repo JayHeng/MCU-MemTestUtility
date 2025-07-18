@@ -1,6 +1,8 @@
 # MCU-MemTestUtility
 A powerful memory validation tool based on Python3.11.6+PyQt5.15.9, it can do Flash/HyperRAM/PSRAM functional/performance tests on NXP MCU (i.MXRT...) | 恩智浦MCU外部存储器性能测试一站式工具
 
+![](img/mtu_v1.0d1.jpg)
+
 ### 1. 使用步骤
 ```text
 1. 打开 MCU-MemTestUtility 软件
