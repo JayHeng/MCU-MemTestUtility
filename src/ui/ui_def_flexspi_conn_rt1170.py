@@ -28,8 +28,8 @@ kFlexspiConnSel_DataH4b = [
                                'PortB_DATA[3:0] - GPIO_AD[15:12]':0x11,
                               },
                               {'None':0xFF,
-                               'PortA_DATA[3:0] - GPIO_EMC_B2[20:17]':0x02,
-                               'PortB_DATA[3:0] - GPIO_EMC_B1[41]_EMC_B2[02:00]':0x11,
+                               'PortA_DATA[7:4] - GPIO_EMC_B2[20:17]':0x02,
+                               'PortB_DATA[7:4] - GPIO_EMC_B1[41]_EMC_B2[02:00]':0x11,
                               }
                           ]
 
