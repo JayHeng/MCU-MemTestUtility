@@ -13,6 +13,7 @@ from ui import ui_cfg_pin_test
 from ui import ui_cfg_rw_test
 from ui import ui_cfg_perf_test
 from ui import ui_cfg_stress_test
+from ui import ui_cfg_mem_regs
 from run import runcore
 
 kRetryPingTimes = 5
@@ -48,6 +49,7 @@ class memTesterMain(runcore.memTesterRun):
         self.pushButton_rwTest.clicked.connect(self.callbackRwTest)
         self.pushButton_perfTest.clicked.connect(self.callbackPerfTest)
         self.pushButton_stressTest.clicked.connect(self.callbackStressTest)
+        self.pushButton_memRegs.clicked.connect(self.callbackMemRegs)
         self.pushButton_Go.clicked.connect(self.callbackGo)
         self.pushButton_clearScreen.clicked.connect(self.clearContentOfScreens)
 
@@ -150,6 +152,13 @@ class memTesterMain(runcore.memTesterRun):
         self.resetAllActionButtonColor()
         self.setActionButtonColor(self.goAction)
 
+    def callbackMemRegs( self ):
+        self.showContentOnSecPacketWin(u"【Action】: Click <Mem REGs> button.")
+        self.goAction = uidef.kGoAction_MemRegs
+        memRegsFrame.show()
+        self.resetAllActionButtonColor()
+        self.setActionButtonColor(self.goAction)
+
     def callbackGo( self ):
         if self.goAction == None:
             return
@@ -223,6 +232,8 @@ if __name__ == '__main__':
     perfTestFrame.setWindowTitle(u"Perf Test")
     stressTestFrame = ui_cfg_stress_test.memTesterUiStressTest(None)
     stressTestFrame.setWindowTitle(u"Stress Test")
+    memRegsFrame = ui_cfg_mem_regs.memTesterUiMemRegs(None)
+    memRegsFrame.setWindowTitle(u"Mem REGs")
 
     #whnd = ctypes.windll.kernel32.GetConsoleWindow()
     #if whnd != 0:

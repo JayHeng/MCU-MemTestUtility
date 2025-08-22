@@ -209,6 +209,7 @@ kGoAction_MemRegs                = 2
 kGoAction_RwTest                 = 3
 kGoAction_PerfTest               = 4
 kGoAction_StressTest             = 5
+kGoAction_MemRegs                = 6
 
 kButtonColor_Enable  = "rgb(142,229,238)"
 kButtonColor_Disable = "rgb(248,248,255)"
