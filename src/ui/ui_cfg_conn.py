@@ -23,6 +23,7 @@ class memTesterUiConn(QMainWindow, connCfgWin.Ui_connCfgDialog):
     def __init__(self, parent=None):
         super(memTesterUiConn, self).__init__(parent)
         self.setupUi(self)
+        self.isRecoverProcess = False
         self.mixspiConnDict = None
         self.textEdit_mixspiConnection = None
         connCfgDict= uivar.getAdvancedSettings(uidef.kAdvancedSettings_Conn)
@@ -147,7 +148,9 @@ class memTesterUiConn(QMainWindow, connCfgWin.Ui_connCfgDialog):
             if self.mixspiConnDict['rstb'][instance][key] == self.mixspiConnCfgDict['rstb']:
                 self.comboBox_rstb.setCurrentIndex(self.comboBox_rstb.findText(key))
                 break
+        self.isRecoverProcess = True
         self.callbackRefreshUserPadCtrlSettings()
+        self.isRecoverProcess = False
 
     def _isGpioGroupMatched( self, gpioName, gpioGroupList):
         isMatched = False
@@ -166,37 +169,65 @@ class memTesterUiConn(QMainWindow, connCfgWin.Ui_connCfgDialog):
                 padCtrl = self.mixspiPadCtrlDict['rtxxxVal']
             else:
                 padCtrl = self.mixspiPadCtrlDict['rt10yyVal']
-            self.lineEdit_padCtrlDataL4b.setText(str(hex(padCtrl)))
-            self.lineEdit_padCtrlSsb.setText(str(hex(padCtrl)))
-            self.lineEdit_padCtrlSclk.setText(str(hex(padCtrl)))
+            dataL4bPadCtrl = padCtrl
+            ssbPadCtrl = padCtrl
+            sclkPadCtrl = padCtrl
+            dataH4bPadCtrl = padCtrl
+            dataT8bPadCtrl = padCtrl
+            sclknPadCtrl = padCtrl
+            dqs0PadCtrl = padCtrl
+            dqs1PadCtrl = padCtrl
+            rstPadCtrl = padCtrl
+            if self.isRecoverProcess:
+                if padCtrl != self.mixspiPadCtrlDict['dataL4b_u32']:
+                    dataL4bPadCtrl = self.mixspiPadCtrlDict['dataL4b_u32']
+                if padCtrl != self.mixspiPadCtrlDict['ssb_u32']:
+                    ssbPadCtrl = self.mixspiPadCtrlDict['ssb_u32']
+                if padCtrl != self.mixspiPadCtrlDict['sclk_u32']:
+                    sclkPadCtrl = self.mixspiPadCtrlDict['sclk_u32']
+                if self.mixspiPadCtrlDict['dataH4b_u32'] != kDefaultPadCtrlVal and self.mixspiPadCtrlDict['dataH4b_u32'] != padCtrl:
+                    dataH4bPadCtrl = self.mixspiPadCtrlDict['dataH4b_u32']
+                if self.mixspiPadCtrlDict['dataT8b_u32'] != kDefaultPadCtrlVal and self.mixspiPadCtrlDict['dataT8b_u32'] != padCtrl:
+                    dataT8bPadCtrl = self.mixspiPadCtrlDict['dataT8b_u32']
+                if self.mixspiPadCtrlDict['sclkn_u32'] != kDefaultPadCtrlVal and self.mixspiPadCtrlDict['sclkn_u32'] != padCtrl:
+                    sclknPadCtrl = self.mixspiPadCtrlDict['sclkn_u32']
+                if self.mixspiPadCtrlDict['dqs0_u32'] != kDefaultPadCtrlVal and self.mixspiPadCtrlDict['dqs0_u32'] != padCtrl:
+                    dqs0PadCtrl = self.mixspiPadCtrlDict['dqs0_u32']
+                if self.mixspiPadCtrlDict['dqs1_u32'] != kDefaultPadCtrlVal and self.mixspiPadCtrlDict['dqs1_u32'] != padCtrl:
+                    dqs1PadCtrl = self.mixspiPadCtrlDict['dqs1_u32']
+                if self.mixspiPadCtrlDict['rstb_u32'] != kDefaultPadCtrlVal and self.mixspiPadCtrlDict['rstb_u32'] != padCtrl:
+                    rstPadCtrl = self.mixspiPadCtrlDict['rstb_u32']
+            self.lineEdit_padCtrlDataL4b.setText(str(hex(dataL4bPadCtrl)))
+            self.lineEdit_padCtrlSsb.setText(str(hex(ssbPadCtrl)))
+            self.lineEdit_padCtrlSclk.setText(str(hex(sclkPadCtrl)))
             pinStr = self.comboBox_dataH4b.currentText()
             if pinStr != 'None':
-                self.lineEdit_padCtrlDataH4b.setText(str(hex(padCtrl)))
+                self.lineEdit_padCtrlDataH4b.setText(str(hex(dataH4bPadCtrl)))
             else:
                 self.lineEdit_padCtrlDataH4b.setText('N/A')
             pinStr = self.comboBox_dataT8b.currentText()
             if pinStr != 'None':
-                self.lineEdit_padCtrlDataT8b.setText(str(hex(padCtrl)))
+                self.lineEdit_padCtrlDataT8b.setText(str(hex(dataT8bPadCtrl)))
             else:
                 self.lineEdit_padCtrlDataT8b.setText('N/A')
             pinStr = self.comboBox_sclkn.currentText()
             if pinStr != 'None':
-                self.lineEdit_padCtrlSclkn.setText(str(hex(padCtrl)))
+                self.lineEdit_padCtrlSclkn.setText(str(hex(sclknPadCtrl)))
             else:
                 self.lineEdit_padCtrlSclkn.setText('N/A')
             pinStr = self.comboBox_dqs0.currentText()
             if pinStr != 'None':
-                self.lineEdit_padCtrlDqs0.setText(str(hex(padCtrl)))
+                self.lineEdit_padCtrlDqs0.setText(str(hex(dqs0PadCtrl)))
             else:
                 self.lineEdit_padCtrlDqs0.setText('N/A')
             pinStr = self.comboBox_dqs1.currentText()
             if pinStr != 'None':
-                self.lineEdit_padCtrlDqs1.setText(str(hex(padCtrl)))
+                self.lineEdit_padCtrlDqs1.setText(str(hex(dqs1PadCtrl)))
             else:
                 self.lineEdit_padCtrlDqs1.setText('N/A')
             pinStr = self.comboBox_rstb.currentText()
             if pinStr != 'None':
-                self.lineEdit_padCtrlRstb.setText(str(hex(padCtrl)))
+                self.lineEdit_padCtrlRstb.setText(str(hex(rstPadCtrl)))
             else:
                 self.lineEdit_padCtrlRstb.setText('N/A')
         elif self.mcuDevice in uidef.kMcuDevice_iMXRT11yy:
@@ -205,6 +236,9 @@ class memTesterUiConn(QMainWindow, connCfgWin.Ui_connCfgDialog):
                 padCtrl = self.mixspiPadCtrlDict['rt11yyValC']
             elif self._isGpioGroupMatched(pinStr, kRT1xxxGpioGroupList_AD):
                 padCtrl = self.mixspiPadCtrlDict['rt11yyValA']
+            if self.isRecoverProcess:
+                if padCtrl != self.mixspiPadCtrlDict['dataL4b_u32']:
+                    padCtrl = self.mixspiPadCtrlDict['dataL4b_u32']
             self.lineEdit_padCtrlDataL4b.setText(str(hex(padCtrl)))
 
             pinStr = self.comboBox_ssb.currentText()
@@ -212,6 +246,9 @@ class memTesterUiConn(QMainWindow, connCfgWin.Ui_connCfgDialog):
                 padCtrl = self.mixspiPadCtrlDict['rt11yyValC']
             elif self._isGpioGroupMatched(pinStr, kRT1xxxGpioGroupList_AD):
                 padCtrl = self.mixspiPadCtrlDict['rt11yyValA']
+            if self.isRecoverProcess:
+                if padCtrl != self.mixspiPadCtrlDict['ssb_u32']:
+                    padCtrl = self.mixspiPadCtrlDict['ssb_u32']
             self.lineEdit_padCtrlSsb.setText(str(hex(padCtrl)))
 
             pinStr = self.comboBox_sclk.currentText()
@@ -219,6 +256,9 @@ class memTesterUiConn(QMainWindow, connCfgWin.Ui_connCfgDialog):
                 padCtrl = self.mixspiPadCtrlDict['rt11yyValC']
             elif self._isGpioGroupMatched(pinStr, kRT1xxxGpioGroupList_AD):
                 padCtrl = self.mixspiPadCtrlDict['rt11yyValA']
+            if self.isRecoverProcess:
+                if padCtrl != self.mixspiPadCtrlDict['sclk_u32']:
+                    padCtrl = self.mixspiPadCtrlDict['sclk_u32']
             self.lineEdit_padCtrlSclk.setText(str(hex(padCtrl)))
 
             pinStr = self.comboBox_dataH4b.currentText()
@@ -227,6 +267,9 @@ class memTesterUiConn(QMainWindow, connCfgWin.Ui_connCfgDialog):
                     padCtrl = self.mixspiPadCtrlDict['rt11yyValC']
                 elif self._isGpioGroupMatched(pinStr, kRT1xxxGpioGroupList_AD):
                     padCtrl = self.mixspiPadCtrlDict['rt11yyValA']
+                if self.isRecoverProcess:
+                    if self.mixspiPadCtrlDict['dataH4b_u32'] != kDefaultPadCtrlVal and self.mixspiPadCtrlDict['dataH4b_u32'] != padCtrl:
+                        padCtrl = self.mixspiPadCtrlDict['dataH4b_u32']
                 self.lineEdit_padCtrlDataH4b.setText(str(hex(padCtrl)))
             else:
                 self.lineEdit_padCtrlDataH4b.setText('N/A')
@@ -237,6 +280,9 @@ class memTesterUiConn(QMainWindow, connCfgWin.Ui_connCfgDialog):
                     padCtrl = self.mixspiPadCtrlDict['rt11yyValC']
                 elif self._isGpioGroupMatched(pinStr, kRT1xxxGpioGroupList_AD):
                     padCtrl = self.mixspiPadCtrlDict['rt11yyValA']
+                if self.isRecoverProcess:
+                    if self.mixspiPadCtrlDict['dataT8b_u32'] != kDefaultPadCtrlVal and self.mixspiPadCtrlDict['dataT8b_u32'] != padCtrl:
+                        padCtrl = self.mixspiPadCtrlDict['dataT8b_u32']
                 self.lineEdit_padCtrlDataT8b.setText(str(hex(padCtrl)))
             else:
                 self.lineEdit_padCtrlDataT8b.setText('N/A')
@@ -247,6 +293,9 @@ class memTesterUiConn(QMainWindow, connCfgWin.Ui_connCfgDialog):
                     padCtrl = self.mixspiPadCtrlDict['rt11yyValC']
                 elif self._isGpioGroupMatched(pinStr, kRT1xxxGpioGroupList_AD):
                     padCtrl = self.mixspiPadCtrlDict['rt11yyValA']
+            if self.isRecoverProcess:
+                if self.mixspiPadCtrlDict['sclkn_u32'] != kDefaultPadCtrlVal and self.mixspiPadCtrlDict['sclkn_u32'] != padCtrl:
+                    padCtrl = self.mixspiPadCtrlDict['sclkn_u32']
                 self.lineEdit_padCtrlSclkn.setText(str(hex(padCtrl)))
             else:
                 self.lineEdit_padCtrlSclkn.setText('N/A')
@@ -257,6 +306,9 @@ class memTesterUiConn(QMainWindow, connCfgWin.Ui_connCfgDialog):
                     padCtrl = self.mixspiPadCtrlDict['rt11yyValC']
                 elif self._isGpioGroupMatched(pinStr, kRT1xxxGpioGroupList_AD):
                     padCtrl = self.mixspiPadCtrlDict['rt11yyValA']
+                if self.isRecoverProcess:
+                    if self.mixspiPadCtrlDict['dqs0_u32'] != kDefaultPadCtrlVal and self.mixspiPadCtrlDict['dqs0_u32'] != padCtrl:
+                        padCtrl = self.mixspiPadCtrlDict['dqs0_u32']
                 self.lineEdit_padCtrlDqs0.setText(str(hex(padCtrl)))
             else:
                 self.lineEdit_padCtrlDqs0.setText('N/A')
@@ -267,6 +319,9 @@ class memTesterUiConn(QMainWindow, connCfgWin.Ui_connCfgDialog):
                     padCtrl = self.mixspiPadCtrlDict['rt11yyValC']
                 elif self._isGpioGroupMatched(pinStr, kRT1xxxGpioGroupList_AD):
                     padCtrl = self.mixspiPadCtrlDict['rt11yyValA']
+                if self.isRecoverProcess:
+                    if self.mixspiPadCtrlDict['dqs1_u32'] != kDefaultPadCtrlVal and self.mixspiPadCtrlDict['dqs1_u32'] != padCtrl:
+                        padCtrl = self.mixspiPadCtrlDict['dqs1_u32']
                 self.lineEdit_padCtrlDqs1.setText(str(hex(padCtrl)))
             else:
                 self.lineEdit_padCtrlDqs1.setText('N/A')
@@ -277,6 +332,9 @@ class memTesterUiConn(QMainWindow, connCfgWin.Ui_connCfgDialog):
                     padCtrl = self.mixspiPadCtrlDict['rt11yyValC']
                 elif self._isGpioGroupMatched(pinStr, kRT1xxxGpioGroupList_AD):
                     padCtrl = self.mixspiPadCtrlDict['rt11yyValA']
+                if self.isRecoverProcess:
+                    if self.mixspiPadCtrlDict['rstb_u32'] != kDefaultPadCtrlVal and self.mixspiPadCtrlDict['rstb_u32'] != padCtrl:
+                        padCtrl = self.mixspiPadCtrlDict['rstb_u32']
                 self.lineEdit_padCtrlRstb.setText(str(hex(padCtrl)))
             else:
                 self.lineEdit_padCtrlRstb.setText('N/A')
