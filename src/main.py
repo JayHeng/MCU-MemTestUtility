@@ -155,6 +155,8 @@ class memTesterMain(runcore.memTesterRun):
     def callbackMemRegs( self ):
         self.showContentOnSecPacketWin(u"【Action】: Click <Mem REGs> button.")
         self.goAction = uidef.kGoAction_MemRegs
+        self.findReadbackRegsValue()
+        memRegsFrame.setNecessaryInfo(self.memModel.memPropertyDict)
         memRegsFrame.show()
         self.resetAllActionButtonColor()
         self.setActionButtonColor(self.goAction)

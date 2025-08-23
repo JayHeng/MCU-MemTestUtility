@@ -90,6 +90,11 @@ g_mixspiStressTestCfgDict = {'testSet':None,
                              'testPageSize':None,
                             }
 
+g_mixspiMemRegsCfgDict = {'isTypeRead':None,
+                          'regIdx':None,
+                          'regsVal':[None] * 9,
+                          }
+
 def initVar(cfgFilename):
     global g_hasSubWinBeenOpened
     global g_cfgFilename
@@ -100,6 +105,7 @@ def initVar(cfgFilename):
     global g_mixspiRwTestCfgDict
     global g_mixspiPerfTestCfgDict
     global g_mixspiStressTestCfgDict
+    global g_mixspiMemRegsCfgDict
 
     g_hasSubWinBeenOpened = False
     g_cfgFilename = cfgFilename
@@ -116,6 +122,7 @@ def initVar(cfgFilename):
         g_mixspiRwTestCfgDict = cfgDict["cfgRwTest"][0]
         g_mixspiPerfTestCfgDict = cfgDict["cfgPerfTest"][0]
         g_mixspiStressTestCfgDict = cfgDict["cfgStressTest"][0]
+        g_mixspiMemRegsCfgDict = cfgDict["cfgMemRegs"][0]
     else:
         g_toolCommDict = {'loadFwEn':True,
                           'cmdPacketShowEn':False,
@@ -195,6 +202,11 @@ def initVar(cfgFilename):
                                      'testPageSize':0x400,
                                     }
 
+        g_mixspiMemRegsCfgDict = {'isTypeRead':True,
+                                  'regIdx':0,
+                                  'regsVal':[None] * 9,
+                                 }
+
 def deinitVar(cfgFilename=None):
     global g_cfgFilename
     if cfgFilename == None and g_cfgFilename != None:
@@ -207,6 +219,7 @@ def deinitVar(cfgFilename=None):
         global g_mixspiRwTestCfgDict
         global g_mixspiPerfTestCfgDict
         global g_mixspiStressTestCfgDict
+        global g_mixspiMemRegsCfgDict
         cfgDict = {
             "cfgToolCommon": [g_toolCommDict],
             "cfgConn": [g_mixspiConnCfgDict],
@@ -215,6 +228,7 @@ def deinitVar(cfgFilename=None):
             "cfgRwTest": [g_mixspiRwTestCfgDict],
             "cfgPerfTest": [g_mixspiPerfTestCfgDict],
             "cfgStressTest": [g_mixspiStressTestCfgDict],
+            "cfgMemRegs": [g_mixspiMemRegsCfgDict],
         }
         json.dump(cfgDict, fileObj, indent=1)
         fileObj.close()
@@ -241,6 +255,9 @@ def getAdvancedSettings( group ):
     elif group == uidef.kAdvancedSettings_StressTest:
         global g_mixspiStressTestCfgDict
         return g_mixspiStressTestCfgDict
+    elif group == uidef.kAdvancedSettings_MemRegs:
+        global g_mixspiMemRegsCfgDict
+        return g_mixspiMemRegsCfgDict
     else:
         pass
 
@@ -266,6 +283,9 @@ def setAdvancedSettings( group, *args ):
     elif group == uidef.kAdvancedSettings_StressTest:
         global g_mixspiStressTestCfgDict
         g_mixspiStressTestCfgDict = args[0]
+    elif group == uidef.kAdvancedSettings_MemRegs:
+        global g_mixspiMemRegsCfgDict
+        g_mixspiMemRegsCfgDict = args[0]
     else:
         pass
 

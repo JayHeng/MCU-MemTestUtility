@@ -417,6 +417,30 @@ class memTesterUi(QMainWindow, memTesterWin.Ui_memTesterWin):
         mypacket.set_members()
         self.sendUartData(mypacket.out_bytes())
 
+    def _getVal32FromText( self, text, ident ):
+        val32 = None
+        idx0 = text.find(ident)
+        if idx0 != -1:
+            #print('find idx0\r\n')
+            hexText = text[idx0+len(ident):idx0+len(ident)+4]
+            #print(hexText)
+            if len(hexText) > 2 and hexText[0:2] == '0x':
+                try:
+                    val32 = int(hexText[2:len(hexText)], 16)
+                except:
+                    pass
+        return val32 
+
+    def findReadbackRegsValue( self ):
+        memRegsCfgDict= uivar.getAdvancedSettings(uidef.kAdvancedSettings_MemRegs)
+        text = self.textEdit_displayWinReg.toPlainText()
+        memRegsCfgDict['regsVal'][0] = self._getVal32FromText(text, 'Status Register: ')
+        text = self.textEdit_displayWinReg.toPlainText()
+        memRegsCfgDict['regsVal'][1] = self._getVal32FromText(text, 'Custom Register1: ')
+        text = self.textEdit_displayWinReg.toPlainText()
+        memRegsCfgDict['regsVal'][2] = self._getVal32FromText(text, 'Custom Register2: ')
+        uivar.setAdvancedSettings(uidef.kAdvancedSettings_MemRegs, memRegsCfgDict)
+
     def sendRwTestPacket( self ):
         mypacket = uipacket.rwTestPacket()
         mypacket.set_members()

@@ -9,6 +9,10 @@ from ui.uilut import mixspiLutSequence
 memPropertyDict = {
     'qe_cfg':     0x40,
     'qe_bytes':   0x01,
+
+    'statRegName':   'Status Register',
+    'reg1Name':      'Function Register',
+    'reg2Name':      'Read Parameters Register',
 }
 
 # LUT
