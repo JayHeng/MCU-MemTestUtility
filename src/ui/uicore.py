@@ -124,8 +124,11 @@ class memTesterUi(QMainWindow, memTesterWin.Ui_memTesterWin):
         self._initFlexspiConn()
         self.memModel = None
         self.memVendor = None
+        self.lastMemVendor = None
         self.memType = None
+        self.lastMemType = None
         self.memChip = None
+        self.lastMemChip = None
         self._initMemVendor()
         self._initMemSpeed()
         self.memLut = []
@@ -465,12 +468,11 @@ class memTesterUi(QMainWindow, memTesterWin.Ui_memTesterWin):
         self.comboBox_memVendor.clear()
         self.comboBox_memVendor.addItems(uidef.kMemVendorList)
         self.comboBox_memVendor.setCurrentIndex(self.toolCommDict['memVendor'])
-        memType = self.toolCommDict['memType']
-        memChip = self.toolCommDict['memChip']
+        self.lastMemVendor = self.toolCommDict['memVendor']
+        self.lastMemType = self.toolCommDict['memType']
+        self.lastMemChip = self.toolCommDict['memChip']
         self.setMemVendor()
-        self.comboBox_memType.setCurrentIndex(memType)
         self.setMemType()
-        self.comboBox_memChip.setCurrentIndex(memChip)
 
     def _findMemTypesFromVendor( self ):
         vendorBaseDir = os.path.join(self.memModelRoot, self.memVendor)
@@ -484,7 +486,11 @@ class memTesterUi(QMainWindow, memTesterWin.Ui_memTesterWin):
             self.comboBox_memType.clear()
             #self.comboBox_memType.addItems(uidef.kMemDeviceDict[self.memVendor].keys())
             self.comboBox_memType.addItems(self._findMemTypesFromVendor())
-            self.comboBox_memType.setCurrentIndex(0)
+            if self.lastMemVendor != self.toolCommDict['memVendor']:
+                self.comboBox_memType.setCurrentIndex(0)
+            else:
+                self.comboBox_memType.setCurrentIndex(self.lastMemType)
+            self.lastMemVendor = self.toolCommDict['memVendor']
             self.setMemType()
         except:
             pass
@@ -507,7 +513,11 @@ class memTesterUi(QMainWindow, memTesterWin.Ui_memTesterWin):
             self.comboBox_memChip.clear()
             #self.comboBox_memChip.addItems(uidef.kMemDeviceDict[self.memVendor][self.memType])
             self.comboBox_memChip.addItems(self._findMemChipsFromType())
-            self.comboBox_memChip.setCurrentIndex(0)
+            if self.lastMemType != self.toolCommDict['memType']:
+                self.comboBox_memChip.setCurrentIndex(0)
+            else:
+                self.comboBox_memChip.setCurrentIndex(self.lastMemChip)
+            self.lastMemType = self.toolCommDict['memType']
         except:
             pass
 
@@ -543,8 +553,9 @@ class memTesterUi(QMainWindow, memTesterWin.Ui_memTesterWin):
 
     def getMemUserSettings( self ):
         self._getMemChipInfo()
-        memType = self.comboBox_memType.currentText()
-        self.toolCommDict['memType'] = self._convertMemTypeValue(memType)
+        # It is used for FW, not for GUI
+        memTypeDef = self.comboBox_memType.currentText()
+        self.toolCommDict['memTypeDef'] = self._convertMemTypeValue(memTypeDef)
         memSpeed = self.comboBox_memSpeed.currentText()
         spdIdx = memSpeed.find('MHz')
         self.toolCommDict['memSpeed'] = int(memSpeed[0:spdIdx])

@@ -244,7 +244,7 @@ class memoryPropertyStruct(object):
             self.memLut = memLut
 
     def set_members( self, memUserSettingDict ):
-        self.type = memUserSettingDict['memType']
+        self.type = memUserSettingDict['memTypeDef']
         self.chip = 0
         self.speedMHz = memUserSettingDict['memSpeed']
         self.ioPadsMode = 0
