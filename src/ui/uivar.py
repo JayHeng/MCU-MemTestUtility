@@ -92,7 +92,7 @@ g_mixspiStressTestCfgDict = {'testSet':None,
 
 g_mixspiMemRegsCfgDict = {'isTypeRead':None,
                           'regIdx':None,
-                          'regsVal':[None] * 9,
+                          'regsVal':[uidef.kInvalidMemRegVal] * 9,
                           }
 
 def initVar(cfgFilename):
@@ -204,7 +204,7 @@ def initVar(cfgFilename):
 
         g_mixspiMemRegsCfgDict = {'isTypeRead':True,
                                   'regIdx':0,
-                                  'regsVal':[None] * 9,
+                                  'regsVal':[uidef.kInvalidMemRegVal] * 9,
                                  }
 
 def deinitVar(cfgFilename=None):

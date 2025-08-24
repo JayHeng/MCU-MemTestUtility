@@ -81,11 +81,11 @@ class memTesterUiMemRegs(QMainWindow, memRegsWin.Ui_memRegsDialog):
                 self.lineEdit_reg7.setReadOnly(False)
                 self.lineEdit_reg8.setReadOnly(False)
         else:
-            if self.mixspiMemRegsCfgDict['regsVal'][0] != None:
+            if self.mixspiMemRegsCfgDict['regsVal'][0] != uidef.kInvalidMemRegVal:
                 self.lineEdit_reg0.setText(str(hex(self.mixspiMemRegsCfgDict['regsVal'][0])))
-            if self.mixspiMemRegsCfgDict['regsVal'][1] != None:
+            if self.mixspiMemRegsCfgDict['regsVal'][1] != uidef.kInvalidMemRegVal:
                 self.lineEdit_reg1.setText(str(hex(self.mixspiMemRegsCfgDict['regsVal'][1])))
-            if self.mixspiMemRegsCfgDict['regsVal'][2] != None:
+            if self.mixspiMemRegsCfgDict['regsVal'][2] != uidef.kInvalidMemRegVal:
                 self.lineEdit_reg2.setText(str(hex(self.mixspiMemRegsCfgDict['regsVal'][2])))
 
     def _recoverLastSettings ( self ): 

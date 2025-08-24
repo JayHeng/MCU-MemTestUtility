@@ -214,3 +214,5 @@ kGoAction_MemRegs                = 6
 
 kButtonColor_Enable  = "rgb(142,229,238)"
 kButtonColor_Disable = "rgb(248,248,255)"
+
+kInvalidMemRegVal   = 0xF500
